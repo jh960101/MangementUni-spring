@@ -3,23 +3,36 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="kr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>everytimemain</title>
+    <title>everymypage</title>
 
     <link href="${pageContext.request.contextPath}/resources/css/courses.css" rel="stylesheet" />
     <link href="${pageContext.request.contextPath}/resources/css/everytime.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-    
+<script defer src="${path}/resources/js/scrollbtn.js"></script>
+<link href="${path}/resources/css/scrollbtn.css" rel="stylesheet" />
 </head>
 
 <body>
+
+	<p class="top_scrollbtn" onclick="scrollbtn('main-img')">TOP</p>
+
+	<div>
+		<img id="main-img" src="${path}/resources/img/etmain.jpg"
+			style="margin-top: 130px; width: 33.3%; height: 300;" /><img
+			id="main-img" src="${path}/resources/img/etmain3.jpg"
+			style="margin-top: 130px; width: 33.3%; height: 300;" /><img
+			id="main-img" src="${path}/resources/img/etmain2.jpg"
+			style="margin-top: 130px; width: 33.4%; height: 300;" />
+			
+	</div>
     <jsp:include page="../common/header.jsp" />
 	    <div id="menuBar">
         <div id="sub-menuBar" style="height: 150px;">
@@ -30,7 +43,7 @@
             </ul>
         </div>
     </div>
-	<div class="container" style="height: 1000px; margin-top:100px;">
+	<div class="container" style="height: 1000px; ">
         <div id="content">
             <!-- title view -->
             <div class="list-group">
