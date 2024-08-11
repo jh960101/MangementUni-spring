@@ -115,7 +115,7 @@
 													name="approve"
 													style="background-color: #024C86; color: white; padding: 2px 0 10px 0;"
 													disabled>
-													신청</button>
+													승인완료</button>
 											</c:if></td>
 									</tr>
 								</c:forEach>

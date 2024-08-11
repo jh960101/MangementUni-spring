@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,6 +65,24 @@
 .button-group button:hover {
 	opacity: 0.8;
 }
+
+.backbtn {
+	margin-top: 30px;
+	text-align: center;
+}
+
+.backbtn .btn {
+	background-color: #024C86 !important;
+	font-color: white;
+	font-weight: bold;
+	font-size: 13px;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	width: 110px;
+	height: 65px;
+}
 </style>
 </head>
 <body>
@@ -73,72 +93,62 @@
 		<c:set var="searchType" value="title" />
 	</c:if>
 
-	
 
-	<div class="container" style="height: 1100px;  margin-top: 100px;">
+
+	<div class="container" style="height: 1100px; margin-top: 100px;">
 		<div id="content">
 			<div id="pageTitle">
 				<h1>공지사항 수정</h1>
 			</div>
 			<div id="pageContent">
-				<table id="tbl-board">
-					<tr>
-						<th>글번호</th>
-						<td>${board.bo_no}</td>
-					</tr>
-					<tr>
-						<th>제 목</th>
-						<td><input type="text" name="title" value="${board.title}" /></td>
-					</tr>
-					<tr>
-						<th>작성자</th>
-						<td><c:out value="${board.emp_name}" /></td>
-					</tr>
-					<tr>
-						<th>조회수</th>
-						<td><c:out value="${board.readCount}" /></td>
-					</tr>
-					<tr>
-						<th>작성 시간</th>
-						<td><fmt:formatDate type="both" value="${board.create_date}" /></td>
-					</tr>
-					<tr>
-						<th>첨부파일</th>
-						<td><input type="file" name="uploadFile" /> <c:if
-								test="${!empty board.originalFilename}">
-								<a
-									href="javascript:fileDownload('${board.originalFilename}', '${board.originalFilename}')">
-									<img src="${path}/resources/images/file.png" width="20"
-									height="20" /> <c:out value="${board.originalFilename}"></c:out>
-								</a>
-								<script>
-									function fileDownload(oriname, rename) {
-										const url = "${path}/board/fileDown";
-										let oName = encodeURIComponent(oriname);
-										let rName = encodeURIComponent(rename);
-										location.assign(url + "?oriname="
-												+ oName + "&rename=" + rName);
-									}
-								</script>
-							</c:if> <c:if test="${empty board.originalFilename}">
-								<span> - </span>
-							</c:if></td>
-					</tr>
-					<tr>
-						<th>내 용</th>
-						<td><textarea name="content" rows="15">${board.content}</textarea></td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<div class="button-group">
-								<button type="button" id="btnUpdate">수정</button>
-								<button type="button" id="btnDelete">삭제</button>
-								<button type="button" id="btnCancel">목록</button>
-							</div>
-						</td>
-					</tr>
-				</table>
+				<form action="updateinfoPro" method="post style="margin-bottom: 20px;" enctype="multipart/form-data">
+					<input type="hidden" name="bo_no" value="${board.bo_no}" />
+					<!-- hidden으로 bo_no를 추가 -->
+					<table id="tbl-board">
+						<tr>
+							<th>글번호</th>
+							<td><label>${board.bo_no}</label></td>
+						</tr>
+						<tr>
+							<th>제 목</th>
+							<td><input type="text" name="title" value="${board.title}" /></td>
+						</tr>
+						<tr>
+							<th>작성자</th>
+							<td><c:out value="${board.emp_name}" /></td>
+						</tr>
+						<tr>
+							<th>조회수</th>
+							<td><c:out value="${board.readCount}" /></td>
+						</tr>
+						<tr>
+							<th>첨부파일</th>
+							<td><input type="file" name="uploadFile" /> <c:if
+									test="${!empty board.originalFilename}">
+									<a
+										href="javascript:fileDownload('${board.originalFilename}', '${board.originalFilename}')">
+										<c:out value="${board.originalFilename}"></c:out>
+									</a>
+								</c:if></td>
+						</tr>
+						<tr>
+							<th>내 용</th>
+							<td><textarea name="content" rows="15">${board.content}</textarea></td>
+						</tr>
+					</table>
+					<div class="button-group">
+						<button type="submit" id="btnUpdate btn">수정</button>
+						<button type="button" id="btnDelete btn"
+							onclick="deleteFunc(${board.bo_no})">삭제</button>
+					</div>
+					<div class="backbtn">
+						<button type="button" id="btnCancel" class="btn"
+							onclick="window.history.back()"
+							style="color: white; font-weight: bold; font-size: 16px;">돌아가기</button>
+					</div>
+				</form>
 			</div>
+			<!-- pageContent  -->
 		</div>
 	</div>
 

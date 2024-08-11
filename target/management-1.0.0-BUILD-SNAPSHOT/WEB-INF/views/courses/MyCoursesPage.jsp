@@ -15,10 +15,11 @@
 <body>
 	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
-		<div id="sub-menuBar">
+		<div id="sub-menuBar" style="height: 380px">
 			<ul id="menulist">
 				<li><a href="studentstatus">학적 조회</a></li>
-				<li><a href="passwordchange">학생 정보 변경</a></li>
+				<li><a href="passwordchange">학생 비밀번호 변경</a></li>
+				<li><a href="studentinformation">학생 정보 변경</a></li>
 				<li><a href="objection">성적 조회</a></li>
 				<li><a href="myCoursesPage">나의 수강 페이지</a></li>
 				<li><a href="courseregistrationpage">수강신청 페이지</a></li>
@@ -59,7 +60,7 @@
 									<td>${list.YEAR}</td>
 									<td>${list.SMT}</td>
 									<td>${list.DEPT_NAME}</td>
-									<td><a href="myCoursesList">${list.SUB_NAME}</a></td>
+									<td><a href="myCoursesList?sub_code=${list.SUB_CODE}">${list.SUB_NAME}</a></td>
 									<td>${list.PROF_NAME}</td>
 								</tr>
 							</c:forEach>

@@ -84,10 +84,11 @@ row row-cols-1 {
 <body>
 	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
-		<div id="sub-menuBar">
+		<div id="sub-menuBar" style="height: 380px">
 			<ul id="menulist">
 				<li><a href="studentstatus">학적 조회</a></li>
-				<li><a href="passwordchange">학생 정보 변경</a></li>
+				<li><a href="passwordchange">학생 비밀번호 변경</a></li>
+				<li><a href="studentinformation">학생 정보 변경</a></li>
 				<li><a href="objection">성적 조회</a></li>
 				<li><a href="myCoursesPage">나의 수강 페이지</a></li>
 				<li><a href="courseregistrationpage">수강신청 페이지</a></li>

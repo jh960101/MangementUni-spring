@@ -53,7 +53,7 @@
 					<hr>
 					<div id="SubjectContent">
 						<p>강의 개요가 들어갈 텍스트</p>
-						<p>${ content }</p>
+						<p>${coment}</p>
 					</div>
 				</div>
 
@@ -72,16 +72,10 @@
 					<div id="online">
 						<p id="online-title">1주차(2022-02-28 ~ 2022-03-01)</p>
 						<div id="onlien-cont">
-							<p>
-								<a href= onlineviedeo
-									onclick="openPage(this.href, 1000px, 800px); return false;">
-									<span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목
-								</a>
-							</p>
-
-							<span class="material-symbols-outlined icon">description</span>[강의
-							자료]
+							<a href="online" target="_blank"
+								onclick="return openPagePopup(this.href,190,700);"> <span
+								class="material-symbols-outlined icon"></span> 페이지 열기
+							</a> <span class="material-symbols-outlined icon"></span>[강의 자료]
 						</div>
 
 					</div>
@@ -196,21 +190,24 @@
 		</div>
 	</div>
 	<script>
-	function openPage() {
-        // 새 창의 크기와 위치 설정
-        const width = 1200;
-        const height = 700;
-        const screenWidth = window.screen.availWidth;
-        const screenHeight = window.screen.availHeight;
-        const left = (screenWidth - width) / 2;
-        const top = (screenHeight - height) / 2;
+		function openPagePopup(url, width, height) {
 
-        // 새 창 옵션
-        const options = `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`;
+			const screenWidth = window.screen.width;
+			const screenHeight = window.screen.height;
 
-        // 새 창 열기
-        const newWindow = window.open('', '_blank', options);
+			const left = (screenWidth - width) / 2;
+			const top = (screenHeight - height) / 2;
+
+			const popup = window
+					.open(url, 'popupWindow',
+							`width=1500,height=700,top=100,left=200,scrollbars=no,resizable=no`);
+
+			return false;
+		}
 	</script>
+
+
+
 </body>
 </html>
 <jsp:include page="../common/footer.jsp" />

@@ -72,10 +72,11 @@ header, footer {
 <body>
 	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
-		<div id="sub-menuBar">
+		<div id="sub-menuBar" style="height: 380px">
 			<ul id="menulist">
 				<li><a href="studentstatus">학적 조회</a></li>
-				<li><a href="passwordchange">학생 정보 변경</a></li>
+				<li><a href="passwordchange">학생 비밀번호 변경</a></li>
+				<li><a href="studentinformation">학생 정보 변경</a></li>
 				<li><a href="objection">성적 조회</a></li>
 				<li><a href="myCoursesPage">나의 수강 페이지</a></li>
 				<li><a href="courseregistrationpage">수강신청 페이지</a></li>
@@ -107,36 +108,24 @@ header, footer {
 										class="form-control" aria-describedby="basic-addon1"
 										placeholder="${name}" readonly>
 								</div>
-								<div class="input-group mb-3">
-									<span class="input-group-text">학과명</span> <input type="text"
-										class="form-control" aria-describedby="basic-addon1"
-										placeholder="${deptname}" readonly>
-								</div>
-								<div class="input-group mb-3">
-									<span class="input-group-text">이메일</span> <input type="text"
-										class="form-control" aria-describedby="basic-addon1"
-										placeholder="${email}" readonly>
-								</div>
-								<div class="input-group mb-3">
-									<span class="input-group-text">전화번호</span> <input type="text"
-										class="form-control" aria-describedby="basic-addon1"
-										placeholder="${phone}" readonly>
-								</div>
+							
 								<div class="input-group mb-3">
 									<span class="input-group-text">이전PW</span> <input
 										type="password" class="form-control"
-										aria-describedby="basic-addon1" id="pwcheck">
+										aria-describedby="basic-addon1" id="pwcheck"placeholder="비밀번호를 입력하세요">
 								</div>
 								<div class="input-group mb-3">
 									<span class="input-group-text">변경할PW</span> <input
 										type="password" class="form-control"
 										aria-describedby="basic-addon1" id="password"
-										name="STU_PASSWORD"placeholder="비밀번호 8자리 이상 영문, 숫자, 특수문자 중 2가지 이상을 혼합">
+										name="STU_PASSWORD"placeholder="비밀번호를 입력하세요.">
+										
 								</div>
+								<label>비밀번호 8자리 이상 영문, 숫자, 특수문자 중 2가지 이상을 혼합</label>
 								<div class="input-group mb-3">
 									<span class="input-group-text">PW확인</span> <input
 										type="password" class="form-control"
-										aria-describedby="basic-addon1" id="confirmPassword">
+										aria-describedby="basic-addon1" id="confirmPassword"placeholder="비밀번호를 입력하세요">
 								</div>
 							</div>
 						</div>

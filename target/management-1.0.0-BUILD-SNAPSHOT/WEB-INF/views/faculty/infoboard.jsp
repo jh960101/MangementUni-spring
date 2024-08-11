@@ -54,10 +54,18 @@ a {
 	<!-- 없는 게시글을 상세 페이지로 이동하기 위해 클릭할 때, alert창 띄우기 위해 코드 작성 -->
 	<c:if test="${not empty msg}">
 		<script>
-			alert('${msg}');
-		</script>
-		<c:remove var=" msg" />
+        alert('${msg}');
+    </script>
+		<c:remove var="msg" />
 	</c:if>
+
+	<c:if test="${not empty sessionScope.msg}">
+		<script>
+        alert('${fn:escapeXml(sessionScope.msg)}');
+    </script>
+		<c:remove var="msg" scope="session" />
+	</c:if>
+
 
 	<c:if test="${login == 'Employee'}">
 		<div id="menuBar">
@@ -104,7 +112,6 @@ a {
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col"></th>
 								<th scope="col">제목</th>
 								<th scope="col">작성자</th>
 								<th scope="col">작성일</th>
@@ -121,7 +128,6 @@ a {
 							<c:if test="${not empty boardList}">
 								<c:forEach var="board" items="${boardList}">
 									<tr>
-										<td><c:out value="${board.bo_no}" /></td>
 										<td><a href="${path}/infodetail?bo_no=${board.bo_no}">
 												<c:out value="${board.title}" />
 										</a></td>

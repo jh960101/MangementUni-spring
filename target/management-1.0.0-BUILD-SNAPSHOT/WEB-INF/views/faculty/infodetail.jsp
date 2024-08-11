@@ -30,6 +30,7 @@
 #tbl-board th {
 	background-color: #f2f2f2;
 	font-weight: bold;
+	border: 1px solid #ddd;
 }
 
 #tbl-board input[type="text"], #tbl-board textarea, #tbl-board input[type="file"]
@@ -46,24 +47,48 @@
 }
 
 .button-group {
-	display: flex;
-	justify-content: space-between;
+	justify-content: center;
+	text-align: right;
+	margin: 20px 50px;
 }
 
 .button-group button {
 	font-size: 18px;
+	font-weight: bold;
 	padding: 10px 38px;
-	margin: auto;
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
 	background-color: #024C86;
 	color: white;
 	margin-right: 55px;
+	padding: 10px 38px;
+}
+
+.button-group #btn {
+	
 }
 
 .button-group button:hover {
 	opacity: 0.8;
+}
+
+.backbtn {
+	margin-top: 30px;
+	text-align: center;
+}
+
+.backbtn .btn {
+	background-color: #024C86 !important;
+	font-color: white;
+	font-weight: bold;
+	font-size: 13px;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	width: 110px;
+	height: 65px;
 }
 </style>
 </head>
@@ -73,6 +98,13 @@
 	<c:set var="searchType" value="${param.searchType}" />
 	<c:if test="${empty searchType}">
 		<c:set var="searchType" value="title" />
+	</c:if>
+
+	<c:if test="${not empty msg}">
+		<script>
+			alert('${msg}');
+		</script>
+		<c:remove var=" msg" />
 	</c:if>
 
 	<c:if test="${login == 'Employee'}">
@@ -87,7 +119,7 @@
 		</div>
 	</c:if>
 
-	<div class="container" style="height: 850px; margin-top: 100px;">
+	<div class="container" style="height: auto; margin-top: 100px;">
 		<div id="content">
 			<div id="pageTitle" style="margin-bottom: 50px;">
 				<h1>공지사항 상세조회</h1>
@@ -101,7 +133,6 @@
 					<tr>
 						<th>제 목</th>
 						<td>
-							<%-- <input type="text" name="title" value="${board.title}" /> --%>
 							<label name="title" value="${board.title}">${board.title}</label>
 						</td>
 					</tr>
@@ -115,54 +146,60 @@
 					</tr>
 					<tr>
 						<th>작성 시간</th>
-						<td><fmt:formatDate type="both" value="${board.create_date}" /></td>
+						<td><fmt:formatDate type="both" pattern="yyyy.MM.dd" value="${board.create_date}" /></td>
 					</tr>
 					<tr>
 						<th>첨부파일</th>
-						<td><input type="file" name="uploadFile" /> <c:if
-								test="${!empty board.originalFilename}">
-								<a
-									href="javascript:fileDownload('${board.originalFilename}', '${board.originalFilename}')">
-									<img src="${path}/resources/images/file.png" width="20"
-									height="20" /> <c:out value="${board.originalFilename}"></c:out>
-								</a>
-								<script>
-                                    function fileDownload(oriname, rename) {
-                                        const url = "${path}/board/fileDown";
-                                        let oName = encodeURIComponent(oriname);
-                                        let rName = encodeURIComponent(rename);
-                                        location.assign(url + "?oriname=" + oName + "&rename=" + rName);
-                                    }
-                                </script>
-							</c:if> <c:if test="${empty board.originalFilename}">
-								<span> - </span>
-							</c:if></td>
+						<td>
+							<c:if test="${not empty board.originalFilename}">
+								${board.originalFilename}
+							</c:if>
+							<c:if test="${empty board.originalFilename}">
+								-
+							</c:if>
+							
+						</td>
 					</tr>
 					<tr>
 						<th>내 용</th>
 						<td>
 							<div id="contentLabel"
-								style="border: 1px solid #ccc; padding: 10px; width: 100%; height: 300px; overflow-y: auto; display: block;">
+								style="padding: 10px; width: 100%; height: 300px; overflow-y: auto; display: block;">
 								${board.content}</div>
 						</td>
 					</tr>
-					<c:if test="${login == 'Employee'}">
-						<tr>
-							<td colspan="2">
-								<div class="button-group">
-									<button type="button" id="btnUpdate"
-										onclick="window.location.href='${path}/updateinfo?bo_no=${board.bo_no}'">수정</button>
-									<button type="button" id="btnDelete" onclick="window.location.href='${path}/deletePro">삭제</button>
-									<button type="button" id="btnCancel"
-										onclick="window.history.back()">취소</button>
-								</div>
-							</td>
-						</tr>
-					</c:if>
 				</table>
+				<c:if test="${login == 'Employee'}">
+					<div class="button-group">
+						<button type="button" id="btnUpdate btn"
+							onclick="window.location.href='${path}/updateinfo?bo_no=${board.bo_no}'">수정</button>
+						<button type="button" id="btnDelete btn"
+							onclick="deleteFunc(${board.bo_no})">삭제</button>
+					</div>
+				</c:if>
+					<div class="backbtn">
+						<button type="button" id="btnCancel" class="btn"
+							onclick="window.history.back()"
+							style="color: white; font-weight: bold; font-size: 16px;">돌아가기</button>
+					</div>
 			</div>
 		</div>
 	</div>
+	<script>
+		function deleteFunc(boardNo) {
+			// 삭제 여부를 확인하는 alert 창
+	        var confirmation = confirm("정말 삭제하시겠습니까?"); 
+
+	        // 확인 버튼을 누른 경우
+	        if (confirmation) {
+	            // 페이지 이동
+	            window.location.href = '${path}/deletePro?bo_no=' + boardNo; 
+	        	//window.location.href = '${path}/deletePro'; 
+	        }
+			
+		}
+	
+	</script>
 	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>
