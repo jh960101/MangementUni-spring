@@ -28,12 +28,7 @@
 	<p class="top_scrollbtn" onclick="scrollbtn('main-img')">TOP</p>
 
 	<div>
-		<img id="main-img" src="${path}/resources/img/etmain.jpg"
-			style="margin-top: 130px; width: 33.3%; height: 300;" /><img
-			id="main-img" src="${path}/resources/img/etmain3.jpg"
-			style="margin-top: 130px; width: 33.3%; height: 300;" /><img
-			id="main-img" src="${path}/resources/img/etmain2.jpg"
-			style="margin-top: 130px; width: 33.4%; height: 300;" />
+		<img id="main-img" src="${path}/resources/img/eta_img.png" style="margin-top: 130px; width: 100%"/>
 			
 	</div>
 	<jsp:include page="../common/header.jsp" />
