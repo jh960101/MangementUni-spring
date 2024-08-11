@@ -19,6 +19,9 @@ public interface BoardMapper {
 	// 게시글 전체 조회
 	List<Board> selectBoardList();
 
+	// page 기능으로 공지사항 목록 출력
+	List<Board> selectBoardList(Map<String, Object> map);
+	
 	// 게시글 번호 조회 - 상세 페이지
 	Board findByNo(int no);
 	
@@ -30,8 +33,6 @@ public interface BoardMapper {
 
 	int empSelect(String loginname);
 
-	// page 기능으로 공지사항 목록 출력
-	List<Board> selectBoardList(Map<String, Object> map);
 
 	// 게시글 삭제하기
 	int deleteByNo(int no);

@@ -28,12 +28,12 @@ public class FacultyService {
 		return mapper.getBoardListCount(map);
 	}
 
-	// 전체 게시글 중에 첫번째 페이지에서 10개의 게시글 반환
+	// 전체 게시글
 	public List<Board> getBoardList() {
 		System.out.println("FacultyService-getBoardList");
 		return mapper.selectBoardList();
 	}
-
+	
 	public Board findByNo(int no) {
 		return mapper.findByNo(no);
 	}
@@ -67,14 +67,6 @@ public class FacultyService {
 		String searchType = params.get("searchType");
 		String searchValue = params.get("searchValue");
 		
-		if ("title".equals(searchType) && (searchValue == null || searchValue.trim().isEmpty())) {
-	        throw new IllegalArgumentException("제목 검색 시 키워드를 입력해야 합니다.");
-	    } 
-		
-		if ("writer".equals(searchType) && (searchValue == null || searchValue.trim().isEmpty())) {
-	    	throw new IllegalArgumentException("작성자 검색 시 키워드를 입력해야 합니다.");
-	    }
-		
 		int firstRow = Integer.parseInt(params.get("firstRow"));
 		int listLimit = Integer.parseInt(params.get("listLimit"));
 		
@@ -103,11 +95,12 @@ public class FacultyService {
 		map.put("bo_no", no);
 		map.put("title", board.getTitle());
 		map.put("content", board.getContent());
-		map.put("uploadFile", board.getRenamedFilename());
+		//map.put("uploadFile", board.getRenamedFilename());
 		map.put("loginname", board.getEmp_name());
 		map.put("loginNo", board.getEmp_no());
 		
 		return mapper.updateByNoList(map);
 	}
+
 
 }

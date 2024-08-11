@@ -57,6 +57,13 @@ public class FacultyController {
 
 		String login = (String) session.getAttribute("login");
 		System.out.println("login : " + login);
+		
+	    // 검색어 초기화
+	    if (param.get("searchValue") == null) {
+	        // searchValue 값이 없을 경우 세션에서 제거
+	        session.removeAttribute("searchType");
+	        session.removeAttribute("searchValue");
+	    }
 
 		Map<String, String> params = new HashMap<String, String>();
 		String searchType = param.get("searchType");
@@ -66,6 +73,8 @@ public class FacultyController {
 			if (searchType != null && searchValue != null && !searchValue.trim().isEmpty()) {
 				params.put("searchType", searchType);
 				params.put("searchValue", searchValue);
+				session.setAttribute("searchType", searchType);
+				session.setAttribute("searchValue", searchValue);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,7 +85,7 @@ public class FacultyController {
 		System.out.println("totalRowCount : " + totalRowCount);
 
 		// 페이지네이션 설정
-		PageInfo pageSettings = new PageInfo(page, listLimit, totalRowCount, 5);
+		PageInfo pageSettings = new PageInfo(page, totalRowCount, 5);
 		pageSettings.pageSetting(totalRowCount);
 
 		int firstRow = pageSettings.getFirstRow();
@@ -88,6 +97,8 @@ public class FacultyController {
 
 		// 데이터 가져오기
 		List<Board> boardList = service.selectBoardList(params);
+
+
 		System.out.println("boardlist : " + boardList);
 
 		// 데이터와 페이지 정보 모델에 추가하기
@@ -96,6 +107,8 @@ public class FacultyController {
 		model.addAttribute("pageInfo", pageSettings);
 		model.addAttribute("count", totalRowCount);
 		model.addAttribute("param", param);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("searchValue", searchValue);
 
 		return "faculty/infoboard";
 	}
@@ -157,7 +170,7 @@ public class FacultyController {
 			board.setEmp_no(loginNo);
 			board.setTitle(title);
 			board.setContent(detail);
-			board.setOriginalFilename(file);
+			//board.setOriginalFilename(file);
 
 			int res = service.insertWrite(board);
 
@@ -195,9 +208,10 @@ public class FacultyController {
 	@RequestMapping("/updateinfoPro")
 	public String updateinfoPro(Model model, @RequestParam("bo_no") int no, @RequestParam Map<String, Object> param,
 			@ModelAttribute Board board, // Board DTO로 받아오기 
-			@RequestParam("uploadFile") MultipartFile uploadFile,
-			HttpSession session, RedirectAttributes redirectAttributes) {
+			@ModelAttribute ("uploadFile") MultipartFile uploadFile, RedirectAttributes redirectAttributes) {
 		System.out.println("FacultyController-updateinfoPro() 실행");
+		
+		System.out.println("bo_no : " + no);
 
 		// 세션에서 로그인 정보 가져오기
 		String loginname = (String) session.getAttribute("loginname");
@@ -221,22 +235,24 @@ public class FacultyController {
 		System.out.println("내용 : " + content);
 
 		// 파일이 선택되었는지 확인
-		if (!uploadFile.isEmpty()) {
-			// 파일 처리 로직 (예: 파일 저장)
-			String originalFilename = uploadFile.getOriginalFilename();
-			String filePath = "C:\\fullstack\\part4\\src\\MangementUni-spring\\src\\main\\webapp\\resources/" + originalFilename; // 파일이 저장될 경로 지정
+	    if (!uploadFile.isEmpty()) {
+	        // 파일 처리 로직 (예: 파일 저장)
+	        String originalFilename = uploadFile.getOriginalFilename();
+	        String filePath = "C:\\fullstack\\part4\\src\\MangementUni-spring\\src\\main\\webapp\\resources/" + originalFilename; // 파일이 저장될 경로 지정
 
-			try {
-				// 파일 저장
-				uploadFile.transferTo(new File(filePath));
-				board.setOriginalFilename(originalFilename); // 파일명 설정
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-			// 파일이 선택되지 않았다면 적절한 처리
-			board.setOriginalFilename(""); // 설정할 필요에 따라
-		}
+//	        try {
+//	            // 파일 저장
+//	            uploadFile.transferTo(new File(filePath+originalFilename));
+//	            board.setOriginalFilename(originalFilename); // 파일명 설정
+//	        } catch (IOException e) {
+//	            e.printStackTrace();
+//	            // 에러 처리 추가 (예: redirect 에러 메시지 추가)
+//	            redirectAttributes.addFlashAttribute("msg", "파일 업로드 중 오류가 발생했습니다.");
+//	            return "redirect:/infoboard"; // 오류 발생 시 리디렉션
+//	        }
+//	    } else {
+//	        board.setOriginalFilename(""); // 파일이 선택되지 않았다면 적절한 처리
+	    }
 
 		// Board 객체에 파라미터 값 설정
 		board.setEmp_name(loginname);
