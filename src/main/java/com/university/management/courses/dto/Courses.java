@@ -20,4 +20,5 @@ public class Courses {
 	private int YEAR; //학년도
 	private int SUB_POINT; //학점
 	private String SUB_STATUS; //상태값 (y,n)
+	private double AttendanceRate; // 출석률
 }

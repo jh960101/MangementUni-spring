@@ -147,6 +147,10 @@ row row-cols-1 {
 
 					<button type="button" class="button btn-wide custom-button"
 						onclick="popup()">글 올리기</button>
+						<button type="button" class="button btn-wide custom-button"
+						onclick="popup()">(임시)상세페이지</button>
+						<button type="button" class="button btn-wide custom-button"
+						onclick="popup()">(임시)목록</button>
 				</div>
 
 			</div>

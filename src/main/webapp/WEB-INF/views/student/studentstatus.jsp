@@ -161,8 +161,9 @@
 									<th>${status.index + 1}</th>
 									<td>${list.YEAR}</td>
 									<td>${list.SMT}</td>
-									<td><a href="myCoursesList">${list.SUB_NAME}</a></td>
+									<td><a href="myCoursesList?sub_code=${list.SUB_CODE}">${list.SUB_NAME}</a></td>
 									<td>${list.PROF_NAME}</td>
+									<td>${list.attendanceRate }%</td>
 								</tr>
 							</c:forEach>
 							</tbody>
@@ -186,13 +187,14 @@
 								</tr>
 							</thead>
 							<tbody class="table-group-divider">
-								<c:forEach var="courlist" items="${courseslist}" varStatus="status">
+								<c:forEach var="courlist" items="${coursesbeforlist}" varStatus="status">
 								<tr>
 									<th>${status.index + 1}</th>
 									<td>${courlist.YEAR}</td>
 									<td>${courlist.SMT}</td>
 									<td>${courlist.SUB_NAME}</td>
 									<td>${courlist.PROF_NAME}</td>
+									<td>${courlist.attendanceRate }%</td>
 								</tr>
 								</c:forEach>
 							

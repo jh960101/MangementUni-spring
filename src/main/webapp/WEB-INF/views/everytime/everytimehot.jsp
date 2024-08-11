@@ -19,11 +19,23 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
-
-
+<script defer src="${path}/resources/js/scrollbtn.js"></script>
+<link href="${path}/resources/css/scrollbtn.css" rel="stylesheet" />
 </head>
 
 <body>
+
+	<p class="top_scrollbtn" onclick="scrollbtn('main-img')">TOP</p>
+
+	<div>
+		<img id="main-img" src="${path}/resources/img/etmain.jpg"
+			style="margin-top: 130px; width: 33.3%; height: 300;" /><img
+			id="main-img" src="${path}/resources/img/etmain3.jpg"
+			style="margin-top: 130px; width: 33.3%; height: 300;" /><img
+			id="main-img" src="${path}/resources/img/etmain2.jpg"
+			style="margin-top: 130px; width: 33.4%; height: 300;" />
+			
+	</div>
 	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
 		<div id="sub-menuBar" style="height: 150px;">
@@ -34,7 +46,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="container" style="height: 1000px; margin-top: 100px;">
+	<div class="container" style="height: 1000px; ">
 		<div id="content">
 			<!-- title view -->
 			<div class="list-group">

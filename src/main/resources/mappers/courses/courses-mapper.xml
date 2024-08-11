@@ -7,7 +7,34 @@
 		parameterType="com.university.management.courses.dto.CoursesList"
 		resultType="com.university.management.courses.dto.CoursesList">
 
-		select * from COURSES where STU_NO=#{STU_NO} and year=#{YEAR} and smt=#{SMT}
+	<!-- 	select * from COURSES where STU_NO=#{STU_NO} and year=#{YEAR} and smt=#{SMT} -->
+
+   SELECT
+    c.STU_NO,
+    c.YEAR,
+    c.SMT,
+    c.DEPT_NAME,
+    c.PROF_NAME,
+    c.SUB_NAME,
+    c.CO_CONTENT,
+    c.SUB_CODE,
+    COALESCE((SELECT ROUND(
+                  (SUM(CASE WHEN l.LMS_CHECK = 'Y' THEN 1 ELSE 0 END) * 100.0 / COUNT(*)),
+                  1
+              ) AS AttendanceRate
+              FROM UNIVERSITY.LMS l
+              WHERE l.SUB_CODE = c.SUB_CODE
+              GROUP BY l.SUB_CODE
+             ), 0) AS AttendanceRate
+FROM
+    UNIVERSITY.COURSES c
+WHERE
+    c.STU_NO =#{STU_NO} and c.year=#{YEAR} and c.smt =#{SMT}
+ORDER BY
+    c.YEAR, c.SMT
+
+
+
 
 	</select>
 
@@ -103,10 +130,41 @@
 	<select id="coursesbeforlist" parameterType="map"
 		resultType="com.university.management.courses.dto.Courses">
 
-		SELECT *
+	<!-- 	SELECT *
 		FROM COURSES
 		WHERE STU_NO = #{loginNo}
 		AND year != #{year}
+
+ -->
+
+
+   SELECT
+    c.STU_NO,
+    c.YEAR,
+    c.SMT,
+    c.DEPT_NAME,
+    c.PROF_NAME,
+    c.SUB_NAME,
+    c.CO_CONTENT,
+    c.SUB_CODE,
+    COALESCE((SELECT ROUND(
+                  (SUM(CASE WHEN l.LMS_CHECK = 'Y' THEN 1 ELSE 0 END) * 100.0 / COUNT(*)),
+                  1
+              ) AS AttendanceRate
+              FROM UNIVERSITY.LMS l
+              WHERE l.SUB_CODE = c.SUB_CODE
+              GROUP BY l.SUB_CODE
+             ), 0) AS AttendanceRate
+FROM
+    UNIVERSITY.COURSES c
+WHERE
+    c.STU_NO =#{loginNo} and c.year!= #{year} or c.smt !=#{smt}
+
+
+
+
+
+
 
 
 	</select>

@@ -16,4 +16,5 @@ public class Lms {
 	private String LMS_DATE;// 온라인 강의 1,2,3,4,5,6,7,8 주차
 	private String LMS_CHECK; // 출석 상태 y,n
 	private String CO_CONTENT;//강의 개요
+    private String SUB_NAME; //과목 명
 }

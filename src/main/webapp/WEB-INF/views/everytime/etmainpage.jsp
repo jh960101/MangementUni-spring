@@ -19,11 +19,25 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
-
+<script defer src="${path}/resources/js/scrollbtn.js"></script>
+<link href="${path}/resources/css/scrollbtn.css" rel="stylesheet" />
 
 </head>
 
 <body>
+
+	<p class="top_scrollbtn" onclick="scrollbtn('main-img')">TOP</p>
+
+	<div>
+		<img id="main-img" src="${path}/resources/img/etmain.jpg"
+			style="margin-top: 130px; width: 33.3%; height: 300;" /><img
+			id="main-img" src="${path}/resources/img/etmain3.jpg"
+			style="margin-top: 130px; width: 33.3%; height: 300;" /><img
+			id="main-img" src="${path}/resources/img/etmain2.jpg"
+			style="margin-top: 130px; width: 33.4%; height: 300;" />
+			
+	</div>
+
 	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
 		<div id="sub-menuBar" style="height: 150px;">
@@ -34,7 +48,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="container" style="height: 1000px; margin-top: 100px;">
+	<div class="container" style="height: 1000px; ">
 		<div id="content">
 			<!-- title view -->
 			<div class="list-group">
@@ -51,7 +65,7 @@
 						value="검색어를 입력해주세요" onfocus="clearPlaceholder()"
 						onblur="setPlaceholder()">
 				</div>
-				<input type="text" id="Box" class="box"  value="&nbsp;자유게시판" readonly>
+				<input type="text" id="Box" class="box" value="&nbsp;자유게시판" readonly>
 			</div>
 
 			<div class="input-group mb-0" style="margin-top: 5px;">
@@ -64,11 +78,9 @@
 			<div class="list-group">
 				<a href="etdetailview"
 					class="list-group-item list-group-item-action list-group-item-large"
-					aria-current="true" style="margin-top: 5px;"> 제목 </a> <a
-					href="#"
+					aria-current="true" style="margin-top: 5px;"> 제목 </a> <a href="#"
 					class="list-group-item list-group-item-action list-group-item-small disabled">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내용 미리보기 </a> <a
-					href="#"
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내용 미리보기 </a> <a href="#"
 					class="list-group-item list-group-item-action list-group-item-small2 disabled">
 					<div style="display: flex; align-items: center;">
 						<div style="padding: 1px; margin-right: 10px; font-size: 15px;">글
@@ -86,11 +98,9 @@
 			<div class="list-group">
 				<a href="etdetailview"
 					class="list-group-item list-group-item-action list-group-item-large"
-					aria-current="true" style="margin-top: 5px;"> 제목 </a> <a
-					href="#"
+					aria-current="true" style="margin-top: 5px;"> 제목 </a> <a href="#"
 					class="list-group-item list-group-item-action list-group-item-small disabled">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내용 미리보기 </a> <a
-					href="#"
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내용 미리보기 </a> <a href="#"
 					class="list-group-item list-group-item-action list-group-item-small2 disabled">
 					<div style="display: flex; align-items: center;">
 						<div style="padding: 1px; margin-right: 10px; font-size: 15px;">글
@@ -108,11 +118,9 @@
 			<div class="list-group">
 				<a href="etdetailview"
 					class="list-group-item list-group-item-action list-group-item-large"
-					aria-current="true" style="margin-top: 5px;"> 제목</a> <a
-					href="#"
+					aria-current="true" style="margin-top: 5px;"> 제목</a> <a href="#"
 					class="list-group-item list-group-item-action list-group-item-small disabled">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내용 미리보기 </a> <a
-					href="#"
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내용 미리보기 </a> <a href="#"
 					class="list-group-item list-group-item-action list-group-item-small2 disabled">
 					<div style="display: flex; align-items: center;">
 						<div style="padding: 1px; margin-right: 10px; font-size: 15px;">글

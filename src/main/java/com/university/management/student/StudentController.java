@@ -132,9 +132,9 @@ CoursesList cour= new CoursesList();
 		Map<String, Object> params = new HashMap<>();
 		params.put("loginNo", loginNo);
 		params.put("year", year);
-
-		List<Courses> courseslist= courservice.coursesbeforlist(params);
-		model.addAttribute("courseslist", courseslist);
+        params.put("smt", smt);
+		List<Courses> coursesbeforlist= courservice.coursesbeforlist(params);
+		model.addAttribute("coursesbeforlist", coursesbeforlist);
 		
 		List<StuScholar>StuScholarlist=schservice.stuScholarList(loginNo);
 		model.addAttribute("StuScholarlist", StuScholarlist);
@@ -212,8 +212,12 @@ CoursesList cour= new CoursesList();
 		lmslist= lmsservice.lmsSelect(sub_code);
 		System.out.println("제발해주세요..."+lmslist);
 		String coment=lmslist.get(0).getCO_CONTENT();
+		String sub_name = lmslist.get(0).getSUB_NAME();
 		model.addAttribute("lmslist",lmslist);
 		model.addAttribute("coment", coment);
+		model.addAttribute("sub_name",sub_name);
+		
+
 		return "courses/myCoursesList";
 	}
 

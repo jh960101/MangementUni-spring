@@ -3,6 +3,7 @@ package com.university.management.courses.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,6 +15,6 @@ public class CoursesList {
 	private String PROF_NAME; // -- 교수명
 	private String SUB_NAME; // -- 과목명
 	private String CO_CONTENT; // -- 강의계획서 내용
-	private String SUB_CODE;//과목 코드
-
+	private String SUB_CODE;// 과목 코드
+	private double AttendanceRate; // 출석률
 }
