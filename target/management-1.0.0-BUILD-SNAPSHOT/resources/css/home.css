@@ -1,6 +1,22 @@
 @charset "UTF-8";
 
 /* home */
+
+.slogan-box{
+	position: relative;
+}
+.slogan{
+	color:white;
+	position:absolute;
+	z-index: 2;
+	top: 300px;
+	left: 430px;
+	
+}
+.slogan h1{
+	font-size: 55px;
+}
+
 .article {
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 }
@@ -82,7 +98,7 @@ main .readmore {
 }
 
 main .readmore2 {
-    margin-top: 90px;
+    margin-top: 75px;
 }
 
 main #readmore {
