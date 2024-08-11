@@ -76,7 +76,7 @@
 						<li class="divide"><a href="department" id="dept">학과 소개</a></li>
 						<li class="divide"><a href="professor" id="prof">교수진 소개</a></li>
 						<li class="divide"><a href="calendar" id="calendar">학사 일정</a></li>
-						<li><a href="waytocome" id="way">오시는길</a></li>
+						<li><a href="waytocome" id="way">오시는 길</a></li>
 					</ul>
 				</div>
 			</div>
