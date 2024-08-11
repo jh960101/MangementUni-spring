@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: 'KimjungchulMyungjo-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/KimjungchulMyungjo-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
 /* home */
 
 .slogan-box{
@@ -10,11 +17,13 @@
 	position:absolute;
 	z-index: 2;
 	top: 300px;
-	left: 430px;
+	left: 275px;
 	
 }
 .slogan h1{
-	font-size: 55px;
+	font-size: 45px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.46);
+    font-family: 'KimjungchulMyungjo-Bold';
 }
 
 .article {
