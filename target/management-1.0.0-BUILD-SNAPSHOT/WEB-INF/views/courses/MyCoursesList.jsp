@@ -38,7 +38,7 @@
 		<div id="content">
 			<!-- title view -->
 			<div id="pageTitle">
-				<h1>파이썬 프로그래밍 실무</h1>
+				<h1>${sub_name }</h1>
 				<h1>${title}</h1>
 			</div>
 
@@ -52,7 +52,6 @@
 					</div>
 					<hr>
 					<div id="SubjectContent">
-						<p>강의 개요가 들어갈 텍스트</p>
 						<p>${coment}</p>
 					</div>
 				</div>
@@ -67,123 +66,22 @@
 
 				<!--  주차별 목록 출력 -->
 				<div id="comm">주차 별 학습 활동</div>
-
 				<div id="onlineList">
-					<div id="online">
-						<p id="online-title">1주차(2022-02-28 ~ 2022-03-01)</p>
-						<div id="onlien-cont">
-							<a href="online" target="_blank"
-								onclick="return openPagePopup(this.href,190,700);"> <span
-								class="material-symbols-outlined icon"></span> 페이지 열기
-							</a> <span class="material-symbols-outlined icon"></span>[강의 자료]
-						</div>
+					<c:forEach var="list" items="${lmslist}" varStatus="status">
+						<div id="online">
+							<p id="online-title">${list.LMS_TITLE }</p>
+							<div id="onlien-cont">
+								<a href="online" target="_blank"
+									onclick="return openPagePopup(this.href,190,700);"> <span
+									class="material-symbols-outlined icon"></span> 영상 강의
+								</a> <span class="material-symbols-outlined icon">description</span>[강의
+								자료]
+							</div>
 
-					</div>
-					<div id="online">
-						<h5>2주차(2022-02-28 ~ 2022-03-01)</h5>
-						<div id="onlien-cont">
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<span class="material-symbols-outlined icon">description</span>[강의
-							자료]
 						</div>
-					</div>
-					<div id="online">
-						<h5>3주차(2022-02-28 ~ 2022-03-01)</h5>
-						<div id="onlien-cont">
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<span class="material-symbols-outlined icon">description</span>[강의
-							자료]
-						</div>
-					</div>
-					<div id="online">
-						<h5>4주차(2022-02-28 ~ 2022-03-01)</h5>
-						<div id="onlien-cont">
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<span class="material-symbols-outlined icon">description</span>[강의
-							자료]
-						</div>
-					</div>
-					<div id="online">
-						<h5>5주차(2022-02-28 ~ 2022-03-01)</h5>
-						<div id="onlien-cont">
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<span class="material-symbols-outlined icon">description</span>[강의
-							자료]
-						</div>
-					</div>
-					<div id="online">
-						<h5>6주차(2022-02-28 ~ 2022-03-01)</h5>
-						<div id="onlien-cont">
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<span class="material-symbols-outlined icon">description</span>[강의
-							자료]
-						</div>
-					</div>
-					<div id="online">
-						<h5>7주차(2022-02-28 ~ 2022-03-01)</h5>
-						<div id="onlien-cont">
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<span class="material-symbols-outlined icon">description</span>[강의
-							자료]
-						</div>
-					</div>
-					<div id="online">
-						<h5>8주차(2022-02-28 ~ 2022-03-01)</h5>
-						<div id="onlien-cont">
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<span class="material-symbols-outlined icon">description</span>[강의
-							자료]
-						</div>
-					</div>
+					</c:forEach>
+
+
 				</div>
 
 			</div>
