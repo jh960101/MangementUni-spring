@@ -5,7 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,26 +37,41 @@
 }
 
 .btnbox {
-	margin-right: 250px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	
+	width:500px;
+	margin-left:180px;
+	
+}
+
+.btn {
+	padding: 10px;
+	text-align: center;
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
 }
 </style>
 </head>
 <body>
+	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
-		<div id="sub-menubar">
+		<div id="sub-menuBar">
 			<ul id="menulist">
 				<li><a href="studentstatus">학적 조회</a></li>
 				<li><a href="passwordchange">학생 정보 변경</a></li>
 				<li><a href="objection">성적 조회</a></li>
 				<li><a href="myCoursesPage">나의 수강 페이지</a></li>
+				<li><a href="myCoursesPage">수강신청 페이지</a></li>
 				<li><a href="askpresident">총장님께 바랍니다</a></li>
-				<li><a href="#">시간표</a></li>
-				<li><a href="#">학생증</a></li>
+				<li><a href="idcard">학생증</a></li>
 			</ul>
 		</div>
 	</div>
-
-	<div class="container" style="height: 500px;">
+	<div class="container" style="height: 550px; margin-top: 100px;">
 
 		<div id="content">
 			<div id="pagetitle">
@@ -80,20 +94,23 @@
 							style="text-align: left; font-weight: 700;"><b>&gt;
 								신청 내용</b></label>
 						<div class="col-sm-10 contentbox">
-							<textarea rows="5" cols="60" style="width: 500px;"
+							<textarea rows="6" cols="60" style="width: 500px;"
 								placeholder="이의 신청 내용을 입력하세요" name="detail"></textarea>
 						</div>
 					</div>
 
 					<div class="btnbox">
-						<button type="submit" class="btn btn-primary" value="등록"
+						<button type="submit" class="btn " value="등록"
 							style="font-size: 15px; width: 100px; height: 40px; background-color: #024C86; color: white; text-align: center; border: none !important;">등록</button>
-						<button type="reset" class="btn btn-primary" value="다시쓰기"
+						<button type="reset" class="btn " value="다시쓰기"
 							style="font-size: 15px; width: 100px; height: 40px; background-color: #024C86; color: white; text-align: center; border: none !important;">다시쓰기</button>
-						<button type="button" class="btn btn-primary" value="돌아가기"
+						<button type="button" class="btn " value="돌아가기"
 							onclick="history.back()"
 							style="font-size: 15px; width: 100px; height: 40px; background-color: #024C86; color: white; text-align: center; border: none !important;">돌아가기</button>
 					</div>
+					
+					
+					
 				</form>
 			</div>
 			<!-- contentView -->

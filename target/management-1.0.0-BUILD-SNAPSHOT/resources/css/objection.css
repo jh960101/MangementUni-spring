@@ -1,5 +1,8 @@
 @charset "UTF-8";
 /* objection */
+.container{
+	
+}
 #sub-menubar {
 	margin-left: 50px;
 	background-color: #024C86;
@@ -33,7 +36,7 @@
 
 /* container */
 #pagetitle {
-	margin-top: 50px;
+	
 	border-bottom: 3px solid;
 	border-bottom-color: #024C86;
 }

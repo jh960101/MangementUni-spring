@@ -1,6 +1,5 @@
 <%@page import="javax.servlet.jsp.tagext.TagLibraryInfo" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
@@ -54,11 +53,11 @@
                                 <li id="uni-detail"><a href="#">대학소개</a></li>
                                 <li><a href="infoboard">공지사항</a></li>
                                 <li><a href="etmainpage">에타게시판</a></li>
-                                <li><a href="myCoursesPage">마이페이지</a></li>
+                                <li><a href="${login eq 'Employee'? 'infoboard':'myCoursesPage' }">마이페이지</a></li>
                             </ul>
                         </div>
                         <div class="col col-1">
-                            <button id="login-btn" onclick="location.href='logout'">LOGOUT</button>
+                            <button id="login-btn" onclick="location.href='logout'" style="color: white">LOGOUT</button>
                         </div>
                     </c:if>
                 </div>

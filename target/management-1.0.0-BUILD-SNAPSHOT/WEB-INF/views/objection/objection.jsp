@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,21 +14,22 @@
 <link href="${path}/resources/css/objection.css" rel="stylesheet" />
 </head>
 <body>
+	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
-		<div id="sub-menubar">
+		<div id="sub-menuBar" style="height: 380px">
 			<ul id="menulist">
 				<li><a href="studentstatus">학적 조회</a></li>
-				<li><a href="passwordchange">학생 정보 변경</a></li>
+				<li><a href="passwordchange">학생 비밀번호 변경</a></li>
+				<li><a href="studentinformation">학생 정보 변경</a></li>
 				<li><a href="objection">성적 조회</a></li>
 				<li><a href="myCoursesPage">나의 수강 페이지</a></li>
+				<li><a href="courseregistrationpage">수강신청 페이지</a></li>
 				<li><a href="askpresident">총장님께 바랍니다</a></li>
-				<li><a href="#">시간표</a></li>
-				<li><a href="#">학생증</a></li>
+				<li><a href="idcard">학생증</a></li>
 			</ul>
 		</div>
 	</div>
-
-	<div class="container" style="height: auto; margin-bottom:50px;">
+	<div class="container" style="height: 800px; margin-top:100px;">
 
 		<div id="content">
 			<div id="pagetitle">
@@ -37,7 +38,7 @@
 
 			<div id="selecttable">
 				<div id="tablelist">
-					<h5 id="midtitle" style="margin-top:40px">&gt; 2024-1학기</h5>
+					<h5 id="midtitle" >&gt; 2024-1학기</h5>
 					<div>
 						<table class="table mt-2 mb-4" style="text-align: center; margin-top:15px;">
 							<thead>

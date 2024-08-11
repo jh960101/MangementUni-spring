@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,10 +15,12 @@
 <!-- 구글 아이콘 링크  -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 <link href="${path}/resources/css/courses.css" rel="stylesheet" />
 
 </head>
 <body>
+	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
 		<div id="sub-menuBar">
 			<ul id="menulist">
@@ -26,13 +28,13 @@
 				<li><a href="passwordchange">학생 정보 변경</a></li>
 				<li><a href="objection">성적 조회</a></li>
 				<li><a href="myCoursesPage">나의 수강 페이지</a></li>
+				<li><a href="myCoursesPage">수강신청 페이지</a></li>
 				<li><a href="askpresident">총장님께 바랍니다</a></li>
 				<li><a href="idcard">학생증</a></li>
 			</ul>
 		</div>
 	</div>
-
-	<div class="container">
+	<div class="container" style="height: 2500px; margin-top: 100px;">
 		<div id="content">
 			<!-- title view -->
 			<div id="pageTitle">
@@ -51,7 +53,7 @@
 					<hr>
 					<div id="SubjectContent">
 						<p>강의 개요가 들어갈 텍스트</p>
-						<p>${ content }</p>
+						<p>${coment}</p>
 					</div>
 				</div>
 
@@ -70,16 +72,10 @@
 					<div id="online">
 						<p id="online-title">1주차(2022-02-28 ~ 2022-03-01)</p>
 						<div id="onlien-cont">
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<p>
-								<a href="#"><span class="material-symbols-outlined icon">play_circle
-								</span> 1. 동영상 강의 제목</a>
-							</p>
-							<span class="material-symbols-outlined icon">description</span>[강의
-							자료]
+							<a href="online" target="_blank"
+								onclick="return openPagePopup(this.href,190,700);"> <span
+								class="material-symbols-outlined icon"></span> 페이지 열기
+							</a> <span class="material-symbols-outlined icon"></span>[강의 자료]
 						</div>
 
 					</div>
@@ -193,6 +189,23 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		function openPagePopup(url, width, height) {
+
+			const screenWidth = window.screen.width;
+			const screenHeight = window.screen.height;
+
+			const left = (screenWidth - width) / 2;
+			const top = (screenHeight - height) / 2;
+
+			const popup = window
+					.open(url, 'popupWindow',
+							`width=1500,height=700,top=100,left=200,scrollbars=no,resizable=no`);
+
+			return false;
+		}
+	</script>
+
 
 
 </body>

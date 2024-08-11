@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+
 
 <!DOCTYPE html>
 <html>
@@ -18,9 +18,9 @@
 #sub-menubar {
 	margin-left: 50px;
 	background-color: #024C86;
-	margin-top: 110px;
+	margin-top: 160px;
 	width: 200px;
-	height: 200px;
+	height: 150px;
 	float: left;
 }
 
@@ -54,19 +54,20 @@
 </style>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div id="menuBar">
 		<div id="sub-menubar">
 			<ul id="menulist">
-				<li><a href="#">공지사항 관리</a></li>
+				<li><a href="infoboard">공지사항 관리</a></li>
 				<li><a href="scholarlist">장학금 관리</a></li>
 				<li><a href="objectionlist">성적 관리</a></li>
-				<li><a href="">학사 일정</a></li>
 			</ul>
 		</div>
 	</div>
 
-	<div class="container" style="height: 500px;">
+	<div class="container" style="height: 750px; margin-top: 50px;">
 		<div id="content">
+		<!-- title view -->
 			<div id="pagetitle">
 				<h1>성적 이의 신청 목록</h1>
 			</div>
@@ -84,11 +85,9 @@
 							<option value="컴퓨터공학과">컴퓨터공학과</option>
 							<option value="화학과">화학과</option>
 							<option value="물리학과">물리학과</option>
-						</select> 
-						<select name="subject" required style="padding: 5px;">
+						</select> <select name="subject" required style="padding: 5px;">
 							<option disabled selected value="">과목 선택</option>
-						</select> 
-						<select name="grade" required style="padding: 5px;">
+						</select> <select name="grade" required style="padding: 5px;">
 							<option value="" disabled selected>학년 선택</option>
 							<option value="1">1학년</option>
 							<option value="2">2학년</option>
