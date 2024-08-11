@@ -23,7 +23,7 @@
 			style="width: 70px; height: 5px; background-color: #024C86; margin: 0px auto;"></div>
 	</div>
 <!-- Spacer -->
-<div class="spacer"><img src="${path}/resources/img/학과소개.png"></div>
+<%--<div class="spacer"><img src="${path}/resources/img/학과소개.png"></div>--%>
 
 <!-- Main Content -->
 <div class="main-content">
