@@ -30,7 +30,7 @@
 		<div id="content">
 			<!-- title view -->
 			<div class="list-group">
-				<div class="dropdown-container">
+				<!-- <div class="dropdown-container">
 					<div class="dropdown">
 						<button class="dropbtn" id="dropdownButton">제목&nbsp;&nbsp;▼</button>
 						<div class="dropdown-content">
@@ -42,20 +42,37 @@
 					<input type="text" id="searchBox" class="search-box"
 						value="검색어를 입력해주세요" onfocus="clearPlaceholder()"
 						onblur="setPlaceholder()">
-				</div>
+				</div> -->
 				<input type="text" id="Box" class="box" value="총장님께.." readonly>
 			</div>
-			
+
 
 
 
 			<div class="list-group">
-				<a href="etdetailview"
+				<div href="etdetailview"
 					class="list-group-item list-group-item-action list-group-item-large"
-					aria-current="true" style="margin-top: 5px;"> 총장님..</a>
+					aria-current="true" style="margin-top: 5px; cursor: pointer;"
+					onclick="location.href='${path}/views/president/presidentplsdetail'">
+					총장님..</div>
 			</div>
 
-			<button type="button" class="btn1">▼&nbsp;더보기</button>
+			<div class="list-group">
+				<div href="etdetailview"
+					class="list-group-item list-group-item-action list-group-item-large"
+					aria-current="true" style="margin-top: 5px; cursor: pointer;"
+					onclick="location.href='${path}/views/president/presidentplsdetail'">
+					총장님!!</div>
+			</div>
+
+			<div class="list-group">
+				<div href="etdetailview"
+					class="list-group-item list-group-item-action list-group-item-large"
+					aria-current="true" style="margin-top: 5px; cursor: pointer;"
+					onclick="location.href='${path}/views/president/presidentplsdetail'">
+					건의 드립니다!</div>
+			</div>
+
 		</div>
 	</div>
 
