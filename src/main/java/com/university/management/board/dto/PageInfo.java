@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class PageInfo {
 
 	private int currentPage; // 현재 페이지
-	private int pageLimit = 5; // 한 페이지에 보여질 하단의 페이지A 수
+	private int pageLimit; // 한 페이지에 보여질 하단의 페이지 수
 	private int listCount; // 총 게시글의 수
 	private int listLimit = 5; // 한 페이지에 보여질 게시글 수
 
@@ -21,10 +21,9 @@ public class PageInfo {
 	private int lastPage; // 페이지 리스트에서 마지막 페이지
 
 
-	public PageInfo(int currentPage, int pageLimit, int listCount, int listLimit) {
+	public PageInfo(int currentPage, int listCount, int listLimit) {
 		super();
 		this.currentPage = currentPage;
-		this.pageLimit = pageLimit;
 		this.listCount = listCount;
 		this.listLimit = listLimit;
 	}
@@ -37,6 +36,8 @@ public class PageInfo {
 
 		firstRow = (currentPage - 1) * listLimit;
 		lastRow = Math.min(totalRowCount, currentPage * listLimit);
+		
+		pageLimit = totalRowCount;
 
 		firstPage = ((currentPage - 1) / pageLimit) * pageLimit + 1;
 		System.out.println("firstPage : " + firstPage);

@@ -80,13 +80,14 @@
 
 			<div class="contentView"
 				style="margin: 50px; margin-left: 300px; text-align: center; font-size: 20px;">
-				<form action="/" method="post">
+				<form action="${path}/objectionWritePro" method="post">
+				<input type="hidden" name="sub_code" value="${odjection.sub_code}" />
 					<div class="row mb-3">
 						<label for="subjectTitle" class="col-sm-2 col-form-label"
 							style="text-align: left;"><b>&gt; 수강 과목</b></label>
 						<div class="col-sm-10 titlebox">
 							<label for="subjectTitle"
-								style="text-align: left; margin-top: 5px;">C언어 프로그래밍 활용</label>
+								style="text-align: left; margin-top: 5px;">${odjection.sub_name}</label>
 						</div>
 					</div>
 					<div class="row mb-3">
@@ -100,7 +101,7 @@
 					</div>
 
 					<div class="btnbox">
-						<button type="submit" class="btn " value="등록"
+						<button type="submit" class="btn " value="등록" onclick="${path}/objectionWrite?sub_code=${odjection.sub_code}"
 							style="font-size: 15px; width: 100px; height: 40px; background-color: #024C86; color: white; text-align: center; border: none !important;">등록</button>
 						<button type="reset" class="btn " value="다시쓰기"
 							style="font-size: 15px; width: 100px; height: 40px; background-color: #024C86; color: white; text-align: center; border: none !important;">다시쓰기</button>

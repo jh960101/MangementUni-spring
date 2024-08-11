@@ -21,7 +21,33 @@
 			style="width: 70px; height: 5px; background-color: #024C86; margin: 0px auto;"></div>
 	</div>
 	<div class="container1">
-		<div id="map" class="map">지도 로드 중...</div>
+		<div id="map" class="map" style="width: 1190px; height: 500px;"></div>
+		<script type="text/javascript"
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3fe2c43d3f698062c7174e0ad3e192f9"></script>
+		<script>
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			mapOption = {
+				// 지도의 중심좌표
+				center : new kakao.maps.LatLng(37.4937, 127.0281),
+				level : 2
+			};
+
+			// 지도 생성
+			var map = new kakao.maps.Map(mapContainer, mapOption);
+
+			// 표시 위치
+			var markerPosition = new kakao.maps.LatLng(37.4937, 127.0281);
+
+			// 마커 생성
+			var marker = new kakao.maps.Marker({
+				position : markerPosition
+			});
+
+			marker.setMap(map);
+			marker.setDraggable(true);
+		</script>
+
+
 		<div class="info">
 			<div class="address1">
 				<div class="left-address1">
