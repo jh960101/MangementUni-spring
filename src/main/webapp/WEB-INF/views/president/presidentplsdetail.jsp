@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="kr">
 
@@ -31,9 +32,9 @@
 
 <body>
 	<jsp:include page="../common/header.jsp" />
-	
+
 	<div class="container"
-		style="height: 1600px; margin-top: 100px; margin-left: 450px;">
+		style="height: 1150px; margin-top: 100px; margin-left: 450px;">
 		<div type="box" id="content" class="header2">
 			<input type="text" id="Box" class="box" value="총장님 부탁드립니다" readonly>
 
@@ -71,13 +72,15 @@
 
 
 
-					<div class="downbtn">
-						<button type="button" class="btn3">
-							<img
-								src="${pageContext.request.contextPath}/resources/img/글목록.png"
-								width="20" height="20">&nbsp;글 목록
-						</button>
-					</div>
+				</div>
+				<hr style="width: 1000px;">
+				<div class="downbtn">
+					<button type="button" class="btn3"
+						onclick="location.href='${path}/views/president/presidentplslist'">
+						<img
+							src="${pageContext.request.contextPath}/resources/img/글목록.png"
+							width="20" height="20">&nbsp;글 목록
+					</button>
 				</div>
 			</div>
 		</div>
