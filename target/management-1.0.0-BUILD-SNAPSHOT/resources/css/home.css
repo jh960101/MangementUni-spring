@@ -21,7 +21,8 @@
 	
 }
 .slogan h1{
-	font-size: 45px;
+	font-size: 48px;
+    margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.46);
     font-family: 'KimjungchulMyungjo-Bold';
 }
