@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.university.management.everytime.mapper.EverytimeMapper">
+
+	<select id="getAllEtaList" resultType="com.university.management.board.dto.Board">
+		SELECT * FROM board WHERE TYPE = "e";
+	</select>
+
+	<select id="getEtaBoardByNo" parameterType="int" resultType="com.university.management.board.dto.Board">
+		SELECT * FROM board WHERE TYPE = "e" AND BO_NO = #{bo_no}#
+	</select>
+
+
+</mapper>
