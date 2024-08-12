@@ -60,7 +60,12 @@
 		JOIN SUBJECT S ON R.SUB_CODE = S.SUB_CODE
 		JOIN PROFESSOR P ON S.PROF_NO = P.PROF_NO
 		JOIN DEPARTMENT D ON S.DEPT_CODE = D.DEPT_CODE
-		WHERE R.YEAR = #{year} AND R.SMT = #{smt} 
+		WHERE R.YEAR = #{year} AND R.SMT = #{smt}
+	</select>
+	
+	<select id="selectObj">
+		SELECT * FROM OBJECTION
+		WHERE stu_no = 2022010003 and sub_code = 'COMP240330';
 	</select>
 
 </mapper>
