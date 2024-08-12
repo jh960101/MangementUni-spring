@@ -30,27 +30,21 @@
 		<div id="loginBox" ">
 
 			<!-- 로그인 페이지 타이틀 -->
-			<div id="loginBoxTitle">비밀번호 찾기</div>
+			<div id="loginBoxTitle">인가 코드 입력</div>
 			<!-- 아이디, 비번, 버튼 박스 -->
-			<form action="${path}/findpasswordinfo" method="post">
+			<form action="${path}/logincodecheck" method="post">
 				<div id="inputBox">
 					<div class="input-form-box">
-						<span>아이디 </span><input type="text" id="loginId" name="loginid"
-							class="form-control"/>
+						<span>인가코드 </span><input type="text" id="pwcode" name="pwcode"
+							class="form-control">
 					</div>
-					<div class="input-form-box">
-						<span>이메일 </span><input type="email" id="loginemail"
-							name="email" class="form-control"/> 
-					</div>
-					<div>
-						교직원 <input type='radio' name='login' value='Employee' />
-						 학생<input	type='radio' name='login' value='Student' checked="checked"/>
-					</div>
-						
+					<input type="hidden" name="checkNumcode" value="${checkNum}">
+					<input type="hidden" name="pw" value="${ studentpw}">
+					<input type="hidden" name="email" value="${email}">
 			<div class="button-login-box">
 				<button type="submit" class="btn btn-xs"
-					style="width: 100%; background-color:  #024C86;color: white;">비밀번호
-					찾기</button>
+					style="width: 100%; background-color:  #024C86;color: white;">확인
+					</button>
 			</div>
 					</div>
 			</form>
