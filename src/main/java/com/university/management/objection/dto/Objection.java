@@ -23,7 +23,7 @@ public class Objection {
 	private String prof_no; 	// 교수번호
 	private String prof_name; 	// 교수번호
 	private String sub_code; 	// 과목 코드
-	private String sub_name; 	// 과목 코드
+	private String sub_name; 	// 과목 이름
 	private String obj_content; // 작성 내용
 	private Date create_Date; 	// 작성 날짜
 
