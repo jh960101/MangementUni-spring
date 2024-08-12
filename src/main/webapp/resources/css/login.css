@@ -28,7 +28,7 @@ html, body {
 .input-form-box {
 	border: 0px solid #ff0000;
 	display: flex;
-	margin-bottom: 5px;
+	margin-bottom: 20px;
 }
 
 .input-form-box>span {
@@ -36,6 +36,13 @@ html, body {
 	text-align: left;
 	padding-top: 5px;
 	min-width: 65px;
+}
+
+.radio-box{
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	padding: 0px 0px 15px 0px;
 }
 
 .button-login-box {

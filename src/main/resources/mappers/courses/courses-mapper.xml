@@ -160,7 +160,7 @@ FROM
 WHERE
     c.STU_NO =#{loginNo} and c.year!= #{year} or c.smt !=#{smt}
 
-
+order by c.year desc
 
 
 

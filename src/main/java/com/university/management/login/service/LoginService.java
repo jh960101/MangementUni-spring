@@ -31,5 +31,10 @@ public class LoginService {
 		System.out.println("loginService안에 pwschange실행");
 		mapper.pwschange(params);
 	}
+//비밀번호 찾기
+	public Student studentpwfind(Map<String, String> params) {
+		
+		return mapper.studentpwfind(params);
+	}
 
 }

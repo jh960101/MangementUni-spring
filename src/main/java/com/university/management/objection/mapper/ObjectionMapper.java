@@ -1,6 +1,7 @@
 package com.university.management.objection.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,6 +12,8 @@ public interface ObjectionMapper {
 
 	List<Objection> selectObjList(int studentno);
 
-	List<Objection> selectBySub(String sub_code);
+	int objInsert(Map<String, String> objInsertList);
+
+	List<Objection> selectLastResultList(Map<String, Integer> lastResultList);
 
 }
