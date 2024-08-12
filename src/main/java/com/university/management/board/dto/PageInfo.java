@@ -30,7 +30,12 @@ public class PageInfo {
 
 	public void pageSetting(int totalRowCount) {
 		System.out.println("[pageSetting] 실행");
-
+		
+		// 공지사항 게시글 개수가 0일 때, 1로 고정(예외 처리)
+		if(totalRowCount < 1) {
+			totalRowCount = 1;
+		}
+		
 		totalPageCount = (int) Math.ceil((double) totalRowCount / listLimit);
 		System.out.println("totalPageCount : " + totalPageCount);
 

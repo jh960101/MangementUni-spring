@@ -1,68 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper
-	namespace="com.university.management.objection.mapper.ObjectionMapper">
+<mapper namespace="com.university.management.objection.mapper.ObjectionMapper">
+    
+    <resultMap type="com.university.management.objection.dto.Objection" id="objectionResultMap">
+        <result property="num" column="num" />
+        <result property="year" column="YEAR" />
+        <result property="smt" column="SMT" />
+        <result property="grade" column="GRADE" />
+        <result property="grade_p" column="GRADE_POINT" />
+        <result property="obj_no" column="OBJ_NO" />
+        <result property="stu_no" column="STU_NO" />
+        <result property="dept_code" column="DEPT_CODE" />
+        <result property="dept_name" column="DEPT_NAME" />
+        <result property="prof_no" column="PROF_NO" />
+        <result property="prof_name" column="PROF_NAME" />
+        <result property="sub_code" column="SUB_CODE" />
+        <result property="sub_name" column="SUB_NAME" />
+        <result property="obj_content" column="OBJ_CONTENT" />
+        <result property="create_Date" column="CREATE_DATE" />
+    </resultMap>
 
-	<resultMap
-		type="com.university.management.objection.dto.Objection"
-		id="objectionResultMap">
-		<result property="num" column="num" />          <!-- 임의의 순서 번호가 필요한 경우 -->
-		<result property="year" column="YEAR" />               <!-- 학년도 -->
-		<result property="smt" column="SMT" />            <!-- 학기 -->
-		<result property="grade" column="GRADE" />             <!-- 등급 -->
-		<result property="grade_p" column="GRADE_POINT" />     <!-- 점수 -->
-		<result property="obj_no" column="OBJ_NO" />           <!-- 성적 이의 신청 인덱스 번호 -->
-		<result property="stu_no" column="STU_NO" />           <!-- 학번 -->
-		<result property="dept_code" column="DEPT_CODE" />     <!-- 학과코드 -->
-		<result property="dept_name" column="DEPT_NAME" />     <!-- 학과명 -->
-		<result property="prof_no" column="PROF_NO" />         <!-- 교수번호 -->
-		<result property="prof_name" column="PROF_NAME" />     <!-- 교수명 -->
-		<result property="sub_code" column="SUB_CODE" />       <!-- 과목 코드 -->
-		<result property="sub_name" column="SUB_NAME" />       <!-- 과목명 -->
-		<result property="obj_content" column="OBJ_CONTENT" /> <!-- 작성 내용 -->
-		<result property="create_Date" column="CREATE_DATE" /> <!-- 작성 날짜 -->
-	</resultMap>
-
-	<select id="selectObjList" parameterType="int"
-		resultType="objectionResultMap">
+    <select id="selectObjList" parameterType="int" resultMap="objectionResultMap">
+        SELECT
+        ROW_NUMBER() OVER (ORDER BY R.SMT) AS num,
+        R.YEAR,
+        R.SMT,
+        D.DEPT_NAME,
+        S.SUB_NAME,
+        S.SUB_CODE,
+        P.PROF_NAME,
+        R.GRADE
+        FROM
+        RESULTS R
+        JOIN SUBJECT S ON R.SUB_CODE = S.SUB_CODE
+        JOIN PROFESSOR P ON S.PROF_NO = P.PROF_NO
+        JOIN DEPARTMENT D ON S.DEPT_CODE = D.DEPT_CODE
+        WHERE R.YEAR = 2024 AND R.SMT = 1
+    </select>
+    
+    <insert id="objInsert" parameterType="java.util.Map">
+    	INSERT INTO OBJECTION
+    	(STU_NO, SUB_CODE, OBJ_CONTENT, CREATE_DATE) VALUES
+		(#{stu_no},#{sub_code}, #{obj_content}, now())
+    </insert>
+    
+	<select id="selectLastResultList" parameterType="java.util.Map"
+		resultMap="objectionResultMap">
 		SELECT
 		ROW_NUMBER() OVER (ORDER BY R.SMT) AS num,
 		R.YEAR,
 		R.SMT,
 		D.DEPT_NAME,
 		S.SUB_NAME,
+		S.SUB_CODE,
 		P.PROF_NAME,
 		R.GRADE
 		FROM
 		RESULTS R
 		JOIN SUBJECT S ON R.SUB_CODE = S.SUB_CODE
-		JOIN PROFESSOR P ON
-		S.PROF_NO = P.PROF_NO
+		JOIN PROFESSOR P ON S.PROF_NO = P.PROF_NO
 		JOIN DEPARTMENT D ON S.DEPT_CODE = D.DEPT_CODE
-		WHERE R.YEAR = 2024 AND R.SMT = 1
+		WHERE R.YEAR = #{year} AND R.SMT = #{smt} 
 	</select>
-
-	<select id="selectBySub" parameterType="String" resultMap="objectionResultMap">
-		SELECT
-		ROW_NUMBER() OVER (ORDER BY R.SMT) AS num,
-		R.YEAR,
-		R.SMT,
-		D.DEPT_NAME,
-		S.SUB_NAME,
-		P.PROF_NAME,
-		R.GRADE
-		FROM
-		RESULTS R
-		JOIN SUBJECT S ON R.SUB_CODE = S.SUB_CODE
-		JOIN PROFESSOR P ON
-		S.PROF_NO = P.PROF_NO
-		JOIN DEPARTMENT D ON S.DEPT_CODE = D.DEPT_CODE
-		WHERE
-		R.YEAR = 2024
-		AND R.SMT = 1
-		AND R.SUB_CODE = #{sub_code};
+	
+	<select id="selectObj">
+		SELECT * FROM OBJECTION
+		WHERE stu_no = 2022010003 and sub_code = 'COMP240330';
 	</select>
-
-
 
 </mapper>

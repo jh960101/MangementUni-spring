@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.university.management.board.dto.Board;
 import com.university.management.courseregistrationpage.dto.Courseregistrationpage;
@@ -256,46 +258,95 @@ public class StudentController {
 	}
 
 	// 성적
-	@RequestMapping("/objection")
-	public String objection(Model model) {
-		System.out.println("StudentController - objection() 실행");
+		@RequestMapping("/objection")
+		public String objection(Model model, @RequestParam(value = "smt", defaultValue = "1") int smt) {
+			System.out.println("StudentController - objection() 실행");
+			
+			int studentno = (int) session.getAttribute("studentno");
+			System.out.println("login : " + studentno);
+			
+			List<Objection> resultList = objservice.selectObjList(studentno);
+			
+		    List<Objection> results22 = objservice.selectLastResultList(2022, smt);
+		    List<Objection> results23 = objservice.selectLastResultList(2023, smt);
+		    System.out.println("results22 : " + results22);
+		    System.out.println("results23 : " + results23);
+
+		    model.addAttribute("results22", results22);
+		    model.addAttribute("results23", results23);
+		    model.addAttribute("smt", smt);
+			model.addAttribute("studentno", studentno);
+			model.addAttribute("resultList", resultList);
+			
+			
+			return "objection/objection";
+		}
 		
-		int studentno = (int) session.getAttribute("studentno");
-		System.out.println("login : " + studentno);
-		
-		List<Objection> resultList = objservice.selectObjList(studentno);
-		
-		model.addAttribute("studentno", studentno);
-		model.addAttribute("resultList", resultList);
-		
-		
-		return "objection/objection";
-	}
+		@RequestMapping(value = "/objectionPro", method = RequestMethod.GET)
+		@ResponseBody
+		public Map<String, Object> objectionPro(@RequestParam(value = "smt", defaultValue="1") int smt) {
+		    System.out.println("StudentController - objectionPro() 실행");
+		    
+		    List<Objection> results22 = objservice.selectLastResultList(2022, smt);
+		    List<Objection> results23 = objservice.selectLastResultList(2023, smt);
+		    
+		    System.out.println("smt : " + smt);
+		    System.out.println("results22 : " + results22);
+		    System.out.println("results23 : " + results23);
+
+		    // 결과를 맵에 담아서 반환
+		    Map<String, Object> response = new HashMap<>();
+		    response.put("results22", results22);
+		    response.put("results23", results23);
+		    
+		    return response;
+		}
 
 	@RequestMapping("/objectionWrite")
-	public String objectionWrite(Model model, @RequestParam("sub_code") String sub_code , @ModelAttribute Objection odj) {
+	public String objectionWrite(Model model, @RequestParam("sub_code") String sub_code, @RequestParam("sub_name") String sub_name) {
 		System.out.println("StudentController-objectionWrite() 실행");
 		
 		Integer studentno = (Integer) session.getAttribute("studentno");
 		System.out.println("studentno : " + studentno);
 
 		System.out.println("sub_code : " + sub_code);
+		System.out.println("sub_name : " + sub_name);
 		
-		List<Objection> odjection = objservice.selectBySub(sub_code);
-		
-		model.addAttribute("odjection",odjection);
+		model.addAttribute("sub_code", sub_code);
+		model.addAttribute("sub_name", sub_name);
 		
 		return "objection/objectionWrite";
 	}
 	
 	@RequestMapping("/objectionWritePro")
-	public String objectionWritePro(Model model, @RequestParam("sub_code") String subCode, @ModelAttribute Objection odj) {
+	public String objectionWritePro(Model model, @RequestParam("sub_code") String sub_code, @RequestParam Map<String, String> param, @ModelAttribute Objection objection) {
 		System.out.println("StudentController-objectionWritePro() 실행");
 		
+		Integer stu_no = (Integer) session.getAttribute("studentno");
+		System.out.println("stu_no : " + stu_no);
+		System.out.println("sub_code : " + sub_code);
 		
+		String sub_name = param.get("sub_name");
+		String obj_content = param.get("content");
+		System.out.println("sub_name : " + sub_name);
+		System.out.println("content : " + obj_content);
 		
+		Map<String, String> objInsertList = new HashMap<String, String>();
+		objInsertList.put("sub_code", sub_code);
+		objInsertList.put("stu_no", String.valueOf(stu_no));
+		objInsertList.put("obj_content", obj_content);
+		objInsertList.put("sub_name", sub_name);
 		
-		return "objection/objectionWrite";
+		int res = objservice.objInsert(objInsertList);
+		System.out.println("res : " + res);
+		
+		if(res > 0) {
+			session.setAttribute("msg", "정상적으로 신청 되었습니다.");
+		} else {
+			session.setAttribute("msg", "신청이 정상적으로 되지 않았습니다.");
+		}
+		
+		return "redirect:/objection";
 	}
 
 	@RequestMapping("/courseregistrationpage")
