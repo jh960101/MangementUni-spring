@@ -35,7 +35,7 @@
 	<select id="selectBoardCount" resultType="int">
 		SELECT COUNT(*) FROM
 		BOARD
-		WHERE TYPE = 'G';
+		WHERE TYPE = 'G'
 	</select>
 
 	<select id="getBoardListCount" parameterType="java.util.Map"
