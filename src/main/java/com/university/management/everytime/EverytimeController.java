@@ -1,4 +1,4 @@
-package com.university.management.everytime.controller;
+package com.university.management.everytime;
 
 import com.university.management.board.dto.Board;
 import com.university.management.everytime.service.EverytimeService;
