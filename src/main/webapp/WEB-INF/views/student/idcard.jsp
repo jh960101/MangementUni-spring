@@ -100,11 +100,18 @@ img {
 body {
 	width: 100%;
 }
+
+@media screen and (max-width: 1000px) {
+	.dispi {
+		display: none;
+	}
+}
 </style>
 </head>
-<jsp:include page="../common/header.jsp" />
+<div class="dispi">
+	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
-	<div id="sub-menuBar" style="height: 380px">
+		<div id="sub-menuBar" style="height: 380px">
 			<ul id="menulist">
 				<li><a href="studentstatus">학적 조회</a></li>
 				<li><a href="passwordchange">학생 비밀번호 변경</a></li>
@@ -117,14 +124,19 @@ body {
 			</ul>
 		</div>
 	</div>
+</div>
+<div class="container-fluid">
+
+
 	<div class="container" style="height: 600px; margin-top: 100px;">
 		<div id="content">
 			<!-- title view -->
 			<div id="pageTitle">
-				<h1>학생증</h1>
+				<h1 class="dispi">학생증</h1>
 			</div>
 			<!-- 카드 -->
-			<div class="card mb-3" style="max-width: 540px; margin-top: 100px; margin-left: 300px;">
+			<div class="card mb-3"
+				style="max-width: 540px; margin-top: 100px; margin-left: 300px;">
 				<div class="background">
 					<div class="row no-gutters">
 						<div class="col-md-4">
@@ -163,16 +175,17 @@ body {
 			</div>
 		</div>
 	</div>
+</div>
 
-
-	<!-- Bootstrap JS and dependencies -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-<jsp:include page="../common/footer.jsp" />
+<div class="dispi">
+<jsp:include page="../common/footer.jsp" /></div>
 
 </html>
 

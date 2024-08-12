@@ -45,19 +45,25 @@
 					</c:if>
 
 					<c:if test="${loginname != null}">
-
 						<div class="col col-9">
 							<ul>
-								<li id="uni-detail"><a href="#">대학소개</a></li>
-								<li><a href="infoboard">공지사항</a></li>
-								<li><a href="etmainpage">에타게시판</a></li>
-								<li><a
-									href="${login eq 'Employee'? 'infoboard':'myCoursesPage' }">마이페이지</a></li>
+								<c:choose>
+									<c:when test="${loginname == '미르총장'}">
+										<!-- 미르총장이 로그인했을 때 -->
+										<li><a href="${path}/presidentplslist">총장페이지</a></li>
+									</c:when>
+									<c:otherwise>
+										<!-- 다른 사용자가 로그인했을 때 -->
+										<li id="uni-detail"><a href="#">대학소개</a></li>
+										<li><a href="infoboard">공지사항</a></li>
+										<li><a href="etmainpage">에타게시판</a></li>
+										<li><a href="${login eq 'Employee'? 'infoboard':'myCoursesPage' }">마이페이지</a></li>
+									</c:otherwise>
+								</c:choose>
 							</ul>
 						</div>
 						<div class="col col-1">
-							<button id="login-btn" onclick="location.href='logout'"
-								style="color: white">LOGOUT</button>
+							<button id="login-btn" onclick="location.href='logout'" style="color: white">LOGOUT</button>
 						</div>
 					</c:if>
 				</div>
@@ -71,12 +77,11 @@
 			<div class="row">
 				<div class="col col-12">
 					<ul>
-						<li class="divide"><a href="ideology" id="ideo"
-							style="margin-left: 40px">학교 이념</a></li>
+						<li class="divide"><a href="ideology" id="ideo" style="margin-left: 40px">학교 이념</a></li>
 						<li class="divide"><a href="department" id="dept">학과 소개</a></li>
 						<li class="divide"><a href="professor" id="prof">교수진 소개</a></li>
 						<li class="divide"><a href="calendar" id="calendar">학사 일정</a></li>
-						<li><a href="waytocome" id="way">오시는길</a></li>
+						<li><a href="waytocome" id="way">오시는 길</a></li>
 					</ul>
 				</div>
 			</div>

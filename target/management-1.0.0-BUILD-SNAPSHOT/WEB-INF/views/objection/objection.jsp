@@ -29,7 +29,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="container" style="height: 800px; margin-top:100px;">
+	<div class="container" style="height: auto; margin-top: 100px;">
 
 		<div id="content">
 			<div id="pagetitle">
@@ -38,9 +38,10 @@
 
 			<div id="selecttable">
 				<div id="tablelist">
-					<h5 id="midtitle" >&gt; 2024-1학기</h5>
+					<h5 id="midtitle">&gt; 2024-1학기</h5>
 					<div>
-						<table class="table mt-2 mb-4" style="text-align: center; margin-top:15px;">
+						<table class="table mt-2 mb-4"
+							style="text-align: center; margin-top: 15px;">
 							<thead>
 								<tr>
 									<th scope="col"></th>
@@ -53,53 +54,30 @@
 								</tr>
 							</thead>
 							<tbody class="table-group-divider">
-								<tr>
-									<th scope="row">1</th>
-									<td>Otto</td>
-									<td>@mdo</td>
-									<td>@mdo</td>
-									<td>@mdo</td>
-									<td>A</td>
-									<td>
-										<button type="button" class="btn btn-xs"
-											onclick="location.href='objectionWrite'"
-											style="background-color: #024C86; color: white; padding: 2px 0 10px 0;">신청</button>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">1</th>
-									<td>Otto</td>
-									<td>@mdo</td>
-									<td>@mdo</td>
-									<td>@mdo</td>
-									<td>B</td>
-									<td>
-										<button type="button" class="btn btn-xs"
-											onclick="location.href='objectionWrite'"
-											style="background-color: #024C86; color: white; padding: 2px 0 10px 0;">신청</button>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">1</th>
-									<td>Otto</td>
-									<td>@mdo</td>
-									<td>@mdo</td>
-									<td>@mdo</td>
-									<td>A+</td>
-									<td>
-										<button type="button" class="btn btn-xs"
-											onclick="location.href='objectionWrite'"
-											style="background-color: #024C86; color: white; padding: 2px 0 10px 0;">신청</button>
-									</td>
-								</tr>
+								<c:forEach var="result" items="${resultList}">
+									<tr>
+										<th scope="row">${result.num}</th>
+										<td>${result.smt}</td>
+										<td>${result.dept_name}</td>
+										<td>${result.sub_name}</td>
+										<td>${result.prof_name}</td>
+										<td>${result.grade}</td>
+										<td>
+											<button type="button" class="btn btn-xs"
+												onclick="location.href='${path}/objectionWrite?sub_code=${result.sub_code}'"
+												style="background-color: #024C86; color: white; padding: 2px 0 10px 0;">신청</button>
+										</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
 				<div id="tablelist">
-					<h5 id="midtitle" style="margin-top:40px">&gt; 2023학년도</h5>
+					<h5 id="midtitle" style="margin-top: 40px">&gt; 2023학년도</h5>
 					<form id="select_sem" method="POST">
-						<select name="subject" required style="padding: 5px; margin-top:15px;">
+						<select name="subject" required
+							style="padding: 5px; margin-top: 15px;">
 							<option value="1">1학기</option>
 							<option value="2">2학기</option>
 						</select>

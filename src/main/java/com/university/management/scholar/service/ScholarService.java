@@ -16,7 +16,7 @@ public class ScholarService {
     @Autowired
 	ScholarMapper mapper;
 	
-	public List<ScholarList> scholarlistSelect(Map<String, String> params) {
+	public List<ScholarList> scholarlistSelect(Map<String, Object> params) {
 	
 		return mapper.scholarlistSelect(params);
 	}
@@ -31,4 +31,7 @@ public class ScholarService {
 		return mapper.stuScholarList(loginNo);
 	}
 
+    public int getListCount(Map<String, Object> params) {
+		return mapper.getListCount(params);
+    }
 }

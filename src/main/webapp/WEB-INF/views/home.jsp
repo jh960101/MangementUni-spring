@@ -28,7 +28,7 @@
 		</div>
 		<div class="slogan">
 			<h1><strong>Designing Tomorrow,</strong></h1>
-			<h3><strong>Engineering Today</strong></h3>
+			<h1><strong>Engineering Today</strong></h1>
 		</div>
 	</div>
 	<div id="section1">

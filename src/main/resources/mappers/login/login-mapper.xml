@@ -5,7 +5,7 @@
 <select id="emplogin" parameterType="map" resultType="com.university.management.employee.dto.Employee">
 
 select * from employee
-where EMP_NAME =#{loginid}and EMP_PASSWORD =#{loginPassword};
+where EMP_NAME =#{loginid}and EMP_PASSWORD =#{loginPassword}
 
 
 </select>
@@ -17,9 +17,19 @@ where EMP_NAME =#{loginid}and EMP_PASSWORD =#{loginPassword};
 
 select s.STU_NO,s.DEPT_CODE,s.STU_NAME,s.STU_PHONE,s.STU_ADDRESS,s.STU_JUMIN,s.STU_EMAIL,s.STU_IMG,s.STU_ADMISSION_DATE,s.STU_ADMISSION,s.STU_GRADE,s.STU_PASSWORD,s.STU_BK_NUM,s.SCH_STATUS,s.DEPT_CODE,d.DEPT_NAME from student s
 join department d on(s.dept_code=d.dept_code)
-where STU_NO =#{loginid} and STU_PASSWORD =#{loginPassword};
+where STU_NO =#{loginid} and STU_PASSWORD =#{loginPassword}
 
 </select>
+
+<select id="studentpwfind" parameterType="map" resultType="com.university.management.student.dto.Student">
+
+select * from student 
+where STU_NO =#{loginid} and STU_EMAIL=#{loginemail}
+
+</select>
+
+
+
 
 
 

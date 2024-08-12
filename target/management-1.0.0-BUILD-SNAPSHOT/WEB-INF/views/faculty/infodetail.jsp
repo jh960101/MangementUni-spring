@@ -65,10 +65,6 @@
 	padding: 10px 38px;
 }
 
-.button-group #btn {
-	
-}
-
 .button-group button:hover {
 	opacity: 0.8;
 }

@@ -938,10 +938,14 @@ function eval(s){return new Object();};
 
 //@GINO: Bug 197987 (Temp Fix)
 /**
-  * Property debugger
-  * @description Debugger keyword
+ * Property debugger
+ * @description This function triggers a debugger statement.
+ * @returns {void}
  */
-var debugger=null;
+function debugProperty() {
+    debugger; // This will pause the execution in the debugger
+}
+
 
 /**
  * Property undefined
@@ -1454,5 +1458,5 @@ TypeError.prototype=new Error("");
 function URIError(){};
 URIError.prototype=new Error("");
 
-//support for debugger keyword
-var debugger = null;
+// Support for debugger functionality
+var debugSupport = null;  // Use a different variable name instead of 'debugger'

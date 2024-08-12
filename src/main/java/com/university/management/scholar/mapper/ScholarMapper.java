@@ -12,10 +12,11 @@ import com.university.management.scholar.dto.StuScholar;
 @Mapper
 public interface ScholarMapper {
 
-	List<ScholarList> scholarlistSelect(Map<String, String> params);
+	List<ScholarList> scholarlistSelect(Map<String, Object> params);
 
 	int scholarInsert(Scholar sch);
 
 	List<StuScholar> stuScholarList(Integer loginNo);
 
+    int getListCount(Map<String, Object> params);
 }

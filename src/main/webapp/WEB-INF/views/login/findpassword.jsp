@@ -32,24 +32,24 @@
 			<!-- 로그인 페이지 타이틀 -->
 			<div id="loginBoxTitle">비밀번호 찾기</div>
 			<!-- 아이디, 비번, 버튼 박스 -->
-			<form action="${path}/member/loginPro.do" method="post">
+			<form action="${path}/findpasswordinfo" method="post">
 				<div id="inputBox">
 					<div class="input-form-box">
-						<span>아이디 </span><input type="text" id="loginId" name="id"
-							class="form-control">
+						<span>아이디 </span><input type="text" id="loginId" name="loginid"
+							class="form-control"/>
 					</div>
 					<div class="input-form-box">
-						<span>비밀번호 </span><input type="password" id="loginPassword"
-							name="password" class="form-control"> 
+						<span>이메일 </span><input type="email" id="loginemail"
+							name="email" class="form-control"/> 
 					</div>
 					<div>
 						교직원 <input type='radio' name='login' value='Employee' />
-						 학생<input	type='radio' name='login' value='Student' />
+						 학생<input	type='radio' name='login' value='Student' checked="checked"/>
 					</div>
 						
 			<div class="button-login-box">
-				<button type="button" class="btn btn-xs"
-					style="width: 100%; background-color:  #024C86;color: white;" onclick="location.href=''">비밀번호
+				<button type="submit" class="btn btn-xs"
+					style="width: 100%; background-color:  #024C86;color: white;">비밀번호
 					찾기</button>
 			</div>
 					</div>
