@@ -25,7 +25,7 @@
 	<!--  html 전체 영역을 지정하는 container -->
 	<div id="container" style="margin-top: auto; margin-bottom: auto;">
 		<!--  login 폼 영역을 : loginBox -->
-		<div id="loginBox"  >
+		<div id="loginBox">
 
 			<!-- 로그인 페이지 타이틀 -->
 			<div id="loginBoxTitle">학사관리 로그인</div>
@@ -38,25 +38,25 @@
 					</div>
 					<div class="input-form-box">
 						<span>비밀번호 </span><input type="password" id="loginPassword"
-							name="loginPassword" class="form-control"> 
+							name="loginPassword" class="form-control">
 					</div>
-					<div>
-						교직원 <input type='radio' name='login' value='Employee'  checked="checked"/>
-						 학생<input	type='radio' name='login' value='Student' />
+					<div class="radio-box">
+					<input type='radio' name='login' value='Employee'
+							checked="checked" />교직원<input type='radio' name='login'
+							value='Student' />학생
 					</div>
-						<button type="submit" class="btn btn-xs"
-							style="width: 100%;background-color:  #024C86;color: white;">로그인</button>
-			<div class="button-login-box">
+					<button type="submit" class="btn btn-xs"
+						style="width: 100%; background-color: #024C86; color: white; height: 40px; margin-bottom: 10px;">로그인</button>
+					<div class="button-login-box">
 
-				<button type="button" class="btn btn-xs"
-					style="width: 100%; background-color:  #024C86;color: white;" onclick="location.href='findpassword'">비밀번호
-					찾기</button>
-			</div>
+						<button type="button" class="btn btn-xs"
+							style="width: 100%; background-color: #024C86; color: white; height: 40px"
+							onclick="location.href='findpassword'">비밀번호 찾기</button>
 					</div>
+				</div>
 			</form>
 
 		</div>
-	</div>
 	</div>
 </section>
 
