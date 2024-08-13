@@ -14,6 +14,13 @@
 
 	</select>
 
+	<select id="lmsSelectNO" parameterType="String"
+		resultType="com.university.management.lms.dto.Lms">
+
+		  select * from lms 
+    where lms_no=#{lms_no}
+
+	</select>
 
 
 </mapper>

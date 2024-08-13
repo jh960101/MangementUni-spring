@@ -18,18 +18,17 @@
 <body>
 
 	<div class="player-container">
-		<div class="header">
 		
+		<div class="header">
 			<img src="${path}/resources/img/logo2.png" type="img/png">
 			<div class="header-title">
-				<h1>강의 제목</h1>
-				<h2>소제목</h2>
+				<h1>${lms.LMS_TITLE }</h1>
 			</div>
 		</div>
 		<div class="content-section">
 			<div class="video-section">
 				<video id="videoPlayer" class="video-player" controls>
-					<source src="${path}/resources/video/1교시.mp4" type="video/mp4">
+					<source src="${path}/resources/video/${lms.LMS_TITLE}.mp4" type="video/mp4">
 					
 				</video>
 			</div>
@@ -38,7 +37,7 @@
 				<button class="button" id="saveProgress">진도저장 후 학습종료</button>
 			</div>
 		</div>
-		
+	
 	</div>
 
 	<script>

@@ -71,7 +71,7 @@
 						<div id="online">
 							<p id="online-title">${list.LMS_TITLE }</p>
 							<div id="onlien-cont">
-								<a href="online" target="_blank"
+								<a href="online?lms_no=${list.LMS_NO}" target="_blank"
 									onclick="return openPagePopup(this.href,190,700);"> <span
 									class="material-symbols-outlined icon"></span> 영상 강의</a>
 								<a href="${path}/resources/pdf/${list.LMS_FILE}" download> <span class="material-symbols-outlined icon">description</span>[강의
