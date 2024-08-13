@@ -27,8 +27,8 @@
 <body>
 <c:if test="${loginname == null}">
 	<script>
-		alert('재학생만 접근이 가능합니다.');
-		history.back();
+		alert('교직원 및 재학생만 접근이 가능합니다.');
+		window.location.href = "login";
 	</script>
 </c:if>
 

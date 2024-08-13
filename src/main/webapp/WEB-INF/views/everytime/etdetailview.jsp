@@ -31,7 +31,7 @@
 <c:if test="${loginname eq null}">
 	<script>
 		alert('교직원 및 재학생만 접근이 가능합니다.');
-		history.back();
+		window.location.href = "login";
 	</script>
 </c:if>
 
