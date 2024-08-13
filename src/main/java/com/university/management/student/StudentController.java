@@ -258,25 +258,48 @@ public class StudentController {
 	}
 
 	// 성적
-	@RequestMapping(value = "/objection", method = {RequestMethod.GET})
-	public String objection(Model model, @RequestParam(value = "smt", defaultValue = "1") int smt, 
-            @RequestParam(value = "year", defaultValue = "2023") int year) {
+	@RequestMapping("/objection")
+	public String objection(Model model, @RequestParam(value = "smt", defaultValue = "1") int smt) {
 		System.out.println("StudentController - objection() 실행");
 		
 		int studentno = (int) session.getAttribute("studentno");
 		System.out.println("login : " + studentno);
-		System.out.println("smt : " + smt);
-		System.out.println("year : " + year);
 		
 		List<Objection> resultList = objservice.selectObjList(studentno);
-		List<Objection> lastResultList = objservice.selectLastResultList(year,smt);
-		System.out.println("lastResultList : "+ lastResultList);
 		
+		List<Objection> results22 = objservice.selectLastResultList(2022, smt);
+		List<Objection> results23 = objservice.selectLastResultList(2023, smt);
+		System.out.println("results22 : " + results22);
+		System.out.println("results23 : " + results23);
+
+		model.addAttribute("results22", results22);
+		model.addAttribute("results23", results23);
+		model.addAttribute("smt", smt);
 		model.addAttribute("studentno", studentno);
 		model.addAttribute("resultList", resultList);
-		model.addAttribute("lastResultList", lastResultList);
+		
 		
 		return "objection/objection";
+	}
+	
+	@RequestMapping(value = "/objectionPro", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> objectionPro(@RequestParam(value = "smt", defaultValue="1") int smt) {
+		System.out.println("StudentController - objectionPro() 실행");
+		
+		List<Objection> results22 = objservice.selectLastResultList(2022, smt);
+		List<Objection> results23 = objservice.selectLastResultList(2023, smt);
+		
+		System.out.println("smt : " + smt);
+		System.out.println("results22 : " + results22);
+		System.out.println("results23 : " + results23);
+
+		// 결과를 맵에 담아서 반환
+		Map<String, Object> response = new HashMap<>();
+		response.put("results22", results22);
+		response.put("results23", results23);
+		
+		return response;
 	}
 
 	@RequestMapping("/objectionWrite")
