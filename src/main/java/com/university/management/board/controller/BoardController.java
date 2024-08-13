@@ -3,7 +3,6 @@ package com.university.management.board.controller;
 import com.university.management.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +44,7 @@ public class BoardController {
         if (originalFilename != null) {
             renameFilename = System.currentTimeMillis() + "_" + originalFilename;
             try {
-                file.transferTo(new File("C:/Fullstack/" + renameFilename)); // 파일 저장 경로
+                file.transferTo(new File("C://" + renameFilename)); // 파일 저장 경로
             } catch (IOException e) {
                 e.printStackTrace();
                 // 예외 처리 로직
@@ -56,22 +55,11 @@ public class BoardController {
         boardService.writePost(stuNo, empNo, title, content, type, originalFilename, renameFilename, anonymous);
 
         // 글 작성 후 etmainpage로 리다이렉트
-        return "redirect:/views/etmainpage";
+        return "redirect:/views/everytime/etmainpage";
     }
 
-  
-
-    	@PostMapping("/everytime/etmainpage")
-    	public String handleEtmainpagePost() {
-    	    return "etmainpage";
-    	}
+    @RequestMapping(value = "/everytime/etmainpage", method = {RequestMethod.GET, RequestMethod.POST})
+    public String handleEtmainpage() {
+        return "etmainpage";
     }
-
-
-
-
-    
-    
-
-
-
+}

@@ -43,7 +43,7 @@
 	<div class="container"
 		style="height: 1000px; width: 1000px; margin-top: 100px;">
 		<div id="content">
-			<form action="${pageContext.request.contextPath}/everytime/etmainpage" method="post" enctype="multipart/form-data">
+			<form action="${pageContext.request.contextPath}/everytime/etmainpage" method="get" enctype="multipart/form-data">
 				<div class="input-group mb-0">
 					<input type="text" name="title" class="form-control1" placeholder="글 작성">
 				</div>
