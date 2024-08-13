@@ -29,4 +29,6 @@ public interface CoursesMapper {
 
 	List<Courses> coursesbeforlist(Map<String, Object> params);
 
+	CoursesList attendanceRate(CoursesList cour);
+
 }

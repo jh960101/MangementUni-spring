@@ -60,7 +60,7 @@
 				<div id="atten">
 					<h5>출석률 현황</h5>
 					<div class="present">
-						<progress value="22" max="100" id="bar"></progress>
+						<progress value="${AttendanceRate}" max="100" id="bar"></progress>
 					</div>
 				</div>
 
@@ -72,8 +72,8 @@
 							<p id="online-title">${list.LMS_TITLE }</p>
 							<div id="onlien-cont">
 								<a href="online" target="_blank"
-									onclick="return openPagePopup(this.href,190,700);"> </a><span
-									class="material-symbols-outlined icon"></span> 영상 강의
+									onclick="return openPagePopup(this.href,190,700);"> <span
+									class="material-symbols-outlined icon"></span> 영상 강의</a>
 								<a href="${path}/resources/pdf/${list.LMS_FILE}" download> <span class="material-symbols-outlined icon">description</span>[강의
 								자료]</a>
 							</div>

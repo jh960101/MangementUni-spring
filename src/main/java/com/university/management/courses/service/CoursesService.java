@@ -59,4 +59,9 @@ public class CoursesService {
 		return mapper.coursesbeforlist(params);
 	}
 
+	public CoursesList attendanceRate(CoursesList cour) {
+		
+		return mapper.attendanceRate(cour);
+	}
+
 }
