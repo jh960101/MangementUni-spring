@@ -28,7 +28,12 @@
 </head>
 
 <body>
-
+<c:if test="${loginname == null}">
+	<script>
+		alert('교직원 및 재학생만 접근이 가능합니다.');
+		history.back();
+	</script>
+</c:if>
 	<p class="top_scrollbtn" onclick="scrollbtn('main-img')">TOP</p>
 
 	<div>
@@ -64,7 +69,15 @@
 				<input type="text" id="Box" class="box" value="&nbsp;내가 작성한 글"
 					readonly>
 			</div>
-			
+
+			<div class="input-group mb-0" style="margin-top: 5px;">
+				<input type="text" class="form-control" placeholder="새 게시글을 작성해주세요"
+					aria-label="Recipient's username" aria-describedby="button-addon2">
+				<button class="btn btn-outline-secondary" type="button"
+					id="button-addon2" onclick="location.href='etnew'">글작성</button>
+			</div>
+
+
 			<c:if test="${list.size()!=0 }">
 				<c:forEach var="board" items="${list}">
 					<div class="list-group">
@@ -73,7 +86,7 @@
 							aria-current="true" style="margin-top: 5px;"> ${board.title}</a>
 						<a href="#"
 							class="list-group-item list-group-item-action list-group-item-small disabled">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${board.content}</a> <a href="#"
+							${board.content}</a> <a href="#"
 							class="list-group-item list-group-item-action list-group-item-small2 disabled">
 							<div style="display: flex; align-items: center;">
 								<div style="padding: 1px; margin-right: 10px; font-size: 15px;">글
@@ -89,28 +102,30 @@
 								<img
 									src="${pageContext.request.contextPath}/resources/img/추천버튼.png"
 									width="15" height="15">
-								<div style="padding: 1px; margin-right: 10px; font-size: 15px;">${board.boLike}</div>
+								<div style="padding: 1px; margin-right: 10px; font-size: 15px;">${board.bo_Like}</div>
 							</div>
 						</a>
 					</div>
 				</c:forEach>
 			</c:if>
-			
+
 			<c:if test="${list.size()!=0 }">
-			<div class="btn-container">
-				<button type="button" class="btn2">▼&nbsp;더보기</button>
-				<div class="btn-list">
-					<button type="button" class="btn3">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/글목록.png"
-							width="25" height="25">&nbsp;글 목록
-					</button>
+				<div class="btn-container">
+					<button type="button" class="btn2">▼&nbsp;더보기</button>
+					<div class="btn-list">
+						<button type="button" class="btn3">
+							<img
+								src="${pageContext.request.contextPath}/resources/img/글목록.png"
+								width="25" height="25">&nbsp;글 목록
+						</button>
+					</div>
 				</div>
-			</div>
 			</c:if>
-			
+
 			<c:if test="${list.size()==0 }">
-				<div style="text-align: center; padding-top: 100px"><h2>게시글이 존재하지 않습니다</h2></div>
+				<div style="text-align: center; padding-top: 100px">
+					<h2>게시글이 존재하지 않습니다</h2>
+				</div>
 			</c:if>
 		</div>
 	</div>
