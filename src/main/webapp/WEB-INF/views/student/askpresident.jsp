@@ -155,11 +155,6 @@
 								class="btn btnlist" type="reset" value="다시 작성"
 								style="color: white; font-weight: bold; font-size: 16px; margin-right: 95px;" />
 						</div>
-						<div class="backbtn">
-							<input class="btn btnlist" type="button" value="작성 취소"
-								onclick="history.back()"
-								style="color: white; font-weight: bold; font-size: 16px;" />
-						</div>
 					</form>
 				</div>
 			</div>

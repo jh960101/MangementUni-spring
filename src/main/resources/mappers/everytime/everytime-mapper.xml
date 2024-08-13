@@ -4,11 +4,19 @@
 	namespace="com.university.management.everytime.mapper.EverytimeMapper">
 
 	<select id="getAllEtaList" resultType="com.university.management.board.dto.Board">
-		SELECT * FROM board WHERE TYPE = "e";
+		SELECT * FROM board WHERE TYPE = "e" order by CREATE_DATE DESC
 	</select>
 
 	<select id="getEtaBoardByNo" parameterType="int" resultType="com.university.management.board.dto.Board">
 		SELECT * FROM board WHERE TYPE = "e" AND BO_NO = #{bo_no}#
+	</select>
+	
+	<select id="getAllEtaListByStuNo" parameterType="int" resultType="com.university.management.board.dto.Board">
+		SELECT * FROM board WHERE TYPE = "e" AND stu_no = #{stu_no} order by CREATE_DATE DESC
+	</select>
+	
+	<select id="getAllEtaHotList" resultType="com.university.management.board.dto.Board">
+		SELECT * FROM board WHERE TYPE = "e" order by READCOUNT DESC, BO_LIKE DESC limit 3 offset 0
 	</select>
 
 

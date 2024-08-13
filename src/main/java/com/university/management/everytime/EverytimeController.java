@@ -42,13 +42,24 @@ public class EverytimeController {
     }
 
     @RequestMapping("/everytimehot")
-    public String ethot() {
+    public String ethot(Model model) {
+    	
+    	  List<Board> list = service.getAllEtaHotList();
+    	  model.addAttribute("list", list);
+    	  System.out.println(list);
+    	
         return "everytime/everytimehot";
     }
 
     @RequestMapping("/etmypage")
-    public String etmypage() {
+    public String etmypage(Model model, @RequestParam("stuno") int stu_no) {
+    	
+    	List<Board> list = service.getAllEtaListByStuNo(stu_no);
+
+        model.addAttribute("list", list);
+
         return "everytime/etmypage";
+ 
     }
 
     @RequestMapping("/etnew")

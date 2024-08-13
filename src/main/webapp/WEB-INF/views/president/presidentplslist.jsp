@@ -113,23 +113,21 @@
 					</thead>
 					<tbody class="table-group-divider">
 
-						<c:if test="${empty boardList}">
+						<c:if test="${empty list}">
 							<tr>
 								<td colspan="6">조회된 글이 없습니다.</td>
 							</tr>
 						</c:if>
-						<c:if test="${not empty boardList}">
-							<c:forEach var="board" items="${boardList}">
-								<!-- C 타입인 항목만 출력 -->
-								<c:if test="${board.type == 'C'}">
-									<tr>
-										<td><a id="listtitle"
-											href="${path}/infodetail?bo_no=${board.bo_no}"> <c:out
-													value="${board.title}" />
-										</a></td>
-										<td><fmt:formatDate value="${board.create_date}" pattern="yyyy-MM-dd" /></td>
-									</tr>
-								</c:if>
+						<c:if test="${not empty list}">
+							<c:forEach var="board" items="${list}">
+								<tr>
+									<td><a id="listtitle"
+										href="${path}/presidentplsdetail?bo_no=${board.bo_no}"> <c:out
+												value="${board.title}" />
+									</a></td>
+									<td><fmt:formatDate value="${board.create_date}"
+											pattern="yyyy-MM-dd" /></td>
+								</tr>
 							</c:forEach>
 						</c:if>
 
@@ -138,11 +136,13 @@
 			</div>
 			<!-- table-responsive div -->
 		</div>
+		
 		<!-- pageContent div -->
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
 				<!-- 이전 페이지 -->
-				<li class="page-item <c:if test="${pageInfo.prevPage == 0}">disabled</c:if>">
+				<li
+					class="page-item <c:if test="${pageInfo.prevPage == 0}">disabled</c:if>">
 					<button class="page-link" type="button"
 						onclick="if(${pageInfo.prevPage} > 0) { window.location.href='${path}/infoboard?searchType=${searchType}&searchValue=${searchValue}&page=${pageInfo.prevPage}'; } else { return false; }"
 						aria-label="Previous">
@@ -151,7 +151,8 @@
 				</li>
 
 				<!-- 페이지 목록 -->
-				<c:forEach begin="${pageInfo.startPage}" end="${pageInfo.lastPage}" step="1" var="page">
+				<c:forEach begin="${pageInfo.startPage}" end="${pageInfo.lastPage}"
+					step="1" var="page">
 					<c:if test="${page == pageInfo.currentPage}">
 						<li class="page-item active"><span class="page-link">${page}</span></li>
 					</c:if>
@@ -164,7 +165,8 @@
 				</c:forEach>
 
 				<!-- 다음 페이지 -->
-				<li class="page-item <c:if test="${pageInfo.nextPage == 0}">disabled</c:if>">
+				<li
+					class="page-item <c:if test="${pageInfo.nextPage == 0}">disabled</c:if>">
 					<button class="page-link" type="button"
 						onclick="if(${pageInfo.nextPage} > 0) { window.location.href='${path}/infoboard?searchType=${searchType}&searchValue=${searchValue}&page=${pageInfo.nextPage}'; } else { return false; }"
 						aria-label="Next">

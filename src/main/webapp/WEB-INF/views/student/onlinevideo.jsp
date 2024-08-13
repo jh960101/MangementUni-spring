@@ -18,45 +18,26 @@
 <body>
 
 	<div class="player-container">
-		<div class="header">
 		
+		<div class="header">
 			<img src="${path}/resources/img/logo2.png" type="img/png">
 			<div class="header-title">
-				<h1>강의 제목</h1>
-				<h2>소제목</h2>
+				<h1>${lms.LMS_TITLE }</h1>
 			</div>
 		</div>
 		<div class="content-section">
 			<div class="video-section">
 				<video id="videoPlayer" class="video-player" controls>
-					<source src="${path}/resources/video/1교시.mp4" type="video/mp4">
+					<source src="${path}/resources/video/${lms.LMS_TITLE}.mp4" type="video/mp4">
 					
 				</video>
 			</div>
 			<div class="controls-section">
-				<div class="info-box">
-					<h3>목차</h3>
-					<p data-time="0">목차 1: 소개</p>
-					<p data-time="60">목차 2: 주요 개념</p>
-					<p data-time="120">목차 3: 예제 1</p>
-					<p data-time="180">목차 4: 예제 2</p>
-					<p data-time="240">목차 5: 결론</p>
-					<p data-time="300">목차 6: 질문과 답변</p>
-				</div>
+				
 				<button class="button" id="saveProgress">진도저장 후 학습종료</button>
 			</div>
 		</div>
-		<div class="footer-container">
-			<select class="dropdown">
-				<option value="1교시.mp4">1교시</option>
-				<option value="2교시.mp4">2교시</option>
-				<option value="3교시.mp4">3교시</option>
-			</select>
-			<div class="footer-right">
-				<button class="button" id="moveButton"
-					style=" width: 100px; height: 43px;">이동</button>
-			</div>
-		</div>
+	
 	</div>
 
 	<script>
@@ -67,12 +48,7 @@
                                     const dropdown = document.querySelector('.dropdown');
                                     const indexItems = document.querySelectorAll('.info-box p');
 
-                                    // 드롭박스에서 선택한 비디오로 변경
-                                    moveButton.addEventListener('click', function () {
-                                        const selectedVideo = dropdown.value;
-                                        videoPlayer.src = selectedVideo;
-                                        videoPlayer.play();
-                                    });
+                                  
 
                                     // 목차 클릭 시 해당 시간으로 이동
                                     indexItems.forEach(item => {
