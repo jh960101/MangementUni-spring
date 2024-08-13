@@ -61,8 +61,8 @@
 										<td>${result.prof_name}</td>
 										<td>${result.grade}</td>
 										<td>
-											<c:if test=""></c:if>
-											<button type="button" class="btn btn-xs"
+											<button type="button" class="btn btn-xs objection-btn" id="objectionButton"
+												data-sub-code="${result.sub_code}"
 												onclick="handleButtonClick(this, '${path}/objectionWrite?sub_code=${result.sub_code}&sub_name=${result.sub_name}')"
 												style="background-color: #024C86; color: white; padding: 2px 0 10px 0;">신청</button>
 										</td>
@@ -72,6 +72,8 @@
 						</table>
 					</div>
 				</div>
+
+				<button id="activateButton">비활성화된 버튼 활성화</button>
 
 				<div id="selecttable">
 					<div id="tablelist">
@@ -135,16 +137,36 @@
 	</div>
 	<!-- container -->
 	<script>
-	function handleButtonClick(button, url) {
-	    // 버튼 비활성화
-	    button.disabled = true; 
-	    
-	    // 원하는 경우 커서 모양 변경
-	    button.style.cursor = "not-allowed";
+	// 버튼 클릭 처리
+    function handleButtonClick(button, url) {
+        const subCode = button.getAttribute('data-sub-code');
+        
+        // 클릭된 버튼 비활성화
+        button.disabled = true; 
+        localStorage.setItem('buttonDisabled-' + subCode, 'true'); // 버튼 상태 저장
 
-	    // 새로운 페이지로 이동
-	    location.href = url; 
-	}
+        // 새 페이지로 이동
+        location.href = url; 
+    }
+	
+ 	// 페이지 로드 시 로컬 스토리지에서 상태 확인
+    document.addEventListener('DOMContentLoaded', function() {
+        const isSubmitted = localStorage.getItem('objectionSubmitted');
+        if (isSubmitted === 'true') {
+            const objectionButton = document.getElementById('objectionButton');
+            objectionButton.disabled = true; // 버튼 비활성화
+        }
+    });
+	
+    document.getElementById('activateButton').addEventListener('click', function() {
+        const buttons = document.querySelectorAll('.objection-btn');
+        buttons.forEach(button => {
+            const subCode = button.getAttribute('data-sub-code');
+            localStorage.removeItem('buttonDisabled-' + subCode); // 상태 삭제
+            button.disabled = false; // 버튼 활성화
+        });
+    });
+	
 	
 	
 	function loadResults(value, year) {
@@ -216,6 +238,15 @@
 
 		// 문서가 준비되면 결과 로드
 		$(document).ready(function() {
+			 // 각 버튼의 상태 확인
+	        $('.objection-btn').each(function() {
+	            const subCode = $(this).data('sub-code');
+	            const isDisabled = localStorage.getItem('buttonDisabled-' + subCode);
+	            if (isDisabled === 'true') {
+	                $(this).prop('disabled', true); // 상태가 true이면 버튼 비활성화
+	            }
+	        });
+			 
 			loadResults(1, '2023'); // 2023학년도 1학기 데이터 로드
 		    loadResults(1, '2022'); // 2022학년도 1학기 데이터 로드
 		    

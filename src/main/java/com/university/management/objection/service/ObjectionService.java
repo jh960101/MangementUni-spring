@@ -24,16 +24,33 @@ public class ObjectionService {
 		return mapper.objInsert(objInsertList);
 	}
 
-	public List<Objection> selectLastResultList(int year, int smt) {
+	public List<Objection> selectLastResultList(int year, int smt, int studentno) {
 		System.out.println("ObjectionService - selectLastResultList() 실행 ");
 		Map<String, Integer> lastResultList = new HashMap<String, Integer>();
 		lastResultList.put("year", year);
 		lastResultList.put("smt", smt);
+		lastResultList.put("studentno", studentno);
 		
 		System.out.println("year : " + year);
 		System.out.println("smt : " + smt);
 		
 		return mapper.selectLastResultList(lastResultList);
+	}
+
+	// 성적 조회 - 교직원
+	public List<Objection> selectObjListEmp() {
+		return  mapper.selectObjListEmp();
+	}
+
+	//성적 조회 - 교직원(필터)
+	public List<Objection> objectionFilterData(String department, String subject, String grade) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("department", department);
+		map.put("subject", subject);
+		map.put("grade", grade);
+		
+		return mapper.objectionFilterData(map);
 	}
 
 }

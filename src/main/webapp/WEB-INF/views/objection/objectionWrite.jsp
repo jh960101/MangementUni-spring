@@ -79,7 +79,7 @@
 			</div>
 			<div class="contentView"
 				style="margin: 50px; margin-left: 300px; text-align: center; font-size: 20px;">
-				<form action="${path}/objectionWritePro" method="post">
+				<form action="${path}/objectionWritePro" method="post" id="objectionForm">
 					<input type="hidden" name="sub_code" value="${sub_code}" />
 					<input type="hidden" name="sub_name" value="${sub_name}" />
 					<div class="row mb-3">
@@ -95,13 +95,13 @@
 							style="text-align: left; font-weight: 700;"><b>&gt;
 								신청 내용</b></label>
 						<div class="col-sm-10 contentbox">
-							<textarea rows="6" cols="60" style="width: 500px;"
+							<textarea rows="6" cols="60" style="width: 500px;" id="objectionContent"
 								placeholder="이의 신청 내용을 입력하세요" name="content"></textarea>
 						</div>
 					</div>
 
 					<div class="btnbox">
-						<button type="submit" class="btn " value="등록" onclick="${path}/objectionWritePro?sub_code=${sub_code}"
+						<button type="submit" class="btn " value="등록" onclick="${path}/objectionWritePro?sub_code=${sub_code}" id="submitButton"
 							style="font-size: 15px; width: 100px; height: 40px; background-color: #024C86; color: white; text-align: center; border: none !important;">등록</button>
 						<button type="reset" class="btn " value="다시쓰기"
 							style="font-size: 15px; width: 100px; height: 40px; background-color: #024C86; color: white; text-align: center; border: none !important;">다시쓰기</button>
@@ -116,6 +116,34 @@
 		<!-- content -->
 	</div>
 	<!-- container -->
+	<script>
+	
+	document.getElementById('objectionForm').addEventListener('submit', function(event) {
+        const content = document.getElementById('objectionContent').value.trim(); // textarea 내용 가져오기
+        if (content === '') { // 내용이 비어 있는지 확인
+            alert('이의 신청 내용을 입력하세요.'); // 알림창 띄우기
+            event.preventDefault(); // 폼 제출 방지
+        }
+    });
+	
+	document.getElementById('objectionForm').addEventListener('submit', function(event) {
+        const content = document.getElementById('objectionContent').value.trim();
+        if (content === '') {
+            alert('이의 신청 내용을 입력하세요.');
+            event.preventDefault(); // 폼 제출 방지
+        } else {
+            // 내용이 있는 경우 버튼을 비활성화하고 로컬스토리지에 상태 저장
+            const submitButton = document.getElementById('submitButton');
+            submitButton.disabled = true; // 버튼 비활성화
+            localStorage.setItem('objectionSubmitted', 'true'); // 상태 저장
+        }
+    });
+	
+	document.getElementById('backButton').addEventListener('click', function() {
+        localStorage.removeItem('objectionSubmitted'); // 뒤로가기 버튼 클릭 시 상태 초기화
+        history.back(); // 이전 페이지로 돌아가기
+    });
+	</script>
 </body>
 </html>
 <jsp:include page="../common/footer.jsp" />
