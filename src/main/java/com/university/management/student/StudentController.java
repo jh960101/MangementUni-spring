@@ -266,6 +266,7 @@ public class StudentController {
 		System.out.println("login : " + studentno);
 		
 		List<Objection> resultList = objservice.selectObjList(studentno);
+		System.out.println("resultList : " + resultList);
 		
 		List<Objection> results22 = objservice.selectLastResultList(2022, smt, studentno);
 		List<Objection> results23 = objservice.selectLastResultList(2023, smt, studentno);

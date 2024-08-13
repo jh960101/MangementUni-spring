@@ -61,10 +61,11 @@
 										<td>${result.prof_name}</td>
 										<td>${result.grade}</td>
 										<td>
-											<button type="button" class="btn btn-xs objection-btn" id="objectionButton"
-												data-sub-code="${result.sub_code}"
-												onclick="handleButtonClick(this, '${path}/objectionWrite?sub_code=${result.sub_code}&sub_name=${result.sub_name}')"
-												style="background-color: #024C86; color: white; padding: 2px 0 10px 0;">신청</button>
+											<button type="button" class="btn btn-xs objection-btn"
+												id="objectionButton" data-sub-code="${result.sub_code}"
+												onclick="location.href='${path}/objectionWrite?sub_code=${result.sub_code}&sub_name=${result.sub_name}'"
+												style="background-color: #024C86; color: white; padding: 2px 0 10px 0;"
+												<c:if test="${result.obj_yn == 'Y'}"> disabled </c:if>>신청</button>
 										</td>
 									</tr>
 								</c:forEach>
@@ -72,8 +73,6 @@
 						</table>
 					</div>
 				</div>
-
-				<button id="activateButton">비활성화된 버튼 활성화</button>
 
 				<div id="selecttable">
 					<div id="tablelist">
@@ -137,37 +136,6 @@
 	</div>
 	<!-- container -->
 	<script>
-	// 버튼 클릭 처리
-    function handleButtonClick(button, url) {
-        const subCode = button.getAttribute('data-sub-code');
-        
-        // 클릭된 버튼 비활성화
-        button.disabled = true; 
-        localStorage.setItem('buttonDisabled-' + subCode, 'true'); // 버튼 상태 저장
-
-        // 새 페이지로 이동
-        location.href = url; 
-    }
-	
- 	// 페이지 로드 시 로컬 스토리지에서 상태 확인
-    document.addEventListener('DOMContentLoaded', function() {
-        const isSubmitted = localStorage.getItem('objectionSubmitted');
-        if (isSubmitted === 'true') {
-            const objectionButton = document.getElementById('objectionButton');
-            objectionButton.disabled = true; // 버튼 비활성화
-        }
-    });
-	
-    document.getElementById('activateButton').addEventListener('click', function() {
-        const buttons = document.querySelectorAll('.objection-btn');
-        buttons.forEach(button => {
-            const subCode = button.getAttribute('data-sub-code');
-            localStorage.removeItem('buttonDisabled-' + subCode); // 상태 삭제
-            button.disabled = false; // 버튼 활성화
-        });
-    });
-	
-	
 	
 	function loadResults(value, year) {
 	    //const smt = $("#smt").val(); // 현재 선택된 학기
