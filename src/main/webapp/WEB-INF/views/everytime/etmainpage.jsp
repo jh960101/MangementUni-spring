@@ -97,7 +97,7 @@
                     <img src="${path}/resources/img/조회수.png" width="15" height="15">
                     <div style="padding: 1px; margin-right: 10px; font-size: 15px;">${board.readCount}</div>
                     <img src="${path}/resources/img/추천버튼.png" width="15" height="15">
-                    <div style="padding: 1px; margin-right: 10px; font-size: 15px;">${board.boLike}</div>
+                    <div style="padding: 1px; margin-right: 10px; font-size: 15px;">${board.bo_Like}</div>
                 </div>
             </a>
             </div>
