@@ -10,6 +10,17 @@ where EMP_NAME =#{loginid}and EMP_PASSWORD =#{loginPassword}
 
 </select>
 
+<select id="employeepwfind" parameterType="map" resultType="com.university.management.employee.dto.Employee">
+
+select * from employee
+where EMP_NAME =#{loginid}and EMP_EMAIL =#{loginemail}
+
+
+</select>
+
+
+
+
 <select id="studentLogin" parameterType="map" resultType="com.university.management.student.dto.Student">
 
 
