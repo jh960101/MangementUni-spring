@@ -28,8 +28,9 @@
 	<p class="top_scrollbtn" onclick="scrollbtn('main-img')">TOP</p>
 
 	<div>
-		<img id="main-img" src="${path}/resources/img/eta_img.png" style="margin-top: 130px; width: 100%"/>
-			
+		<img id="main-img" src="${path}/resources/img/eta_img.png"
+			style="margin-top: 130px; width: 100%" />
+
 	</div>
 	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
@@ -41,7 +42,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="container" style="height: 1000px; ">
+	<div class="container" style="height: 1000px;">
 		<div id="content">
 			<!-- title view -->
 			<div class="list-group">
@@ -62,87 +63,31 @@
 					readonly>
 			</div>
 
-			<div class="input-group mb-0" style="margin-top: 5px;">
-				<input type="text" class="form-control" placeholder="새 게시글을 작성해주세요"
-					aria-label="Recipient's username" aria-describedby="button-addon2">
-				<button class="btn btn-outline-secondary" type="button"
-					id="button-addon2" onclick="location.href='etnew'">글작성</button>
-			</div>
+			<c:forEach var="board" items="${list}" varStatus="status">
+				<div class="list-group">
+					<a href="etdetailview?no=${board.bo_no }"
+						class="list-group-item list-group-item-action list-group-item-large"
+						aria-current="true" style="margin-top: 5px;"> <span
+						style="font-size: 20px; vertical-align: middle;">👑</span> ${status.count}st ${board.title}
+					</a> <a href="#"
+						class="list-group-item list-group-item-action list-group-item-small disabled">
+						${board.content} </a> <a href="#"
+						class="list-group-item list-group-item-action list-group-item-small2 disabled">
+						<div style="display: flex; align-items: center;">
+							<div style="padding: 1px; margin-right: 10px; font-size: 15px;">글
+								작성 1초전</div>
+							<img src="${path}/resources/img/msg.png" width="15" height="15">
+							<div style="padding: 1px; margin-right: 10px; font-size: 15px;">20</div>
+							<img src="${path}/resources/img/조회수.png" width="15" height="15">
+							<div style="padding: 1px; margin-right: 10px; font-size: 15px;">${board.readCount}</div>
+							<img src="${path}/resources/img/추천버튼.png" width="15" height="15">
+							<div style="padding: 1px; margin-right: 10px; font-size: 15px;">${board.boLike}</div>
+						</div>
+					</a>
+				</div>
+			</c:forEach>
 
-			<div class="list-group">
-				<a href="etdetailview"
-					class="list-group-item list-group-item-action list-group-item-large"
-					aria-current="true" style="margin-top: 5px;"> <span
-					style="font-size: 20px; vertical-align: middle;">👑</span> 1st
-					제목
-				</a> <a href="#"
-					class="list-group-item list-group-item-action list-group-item-small disabled">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내용 미리보기 </a> <a
-					href="#"
-					class="list-group-item list-group-item-action list-group-item-small2 disabled">
-					<div style="display: flex; align-items: center;">
-						<div style="padding: 1px; margin-right: 10px; font-size: 15px;">글
-							작성 1초전</div>
-						<img src="${path}/resources/img/msg.png" width="15" height="15">
-						<div style="padding: 1px; margin-right: 10px; font-size: 15px;">20</div>
-						<img src="${path}/resources/img/조회수.png" width="15" height="15">
-						<div style="padding: 1px; margin-right: 10px; font-size: 15px;">20</div>
-						<img src="${path}/resources/img/추천버튼.png" width="15" height="15">
-						<div style="padding: 1px; margin-right: 10px; font-size: 15px;">20</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="list-group">
-				<a href="etdetailview"
-					class="list-group-item list-group-item-action list-group-item-large"
-					aria-current="true" style="margin-top: 5px;"> <span
-					style="font-size: 20px; vertical-align: middle;">👑</span> 2st
-					제목
-				</a> <a href="#"
-					class="list-group-item list-group-item-action list-group-item-small disabled">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내용 미리보기 </a> <a
-					href="#"
-					class="list-group-item list-group-item-action list-group-item-small2 disabled">
-					<div style="display: flex; align-items: center;">
-						<div style="padding: 1px; margin-right: 10px; font-size: 15px;">글
-							작성 1초전</div>
-						<img src="${path}/resources/img/msg.png" width="15" height="15">
-						<div style="padding: 1px; margin-right: 10px; font-size: 15px;">20</div>
-						<img src="${path}/resources/img/조회수.png" width="15" height="15">
-						<div style="padding: 1px; margin-right: 10px; font-size: 15px;">20</div>
-						<img src="${path}/resources/img/추천버튼.png" width="15" height="15">
-						<div style="padding: 1px; margin-right: 10px; font-size: 15px;">20</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="list-group">
-				<a href="etdetailview"
-					class="list-group-item list-group-item-action list-group-item-large"
-					aria-current="true" style="margin-top: 5px;"> <span
-					style="font-size: 20px; vertical-align: middle;">👑</span> 3st
-					제목
-				</a> <a href="#"
-					class="list-group-item list-group-item-action list-group-item-small disabled">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내용 미리보기 </a> <a
-					href="#"
-					class="list-group-item list-group-item-action list-group-item-small2 disabled">
-					
-					<div style="display: flex; align-items: center;">
-						<div style="padding: 1px; margin-right: 10px; font-size: 15px;">글
-							작성 1초전</div>
-						<img src="${path}/resources/img/msg.png" width="15" height="15">
-						<div style="padding: 1px; margin-right: 10px; font-size: 15px;">20</div>
-						<img src="${path}/resources/img/조회수.png" width="15" height="15">
-						<div style="padding: 1px; margin-right: 10px; font-size: 15px;">20</div>
-						<img src="${path}/resources/img/추천버튼.png" width="15" height="15">
-						<div style="padding: 1px; margin-right: 10px; font-size: 15px;">20</div>
-					</div>
-				</a>
-			</div>
-
-			<button type="button" class="btn1">▼&nbsp;더보기</button>
+<!-- 			<button type="button" class="btn1">▼&nbsp;더보기</button> -->
 		</div>
 	</div>
 
