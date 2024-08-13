@@ -39,7 +39,7 @@
 							class="form-control">
 					</div>
 					<input type="hidden" name="checkNumcode" value="${checkNum}">
-					<input type="hidden" name="pw" value="${ studentpw}">
+					<input type="hidden" name="pw" value="${ findpw}">
 					<input type="hidden" name="email" value="${email}">
 			<div class="button-login-box">
 				<button type="submit" class="btn btn-xs"

@@ -21,4 +21,6 @@ public interface Loginmapper {
 
 	Student studentpwfind(Map<String, String> params);
 
+	Employee employeepwfind(Map<String, String> params);
+
 }
