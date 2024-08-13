@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.university.management.lms.dto.Lms;
 import com.university.management.lms.service.LmsService;
+import com.university.management.student.StudentController;
 
 @Controller
 public class OnlineController {
@@ -37,6 +38,7 @@ public class OnlineController {
         	System.out.println(lms_no);
         lmsService.lmsstatusUpdate(lms_no);
         	
+        
         	
             return ResponseEntity.ok("success");
         } else {

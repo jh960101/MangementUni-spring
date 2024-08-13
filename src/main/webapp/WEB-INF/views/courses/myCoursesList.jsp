@@ -18,9 +18,15 @@
 
 <link href="${path}/resources/css/courses.css" rel="stylesheet" />
 
- <style>
-     
-    </style>
+
+<style>
+/* 비활성화된 링크의 스타일 설정 */
+.inactive {
+	color: gray;
+	pointer-events: none; /* 클릭 불가 */
+	text-decoration: none; /* 밑줄 제거 */
+}
+</style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
@@ -62,7 +68,8 @@
 				<!-- 출석률 퍼센트 바 -->
 				<div id="atten">
 					<h5>출석률 현황</h5>
-					<div class="present"> <label >${AttendanceRate}%</label>
+					<div class="present">
+						<label>${AttendanceRate}%</label>
 						<progress value="${AttendanceRate}" max="100" id="bar"></progress>
 					</div>
 				</div>
@@ -75,10 +82,14 @@
 							<p id="online-title">${list.LMS_TITLE }</p>
 							<div id="onlien-cont">
 								<a href="online?lms_no=${list.LMS_NO}" target="_blank"
-									onclick="return openPagePopup(this.href,190,700);"> <span
-									class="material-symbols-outlined icon"></span> 영상 강의</a>
-								<a href="${path}/resources/pdf/${list.LMS_FILE}" download> <span class="material-symbols-outlined icon">description</span>[강의
-								자료]</a>
+									onclick="return openPagePopup(this.href,190,700);"
+									data-week=${list. LMS_DATE }> <span
+									class="material-symbols-outlined icon"></span> 영상 강의
+								</a> <a href="${path}/resources/pdf/${list.LMS_FILE}" download>
+									<span class="material-symbols-outlined icon">description</span>[강의
+									자료]
+								</a>
+
 							</div>
 
 						</div>
@@ -105,6 +116,35 @@
 
 			return false;
 		}
+		
+		
+		
+		
+		  document.addEventListener('DOMContentLoaded', function() {
+	            const startDate = new Date('2024-08-01'); // 시작 날짜
+	            const links = document.querySelectorAll('#online a');
+	            const currentDate = new Date();
+
+	            links.forEach(link => {
+	                const weekText = link.getAttribute('data-week');
+	                const weekNumber = parseInt(weekText); // "1주차"에서 "1" 추출
+
+	                const weekStartDate = new Date(startDate);
+	                weekStartDate.setDate(startDate.getDate() + (weekNumber - 1) * 7);
+
+	                
+	                // 활성화 조건
+	                if (currentDate >= weekStartDate) {
+	                    link.classList.remove('inactive');
+	                } else {
+	                    link.classList.add('inactive');
+	                }
+	            });
+	        });
+		
+		
+		
+		
 	</script>
 
 
