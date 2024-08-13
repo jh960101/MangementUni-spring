@@ -19,4 +19,9 @@ public class LmsService {
 		return mapper.lmsSelect(sub_code);
 	}
 
+	public Lms lmsSelectNO(String lms_no) {
+	
+		return mapper.lmsSelectNO(lms_no);
+	}
+
 }
