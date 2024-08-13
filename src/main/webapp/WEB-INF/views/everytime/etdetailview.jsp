@@ -11,9 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자유게시판</title>
 
+    <link href="${pageContext.request.contextPath}/resources/css/everytime3.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/resources/css/courses.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/resources/css/everytime2.css" rel="stylesheet"/>
-    <link href="${pageContext.request.contextPath}/resources/css/everytime3.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
@@ -32,7 +32,7 @@
         </ul>
     </div>
 </div>
-<div class="container" style="height: 1600px; margin-top: 100px; margin-left: 450px;">
+<div class="container" style="height: 1600px; margin-top: 500px; margin-left: 450px;">
     <div type="box" id="content" class="header2">
         <input type="text" id="Box" class="box" value="&nbsp;자유게시판" readonly>
 
@@ -68,7 +68,7 @@
                     </textarea>
             </div>
             <hr style="width: 1000px;">
-            <div id="commentsContainer">
+            <div id="commentsContainer" style="height: 200px";>
                 <div class="comment">
                     <div class="horizontal-container">
                         <div class="profile-section">
@@ -115,7 +115,7 @@
                     <hr style="width: 1000px;">
                 </div>
 
-                <div class="form-controls-container">
+                <div class="form-controls-container"  style="border:none">
                     <div class="file-upload-section">
                         <form>
                                 <textarea id="commentInput" class="form-control" rows="3" cols="80"
