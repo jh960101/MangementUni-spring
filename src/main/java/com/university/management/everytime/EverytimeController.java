@@ -47,8 +47,14 @@ public class EverytimeController {
     }
 
     @RequestMapping("/etmypage")
-    public String etmypage() {
+    public String etmypage(Model model, @RequestParam("stuno") int stu_no) {
+    	
+    	List<Board> list = service.getAllEtaListByStuNo(stu_no);
+
+        model.addAttribute("list", list);
+
         return "everytime/etmypage";
+ 
     }
 
     @RequestMapping("/etnew")

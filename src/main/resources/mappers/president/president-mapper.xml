@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.university.management.president.mapper.PresidentMapper">
+
+	<select id="getAllList" resultType="com.university.management.board.dto.Board">
+		SELECT * FROM board WHERE TYPE = "c" ORDER BY CREATE_DATE DESC
+	</select>
+	
+	<select id="getBoardByNo" parameterType="int" resultType="com.university.management.board.dto.Board">
+		SELECT * FROM board WHERE TYPE = "c" AND BO_NO = #{bo_no}
+	</select>
+
+</mapper>

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.university.management.board.dto.Board;
+import com.university.management.objection.dto.Objection;
 
 @Mapper
 public interface BoardMapper {
@@ -32,7 +33,6 @@ public interface BoardMapper {
 	int insertWrite(Board board);
 
 	int empSelect(String loginname);
-
 
 	// 게시글 삭제하기
 	int deleteByNo(int no);
