@@ -14,10 +14,12 @@ public class Objection {
 	private int num;			// 성적 출력 시 번호
 	private int year; 			// 학년도
 	private int smt; 			// 학기
+	private String stu_grade; 	// 학년
 	private String grade; 		// 등급(A+)
 	private int grade_p;		// 점수		
 	private String obj_no; 		// 성적 이의 신청 인덱스 번호
 	private String stu_no; 		// 학번
+	private String stu_name;	// 학생 이름
 	private String dept_code; 	// 학과코드
 	private String dept_name; 	// 학과명
 	private String prof_no; 	// 교수번호
