@@ -6,11 +6,16 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.university.management.board.dto.Board;
-import com.university.management.objection.dto.Objection;
+import com.university.management.board.dto.BoardDTO;
+
+
 
 @Mapper
 public interface BoardMapper {
-
+	
+	// 에타글작성(create) 
+		 void insertBoard(BoardDTO boardDTO);
+		 
 	// 게시글 갯수
 	//int selectBoardCount(Map<String, String> boardlist);
 	int selectBoardCount();
@@ -40,6 +45,6 @@ public interface BoardMapper {
 	// 게시글 업로드
 	int updateByNoList(Map<String, Object> map);
 	
-
+	
 
 }

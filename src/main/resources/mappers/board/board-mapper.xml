@@ -140,10 +140,24 @@
 
 	<update id="updateByNoList" parameterType="java.util.Map">
 		UPDATE BOARD
-		SET emp_no = #{loginNo}, title = #{title}, content = #{content}, type= 'G',
+		SET emp_no
+		= #{loginNo}, title = #{title}, content = #{content}, type= 'G',
 		RENAME_FILENAME = #{originalFilename}, CREATE_DATE = now()
-		WHERE bo_no = #{bo_no}
+		WHERE bo_no
+		= #{bo_no}
 	</update>
+
+<!-- resources/mapper/BoardMapper.xml -->
+
+
+    <insert id="insertBoard" parameterType="com.university.management.board.dto.BoardDTO">
+        INSERT INTO UNIVERSITY.BOARD (
+            STU_NO, EMP_NO, TITLE, CONTENT, TYPE, ORIGINAL_FILENAME, RENAME_FILENAME, CREATE_DATE, BO_LIKE
+        ) VALUES (
+            #{stuNo}, #{empNo}, #{title}, #{content}, #{type}, #{originalFilename}, #{renameFilename}, NOW(), 0
+        )
+    </insert>
+
 
 
 
