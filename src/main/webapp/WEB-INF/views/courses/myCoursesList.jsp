@@ -18,6 +18,9 @@
 
 <link href="${path}/resources/css/courses.css" rel="stylesheet" />
 
+ <style>
+     
+    </style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
@@ -59,7 +62,7 @@
 				<!-- 출석률 퍼센트 바 -->
 				<div id="atten">
 					<h5>출석률 현황</h5>
-					<div class="present">
+					<div class="present"> <label >${AttendanceRate}%</label>
 						<progress value="${AttendanceRate}" max="100" id="bar"></progress>
 					</div>
 				</div>

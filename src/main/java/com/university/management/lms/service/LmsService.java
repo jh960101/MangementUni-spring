@@ -24,4 +24,9 @@ public class LmsService {
 		return mapper.lmsSelectNO(lms_no);
 	}
 
+	public void lmsstatusUpdate(int lms_no) {
+	mapper.lmsstatusUpdate(lms_no);
+		
+	}
+
 }
