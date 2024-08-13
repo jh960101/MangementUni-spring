@@ -13,4 +13,7 @@ public interface EverytimeMapper {
 
     /** eta 게시판 번호 기준으로 하나 가져오기 **/
     Board getEtaBoardByNo(int no_no);
+
+    /** eta 리스트 학생번호 기준으로 가져오기 **/
+	List<Board> getAllEtaListByStuNo(int stu_no);
 }
