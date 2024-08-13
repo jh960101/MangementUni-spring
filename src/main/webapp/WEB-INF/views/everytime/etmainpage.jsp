@@ -25,6 +25,12 @@
 </head>
 
 <body>
+<c:if test="${loginname == null}">
+	<script>
+		alert('재학생만 접근이 가능합니다.');
+		history.back();
+	</script>
+</c:if>
 
 <p class="top_scrollbtn" onclick="scrollbtn('main-img')">TOP</p>
 
