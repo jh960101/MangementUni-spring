@@ -18,6 +18,7 @@ public class Objection {
 	private String grade; 		// 등급(A+)
 	private int grade_p;		// 점수		
 	private String obj_no; 		// 성적 이의 신청 인덱스 번호
+	private String obj_yn;		// 이의 신청 여부(y/n)
 	private String stu_no; 		// 학번
 	private String stu_name;	// 학생 이름
 	private String dept_code; 	// 학과코드
