@@ -107,10 +107,6 @@
 			<div id="pageContent">
 				<table id="tbl-board">
 					<tr>
-						<th>글번호</th>
-						<td>${board.bo_no}</td>
-					</tr>
-					<tr>
 						<th>제 목</th>
 						<td>
 							<label name="title" value="${board.title}">${board.title}</label>
