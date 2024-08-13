@@ -267,8 +267,8 @@ public class StudentController {
 		
 		List<Objection> resultList = objservice.selectObjList(studentno);
 		
-		List<Objection> results22 = objservice.selectLastResultList(2022, smt);
-		List<Objection> results23 = objservice.selectLastResultList(2023, smt);
+		List<Objection> results22 = objservice.selectLastResultList(2022, smt, studentno);
+		List<Objection> results23 = objservice.selectLastResultList(2023, smt, studentno);
 		System.out.println("results22 : " + results22);
 		System.out.println("results23 : " + results23);
 
@@ -287,8 +287,11 @@ public class StudentController {
 	public Map<String, Object> objectionPro(@RequestParam(value = "smt", defaultValue="1") int smt) {
 		System.out.println("StudentController - objectionPro() 실행");
 		
-		List<Objection> results22 = objservice.selectLastResultList(2022, smt);
-		List<Objection> results23 = objservice.selectLastResultList(2023, smt);
+		int studentno = (int) session.getAttribute("studentno");
+		System.out.println("login : " + studentno);
+		
+		List<Objection> results22 = objservice.selectLastResultList(2022, smt, studentno);
+		List<Objection> results23 = objservice.selectLastResultList(2023, smt, studentno);
 		
 		System.out.println("smt : " + smt);
 		System.out.println("results22 : " + results22);

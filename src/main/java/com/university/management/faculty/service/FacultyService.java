@@ -12,12 +12,17 @@ import org.springframework.web.multipart.MultipartFile;
 import com.university.management.board.dto.Board;
 import com.university.management.board.dto.PageInfo;
 import com.university.management.board.mapper.BoardMapper;
+import com.university.management.objection.dto.Objection;
+import com.university.management.objection.mapper.ObjectionMapper;
 
 @Service
 public class FacultyService {
 
 	@Autowired
 	private BoardMapper mapper;
+	
+	@Autowired
+	private ObjectionMapper objmapper;
 
 	// 총 게시글 갯수
 	public int getBoardCount() {
@@ -101,6 +106,5 @@ public class FacultyService {
 		
 		return mapper.updateByNoList(map);
 	}
-
 
 }
