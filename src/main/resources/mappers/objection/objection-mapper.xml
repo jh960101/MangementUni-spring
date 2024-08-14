@@ -12,7 +12,8 @@
 		<result property="grade" column="GRADE" />
 		<result property="grade_p" column="GRADE_P" />
 		<result property="obj_no" column="OBJ_NO" />
-		<result property="obj_yn" column="OBJ_YNS" />
+		<result property="obj_yn" column="OBJ_YN" />
+		<result property="obj_status" column="OBJ_STATUS" />
 		<result property="stu_no" column="STU_NO" />
 		<result property="stu_name" column="STU_NAME" />
 		<result property="dept_code" column="DEPT_CODE" />
@@ -29,11 +30,12 @@
 		resultMap="objectionResultMap">
 		SELECT ROW_NUMBER() OVER (ORDER BY A.SMT) AS num
 		, A.YEAR AS year
-		, A.SMT AS SMT
+		, A.SMT AS smt
 		, D.DEPT_NAME AS dept_name
 		, C.STU_GRADE AS stu_grade
 		, C.STU_NAME AS stu_name
 		, B.SUB_NAME AS sub_name
+		, B.SUB_CODE AS sub_code
 		, P.PROF_NAME AS prof_name
 		, A.GRADE AS grade
 		, A.GRADE_P AS grade_p
@@ -93,16 +95,47 @@
 	</select>
 
 	<select id="selectObjListEmp" resultMap="objectionResultMap">
+		SELECT 
+        ROW_NUMBER() OVER (ORDER BY A.SMT) AS num,
+        C.STU_NO, 
+        B.SUB_CODE, 
+        A.YEAR, 
+        A.SMT, 
+        D.DEPT_NAME, 
+        C.STU_GRADE, 
+        C.STU_NAME, 
+        B.SUB_NAME, 
+        P.PROF_NAME, 
+        A.GRADE, 
+        A.GRADE_P, 
+        E.OBJ_NO
+    	FROM RESULTS A
+    	INNER JOIN SUBJECT B ON A.SUB_CODE = B.SUB_CODE
+    	INNER JOIN STUDENT C ON A.STU_NO = C.STU_NO
+    	INNER JOIN DEPARTMENT D ON C.DEPT_CODE = D.DEPT_CODE
+    	INNER JOIN PROFESSOR P ON P.PROF_NO = B.PROF_NO
+    	LEFT OUTER JOIN OBJECTION E ON A.SUB_CODE = E.SUB_CODE AND A.STU_NO = E.STU_NO 
+    	WHERE A.YEAR = 2024 AND A.SMT = 1
+        AND E.OBJ_NO IS NOT NULL 
+        AND E.OBJ_STATUS = 'N'
+	</select> 
+	
+	<select id="objectionUpSelect" parameterType="java.util.Map"
+		resultMap="objectionResultMap">
 		SELECT ROW_NUMBER() OVER (ORDER BY A.SMT) AS num
 		, A.YEAR AS year
 		, A.SMT AS SMT
 		, D.DEPT_NAME AS dept_name
 		, C.STU_GRADE AS stu_grade
 		, C.STU_NAME AS stu_name
+        , C.STU_NO AS stu_no
 		, B.SUB_NAME AS sub_name
+		, B.SUB_CODE AS sub_code
+        , P.PROF_NAME AS prof_name
 		, A.GRADE AS grade
 		, A.GRADE_P AS grade_p
 		, E.OBJ_NO AS obj_no
+		, E.OBJ_CONTENT AS obj_content
 		FROM RESULTS A
 		INNER JOIN SUBJECT B
 		ON A.SUB_CODE = B.SUB_CODE
@@ -110,13 +143,18 @@
 		ON A.STU_NO = C.STU_NO
 		INNER JOIN DEPARTMENT D
 		ON C.DEPT_CODE = D.DEPT_CODE
+        INNER JOIN PROFESSOR P 
+		ON P.PROF_NO = B.PROF_NO
 		LEFT OUTER JOIN OBJECTION E
 		ON A.SUB_CODE = E.SUB_CODE
-		AND A.STU_NO = E.STU_NO
+		AND A.STU_NO = E.STU_NO 
 		WHERE A.YEAR = 2024
 		AND A.SMT = 1
-	</select> 
-
+        AND E.OBJ_NO IS NOT NULL
+        AND A.SUB_CODE = #{sub_code}
+        AND A.STU_NO = #{stu_no}
+	</select>
+	
 	<select id="objectionFilterData" parameterType="java.util.Map"
 		resultMap="objectionResultMap">
 		SELECT
@@ -151,5 +189,12 @@
 			AND STU.STU_GRADE = #{grade}
 		</if>
 	</select>
+	
+	<update id="objUpdate" parameterType="java.util.Map">
+		UPDATE RESULTS 
+    	SET GRADE_P = #{grade_p}, GRADE = #{grade}, OBJ_STATUS = 'Y'
+   		WHERE 
+        STU_NO = #{stu_no} AND SUB_CODE = #{sub_code}
+	</update>
 
 </mapper>

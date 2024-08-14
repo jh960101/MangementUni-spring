@@ -53,4 +53,59 @@ public class ObjectionService {
 		return mapper.objectionFilterData(map);
 	}
 
+	// 성적 이의신청 화면의 정보 출력
+	public List<Objection> objectionUpSelect(String sub_code, int stu_no) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sub_code", sub_code);
+		map.put("stu_no", stu_no);
+		
+		return mapper.objectionUpSelect(map);
+	}
+
+	// 성적 업데이트
+	public int objUpdate(String sub_code, int stu_no, int grade_p) {
+		System.out.println("ObjectionService-objUpdate() 실행");
+		System.out.println("sub_code : " + sub_code);
+		System.out.println("stu_no : " + stu_no);
+		System.out.println("grade_p : " + grade_p);
+		
+		// 등급 변수
+		String grade;
+		
+		// 등급 처리
+		if (grade_p >= 90) {
+		    grade = "A+";
+		} else if (grade_p >= 85) {
+		    grade = "A";
+		} else if (grade_p >= 80) {
+		    grade = "A-";
+		} else if (grade_p >= 75) {
+		    grade = "B+";
+		} else if (grade_p >= 70) {
+		    grade = "B";
+		} else if (grade_p >= 65) {
+		    grade = "B-";
+		} else if (grade_p >= 60) {
+		    grade = "C+";
+		} else if (grade_p >= 55) {
+		    grade = "C";
+		} else if (grade_p >= 50) {
+		    grade = "C-";
+		} else {
+		    grade = "F"; // 0~49
+		}
+		
+		System.out.println("grade : " + grade);
+	
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sub_code", sub_code);
+		map.put("stu_no", stu_no);
+		map.put("grade_p", grade_p);
+		map.put("grade", grade);
+		
+		System.out.println("map : " + map);
+		return mapper.objUpdate(map);
+	}
+
 }
