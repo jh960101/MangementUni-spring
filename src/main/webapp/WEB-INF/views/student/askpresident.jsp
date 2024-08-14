@@ -110,6 +110,12 @@
 </style>
 </head>
 <body>
+	<c:if test="${not empty msg}">
+		<script>
+			alert('${msg}');
+		</script>
+	</c:if>
+
 	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
 		<div id="sub-menuBar" style="height: 380px">
@@ -135,7 +141,7 @@
 				<h5 class="mt-4" style="text-align: left; color: red;">이 글은
 					익명성이 보장됩니다. 단 비방이나 혐오 욕설을 사용하면 처벌받을수 있습니다.</h5>
 				<div id="pageContent">
-					<form action="" method="post" style="margin-bottom: 20px;"
+					<form action="presidentplsWrite" method="post" style="margin-bottom: 20px;"
 						onsubmit="return validateForm()">
 						<table id="tbl-board">
 							<tr>
@@ -145,7 +151,8 @@
 
 							<tr>
 								<th width="50"><span>내용</span></th>
-								<td><textarea placeholder="내용을 입력하세요" name="detail" id="textBox"
+								<td><textarea placeholder="내용을 입력하세요" name="content"
+										id="textBox"
 										style="border: 1px solid #ccc; padding: 10px; width: 100%; height: 300px; overflow-y: auto;"></textarea></td>
 							</tr>
 						</table>
@@ -199,14 +206,12 @@
 
 			// 글자수 제한
 			if (content.length > 500) {
-				// 200자 부터는 타이핑 되지 않도록
 				$(this).val($(this).val().substring(0, 500));
-				// 200자 넘으면 알림창 뜨도록
+
 				alert('글자수는 500자까지 입력 가능합니다.');
 			}
 			;
 		});
-		
 	</script>
 
 

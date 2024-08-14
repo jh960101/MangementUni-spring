@@ -14,4 +14,6 @@ public interface PresidentMapper {
 
 	Board getBoardByNo(int bo_no);
 
+	int insertboard(Board board);
+
 }

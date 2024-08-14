@@ -27,6 +27,7 @@ import com.university.management.lms.service.LmsService;
 
 import com.university.management.objection.dto.Objection;
 import com.university.management.objection.service.ObjectionService;
+import com.university.management.president.service.PresidentService;
 import com.university.management.scholar.dto.StuScholar;
 import com.university.management.scholar.service.ScholarService;
 import com.university.management.student.dto.Student;
@@ -52,12 +53,34 @@ public class StudentController {
 	
 	@Autowired
 	private ObjectionService objservice;
+	
+	@Autowired
+	private PresidentService preservice;
 
 
 	@RequestMapping("/askpresident")
 	public String askpresident() {
 		return "student/askpresident";
 	}
+	
+	@RequestMapping("/presidentplsWrite")
+	public String presidentplsWrite(Model model, @RequestParam("title") String title, @RequestParam("content") String content) {
+		
+		int stu_no = (int) session.getAttribute("studentno");
+		
+		int result = preservice.insertboard(stu_no, title, content);
+		
+		if(result==1) {
+			model.addAttribute("msg", "전송을 성공하였습니다.");
+		}
+		else if(result==0) {
+			model.addAttribute("msg", "전송에 실패하였습니다.");
+		}
+		
+		
+		return "student/askpresident";
+	}
+	
 
 	@RequestMapping("/studentstatus")
 	public String studentstatus(Model model) {
