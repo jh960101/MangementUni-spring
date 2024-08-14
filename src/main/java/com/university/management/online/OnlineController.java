@@ -60,8 +60,7 @@ public class OnlineController {
         	y=0;
             System.out.println("현재 날짜는 범위에 포함되지 않습니다.");
         }
-		
-	
+
 
 		if (y == 1) {
 			System.out.println("온라인 강의 실험중");
