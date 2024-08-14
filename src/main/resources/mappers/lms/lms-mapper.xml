@@ -22,5 +22,14 @@
 
 	</select>
 
+<select id="lmsstatusUpdate" parameterType="int">
+
+	 update lms set lms_check='y'
+    where LMS_NO=#{lms_no}
+
+	</select>
+
+
+
 
 </mapper>

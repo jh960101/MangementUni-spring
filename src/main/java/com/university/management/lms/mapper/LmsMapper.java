@@ -13,4 +13,6 @@ public interface LmsMapper {
 
 	Lms lmsSelectNO(String lms_no);
 
+	void lmsstatusUpdate(int lms_no);
+
 }
