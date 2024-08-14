@@ -3,17 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
-
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>성적 이의 신청 목록</title>
-
 <script defer src="https://code.jquery.com/jquery-latest.min.js"></script>
 <%-- <script defer src="${path}/resources/js/.js"></script> --%>
-
 <style>
 #sub-menubar {
 	margin-left: 50px;
@@ -74,7 +71,7 @@
 			<div id="pageContent">
 				<div id="selectbox">
 					<form id="filterForm" method="POST">
-						<select name="department" required onchange="categoryChange(this)"
+						<select name="department" required onchange="categoryChange(this);"
 							style="padding: 5px;">
 							<option value="" disabled selected>학과 선택</option>
 							<option value="AI인공지능학과">AI인공지능학과</option>
@@ -85,9 +82,11 @@
 							<option value="컴퓨터공학과">컴퓨터공학과</option>
 							<option value="화학과">화학과</option>
 							<option value="물리학과">물리학과</option>
-						</select> <select name="subject" required style="padding: 5px;">
+						</select> 
+						<select name="subject" required style="padding: 5px;">
 							<option disabled selected value="">과목 선택</option>
-						</select> <select name="grade" required style="padding: 5px;">
+						</select> 
+						<select name="grade" required style="padding: 5px;">
 							<option value="" disabled selected>학년 선택</option>
 							<option value="1">1학년</option>
 							<option value="2">2학년</option>
@@ -112,12 +111,30 @@
 							<th scope="col">학년</th>
 							<th scope="col">이름</th>
 							<th scope="col">신청 과목</th>
+							<th scope="col">등급</th>
 							<th scope="col">점수</th>
 							<th scope="col"></th>
 						</tr>
 					</thead>
 					<tbody id="results" class="table-group-divider">
 						<!-- 검색 결과가 들어올 부분 -->
+						<c:forEach var="item" items="${objListEmp}">
+							<tr>
+								<th scope="row">${item.obj_no}</th>
+								<td>${item.smt}</td>
+								<td>${item.dept_name}</td>
+								<td>${item.stu_grade}</td>
+								<td>${item.stu_name}</td>
+								<td>${item.sub_name}</td>
+								<td>${item.grade}</td>
+								<td>${item.grade_p}</td>
+								<td>
+									<button type="button" class="btn btn-xs btn-primary"
+										onclick="location.href='${path}/objectionupdate"
+										style="background-color: #024C86; color: white; padding: 10px 15px 10px 15px;">보기</button>
+								</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -126,6 +143,7 @@
 		<!-- pageContent -->
 	</div>
 	<script>
+	
         function categoryChange(selectElement) {
             const subjects = {
                 "컴퓨터공학과": [
@@ -180,14 +198,14 @@
 
             const selectedDepartment = selectElement.value;
             const subjectSelect = document.querySelector('select[name="subject"]');
-            subjectSelect.innerHTML = '<option disabled selected value="">과목 선택</option>'; // Clear previous options
+            subjectSelect.innerHTML = '<option disabled selected value="">과목 선택</option>';
 
             if (subjects[selectedDepartment]) {
                 subjects[selectedDepartment].forEach(subject => {
                     const option = document.createElement('option');
                     option.value = subject;
                     option.textContent = subject;
-                    subjectSelect.appendChild(option);
+                    subjectSelect.appendChild(option); 
                 });
             }
         }
@@ -207,21 +225,22 @@
                     const resultsTable = document.getElementById('results');
                     resultsTable.innerHTML = ''; 
 
+                 	// 필터링된 데이터로 테이블 업데이트
                     data.forEach((item, index) => {
                         const row = document.createElement('tr');
                         
                         row.innerHTML = `
                             <th scope="row">${index + 1}</th>
-                            <td>${item.semester}</td>
-                            <td>${item.department}</td>
+                            <td>${item.smt}</td>
+                            <td>${item.dept_code}</td>
                             <td>${item.grade}</td>
-                            <td>${item.name}</td>
-                            <td>${item.subject}</td>
-                            <td>${item.score}</td>
+                            <td>${item.stu_name}</td>
+                            <td>${item.sub_name}</td>
+                            <td>${item.grade}</td>
+                            <td>${item.grade_p}</td>
                             <td>
-                                <button type="button" class="btn btn-xs btn-primary" style="background-color: #024C86; color: white; padding: 2px 0 10px 0;">승인</button>
-                            </td>
-                        `;
+                                <button type="button" class="btn btn-xs btn-primary" style="background-color: #024C86; color: white; padding: 2px 0 10px 0;">보기</button>
+                            </td>`;
                         resultsTable.appendChild(row);
                     });
                 },
@@ -230,7 +249,7 @@
                 }
             });
         });
-    </script>
+   </script>
 </body>
 </html>
 <jsp:include page="../common/footer.jsp" />

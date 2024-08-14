@@ -1,49 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.university.management.objection.mapper.ObjectionMapper">
-    
-    <resultMap type="com.university.management.objection.dto.Objection" id="objectionResultMap">
-        <result property="num" column="num" />
-        <result property="year" column="YEAR" />
-        <result property="smt" column="SMT" />
-        <result property="grade" column="GRADE" />
-        <result property="grade_p" column="GRADE_POINT" />
-        <result property="obj_no" column="OBJ_NO" />
-        <result property="stu_no" column="STU_NO" />
-        <result property="dept_code" column="DEPT_CODE" />
-        <result property="dept_name" column="DEPT_NAME" />
-        <result property="prof_no" column="PROF_NO" />
-        <result property="prof_name" column="PROF_NAME" />
-        <result property="sub_code" column="SUB_CODE" />
-        <result property="sub_name" column="SUB_NAME" />
-        <result property="obj_content" column="OBJ_CONTENT" />
-        <result property="create_Date" column="CREATE_DATE" />
-    </resultMap>
+<mapper
+	namespace="com.university.management.objection.mapper.ObjectionMapper">
 
-    <select id="selectObjList" parameterType="int" resultMap="objectionResultMap">
-        SELECT
-        ROW_NUMBER() OVER (ORDER BY R.SMT) AS num,
-        R.YEAR,
-        R.SMT,
-        D.DEPT_NAME,
-        S.SUB_NAME,
-        S.SUB_CODE,
-        P.PROF_NAME,
-        R.GRADE
-        FROM
-        RESULTS R
-        JOIN SUBJECT S ON R.SUB_CODE = S.SUB_CODE
-        JOIN PROFESSOR P ON S.PROF_NO = P.PROF_NO
-        JOIN DEPARTMENT D ON S.DEPT_CODE = D.DEPT_CODE
-        WHERE R.YEAR = 2024 AND R.SMT = 1
-    </select>
-    
-    <insert id="objInsert" parameterType="java.util.Map">
-    	INSERT INTO OBJECTION
-    	(STU_NO, SUB_CODE, OBJ_CONTENT, CREATE_DATE) VALUES
-		(#{stu_no},#{sub_code}, #{obj_content}, now())
-    </insert>
-    
+	<resultMap
+		type="com.university.management.objection.dto.Objection"
+		id="objectionResultMap">
+		<result property="num" column="num" />
+		<result property="year" column="YEAR" />
+		<result property="smt" column="SMT" />
+		<result property="grade" column="GRADE" />
+		<result property="grade_p" column="GRADE_P" />
+		<result property="obj_no" column="OBJ_NO" />
+		<result property="obj_yn" column="OBJ_YNS" />
+		<result property="stu_no" column="STU_NO" />
+		<result property="stu_name" column="STU_NAME" />
+		<result property="dept_code" column="DEPT_CODE" />
+		<result property="dept_name" column="DEPT_NAME" />
+		<result property="prof_no" column="PROF_NO" />
+		<result property="prof_name" column="PROF_NAME" />
+		<result property="sub_code" column="SUB_CODE" />
+		<result property="sub_name" column="SUB_NAME" />
+		<result property="obj_content" column="OBJ_CONTENT" />
+		<result property="create_Date" column="CREATE_DATE" />
+	</resultMap>
+
+	<select id="selectObjList" parameterType="int"
+		resultMap="objectionResultMap">
+		SELECT ROW_NUMBER() OVER (ORDER BY A.SMT) AS num
+		, A.YEAR AS year
+		, A.SMT AS SMT
+		, D.DEPT_NAME AS dept_name
+		, C.STU_GRADE AS stu_grade
+		, C.STU_NAME AS stu_name
+		, B.SUB_NAME AS sub_name
+		, P.PROF_NAME AS prof_name
+		, A.GRADE AS grade
+		, A.GRADE_P AS grade_p
+		, E.OBJ_NO AS obj_no
+		, CASE WHEN E.OBJ_NO IS NOT NULL THEN 'Y' ELSE 'N' END AS obj_yn
+		FROM RESULTS A
+		INNER JOIN SUBJECT B
+		ON A.SUB_CODE = B.SUB_CODE
+		INNER JOIN STUDENT C
+		ON A.STU_NO = C.STU_NO
+		INNER JOIN DEPARTMENT D
+		ON C.DEPT_CODE = D.DEPT_CODE
+		INNER JOIN PROFESSOR P 
+		ON P.PROF_NO = B.PROF_NO
+		LEFT OUTER JOIN OBJECTION E
+		ON A.SUB_CODE = E.SUB_CODE
+		AND A.STU_NO = E.STU_NO
+		WHERE A.YEAR = 2024
+		AND A.SMT = 1
+		AND A.STU_NO = #{studentno}
+	</select>
+
+	<insert id="objInsert" parameterType="java.util.Map">
+		INSERT INTO OBJECTION
+		(STU_NO, SUB_CODE, OBJ_CONTENT, CREATE_DATE) VALUES
+		(#{stu_no},#{sub_code},
+		#{obj_content}, now())
+	</insert>
+
 	<select id="selectLastResultList" parameterType="java.util.Map"
 		resultMap="objectionResultMap">
 		SELECT
@@ -58,14 +77,79 @@
 		FROM
 		RESULTS R
 		JOIN SUBJECT S ON R.SUB_CODE = S.SUB_CODE
-		JOIN PROFESSOR P ON S.PROF_NO = P.PROF_NO
+		JOIN PROFESSOR P ON
+		S.PROF_NO = P.PROF_NO
 		JOIN DEPARTMENT D ON S.DEPT_CODE = D.DEPT_CODE
 		WHERE R.YEAR = #{year} AND R.SMT = #{smt}
+		AND D.DEPT_CODE = 'COMP'
+		AND
+		STU_NO= #{studentno}
 	</select>
-	
+
 	<select id="selectObj">
 		SELECT * FROM OBJECTION
-		WHERE stu_no = 2022010003 and sub_code = 'COMP240330';
+		WHERE stu_no = 2022010003 and
+		sub_code = 'COMP240330'
+	</select>
+
+	<select id="selectObjListEmp" resultMap="objectionResultMap">
+		SELECT ROW_NUMBER() OVER (ORDER BY A.SMT) AS num
+		, A.YEAR AS year
+		, A.SMT AS SMT
+		, D.DEPT_NAME AS dept_name
+		, C.STU_GRADE AS stu_grade
+		, C.STU_NAME AS stu_name
+		, B.SUB_NAME AS sub_name
+		, A.GRADE AS grade
+		, A.GRADE_P AS grade_p
+		, E.OBJ_NO AS obj_no
+		FROM RESULTS A
+		INNER JOIN SUBJECT B
+		ON A.SUB_CODE = B.SUB_CODE
+		INNER JOIN STUDENT C
+		ON A.STU_NO = C.STU_NO
+		INNER JOIN DEPARTMENT D
+		ON C.DEPT_CODE = D.DEPT_CODE
+		LEFT OUTER JOIN OBJECTION E
+		ON A.SUB_CODE = E.SUB_CODE
+		AND A.STU_NO = E.STU_NO
+		WHERE A.YEAR = 2024
+		AND A.SMT = 1
+	</select> 
+
+	<select id="objectionFilterData" parameterType="java.util.Map"
+		resultMap="objectionResultMap">
+		SELECT
+		ROW_NUMBER() OVER (ORDER BY R.SMT) AS num,
+		OBJ.OBJ_NO AS obj_no,
+		R.SMT AS smt,
+		DEP.DEPT_NAME AS dept_name,
+		STU.STU_GRADE AS stu_grade,
+		STU.STU_NAME AS stu_name,
+		SUB.SUB_NAME AS sub_name,
+		R.GRADE AS grade,
+		R.GRADE_P AS grade_p
+		FROM
+		OBJECTION OBJ
+		RIGHT JOIN
+		SUBJECT SUB ON SUB.SUB_CODE = OBJ.SUB_CODE
+		INNER JOIN
+		STUDENT STU ON STU.STU_NO = OBJ.STU_NO
+		INNER JOIN
+		RESULTS R ON R.SUB_CODE = OBJ.SUB_CODE AND R.STU_NO = STU.STU_NO
+		INNER JOIN
+		DEPARTMENT DEP ON DEP.DEPT_CODE = STU.DEPT_CODE
+		WHERE
+		R.YEAR = 2024 AND R.SMT = 1
+		<if test="department != null and department != ''">
+			AND SUB.DEPT_CODE = #{department}
+		</if>
+		<if test="subject != null and subject != ''">
+			AND SUB.SUB_CODE = #{subject}
+		</if>
+		<if test="grade != null and grade != ''">
+			AND STU.STU_GRADE = #{grade}
+		</if>
 	</select>
 
 </mapper>

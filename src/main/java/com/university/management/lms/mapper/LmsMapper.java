@@ -11,4 +11,6 @@ public interface LmsMapper {
 
 	List<Lms> lmsSelect(String sub_code);
 
+	Lms lmsSelectNO(String lms_no);
+
 }

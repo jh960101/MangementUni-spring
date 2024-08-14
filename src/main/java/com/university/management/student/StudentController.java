@@ -216,6 +216,32 @@ public class StudentController {
 		System.out.println("제발해주세요..."+lmslist);
 		String coment=lmslist.get(0).getCO_CONTENT();
 		String sub_name = lmslist.get(0).getSUB_NAME();
+		
+		
+		// 세션에서 loginname을 가져옴
+		Integer loginNo = (Integer) session.getAttribute("studentno");
+		CoursesList cour = new CoursesList();
+		// 현재 날짜를 가져옵니다.
+		LocalDate today = LocalDate.now();
+		// 현재 월을 가져옵니다.
+		int month = today.getMonthValue();
+
+		// 월에 따라서 값을 결정합니다
+		int smt = 0;
+		if (month >= 1 && month <= 7) {
+			smt = 1;
+		} else if (month >= 8 && month <= 12) {
+			smt = 2;
+		}
+		int year = today.getYear();
+
+		cour.setSTU_NO(loginNo);
+		cour.setSMT(smt);
+		cour.setYEAR(year);
+		cour.setSUB_NAME(lmslist.get(0).getSUB_NAME());
+		CoursesList lmsAttendanceRate = courservice.attendanceRate(cour);
+	int attendanceRate=(int)lmsAttendanceRate.getAttendanceRate();
+		model.addAttribute("AttendanceRate", attendanceRate);
 		model.addAttribute("lmslist",lmslist);
 		model.addAttribute("coment", coment);
 		model.addAttribute("sub_name",sub_name);
@@ -266,9 +292,10 @@ public class StudentController {
 		System.out.println("login : " + studentno);
 		
 		List<Objection> resultList = objservice.selectObjList(studentno);
+		System.out.println("resultList : " + resultList);
 		
-		List<Objection> results22 = objservice.selectLastResultList(2022, smt);
-		List<Objection> results23 = objservice.selectLastResultList(2023, smt);
+		List<Objection> results22 = objservice.selectLastResultList(2022, smt, studentno);
+		List<Objection> results23 = objservice.selectLastResultList(2023, smt, studentno);
 		System.out.println("results22 : " + results22);
 		System.out.println("results23 : " + results23);
 
@@ -287,8 +314,11 @@ public class StudentController {
 	public Map<String, Object> objectionPro(@RequestParam(value = "smt", defaultValue="1") int smt) {
 		System.out.println("StudentController - objectionPro() 실행");
 		
-		List<Objection> results22 = objservice.selectLastResultList(2022, smt);
-		List<Objection> results23 = objservice.selectLastResultList(2023, smt);
+		int studentno = (int) session.getAttribute("studentno");
+		System.out.println("login : " + studentno);
+		
+		List<Objection> results22 = objservice.selectLastResultList(2022, smt, studentno);
+		List<Objection> results23 = objservice.selectLastResultList(2023, smt, studentno);
 		
 		System.out.println("smt : " + smt);
 		System.out.println("results22 : " + results22);

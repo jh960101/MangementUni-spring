@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="kr">
 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>everytimemain</title>
+<title>글 작성</title>
 
 <link
 	href="${pageContext.request.contextPath}/resources/css/courses.css"
@@ -25,14 +23,19 @@
 
 
 </head>
-
+<c:if test="${loginname == null}">
+	<script>
+		alert('교직원 및 재학생만 접근이 가능합니다.');
+		window.location.href = "login";
+	</script>
+</c:if>
 <body>
 	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
 		<div id="sub-menuBar" style="height: 150px;">
 			<ul id="menulist">
 				<li><a href="etmainpage">자유게시판</a></li>
-				<li><a href="etmypage">내글 보기</a></li>
+				<li><a href="etmypage?stuno=${studentno}">내글 보기</a></li>
 				<li><a href="everytimehot">HOT게시판</a></li>
 			</ul>
 		</div>
@@ -40,48 +43,36 @@
 	<div class="container"
 		style="height: 1000px; width: 1000px; margin-top: 100px;">
 		<div id="content">
-			<input type="text" id="Box" class="box" value="&nbsp;글 작성"readonly>
-
-			<div class="input-group mb-0">
-				<input type="text" class="form-control1"
-					placeholder="&nbsp;&nbsp;글 작성" aria-label="Recipient's username"
-					aria-describedby="button-addon2">
-			</div>
-
-			<div class="input-group mb-0" style="border-bottom: none;">
-				<input type="text" class="form-control2"
-					placeholder="&nbsp;&nbsp;글을 작성하시오" aria-label="Recipient's username"
-					aria-describedby="button-addon2">
-			</div>
-
-			<div class="form-controls-container">
-				<div class="file-upload-section">
-					<form>
-						<label for="file-upload" class="file-upload-button"> <span>첨부파일</span>
-							<input type="file" id="file-upload" name="file-upload"
-							onchange="updateFilePath()">
+			<form action="${pageContext.request.contextPath}/everytime/etmainpage" method="get" enctype="multipart/form-data">
+				<div class="input-group mb-0">
+					<input type="text" name="title" class="form-control1" placeholder="글 작성">
+				</div>
+				<div class="input-group mb-0" style="border-bottom: none;">
+					<input type="text" name="content" class="form-control2" placeholder="글을 작성하시오">
+				</div>
+				<div class="form-controls-container">
+					<div class="file-upload-section">
+						<label for="file-upload" class="file-upload-button">
+							<span>첨부파일</span>
+							<input type="file" id="file-upload" name="file-upload" onchange="updateFilePath()">
 						</label>
-					</form>
-					<span id="file-path" class="file-upload-path">첨부된 파일이 없습니다</span>
-				</div>
-				<div class="오른쪽정렬">
-					<div class="form-check d-inline">
-						<input class="form-check-input"
-							style="font-weight: bolder; border: 2px solid rgb(2, 76, 134)"
-							type="checkbox" value="" id="flexCheckDefault"> <label
-							class="form-check-label" style="font-weight: bolder;"
-							for="flexCheckDefault">익명</label>
+						<span id="file-path" class="file-upload-path">첨부된 파일이 없습니다</span>
 					</div>
-					<div class="d-flex align-items-center">
-						<button class="custom-submit-button" type="button"
-							id="button-addon2">글 작성</button>
+					<div class="오른쪽정렬">
+						<div class="form-check d-inline">
+							<input class="form-check-input"
+								style="font-weight: bolder; border: 2px solid rgb(2, 76, 134)"
+								type="checkbox" name="anonymous" value="true" id="flexCheckDefault"> 
+							<label class="form-check-label" style="font-weight: bolder;" for="flexCheckDefault">익명</label>
+						</div>
+						<div class="d-flex align-items-center">
+							<button class="custom-submit-button" type="submit" id="button-addon2">글 작성</button>
+						</div>
 					</div>
 				</div>
-			</div>
-
+			</form>
 			<div class="btn-container">
-
-				<button type="button" class="btn1">◀뒤로가기</button>
+				<button type="button" class="btn1" onclick="history.back()">◀뒤로가기</button>
 			</div>
 		</div>
 	</div>

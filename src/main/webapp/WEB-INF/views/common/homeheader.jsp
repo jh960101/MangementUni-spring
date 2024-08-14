@@ -13,7 +13,9 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
-<script defer src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+	crossorigin="anonymous"></script>
 <script defer src="${path}/resources/js/homepage.js"></script>
 <link href="${path}/resources/css/main.css" rel="stylesheet" />
 <link href="${path}/resources/css/home.css?힣" rel="stylesheet" />
@@ -57,13 +59,15 @@
 										<li id="uni-detail"><a href="#">대학소개</a></li>
 										<li><a href="infoboard">공지사항</a></li>
 										<li><a href="etmainpage">에타게시판</a></li>
-										<li><a href="${login eq 'Employee'? 'infoboard':'myCoursesPage' }">마이페이지</a></li>
+										<li><a
+											href="${login eq 'Employee'? 'infoboard':'myCoursesPage' }">마이페이지</a></li>
 									</c:otherwise>
 								</c:choose>
 							</ul>
 						</div>
 						<div class="col col-1">
-							<button id="login-btn" onclick="location.href='logout'" style="color: white">LOGOUT</button>
+							<button id="login-btn" onclick="location.href='logout'"
+								style="color: white">LOGOUT</button>
 						</div>
 					</c:if>
 				</div>
@@ -77,7 +81,8 @@
 			<div class="row">
 				<div class="col col-12">
 					<ul>
-						<li class="divide"><a href="ideology" id="ideo" style="margin-left: 40px">학교 이념</a></li>
+						<li class="divide"><a href="ideology" id="ideo"
+							style="margin-left: 40px">학교 이념</a></li>
 						<li class="divide"><a href="department" id="dept">학과 소개</a></li>
 						<li class="divide"><a href="professor" id="prof">교수진 소개</a></li>
 						<li class="divide"><a href="calendar" id="calendar">학사 일정</a></li>

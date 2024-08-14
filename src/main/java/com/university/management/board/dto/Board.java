@@ -3,7 +3,7 @@ package com.university.management.board.dto;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +26,10 @@ public class Board {
 	private int readCount; // 조회수
 	private Date create_date; // 작성 날짜
 	private Date modify_date; // 수정 날짜
-	private int boLike; // 좋아요 버튼
+	private int bo_Like; // 좋아요 버튼
 	private List<Reply> replies; // 댓글
+	
+		
+	
 
 }

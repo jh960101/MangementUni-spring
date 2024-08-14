@@ -16,4 +16,8 @@ public interface ObjectionMapper {
 
 	List<Objection> selectLastResultList(Map<String, Integer> lastResultList);
 
+	List<Objection> selectObjListEmp();
+
+	List<Objection> objectionFilterData(Map<String, String> map);
+
 }

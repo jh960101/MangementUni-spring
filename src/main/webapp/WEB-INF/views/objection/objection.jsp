@@ -61,10 +61,11 @@
 										<td>${result.prof_name}</td>
 										<td>${result.grade}</td>
 										<td>
-											<c:if test=""></c:if>
-											<button type="button" class="btn btn-xs"
-												onclick="handleButtonClick(this, '${path}/objectionWrite?sub_code=${result.sub_code}&sub_name=${result.sub_name}')"
-												style="background-color: #024C86; color: white; padding: 2px 0 10px 0;">신청</button>
+											<button type="button" class="btn btn-xs objection-btn"
+												id="objectionButton" data-sub-code="${result.sub_code}"
+												onclick="location.href='${path}/objectionWrite?sub_code=${result.sub_code}&sub_name=${result.sub_name}'"
+												style="background-color: #024C86; color: white; padding: 2px 0 10px 0;"
+												<c:if test="${result.obj_yn == 'Y'}"> disabled </c:if>>신청</button>
 										</td>
 									</tr>
 								</c:forEach>
@@ -135,17 +136,6 @@
 	</div>
 	<!-- container -->
 	<script>
-	function handleButtonClick(button, url) {
-	    // 버튼 비활성화
-	    button.disabled = true; 
-	    
-	    // 원하는 경우 커서 모양 변경
-	    button.style.cursor = "not-allowed";
-
-	    // 새로운 페이지로 이동
-	    location.href = url; 
-	}
-	
 	
 	function loadResults(value, year) {
 	    //const smt = $("#smt").val(); // 현재 선택된 학기
@@ -216,6 +206,15 @@
 
 		// 문서가 준비되면 결과 로드
 		$(document).ready(function() {
+			 // 각 버튼의 상태 확인
+	        $('.objection-btn').each(function() {
+	            const subCode = $(this).data('sub-code');
+	            const isDisabled = localStorage.getItem('buttonDisabled-' + subCode);
+	            if (isDisabled === 'true') {
+	                $(this).prop('disabled', true); // 상태가 true이면 버튼 비활성화
+	            }
+	        });
+			 
 			loadResults(1, '2023'); // 2023학년도 1학기 데이터 로드
 		    loadResults(1, '2022'); // 2022학년도 1학기 데이터 로드
 		    
