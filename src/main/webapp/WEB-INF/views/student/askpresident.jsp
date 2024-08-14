@@ -135,21 +135,28 @@
 				<h5 class="mt-4" style="text-align: left; color: red;">이 글은
 					익명성이 보장됩니다. 단 비방이나 혐오 욕설을 사용하면 처벌받을수 있습니다.</h5>
 				<div id="pageContent">
-					<form action="writeinfoPro" method="post"
-						style="margin-bottom: 20px;" onsubmit="return validateForm()">
+					<form action="" method="post" style="margin-bottom: 20px;"
+						onsubmit="return validateForm()">
 						<table id="tbl-board">
 							<tr>
 								<th><span>제목</span></th>
 								<td><input type="text" placeholder="제목을 입력하세요" name="title"></td>
 							</tr>
-							
+
 							<tr>
 								<th width="50"><span>내용</span></th>
-								<td><textarea placeholder="내용을 입력하세요" name="detail"
+								<td><textarea placeholder="내용을 입력하세요" name="detail" id="textBox"
 										style="border: 1px solid #ccc; padding: 10px; width: 100%; height: 300px; overflow-y: auto;"></textarea></td>
 							</tr>
 						</table>
 						<div class="table-secondary">
+							<div class="textLengthWrap"
+								style="display: flex; align-items: center;">
+								<p class="textCount"
+									style="margin-bottom: 0; display: flex; align-items: center;">0자</p>
+								<p class="textTotal"
+									style="margin-bottom: 0; display: flex; align-items: center;">/500자</p>
+							</div>
 							<input class="btn btnlist" type="submit" value="등록"
 								style="color: white; font-weight: bold; font-size: 16px;" /> <input
 								class="btn btnlist" type="reset" value="다시 작성"
@@ -179,6 +186,27 @@
 
 			return true; // 모든 조건을 만족하면 폼 제출
 		}
+		/*  글자수 체크*/
+		$('#textBox').keyup(function(e) {
+			let content = $(this).val();
+
+			// 글자수 세기
+			if (content.length == 0 || content == '') {
+				$('.textCount').text('0자');
+			} else {
+				$('.textCount').text(content.length + '자');
+			}
+
+			// 글자수 제한
+			if (content.length > 500) {
+				// 200자 부터는 타이핑 되지 않도록
+				$(this).val($(this).val().substring(0, 500));
+				// 200자 넘으면 알림창 뜨도록
+				alert('글자수는 500자까지 입력 가능합니다.');
+			}
+			;
+		});
+		
 	</script>
 
 
