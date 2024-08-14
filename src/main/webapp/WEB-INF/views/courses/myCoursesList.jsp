@@ -81,7 +81,7 @@
 						<div id="online">
 							<p id="online-title">${list.LMS_TITLE }</p>
 							<div id="onlien-cont">
-								<a href="online?lms_no=${list.LMS_NO}" target="_blank"
+								<a id="lmsvideo-link" href="online?lms_no=${list.LMS_NO}" target="_blank"
 									onclick="return openPagePopup(this.href,190,700);"
 									data-week=${list. LMS_DATE }> <span
 									class="material-symbols-outlined icon"></span> 영상 강의
@@ -122,7 +122,7 @@
 		
 		  document.addEventListener('DOMContentLoaded', function() {
 	            const startDate = new Date('2024-08-01'); // 시작 날짜
-	            const links = document.querySelectorAll('#online a');
+	            const links = document.querySelectorAll('#online #lmsvideo-link');
 	            const currentDate = new Date();
 
 	            links.forEach(link => {
