@@ -11,4 +11,8 @@
 		SELECT * FROM board WHERE TYPE = "c" AND BO_NO = #{bo_no}
 	</select>
 
+	<insert id="insertboard" parameterType="com.university.management.board.dto.Board">
+		INSERT INTO BOARD(stu_no, title, content, type, create_date) VALUES (#{stu_no},#{title},#{content},"C", default)
+	</insert>
+	
 </mapper>
