@@ -22,4 +22,15 @@ public class PresidentService {
 		return mapper.getBoardByNo(bo_no) ;
 	}
 
+	public int insertboard(int stu_no, String title, String content) {
+		
+		Board board = new Board();
+		
+		board.setStu_no(stu_no);
+		board.setTitle(title);
+		board.setContent(content);
+		
+		return mapper.insertboard(board);
+	}
+
 }

@@ -5,7 +5,7 @@
 <select id="emplogin" parameterType="map" resultType="com.university.management.employee.dto.Employee">
 
 select * from employee
-where EMP_NAME =#{loginid}and EMP_PASSWORD =#{loginPassword}
+where EMP_NO =#{loginid}and EMP_PASSWORD =#{loginPassword}
 
 
 </select>
