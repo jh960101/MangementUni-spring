@@ -108,25 +108,29 @@ header, footer {
 										class="form-control" aria-describedby="basic-addon1"
 										placeholder="${name}" readonly>
 								</div>
-							
+
 								<div class="input-group mb-3">
 									<span class="input-group-text">이전PW</span> <input
 										type="password" class="form-control"
-										aria-describedby="basic-addon1" id="pwcheck"placeholder="비밀번호를 입력하세요">
+										aria-describedby="basic-addon1" id="pwcheck"
+										placeholder="비밀번호를 입력하세요">
 								</div>
 								<div class="input-group mb-3">
 									<span class="input-group-text">변경할PW</span> <input
 										type="password" class="form-control"
 										aria-describedby="basic-addon1" id="password"
-										name="STU_PASSWORD"placeholder="비밀번호를 입력하세요.">
-										
+										name="STU_PASSWORD" placeholder="비밀번호를 입력하세요."
+										oninput="pwdCheck()">
+
 								</div>
-								<label>비밀번호 8자리 이상 영문, 숫자, 특수문자 중 2가지 이상을 혼합</label>
+								<span id="pwdch">비밀번호 8자리 이상 영문, 숫자, 특수문자 중 2가지 이상을 혼합</span>
 								<div class="input-group mb-3">
 									<span class="input-group-text">PW확인</span> <input
 										type="password" class="form-control"
-										aria-describedby="basic-addon1" id="confirmPassword"placeholder="비밀번호를 입력하세요">
+										aria-describedby="basic-addon1" id="confirmPassword"
+										placeholder="비밀번호를 입력하세요" oninput="pwdCheck()">
 								</div>
+								  <span id="pwdConfirm"></span> </br>
 							</div>
 						</div>
 						<div class="d-flex justify-content-center mt-4">
@@ -163,11 +167,12 @@ header, footer {
 	        alert("비밀번호와 확인 비밀번호가 일치하지 않습니다.");
 	        return false;
 	    }
+	    
 
 	    // 비밀번호 유효성 검사
 	    var num = password.search(/[0-9]/g);
 	    var eng = password.search(/[a-z]/ig);
-	    var spe = password.search(/[`~!@#$%^&*|₩'";:/?]/gi);
+	    var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
 	    if (password.length < 8 || password.length > 20) {
 	        alert("비밀번호는 8자리 ~ 20자리 이내로 입력해주세요.");
@@ -176,7 +181,7 @@ header, footer {
 	        alert("비밀번호는 공백 없이 입력해주세요.");
 	        return false;
 	    } else if ((num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0)) {
-	        alert("영문, 숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
+	      alert("영문, 숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
 	        return false;
 	    } else {
 	        // 비밀번호가 성공적으로 변경됨을 알리고 폼을 제출합니다.
@@ -184,6 +189,38 @@ header, footer {
 	        return true;
 	    }
 	}
+	
+	
+	
+	 function pwdCheck(){
+		var password =$('#password').val();
+		var pw = "${pw}";
+		const length = $('#confirmPassword').val().length;
+	    var num = password.search(/[0-9]/g);
+	    var eng = password.search(/[a-z]/ig);
+		var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+		
+				if ((num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0)) {
+					 $('#pwdch').text('비밀번호 8자리 이상 영문, 숫자, 특수문자 중 2가지 이상을 혼합해주세요').css('color', 'red')
+				    }else{
+				    	 $('#pwdch').text('비밀번호 통과').css('color', 'gray')
+				    }
+		
+			if( length !== 0 ){
+
+				
+
+		      if($('#password').val() == $('#confirmPassword').val()){
+		         $('#pwdConfirm').text('비밀번호 일치').css('color', 'gray')
+		      }else{
+		         $('#pwdConfirm').text('확인 비밀번호 불일치').css('color', 'red')
+		      }
+			} else {
+		         $('#pwdConfirm').text('').css('color', 'black')
+			}
+		   
+		  }
+	  
     </script>
 
 	<footer>
