@@ -11,6 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>자유게시판</title>
 
+
 <link
 	href="${pageContext.request.contextPath}/resources/css/courses.css"
 	rel="stylesheet" />
@@ -27,6 +28,7 @@
 	crossorigin="anonymous">
 <style>
 </style>
+
 </head>
 <c:if test="${loginname eq null}">
 	<script>
@@ -43,6 +45,7 @@
 </c:if>
 
 <body>
+
 	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
 		<div id="sub-menuBar" style="height: 150px;">
@@ -57,6 +60,7 @@
 		style="height: 1600px; margin-top: 100px; margin-left: 450px;">
 		<div type="box" id="content" class="header2">
 			<input type="text" id="Box" class="box" value="&nbsp;자유게시판" readonly>
+
 
 			<div class="input-group">
 				<input type="text" class="form-control1" value="${board.title}"
@@ -92,6 +96,7 @@
 					<textarea class="form-control2" rows="30" id="mainContent" readonly
 						style="overflow: hidden;">${board.content}
                     </textarea>
+
 				</div>
 				<hr style="width: 1000px;">
 				<div id="commentsContainer">
@@ -111,6 +116,7 @@
 								</div>
 							</div>
 						</div>
+
 
 						<div class="input-group">
 							<input type="text" class="form-control3" value="정훈아 멋지다!!!"
@@ -142,6 +148,7 @@
 						<hr style="width: 1000px;">
 					</div>
 
+
 					<div class="form-controls-container">
 						<div class="file-upload-section">
 							<form>
@@ -150,6 +157,7 @@
 									style="width: 100%;"></textarea>
 							</form>
 						</div>
+
 
 						<div class="form-check d-inline">
 							<input class="form-check-input" style="font-weight: bolder;"
