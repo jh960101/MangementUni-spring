@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,7 +130,8 @@
 								<td>${item.grade_p}</td>
 								<td>
 									<button type="button" class="btn btn-xs btn-primary"
-										style="background-color: #024C86; color: white; padding: 2px 0 10px 0;">승인</button>
+										onclick="location.href='${path}/objectionupdate"
+										style="background-color: #024C86; color: white; padding: 10px 15px 10px 15px;">보기</button>
 								</td>
 							</tr>
 						</c:forEach>
@@ -196,7 +198,7 @@
 
             const selectedDepartment = selectElement.value;
             const subjectSelect = document.querySelector('select[name="subject"]');
-            subjectSelect.innerHTML = '<option disabled selected value="">과목 선택</option>'; // Clear previous options
+            subjectSelect.innerHTML = '<option disabled selected value="">과목 선택</option>';
 
             if (subjects[selectedDepartment]) {
                 subjects[selectedDepartment].forEach(subject => {
@@ -237,7 +239,7 @@
                             <td>${item.grade}</td>
                             <td>${item.grade_p}</td>
                             <td>
-                                <button type="button" class="btn btn-xs btn-primary" style="background-color: #024C86; color: white; padding: 2px 0 10px 0;">승인</button>
+                                <button type="button" class="btn btn-xs btn-primary" style="background-color: #024C86; color: white; padding: 2px 0 10px 0;">보기</button>
                             </td>`;
                         resultsTable.appendChild(row);
                     });

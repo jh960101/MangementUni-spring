@@ -313,11 +313,23 @@ public class FacultyController {
 	}
 
 	// 성적이의신청 데이터 목록 받아오기
-	
 	 @PostMapping("/objectionSearch")
 	 @ResponseBody public List<Objection> filterData(@RequestParam String
 	 department, @RequestParam String subject, @RequestParam String grade) {
-	 return objservice.objectionFilterData(department, subject, grade); }
+		 return objservice.objectionFilterData(department, subject, grade); 
+	 }
+	 
+	 // 이의 신청 업데이트
+	 @RequestMapping("/objectionupdate")
+		public String objectionupdate(Model model) {
+			System.out.println("facultycontroller-objectionupdate() 실행");
+
+			String login = (String) session.getAttribute("login");
+			System.out.println("login : " + login);
+
+			return "objection/objectionlist";
+		}
+	 
 	 
 
 	@RequestMapping("/scholarlist")
