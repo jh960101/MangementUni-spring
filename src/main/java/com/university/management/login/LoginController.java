@@ -53,7 +53,8 @@ public class LoginController {
 			Employee employee = loginService.emplogin(params);
 			if (employee != null && employee.getEMP_PASSWORD().equals(loginPassword)) {
 				session.setAttribute("loginname", employee.getEMP_NAME());
-				model.addAttribute("msg", loginid + "관리자님 로그인 되었습니다.");
+				session.setAttribute("empNO", employee.getEMP_NO());
+				model.addAttribute("msg",  employee.getEMP_NAME() + "관리자님 로그인 되었습니다.");
 				
 				session.setAttribute("login",login);
 				return "home";
