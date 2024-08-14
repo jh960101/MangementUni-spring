@@ -115,7 +115,7 @@ header, footer {
 								<div class="input-group mb-3">
 									<span class="input-group-text">이메일</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
-										placeholder="${email}" id="email" name="email" value="${email}">
+										placeholder="${email}" id="email" name="email" value="${email}"maxlength='20'>
 								</div>
 								<div class="input-group mb-3">
 									<span class="input-group-text">전화번호</span> <input type="text"
@@ -126,7 +126,7 @@ header, footer {
 								<div class="input-group mb-3">
 									<span class="input-group-text">주소</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
-										placeholder="${address}" id="address" name="address"value="${address}">
+										placeholder="${address}" id="address" name="address"value="${address}"maxlength='30'>
 								</div>
 							</div>
 						</div>

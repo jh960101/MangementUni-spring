@@ -122,7 +122,14 @@ progress::-moz-progress-bar {
 	border-radius: 18px;
 	background-image: linear-gradient(60deg, RGB(206, 225, 253),
 		RGB(168, 198, 247));
+	
 }
+
+
+
+
+
+
 
 #comm {
 	padding: 10px;
