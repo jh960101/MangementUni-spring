@@ -20,4 +20,8 @@ public interface ObjectionMapper {
 
 	List<Objection> objectionFilterData(Map<String, String> map);
 
+	List<Objection> objectionUpSelect(Map<String, Object> map);
+
+	int objUpdate(Map<String, Object> map);
+
 }

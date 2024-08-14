@@ -2,6 +2,7 @@ package com.university.management.faculty;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -314,21 +315,56 @@ public class FacultyController {
 
 	// 성적이의신청 데이터 목록 받아오기
 	 @PostMapping("/objectionSearch")
-	 @ResponseBody public List<Objection> filterData(@RequestParam String
+	 @ResponseBody 
+	 public List<Objection> filterData(@RequestParam String
 	 department, @RequestParam String subject, @RequestParam String grade) {
 		 return objservice.objectionFilterData(department, subject, grade); 
 	 }
 	 
 	 // 이의 신청 업데이트
-	 @RequestMapping("/objectionupdate")
-		public String objectionupdate(Model model) {
-			System.out.println("facultycontroller-objectionupdate() 실행");
+	 @RequestMapping("/objectionUpdate")
+	 public String objectionupdate(Model model, @RequestParam("sub_code") String sub_code, @RequestParam("sub_name") String sub_name, @RequestParam("stu_no") int stu_no) {
+		System.out.println("facultycontroller-objectionupdate() 실행");
 
-			String login = (String) session.getAttribute("login");
-			System.out.println("login : " + login);
+		String login = (String) session.getAttribute("login");
+		System.out.println("login : " + login);
+			
+		List<Objection> objectlist = new ArrayList<>();
+		
+		objectlist = objservice.objectionUpSelect(sub_code,stu_no);
+		
+		model.addAttribute("sub_code", sub_code);
+		model.addAttribute("sub_name", sub_name);
+		model.addAttribute("stu_no", stu_no);
+		model.addAttribute("objectlist", objectlist);
 
-			return "objection/objectionlist";
+		return "objection/objectionUpdate";
+	}
+	 
+	 // 업데이트 처리
+	 @RequestMapping("/objectionUpdatePro")
+	 public String objectionupdatePro(Model model, @RequestParam("sub_code") String sub_code, @RequestParam("sub_name") String sub_name, 
+			 @RequestParam("stu_no") int stu_no, @RequestParam("grade_p") int grade_p, HttpSession session) {
+		System.out.println("facultycontroller-objectionUpdatePro() 실행");
+
+		String login = (String) session.getAttribute("login");
+		System.out.println("login : " + login);
+		System.out.println("grade_p : " + grade_p);
+		System.out.println("sub_code : " + sub_code);
+		System.out.println("sub_name : " + sub_name);
+		System.out.println("stu_no : " + stu_no);
+			
+		int res = objservice.objUpdate(sub_code,stu_no,grade_p);
+		System.out.println("objUpdate res : " + res);
+		
+		if (res > 0) {
+			session.setAttribute("msg", "저장 되었습니다.");
+			//int change = objservice.
+		} else {
+			session.setAttribute("msg", "정상적으로 저장되지 않았습니다.");
 		}
+		return "redirect:/objectionlist";
+	}
 	 
 	 
 

@@ -65,7 +65,8 @@
 												id="objectionButton" data-sub-code="${result.sub_code}"
 												onclick="location.href='${path}/objectionWrite?sub_code=${result.sub_code}&sub_name=${result.sub_name}'"
 												style="background-color: #024C86; color: white; padding: 2px 0 10px 0;"
-												<c:if test="${result.obj_yn == 'Y'}"> disabled </c:if>>신청</button>
+												<c:if test="${result.obj_yn == 'Y'}"> disabled </c:if>>
+												신청</button>
 										</td>
 									</tr>
 								</c:forEach>
