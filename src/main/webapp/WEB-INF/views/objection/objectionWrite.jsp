@@ -106,7 +106,7 @@
 						<button type="reset" class="btn " value="다시쓰기"
 							style="font-size: 15px; width: 100px; height: 40px; background-color: #024C86; color: white; text-align: center; border: none !important;">다시쓰기</button>
 						<button type="button" class="btn " value="돌아가기"
-							id="backButton"
+							id="backButton" onclick="history.back();"
 							style="font-size: 15px; width: 100px; height: 40px; background-color: #024C86; color: white; text-align: center; border: none !important;">돌아가기</button>
 					</div>
 				</form>
@@ -124,11 +124,6 @@
             alert('이의 신청 내용을 입력하세요.');
             event.preventDefault(); // 폼 제출 방지
         } 
-    });
-	
-    document.getElementById('backButton').addEventListener('click', function() {
-        localStorage.removeItem('objectionSubmitted'); // 비활성화 상태 초기화
-        history.back(); // 이전 페이지로 돌아가기
     });
 	
 	</script>

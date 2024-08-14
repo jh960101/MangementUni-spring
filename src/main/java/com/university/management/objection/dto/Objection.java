@@ -19,6 +19,8 @@ public class Objection {
 	private int grade_p;		// 점수		
 	private String obj_no; 		// 성적 이의 신청 인덱스 번호
 	private String obj_yn;		// 이의 신청 여부(y/n)
+	private String obj_content; // 이의 신청 내용
+	private String obj_status; 
 	private String stu_no; 		// 학번
 	private String stu_name;	// 학생 이름
 	private String dept_code; 	// 학과코드
@@ -27,7 +29,6 @@ public class Objection {
 	private String prof_name; 	// 교수번호
 	private String sub_code; 	// 과목 코드
 	private String sub_name; 	// 과목 이름
-	private String obj_content; // 작성 내용
 	private Date create_Date; 	// 작성 날짜
 
 }

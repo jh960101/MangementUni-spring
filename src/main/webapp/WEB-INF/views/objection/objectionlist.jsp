@@ -48,10 +48,24 @@
 	border-bottom: 3px solid;
 	border-bottom-color: #024C86;
 }
+
+#results th{
+	text-align:center;
+	align-items: center;
+	vertical-align: center;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+
+	<c:if test="${not empty sessionScope.msg}">
+		<script>
+        alert('${fn:escapeXml(sessionScope.msg)}');
+    </script>
+		<c:remove var="msg" scope="session" />
+	</c:if>
+
 	<div id="menuBar">
 		<div id="sub-menubar">
 			<ul id="menulist">
@@ -62,7 +76,7 @@
 		</div>
 	</div>
 
-	<div class="container" style="height: 750px; margin-top: 50px;">
+	<div class="container" style="height: auto; margin-top: 50px;">
 		<div id="content">
 		<!-- title view -->
 			<div id="pagetitle">
@@ -119,8 +133,8 @@
 					<tbody id="results" class="table-group-divider">
 						<!-- 검색 결과가 들어올 부분 -->
 						<c:forEach var="item" items="${objListEmp}">
-							<tr>
-								<th scope="row">${item.obj_no}</th>
+							<tr style="vertical-align: center;">
+								<th scope="row">${item.num}</th>
 								<td>${item.smt}</td>
 								<td>${item.dept_name}</td>
 								<td>${item.stu_grade}</td>
@@ -130,8 +144,9 @@
 								<td>${item.grade_p}</td>
 								<td>
 									<button type="button" class="btn btn-xs btn-primary"
-										onclick="location.href='${path}/objectionupdate"
-										style="background-color: #024C86; color: white; padding: 10px 15px 10px 15px;">보기</button>
+										onclick="location.href='${path}/objectionUpdate?sub_code=${item.sub_code}&sub_name=${item.sub_name}&stu_no=${item.stu_no}'"
+										style="background-color: #024C86; color: white; padding: 5px 10px 5px 10px; border: none !important;">
+										보기</button>
 								</td>
 							</tr>
 						</c:forEach>
