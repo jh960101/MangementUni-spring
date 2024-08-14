@@ -24,12 +24,12 @@
 </head>
 
 <body>
-<c:if test="${loginname == null}">
-	<script>
-		alert('교직원 및 재학생만 접근이 가능합니다.');
-		window.location.href = "login";
-	</script>
-</c:if>
+	<c:if test="${loginname == null}">
+		<script>
+			alert('교직원 및 재학생만 접근이 가능합니다.');
+			window.location.href = "login";
+		</script>
+	</c:if>
 	<p class="top_scrollbtn" onclick="scrollbtn('main-img')">TOP</p>
 
 	<div>
@@ -70,10 +70,15 @@
 
 			<c:forEach var="board" items="${list}" varStatus="status">
 				<div class="list-group">
-					<a href="etdetailview?no=${board.bo_no }"
+					<a href="etdetailview?no=${board.bo_no}"
 						class="list-group-item list-group-item-action list-group-item-large"
 						aria-current="true" style="margin-top: 5px;"> <span
-						style="font-size: 20px; vertical-align: middle;">👑</span> ${status.count}st ${board.title}
+						style="font-size: 20px; vertical-align: middle;"> <c:if
+								test="${status.count<=3 }">
+								<img src="${path}/resources/img/etahotimg${status.count}.png" />
+								<strong>${board.title}</strong>
+							</c:if>
+					</span> <c:if test="${status.count>3 }">${status.count}th ${board.title}</c:if>
 					</a> <a href="#"
 						class="list-group-item list-group-item-action list-group-item-small disabled">
 						${board.content} </a> <a href="#"
@@ -92,7 +97,7 @@
 				</div>
 			</c:forEach>
 
-<!-- 			<button type="button" class="btn1">▼&nbsp;더보기</button> -->
+			<!-- 			<button type="button" class="btn1">▼&nbsp;더보기</button> -->
 		</div>
 	</div>
 

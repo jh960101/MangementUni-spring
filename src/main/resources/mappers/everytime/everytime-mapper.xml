@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id="getAllEtaHotList" resultType="com.university.management.board.dto.Board">
-		SELECT * FROM board WHERE TYPE = "e" order by READCOUNT DESC, BO_LIKE DESC limit 3 offset 0
+		SELECT * FROM board WHERE TYPE = "e" order by READCOUNT DESC, BO_LIKE DESC limit 5 offset 0
 	</select>
 
 
