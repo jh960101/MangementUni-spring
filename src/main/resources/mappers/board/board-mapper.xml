@@ -12,8 +12,8 @@
 		<result property="title" column="TITLE" />                     		<!-- 제목 -->
 		<result property="content" column="CONTENT" />                 		<!-- 내용 -->
 		<result property="type" column="TYPE" />                       		<!-- 타입 -->
-		<result property="originalFileName" column="ORIGINAL_FILENAME" /> 	<!-- 파일 업로드 -->
-		<result property="renamedFileName" column="RENAMED_FILENAME" /> 	<!-- 수정 파일 업로드 -->
+		<result property="originalFilename" column="ORIGINAL_FILENAME" /> 	<!-- 파일 업로드 -->
+		<result property="renameFilename" column="RENAME_FILENAME" /> 	<!-- 수정 파일 업로드 -->
 		<result property="readCount" column="READCOUNT" />            		<!-- 조회수 -->
 		<result property="create_date" column="CREATE_DATE" />         	 	<!-- 작성 날짜 -->
 		<result property="modify_date" column="MODIFY_DATE" />          		<!-- 수정 날짜 -->
@@ -102,9 +102,9 @@
 
 	<!-- 상세페이지 이동을 위한 게시글 번호 조회 -->
 	<select id="findByNo" parameterType="int"
-		resultType="com.university.management.board.dto.Board">
+		resultMap="boardListResultMap">
 		SELECT B.BO_NO,
-		E.EMP_NAME,B.TITLE,B.CONTENT,B.READCOUNT,B.CREATE_DATE, B.MODIFY_DATE,
+		E.EMP_NAME,B.TITLE,B.CONTENT,B.READCOUNT, B.ORIGINAL_FILENAME, B.CREATE_DATE, B.MODIFY_DATE,
 		B.BO_LIKE
 		FROM BOARD B
 		JOIN EMPLOYEE E ON B.EMP_NO = E.EMP_NO
@@ -142,7 +142,7 @@
 		UPDATE BOARD
 		SET emp_no
 		= #{loginNo}, title = #{title}, content = #{content}, type= 'G',
-		RENAME_FILENAME = #{originalFilename}, CREATE_DATE = now()
+		ORIGINAL_FILENAME = #{originalFilename}, CREATE_DATE = now()
 		WHERE bo_no
 		= #{bo_no}
 	</update>

@@ -157,37 +157,42 @@
 	
 	<select id="objectionFilterData" parameterType="java.util.Map"
 		resultMap="objectionResultMap">
-		SELECT
-		ROW_NUMBER() OVER (ORDER BY R.SMT) AS num,
-		OBJ.OBJ_NO AS obj_no,
-		R.SMT AS smt,
-		DEP.DEPT_NAME AS dept_name,
-		STU.STU_GRADE AS stu_grade,
-		STU.STU_NAME AS stu_name,
-		SUB.SUB_NAME AS sub_name,
-		R.GRADE AS grade,
-		R.GRADE_P AS grade_p
-		FROM
-		OBJECTION OBJ
-		RIGHT JOIN
-		SUBJECT SUB ON SUB.SUB_CODE = OBJ.SUB_CODE
-		INNER JOIN
-		STUDENT STU ON STU.STU_NO = OBJ.STU_NO
-		INNER JOIN
-		RESULTS R ON R.SUB_CODE = OBJ.SUB_CODE AND R.STU_NO = STU.STU_NO
-		INNER JOIN
-		DEPARTMENT DEP ON DEP.DEPT_CODE = STU.DEPT_CODE
-		WHERE
-		R.YEAR = 2024 AND R.SMT = 1
+		SELECT 
+        ROW_NUMBER() OVER (ORDER BY A.SMT) AS num,
+        C.STU_NO, 
+        B.SUB_CODE,
+        A.YEAR, 
+        A.SMT, 
+        D.DEPT_NAME, 
+        D.DEPT_CODE, 
+        C.STU_GRADE,
+        C.STU_NAME,
+        B.SUB_NAME, 
+        P.PROF_NAME, 
+        A.GRADE, 
+        A.GRADE_P, 
+        E.OBJ_NO
+    	FROM RESULTS A
+    	INNER JOIN SUBJECT B ON A.SUB_CODE = B.SUB_CODE
+    	INNER JOIN STUDENT C ON A.STU_NO = C.STU_NO
+    	INNER JOIN DEPARTMENT D ON C.DEPT_CODE = D.DEPT_CODE
+    	INNER JOIN PROFESSOR P ON P.PROF_NO = B.PROF_NO
+    	LEFT OUTER JOIN OBJECTION E ON A.SUB_CODE = E.SUB_CODE AND A.STU_NO = E.STU_NO 
+    	WHERE A.YEAR = 2024 AND A.SMT = 1
+        AND E.OBJ_NO IS NOT NULL 
+        AND E.OBJ_STATUS = 'N'
 		<if test="department != null and department != ''">
-			AND SUB.DEPT_CODE = #{department}
+			AND D.DEPT_NAME LIKE #{department}
 		</if>
 		<if test="subject != null and subject != ''">
-			AND SUB.SUB_CODE = #{subject}
+			AND B.SUB_NAME LIKE #{subject}
 		</if>
 		<if test="grade != null and grade != ''">
-			AND STU.STU_GRADE = #{grade}
+			AND C.STU_GRADE LIKE #{grade}
 		</if>
+		LIMIT #{listLimit}
+		OFFSET #{firstRow}
+		
 	</select>
 	
 	<update id="objUpdate" parameterType="java.util.Map">
@@ -196,5 +201,30 @@
    		WHERE 
         STU_NO = #{stu_no} AND SUB_CODE = #{sub_code}
 	</update>
+
+	<select id="getListCount" parameterType="java.util.Map"
+		resultType="int">
+		SELECT
+		COUNT(*) AS total_count
+		FROM RESULTS A
+		INNER JOIN SUBJECT B ON A.SUB_CODE = B.SUB_CODE
+		INNER JOIN STUDENT C ON A.STU_NO = C.STU_NO
+		INNER JOIN DEPARTMENT D ON C.DEPT_CODE = D.DEPT_CODE
+		INNER JOIN PROFESSOR P ON P.PROF_NO = B.PROF_NO
+		LEFT OUTER JOIN OBJECTION E ON A.SUB_CODE = E.SUB_CODE AND A.STU_NO =
+		E.STU_NO
+		WHERE A.YEAR = 2024 AND A.SMT = 1
+		AND E.OBJ_NO IS NOT NULL
+		AND E.OBJ_STATUS = 'N'
+		<if test="department != null and department != ''">
+			AND D.DEPT_CODE = #{department} 
+		</if>
+		<if test="subject != null and subject != ''">
+			AND B.SUB_CODE = #{subject}
+		</if>
+		<if test="grade != null and grade != ''">
+			AND C.STU_GRADE = #{grade}
+		</if>
+	</select>
 
 </mapper>

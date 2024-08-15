@@ -100,7 +100,7 @@ public class FacultyService {
 		map.put("bo_no", no);
 		map.put("title", board.getTitle());
 		map.put("content", board.getContent());
-		//map.put("uploadFile", board.getRenamedFilename());
+		map.put("uploadFile", board.getOriginalFilename());
 		map.put("loginname", board.getEmp_name());
 		map.put("loginNo", board.getEmp_no());
 		

@@ -21,8 +21,8 @@ public class Board {
 	private String title; // 제목
 	private String content; // 내용
 	private String type; // 타입 (공지사항, 에타, 총장님께전합니다)
-	//private MultipartFile originalFilename; // 파일 업로드
-	//private MultipartFile renamedFilename; // 수정 파일 업로드
+	private String originalFilename; // 파일 업로드
+	private String renameFilename; // 수정 파일 업로드
 	private int readCount; // 조회수
 	private Date create_date; // 작성 날짜
 	private Date modify_date; // 수정 날짜
