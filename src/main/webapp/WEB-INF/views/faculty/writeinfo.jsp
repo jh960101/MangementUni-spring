@@ -134,7 +134,7 @@
 				<h1>공지사항 게시글 작성</h1>
 			</div>
 			<div id="pageContent">
-				<form action="writeinfoPro" method="post"
+				<form action="writeinfoPro" method="post" enctype="multipart/form-data"
 					style="margin-bottom: 20px;" onsubmit="return validateForm()">
 					<table id="tbl-board">
 						<tr>

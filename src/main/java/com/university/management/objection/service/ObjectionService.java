@@ -43,14 +43,8 @@ public class ObjectionService {
 	}
 
 	//성적 조회 - 교직원(필터)
-	public List<Objection> objectionFilterData(String department, String subject, String grade) {
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("department", department);
-		map.put("subject", subject);
-		map.put("grade", grade);
-		
-		return mapper.objectionFilterData(map);
+	public List<Objection> objectionFilterData(Map<String, Object> params) {
+		return mapper.objectionFilterData(params);
 	}
 
 	// 성적 이의신청 화면의 정보 출력
@@ -106,6 +100,10 @@ public class ObjectionService {
 		
 		System.out.println("map : " + map);
 		return mapper.objUpdate(map);
+	}
+
+	public int getListCount(Map<String, Object> params) {
+		return mapper.getListCount(params);
 	}
 
 }

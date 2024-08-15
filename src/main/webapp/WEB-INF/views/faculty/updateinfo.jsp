@@ -198,8 +198,8 @@
 						</tr>
 						<tr>
 							<th>첨부파일</th>
-							<td><input type="file" name="uploadFile" /> <c:if
-									test="${!empty board.originalFilename}">
+							<td><input type="file" name="uploadFile" value="${board.originalFilename}"/> 
+								<c:if test="${!empty board.originalFilename}">
 									<a
 										href="javascript:fileDownload('${board.originalFilename}', '${board.originalFilename}')">
 										<c:out value="${board.originalFilename}"></c:out>
