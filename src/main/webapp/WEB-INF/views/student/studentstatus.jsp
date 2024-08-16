@@ -10,12 +10,14 @@
 <meta charset="UTF-8">
 <title>학적 조회</title>
 <link href="${path}/resources/css/studentinfo.css" rel="stylesheet" />
+<link rel='stylesheet'
+	href='https://cdn-uicons.flaticon.com/2.5.1/uicons-solid-straight/css/uicons-solid-straight.css'>
 </head>
 <body>
 
 	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
-	<div id="sub-menuBar" style="height: 380px">
+		<div id="sub-menuBar" style="height: 380px">
 			<ul id="menulist">
 				<li><a href="studentstatus">학적 조회</a></li>
 				<li><a href="passwordchange">학생 비밀번호 변경</a></li>
@@ -33,11 +35,11 @@
 		<div id="content">
 
 			<!-- title view -->
-			<div id="pagetitle">
+			<div id="pagetitle" >
 				<h1>학적 조회</h1>
 			</div>
 
-			<div id="contentview">
+			<div id="contentview" style="margin-top: 80px;">
 
 				<!--  학적 카드  -->
 				<div id="statuscard">
@@ -47,7 +49,7 @@
 								<table style="text-align: left;">
 									<c:forEach var="stuinfo" items="${studentInfo}">
 										<tr>
-											<img src="${path}/resources/img/프로필사진.png" alt="student img" />
+											<img src="${path}/resources/img/idcard.png" alt="student img" />
 										</tr>
 										<tr>
 											<th>이름</th>
@@ -85,8 +87,15 @@
 						</div>
 					</div>
 				</div>
-				<div id="courselist1">
-					<h5 id="midtitle">&gt; 등록금 조회</h5>
+				<div id="courselist1" style="margin-top: 100px;">
+
+					<h5 id="midtitle" style="display: flex; margin-bottom: 20px">
+						<div
+							style="display: flex; justify-content: center; align-items: center;">
+							<i class="fi fi-ss-book"></i>
+						</div>
+						<strong>&nbsp;등록금 조회</strong>
+					</h5>
 					<div>
 						<table class="table mt-2 mb-4">
 							<thead>
@@ -99,22 +108,28 @@
 								</tr>
 							</thead>
 							<tbody class="table-group-divider">
-							<c:forEach var="list" items="${tuitionlist}" varStatus="status">
-								<tr>
-									<th>${status.index + 1}</th>
-									<td>${list.YEAR}</td>
-									<td>${list.SMT}</td>
-									<td>${list.DEPT_NAME}</td>
-									<td>${list.TU_PRICE}</td>
-								</tr>
+								<c:forEach var="list" items="${tuitionlist}" varStatus="status">
+									<tr>
+										<th>${status.index + 1}</th>
+										<td>${list.YEAR}</td>
+										<td>${list.SMT}</td>
+										<td>${list.DEPT_NAME}</td>
+										<td>${list.TU_PRICE}</td>
+									</tr>
 								</c:forEach>
-								
+
 							</tbody>
 						</table>
 					</div>
 				</div>
-				<div id="courselist1">
-					<h5 id="midtitle">&gt; 장학금 수혜 조회</h5>
+				<div id="courselist1" style="margin-top: 100px;">
+					<h5 id="midtitle" style="display: flex; margin-bottom: 20px">
+						<div
+							style="display: flex; justify-content: center; align-items: center;">
+							<i class="fi fi-ss-book"></i>
+						</div>
+						<strong>&nbsp;장학금 수혜 조회</strong>
+					</h5>
 					<div>
 						<table class="table mt-2 mb-4">
 							<thead>
@@ -127,22 +142,29 @@
 								</tr>
 							</thead>
 							<tbody class="table-group-divider">
-								<c:forEach var="list" items="${StuScholarlist}" varStatus="status">
-								<tr>
-									<th>${status.index + 1}</th>
-									<td>${list.YEAR}</td>
-									<td>${list.SMT}</td>
-									<td>${list.SCH_NAME}</td>
-									<td>${list.SCH_DISCOUNT}</td>
-								</tr>
+								<c:forEach var="list" items="${StuScholarlist}"
+									varStatus="status">
+									<tr>
+										<th>${status.index + 1}</th>
+										<td>${list.YEAR}</td>
+										<td>${list.SMT}</td>
+										<td>${list.SCH_NAME}</td>
+										<td>${list.SCH_DISCOUNT}</td>
+									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
 
-				<div id="courselist1">
-					<h5 id="midtitle">&gt; 수강 과목 조회</h5>
+				<div id="courselist1" style="margin-top: 100px;">
+					<h5 id="midtitle" style="display: flex; margin-bottom: 20px">
+						<div
+							style="display: flex; justify-content: center; align-items: center;">
+							<i class="fi fi-ss-book"></i>
+						</div>
+						<strong>&nbsp;수강 과목 조회</strong>
+					</h5>
 					<div>
 						<table class="table mt-2 mb-4">
 							<thead>
@@ -157,23 +179,29 @@
 							</thead>
 							<tbody class="table-group-divider">
 								<c:forEach var="list" items="${courlist}" varStatus="status">
-								<tr>
-									<th>${status.index + 1}</th>
-									<td>${list.YEAR}</td>
-									<td>${list.SMT}</td>
-									<td><a href="myCoursesList?sub_code=${list.SUB_CODE}">${list.SUB_NAME}</a></td>
-									<td>${list.PROF_NAME}</td>
-									<td>${list.attendanceRate }%</td>
-								</tr>
-							</c:forEach>
+									<tr>
+										<th>${status.index + 1}</th>
+										<td>${list.YEAR}</td>
+										<td>${list.SMT}</td>
+										<td><a href="myCoursesList?sub_code=${list.SUB_CODE}">${list.SUB_NAME}</a></td>
+										<td>${list.PROF_NAME}</td>
+										<td>${list.attendanceRate }%</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
 				<!-- courselist1 -->
 
-				<div id="courselist2">
-					<h5 id="midtitle">&gt; 이전 수강 과목 조회</h5>
+				<div id="courselist2" style="margin-top: 100px;">
+					<h5 id="midtitle" style="display: flex; margin-bottom: 20px;">
+						<div
+							style="display: flex; justify-content: center; align-items: center;">
+							<i class="fi fi-ss-book"></i>
+						</div>
+						<strong>&nbsp;이전 수강 과목 조회</strong>
+					</h5>
 					<div>
 						<table class="table mt-2 mb-4">
 							<thead>
@@ -187,17 +215,18 @@
 								</tr>
 							</thead>
 							<tbody class="table-group-divider">
-								<c:forEach var="courlist" items="${coursesbeforlist}" varStatus="status">
-								<tr>
-									<th>${status.index + 1}</th>
-									<td>${courlist.YEAR}</td>
-									<td>${courlist.SMT}</td>
-									<td>${courlist.SUB_NAME}</td>
-									<td>${courlist.PROF_NAME}</td>
-									<td>${courlist.attendanceRate }%</td>
-								</tr>
+								<c:forEach var="courlist" items="${coursesbeforlist}"
+									varStatus="status">
+									<tr>
+										<th>${status.index + 1}</th>
+										<td>${courlist.YEAR}</td>
+										<td>${courlist.SMT}</td>
+										<td>${courlist.SUB_NAME}</td>
+										<td>${courlist.PROF_NAME}</td>
+										<td>${courlist.attendanceRate }%</td>
+									</tr>
 								</c:forEach>
-							
+
 							</tbody>
 						</table>
 					</div>
