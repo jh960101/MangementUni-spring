@@ -26,7 +26,7 @@
 }
 
 .input-background {
-	width: 600px;
+	width: 500px;
 	margin: 0 auto;
 }
 
@@ -34,7 +34,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 20px;
+	margin-top: 50px;
 }
 
 .custom {
@@ -85,7 +85,7 @@ header, footer {
 			</ul>
 		</div>
 	</div>
-	<div class="container" style="height: 750px; margin-top: 100px;">
+	<div class="container" style="height: 700px; margin-top: 100px;">
 		<form id="passwordChangeForm" action="${path}/passwordchangeInfo"
 			method="post" onsubmit="return chkpw()">
 			<div id="content">
@@ -93,47 +93,49 @@ header, footer {
 				<div id="pageTitle">
 					<h1>학생 정보 변경</h1>
 				</div>
-				<div id="pageContent">
+				<div id="pageContent" style="margin-top: 90px">
 					<!-- content view -->
 					<div class="input-background">
 						<div class="container text-center">
-							<div class="row row-cols-1">
-								<div class="input-group mb-3">
-									<span class="input-group-text">학　　번</span> <input type="text"
-										class="form-control" aria-describedby="basic-addon1"
-										name="STU_NO" placeholder="${id}" readonly>
-								</div>
-								<div class="input-group mb-3">
+							<div class="row row-cols-1" style="display: flex; flex-direction: column; gap:10px;">
+								<div class="input-group mb-2">
 									<span class="input-group-text">사용자명</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
-										placeholder="${name}" readonly>
+										placeholder="${name}" style="font-weight: bold;"
+										disabled="disabled">
+								</div>
+								<div class="input-group mb-2">
+									<span class="input-group-text">학　　번</span> <input type="text"
+										class="form-control" aria-describedby="basic-addon1"
+										name="STU_NO" placeholder="${id}" disabled="disabled"
+										style="font-weight: bold;"">
 								</div>
 
-								<div class="input-group mb-3">
-									<span class="input-group-text" style="letter-spacing :0.7px;">이전PW</span> <input
-										type="password" class="form-control"
+								<div class="input-group mb-2">
+									<span class="input-group-text" style="letter-spacing: 0.7px;">이전PW</span>
+									<input type="password" class="form-control"
 										aria-describedby="basic-addon1" id="pwcheck"
 										placeholder="기존 비밀번호를 입력해주세요">
 								</div>
 								<div class="input-group mb-3">
-									<span class="input-group-text" style="letter-spacing :0.7px;">변경PW</span> <input
-										type="password" class="form-control"
+									<span class="input-group-text" style="letter-spacing: 0.7px;">변경PW</span>
+									<input type="password" class="form-control"
 										aria-describedby="basic-addon1" id="password"
 										name="STU_PASSWORD" placeholder="새 비밀번호를 입력해주세요"
 										oninput="pwdCheck()">
-
 								</div>
-								<span id="pwdch" style="color: red">※비밀번호 8자리 이상 영문, 숫자, 특수문자 중 2가지 이상을 혼합</span>
+								<span id="pwdch"
+									style="color: red; font-size: 14.5px;padding-bottom: 10px;">※ 비밀번호 8자리 이상 영문, 숫자, 특수문자 중 2가지 이상을 혼합해주세요.</span>
 								<div class="input-group mb-3">
-									<span class="input-group-text" style="letter-spacing :0.7px;">PW확인</span> <input
-										type="password" class="form-control"
+									<span class="input-group-text" style="letter-spacing: 0.7px;">PW확인</span>
+									<input type="password" class="form-control"
 										aria-describedby="basic-addon1" id="confirmPassword"
 										placeholder="새 비밀번호를 입력해주세요" oninput="pwdCheck()">
 								</div>
-								  <span id="pwdConfirm"></span> </br>
+								<span id="pwdConfirm"></span>
 							</div>
 						</div>
-						<div class="d-flex justify-content-center mt-4">
+						<div class="d-flex justify-content-center mt-4" style="margin-top: 0px;">
 							<button type="submit" class="button btn-wide custom-button">
 								암호변경</button>
 						</div>
@@ -201,9 +203,9 @@ header, footer {
 		var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 		
 				if ((num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0)) {
-					 $('#pwdch').text('비밀번호 8자리 이상 영문, 숫자, 특수문자 중 2가지 이상을 혼합해주세요').css('color', 'red')
+					 $('#pwdch').text('※ 비밀번호 8자리 이상 영문, 숫자, 특수문자 중 2가지 이상을 혼합해주세요').css('color', 'red')
 				    }else{
-				    	 $('#pwdch').text('비밀번호 통과').css('color', 'gray')
+				    	 $('#pwdch').text('비밀번호 통과').css('color', 'green')
 				    }
 		
 			if( length !== 0 ){
@@ -211,7 +213,7 @@ header, footer {
 				
 
 		      if($('#password').val() == $('#confirmPassword').val()){
-		         $('#pwdConfirm').text('비밀번호 일치').css('color', 'gray')
+		         $('#pwdConfirm').text('비밀번호 일치').css('color', 'green')
 		      }else{
 		         $('#pwdConfirm').text('확인 비밀번호 불일치').css('color', 'red')
 		      }
