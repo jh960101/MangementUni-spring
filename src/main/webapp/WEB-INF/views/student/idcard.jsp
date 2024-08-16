@@ -140,7 +140,7 @@ body {
 				<div class="background">
 					<div class="row no-gutters">
 						<div class="col-md-4">
-							<img src="${path}/resources/img/유제욱.jpg"
+							<img src="${path}/resources/img/idcard.png"
 								class="img-fluid rounded-start" alt="설명">
 						</div>
 						<div class="col-md-6">
