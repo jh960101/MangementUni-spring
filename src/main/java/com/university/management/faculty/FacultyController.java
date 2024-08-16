@@ -2,6 +2,9 @@ package com.university.management.faculty;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +13,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.codec.multipart.Part;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -128,6 +132,7 @@ public class FacultyController {
 
 		Board board = service.findByNo(no);
 		System.out.println(board);
+		System.out.println("파일명 : " + board.getOriginalFilename());
 
 		// 조회 수 증가
 		int readCount = service.readCount(no);
@@ -136,7 +141,6 @@ public class FacultyController {
 		model.addAttribute("readCount", readCount);
 		model.addAttribute("login", login);
 		model.addAttribute("no", no);
-		// model.addAttribute("replyList", board.getReplies());
 
 		return "faculty/infodetail";
 	}
@@ -149,7 +153,8 @@ public class FacultyController {
 
 	// 공지사항 작성 처리
 	@RequestMapping("/writeinfoPro")
-	public String writeinfoPro(Model model, @RequestParam Map<String, Object> param, @ModelAttribute Board board) {
+	public String writeinfoPro(Model model, @RequestParam Map<String, Object> param, @ModelAttribute Board board,
+			@RequestParam("uploadFile") MultipartFile file) throws IOException {
 		System.out.println("FacultyController-writeinfoPro() 실행");
 
 		String loginname = (String) session.getAttribute("loginname");
@@ -159,32 +164,45 @@ public class FacultyController {
 		System.out.println("loginNO : " + loginNo);
 
 		String title = (String) param.get("title");
-		String file = (String) param.get("filename");
 		String detail = (String) param.get("detail");
 
 		System.out.println("title : " + title);
-		System.out.println("file : " + file);
 		System.out.println("detail : " + detail);
 
 		if (title != null && detail != null) {
 
-			file = (file != null || file != "") ? "-" : file; // filename이 null일 때 처리
-			System.out.println("file : " + file);
+			String fileReadName = "";
+			if (!file.isEmpty()) {
+				// 파일명을 얻어서 출력
+				fileReadName = file.getOriginalFilename();
+				System.out.println("file : " + file);
+
+				// 폼의 파일 필드에서 파일을 가져옵니다.
+				String uploadDir = "C:/uploads";
+				File uploadDirFile = new File(uploadDir);
+
+				if (!uploadDirFile.exists()) {
+					uploadDirFile.mkdirs(); // 디렉토리가 없으면 생성
+				}
+
+				File dest = new File(uploadDir, file.getOriginalFilename());
+				file.transferTo(dest); // 파일 저장
+			} else {
+				fileReadName = "-";
+			}
 
 			// param의 값을 Board 객체에 설정
 			board.setEmp_no(loginNo);
 			board.setTitle(title);
 			board.setContent(detail);
-			// board.setOriginalFilename(file);
+			board.setOriginalFilename(fileReadName);
 
 			int res = service.insertWrite(board);
 
 			if (res > 0) {
-				System.out.println("글이 추가 되었습니다");
-				model.addAttribute("msg", "글이 추가 되었습니다");
+				session.setAttribute("msg", "정상적으로 업로드되었습니다.");
 			} else {
-				System.out.println("글 추가를 실패하였습니다");
-				model.addAttribute("msg", "글 추가를 실패하였습니다");
+				session.setAttribute("msg", "정상적으로 업로드되지 않았습니다.");
 			}
 
 		} else {
@@ -192,7 +210,7 @@ public class FacultyController {
 			model.addAttribute("msg", "내용을 입력해주세요.");
 		}
 
-		return "faculty/infoboard";
+		return "redirect:/infoboard"; // 리디렉션
 	}
 
 	@RequestMapping("/updateinfo")
@@ -239,25 +257,33 @@ public class FacultyController {
 		System.out.println("파일 : " + uploadFile);
 		System.out.println("내용 : " + content);
 
-		// 파일이 선택되었는지 확인
+		String fileReadName = "";
 		if (!uploadFile.isEmpty()) {
-			// 파일 처리 로직 (예: 파일 저장)
-			String originalFilename = uploadFile.getOriginalFilename();
-			String filePath = "C:\\fullstack\\part4\\src\\MangementUni-spring\\src\\main\\webapp\\resources/"
-					+ originalFilename; // 파일이 저장될 경로 지정
+			try {
+				// 파일명을 얻어서 출력
+				fileReadName = uploadFile.getOriginalFilename();
+				System.out.println("file : " + uploadFile);
 
-//	        try {
-//	            // 파일 저장
-//	            uploadFile.transferTo(new File(filePath+originalFilename));
-//	            board.setOriginalFilename(originalFilename); // 파일명 설정
-//	        } catch (IOException e) {
-//	            e.printStackTrace();
-//	            // 에러 처리 추가 (예: redirect 에러 메시지 추가)
-//	            redirectAttributes.addFlashAttribute("msg", "파일 업로드 중 오류가 발생했습니다.");
-//	            return "redirect:/infoboard"; // 오류 발생 시 리디렉션
-//	        }
-//	    } else {
-//	        board.setOriginalFilename(""); // 파일이 선택되지 않았다면 적절한 처리
+				// 폼의 파일 필드에서 파일을 가져옵니다.
+				String uploadDir = "C:/uploads";
+				File uploadDirFile = new File(uploadDir);
+
+				if (!uploadDirFile.exists()) {
+					uploadDirFile.mkdirs(); // 디렉토리가 없으면 생성
+				}
+
+				File dest = new File(uploadDir, uploadFile.getOriginalFilename());
+				uploadFile.transferTo(dest); // 파일 저장
+
+				board.setOriginalFilename(fileReadName); // 파일명 설정
+			} catch (IOException e) {
+				e.printStackTrace();
+				// 에러 처리 추가 (예: redirect 에러 메시지 추가)
+				redirectAttributes.addFlashAttribute("msg", "파일 업로드 중 오류가 발생했습니다.");
+				return "redirect:/infoboard"; // 오류 발생 시 리디렉션
+			}
+		} else {
+			board.setOriginalFilename(""); // 파일이 선택되지 않았다면 적절한 처리
 		}
 
 		// Board 객체에 파라미터 값 설정
@@ -299,40 +325,94 @@ public class FacultyController {
 
 	// 성적
 	@RequestMapping("/objectionlist")
-	public String objectionList(Model model) {
+	public String objectionList(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
+			String department, String subject, String grade) {
 		System.out.println("facultycontroller-objectionList() 실행");
 
 		String login = (String) session.getAttribute("login");
 		System.out.println("login : " + login);
 
-		List<Objection> objListEmp = objservice.selectObjListEmp();
+		Map<String, Object> params = new HashMap<>();
+		params.put("department", department);
+		params.put("subject", subject);
+		params.put("grade", grade);
+
+		int listLimit = 5; // 한 페이지에 보여질 게시글 수
+		int totalRowCount = objservice.getListCount(params); // 전체 게시글의 수
+
+		// 페이지네이션 설정
+		PageInfo pageSettings = new PageInfo(page, totalRowCount, 5);
+		pageSettings.pageSetting(totalRowCount);
+
+		int firstRow = pageSettings.getFirstRow();
+
+		params.put("firstRow", firstRow);
+		params.put("listLimit", listLimit);
+
+		// 데이터 가져오기
+		List<Objection> objListEmp = objservice.objectionFilterData(params);
 		System.out.println("objListEmp : " + objListEmp);
 
+		// 데이터와 페이지 정보 모델에 추가하기
 		model.addAttribute("objListEmp", objListEmp);
+		model.addAttribute("department", department);
+		model.addAttribute("subject", subject);
+		model.addAttribute("grade", grade);
+		model.addAttribute("pageInfo", pageSettings);
+		model.addAttribute("count", totalRowCount);
 
 		return "objection/objectionlist";
 	}
 
 	// 성적이의신청 데이터 목록 받아오기
-	 @PostMapping("/objectionSearch")
-	 @ResponseBody 
-	 public List<Objection> filterData(@RequestParam String
-	 department, @RequestParam String subject, @RequestParam String grade) {
-		 return objservice.objectionFilterData(department, subject, grade); 
-	 }
-	 
-	 // 이의 신청 업데이트
-	 @RequestMapping("/objectionUpdate")
-	 public String objectionupdate(Model model, @RequestParam("sub_code") String sub_code, @RequestParam("sub_name") String sub_name, @RequestParam("stu_no") int stu_no) {
+	@PostMapping("/objectionSearch")
+	@ResponseBody
+	public List<Objection> objectionSearch(@RequestBody Map<String, Object> requestData) {
+		System.out.println("facultycontroller-objectionSearch() 실행");
+
+		String department = (String) requestData.get("department");
+		String subject = (String) requestData.get("subject");
+		String grade = (String) requestData.get("grade");
+		int page = Integer.valueOf((String) requestData.get("page"));
+
+		System.out.println("department : " + department);
+		System.out.println("subject : " + subject);
+		System.out.println("grade : " + grade);
+		System.out.println("page : " + page);
+
+		Map<String, Object> params = new HashMap<>();
+		params.put("department", department);
+		params.put("subject", subject);
+		params.put("grade", grade);
+
+		int listLimit = 5; // 한 페이지에 보여질 게시글 수
+		int totalRowCount = objservice.getListCount(params); // 전체 게시글의 수
+
+		// 페이지네이션 설정
+		PageInfo pageSettings = new PageInfo(page, totalRowCount, 5);
+		pageSettings.pageSetting(totalRowCount);
+
+		int firstRow = pageSettings.getFirstRow();
+
+		params.put("firstRow", firstRow);
+		params.put("listLimit", listLimit);
+
+		return objservice.objectionFilterData(params);
+	}
+
+	// 이의 신청 업데이트
+	@RequestMapping("/objectionUpdate")
+	public String objectionupdate(Model model, @RequestParam("sub_code") String sub_code,
+			@RequestParam("sub_name") String sub_name, @RequestParam("stu_no") int stu_no) {
 		System.out.println("facultycontroller-objectionupdate() 실행");
 
 		String login = (String) session.getAttribute("login");
 		System.out.println("login : " + login);
-			
+
 		List<Objection> objectlist = new ArrayList<>();
-		
-		objectlist = objservice.objectionUpSelect(sub_code,stu_no);
-		
+
+		objectlist = objservice.objectionUpSelect(sub_code, stu_no);
+
 		model.addAttribute("sub_code", sub_code);
 		model.addAttribute("sub_name", sub_name);
 		model.addAttribute("stu_no", stu_no);
@@ -340,11 +420,12 @@ public class FacultyController {
 
 		return "objection/objectionUpdate";
 	}
-	 
-	 // 업데이트 처리
-	 @RequestMapping("/objectionUpdatePro")
-	 public String objectionupdatePro(Model model, @RequestParam("sub_code") String sub_code, @RequestParam("sub_name") String sub_name, 
-			 @RequestParam("stu_no") int stu_no, @RequestParam("grade_p") int grade_p, HttpSession session) {
+
+	// 업데이트 처리
+	@RequestMapping("/objectionUpdatePro")
+	public String objectionupdatePro(Model model, @RequestParam("sub_code") String sub_code,
+			@RequestParam("sub_name") String sub_name, @RequestParam("stu_no") int stu_no,
+			@RequestParam("grade_p") int grade_p, HttpSession session) {
 		System.out.println("facultycontroller-objectionUpdatePro() 실행");
 
 		String login = (String) session.getAttribute("login");
@@ -353,20 +434,17 @@ public class FacultyController {
 		System.out.println("sub_code : " + sub_code);
 		System.out.println("sub_name : " + sub_name);
 		System.out.println("stu_no : " + stu_no);
-			
-		int res = objservice.objUpdate(sub_code,stu_no,grade_p);
+
+		int res = objservice.objUpdate(sub_code, stu_no, grade_p);
 		System.out.println("objUpdate res : " + res);
-		
+
 		if (res > 0) {
 			session.setAttribute("msg", "저장 되었습니다.");
-			//int change = objservice.
 		} else {
 			session.setAttribute("msg", "정상적으로 저장되지 않았습니다.");
 		}
 		return "redirect:/objectionlist";
 	}
-	 
-	 
 
 	@RequestMapping("/scholarlist")
 	public String scholarList(Model model, String scholarship_type, String department_type, String grade,

@@ -18,10 +18,12 @@ public interface ObjectionMapper {
 
 	List<Objection> selectObjListEmp();
 
-	List<Objection> objectionFilterData(Map<String, String> map);
-
 	List<Objection> objectionUpSelect(Map<String, Object> map);
 
 	int objUpdate(Map<String, Object> map);
+
+	int getListCount(Map<String, Object> params);
+
+	List<Objection> objectionFilterData(Map<String, Object> params);
 
 }

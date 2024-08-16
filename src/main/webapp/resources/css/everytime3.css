@@ -1,10 +1,12 @@
 --
+
  
+
 everytime3.css -- /* 댓글 작성 창 길이 조정 */
         .form-controls-container .file-upload-section {
 	display: flex;
 	align-items: center;
-	width: 80%;
+	width: 50%;
 }
 
 .form-control {
@@ -14,6 +16,7 @@ everytime3.css -- /* 댓글 작성 창 길이 조정 */
 #commentInput {
 	flex: 1;
 	margin-right: 10px;
+	border:none;
 }
 
 .form-control {
@@ -33,7 +36,7 @@ everytime3.css -- /* 댓글 작성 창 길이 조정 */
 	overflow: auto;
 	width: 700px;
 	height: 300px;
-	/
+	
 }
 
 .file-upload-section {
@@ -99,8 +102,7 @@ everytime3.css -- /* 댓글 작성 창 길이 조정 */
 .form-control3 {
 	height: 100px;
 	width: 1000px;
-	font-size: 15px;
-	border-top: none;
+	font-size: 16px;
 }
 
 .form-controls-container {
@@ -109,7 +111,6 @@ everytime3.css -- /* 댓글 작성 창 길이 조정 */
 	justify-content: space-between;
 	padding: 20px;
 	background-color: #c9c9c9;
-	border-top: none;
 	width: 1000px;
 }
 
@@ -180,6 +181,3 @@ everytime3.css -- /* 댓글 작성 창 길이 조정 */
 	height: 300px;
 }
 
-.container {
-	
-}
