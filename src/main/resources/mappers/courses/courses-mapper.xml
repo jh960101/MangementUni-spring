@@ -80,8 +80,7 @@ ORDER BY
 		resultType="com.university.management.courses.dto.Courses">
 
 		SELECT s.SUB_CODE,
-		s.SUB_NAME,p.PROF_NAME,s.CLASS_CAP,s.SUB_ST_TIME,s.SUB_END_TIME
-		,s.CO_CONTENT,s.SMT,s.YEAR,s.SUB_POINT,s.SMT,s.YEAR,s.SUB_STATUS
+		s.SUB_NAME,p.PROF_NAME,s.CLASS_CAP,s.CO_CONTENT,s.SMT,s.YEAR,s.SUB_POINT,s.SMT,s.YEAR,s.SUB_STATUS
 		FROM
 		subject s
 		JOIN department d ON s.dept_code = d.dept_code

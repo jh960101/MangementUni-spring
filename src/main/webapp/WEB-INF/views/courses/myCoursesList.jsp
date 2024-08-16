@@ -22,7 +22,7 @@
 <style>
 /* 비활성화된 링크의 스타일 설정 */
 .inactive {
-	color: gray;
+	color: red !important;
 	pointer-events: none; /* 클릭 불가 */
 	text-decoration: none; /* 밑줄 제거 */
 }
@@ -79,12 +79,12 @@
 				<div id="onlineList">
 					<c:forEach var="list" items="${lmslist}" varStatus="status">
 						<div id="online">
-							<p id="online-title">${list.LMS_TITLE }</p>
+							<p id="online-title">${list.LMS_TITLE } (${list.LMS_Period})</p>
 							<div id="onlien-cont">
 								<a id="lmsvideo-link" href="online?lms_no=${list.LMS_NO}"
 									target="_blank"
 									onclick="return openPagePopup(this.href,190,700);"
-									data-week=${list. LMS_DATE }> <span
+									data-week=${list. LMS_DATE }  style="color: #10df10e8;"> <span 
 									class="material-symbols-outlined icon"></span> 영상 강의
 								</a> <a href="${path}/resources/pdf/${list.LMS_FILE}" download>
 									<span class="material-symbols-outlined icon">description</span>[강의
@@ -137,8 +137,10 @@
 	                // 활성화 조건
 	                if (currentDate >= weekStartDate) {
 	                    link.classList.remove('inactive');
+	                    
 	                } else {
 	                    link.classList.add('inactive');
+	                   
 	                }
 	            });
 	        });

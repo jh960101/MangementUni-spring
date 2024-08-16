@@ -17,4 +17,5 @@ public class Lms {
 	private String LMS_CHECK; // 출석 상태 y,n
 	private String CO_CONTENT;//강의 개요
     private String SUB_NAME; //과목 명
+    private String LMS_Period; // 날짜
 }
