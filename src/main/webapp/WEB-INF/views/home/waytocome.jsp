@@ -18,7 +18,7 @@
 			<strong>오시는 길</strong>
 		</h2>
 		<div
-			style="width: 70px; height: 5px; background-color: #024C86; margin: auto;"></div>
+			style="width: 70px; height: 5px; background-color: #024C86; margin: auto;margin-bottom: 90px"></div>
 	</div>
 	<div class="container1 mt-4">
 		<div style="margin-top:27px;">
