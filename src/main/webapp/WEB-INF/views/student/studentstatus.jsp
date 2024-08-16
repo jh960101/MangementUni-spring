@@ -54,30 +54,31 @@
 										<tr>
 											<th>이　　름</th>
 											<td>${stuinfo.STU_NAME}</td>
-											<th style="letter-spacing :7.5px;">이메일</th>
-											<td>${stuinfo.STU_EMAIL}</td>
+											<th>학적상태</th>
+											<td>${status}</td>
 											<th>생년월일</th>
 											<td>${stuinfo.STU_JUMIN}</td>
 										</tr>
 										<tr>
-											<th>학적상태</th>
-											<td>${status}</td>
+											<th>소속학과</th>
+											<td>${stuinfo.DEPT_NAME}</td>
 											<th style="letter-spacing :7.5px;">연락처</th>
 											<td>${stuinfo.STU_PHONE}</td>
 											<th style="letter-spacing :7.5px;">입학일</th>
 											<td>${stuinfo.STU_ADMISSION_DATE}</td>
+											
 										</tr>
 										<tr>
-											<th>소속학과</th>
-											<td>${stuinfo.DEPT_NAME}</td>
 											
-											<th style="letter-spacing :7.5px;">거주지</th>
-											<td>${stuinfo.STU_ADDRESS}</td>
+											
 										</tr>
 										<tr>
 											<th>학　　번</th>
 											<td>${stuinfo.STU_NO}</td>
-											
+											<th style="letter-spacing :7.5px;">이메일</th>
+											<td>${stuinfo.STU_EMAIL}</td>
+											<th style="letter-spacing :7.5px;">거주지</th>
+											<td>${stuinfo.STU_ADDRESS}</td>
 										</tr>
 									</c:forEach>
 								</table>
