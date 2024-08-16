@@ -104,7 +104,7 @@
 	<select id="findByNo" parameterType="int"
 		resultMap="boardListResultMap">
 		SELECT B.BO_NO,
-		E.EMP_NAME,B.TITLE,B.CONTENT,B.READCOUNT, B.ORIGINAL_FILENAME, B.CREATE_DATE, B.MODIFY_DATE,
+		E.EMP_NAME,B.TITLE,B.CONTENT,B.READCOUNT, B.ORIGINAL_FILENAME, B.RENAME_FILENAME, B.CREATE_DATE, B.MODIFY_DATE,
 		B.BO_LIKE
 		FROM BOARD B
 		JOIN EMPLOYEE E ON B.EMP_NO = E.EMP_NO
@@ -128,8 +128,8 @@
 	<!-- 공지사항 게시글 추가 -->
 	<insert id="insertWrite" parameterType="Board">
 		INSERT INTO BOARD
-		(EMP_NO, TITLE, CONTENT, TYPE, ORIGINAL_FILENAME, READCOUNT) VALUES
-		(#{emp_no},#{title},#{content},'G',#{originalFilename}, 0)
+		(EMP_NO, TITLE, CONTENT, TYPE, ORIGINAL_FILENAME, RENAME_FILENAME, READCOUNT) VALUES
+		(#{emp_no},#{title},#{content},'G',#{originalFilename}, #{renameFilename}, 0)
 	</insert>
 
 	<!-- 공지사항 게시글 삭제 -->
@@ -142,7 +142,7 @@
 		UPDATE BOARD
 		SET emp_no
 		= #{loginNo}, title = #{title}, content = #{content}, type= 'G',
-		ORIGINAL_FILENAME = #{originalFilename}, CREATE_DATE = now()
+		ORIGINAL_FILENAME = #{originalFilename}, RENAME_FILENAME = #{renameFilename}, CREATE_DATE = now()
 		WHERE bo_no
 		= #{bo_no}
 	</update>
