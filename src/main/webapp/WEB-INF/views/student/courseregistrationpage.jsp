@@ -55,7 +55,6 @@
 						<th>강좌명</th>
 						<th>교수명</th>
 						<th>인원제한</th>
-						<th>강의시간</th>
 						<th>학점</th>
 						<th>신청</th>
 					</tr>
@@ -67,7 +66,6 @@
 							<td>${stuinfo.SUB_NAME}</td>
 							<td>${stuinfo.PROF_NAME}</td>
 							<td>${stuinfo.CLASS_CAP}</td>
-							<td>${stuinfo.SUB_ST_TIME}~${stuinfo.SUB_END_TIME}</td>
 							<td>${stuinfo.SUB_POINT}</td>
 							<input type="hidden" id="SUB_CODE" name="sub_code" />
 							<input type="hidden" id="SUB_NAME" name="SUB_NAME" />
