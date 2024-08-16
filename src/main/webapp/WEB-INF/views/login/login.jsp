@@ -34,16 +34,15 @@
 				<div id="inputBox">
 					<div class="input-form-box">
 						<span>아이디 </span><input type="text" id="loginId" name="loginid"
-							class="form-control"maxlength='10'>
+							class="form-control" maxlength='10'>
 					</div>
 					<div class="input-form-box">
 						<span>비밀번호 </span><input type="password" id="loginPassword"
-							name="loginPassword" class="form-control"maxlength='20'>
+							name="loginPassword" class="form-control" maxlength='20'>
 					</div>
 					<div class="radio-box">
-					<input type='radio' name='login' value='Employee'
-							checked="checked" />교직원<input type='radio' name='login'
-							value='Student' />학생
+						<input type='radio' name='login' value='Student' checked="checked" />학생 <input
+							type='radio' name='login' value='Employee' />교직원
 					</div>
 					<button type="submit" class="btn btn-xs"
 						style="width: 100%; background-color: #024C86; color: white; height: 40px; margin-bottom: 10px;">로그인</button>
