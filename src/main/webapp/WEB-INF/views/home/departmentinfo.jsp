@@ -27,7 +27,7 @@
 
 <!-- Main Content -->
 <div class="main-content">
-    <div class="filters">
+    <%-- <div class="filters">
         <label for="professor-select" class="minititle"></label>
         <form action="${path}/department" method="post">
             <select name="department" id="professor-select"
@@ -43,8 +43,7 @@
                 <option value="PHYS" ${department =='PHYS'? 'selected' :''}>물리학과</option>
             </select>
         </form>
-    </div>
-    <hr>
+    </div> --%>
     <div class="professor-list">
         <c:forEach var="deptlist" items="${list}">
             <div class="professor-card">
