@@ -130,7 +130,7 @@
 		<section id="section2" class="container">
 			<h1 align="center">미르인에게 알립니다</h1>
 			<div class="row new2">
-				<div class="col col-3">
+				<div class="col col-3" style="margin-right: 50px;">
 					<a href="https://www.donga.com/news/Society/article/all/20231121/122273034/1" style="text-decoration: none;" target="_blank">
 						<div class="article main-article">
 							<p class="title" style="color: #333">2024년도 1분기 학술교류 유학생 모집</p>
@@ -143,7 +143,7 @@
 						</div>
 					</a>
 				</div>
-				<div class="col col-3">
+				<div class="col col-3"  style="margin-right: 50px;">
 					<a href="https://www.newspim.com/news/view/20210916000640" style="text-decoration: none;" target="_blank">
 						<div class="article main-article">
 							<p class="title" style="color: #333">2024 9월부터 미르 구내식당 비건 식단
