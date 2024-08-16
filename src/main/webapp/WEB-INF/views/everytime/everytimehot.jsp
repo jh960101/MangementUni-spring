@@ -95,7 +95,6 @@
 									${nowDate-prevDate-1}일전
 								</c:if>
 								
-										<!--  기억해내야해 희만아 뭘하고 싶었는지...-->		
 							</div>
 							<img src="${path}/resources/img/msg.png" width="15" height="15">
 							<div style="padding: 1px; margin-right: 10px; font-size: 15px;">20</div>
