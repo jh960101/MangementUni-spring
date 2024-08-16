@@ -9,16 +9,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>대학 소개</title>
 <link href="${path}/resources/css/professor.css" rel="stylesheet" />
+<script defer src="${path}/resources/js/scrollbtn.js"></script>
+<link href="${path}/resources/css/scrollbtn.css" rel="stylesheet" />
 </head>
 <body>
-	<div>  <jsp:include page="../common/header.jsp"/>
-      <h2 style="margin-top: 150px; text-align: center">
-          <strong>교수진 소개</strong>
-      </h2>
-      <div style="width: 70px; height: 5px; background-color: #024C86; margin:0px auto;"></div>
-  </div>
-	
-				
+	<p class="top_scrollbtn" onclick="location.href='#'">TOP</p>
+	<div>
+		<jsp:include page="../common/header.jsp" />
+		<h2 style="margin-top: 150px; text-align: center">
+			<strong>교수진 소개</strong>
+		</h2>
+		<div
+			style="width: 70px; height: 5px; background-color: #024C86; margin: 0px auto;"></div>
+	</div>
+
+
 	<main>
 		<div class="main-content">
 			<div class="filters">
