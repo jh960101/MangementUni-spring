@@ -116,13 +116,22 @@ progress::-webkit-progress-value {
 	border-radius: 18px;
 	background-image: linear-gradient(60deg, RGB(206, 225, 253),
 		RGB(168, 198, 247));
+		   transition: width 1s ease; /* 애니메이션 효과 추가 */
 }
 
 progress::-moz-progress-bar {
 	border-radius: 18px;
 	background-image: linear-gradient(60deg, RGB(206, 225, 253),
 		RGB(168, 198, 247));
+		 transition: width 1s ease; /* 애니메이션 효과 추가 */
+	
 }
+
+
+
+
+
+
 
 #comm {
 	padding: 10px;
