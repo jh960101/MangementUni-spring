@@ -64,7 +64,7 @@
 											<li><c:if test="${login eq 'Employee'}">
 													<a href=infoboard>관리페이지</a>
 												</c:if> <c:if test="${login eq 'Student' }">
-													<a href=myCoursesPage>마이페이지</a>
+													<a href=studentstatus>마이페이지</a>
 												</c:if></li>
 										</c:otherwise>
 									</c:choose>
