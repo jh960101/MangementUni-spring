@@ -95,6 +95,7 @@ body {
     right: 0;
     display: none;
     padding: 15px 0px;
+    padding-left: 570px;
     background: white;
     border-top: 2px solid #eee;
 }
