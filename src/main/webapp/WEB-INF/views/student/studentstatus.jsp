@@ -70,16 +70,14 @@
 										<tr>
 											<th>소속학과</th>
 											<td>${stuinfo.DEPT_NAME}</td>
-											<th>계좌번호</th>
-											<td>${stuinfo.STU_BK_NUM}</td>
+											
 											<th style="letter-spacing :7.5px;">거주지</th>
 											<td>${stuinfo.STU_ADDRESS}</td>
 										</tr>
 										<tr>
 											<th>학　　번</th>
 											<td>${stuinfo.STU_NO}</td>
-											<th style="letter-spacing :7.5px;">등록금</th>
-											<td>${stuinfo.TU_PRICE}</td>
+											
 										</tr>
 									</c:forEach>
 								</table>
