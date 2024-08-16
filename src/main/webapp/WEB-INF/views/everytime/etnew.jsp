@@ -45,7 +45,7 @@
 		<div id="content">
 			<form action="${pageContext.request.contextPath}/everytime/etmainpage" method="get" enctype="multipart/form-data">
 				<div class="input-group mb-0">
-					<input type="text" name="title" class="form-control1" placeholder="글 작성">
+					<input type="text" name="title" class="form-control1" placeholder="글 작성" >
 				</div>
 				<div class="input-group mb-0" style="border-bottom: none;">
 					<input type="text" name="content" class="form-control2" placeholder="글을 작성하시오">

@@ -115,7 +115,7 @@ public class BoardDTO {
                 ", renameFilename='" + renameFilename + '\'' +
                 ", readCount=" + readCount +
                 ", anonymous=" + anonymous +
-                ", boLike=" + bo_Like +
+                ", bo_Like=" + bo_Like +
                 '}';
     }
 }
