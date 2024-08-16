@@ -100,17 +100,17 @@ header, footer {
 								<div class="input-group mb-3">
 									<span class="input-group-text">학번</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
-										name="STU_NO" placeholder="${id}" readonly>
+										name="STU_NO" placeholder="${id}" disabled="disabled">
 								</div>
 								<div class="input-group mb-3">
 									<span class="input-group-text">사용자명</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
-										placeholder="${name}" readonly>
+										placeholder="${name}"  disabled="disabled">
 								</div>
 								<div class="input-group mb-3">
 									<span class="input-group-text">학과명</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
-										placeholder="${deptname}" readonly>
+										placeholder="${deptname}"  disabled="disabled">
 								</div>
 								<div class="input-group mb-3">
 									<span class="input-group-text">이메일</span> <input type="text"
