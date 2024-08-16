@@ -17,7 +17,7 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 <link href="${path}/resources/css/courses.css" rel="stylesheet" />
-
+<script src="${path}/resources/js/myCoursesList.js" defer></script>
 
 <style>
 /* 비활성화된 링크의 스타일 설정 */
@@ -70,7 +70,7 @@
 					<h5>출석률 현황</h5>
 					<div class="present">
 						<label>${AttendanceRate}%</label>
-						<progress value="${AttendanceRate}" max="100" id="bar"></progress>
+						<progress value="0" max="100" id="bar"></progress>
 					</div>
 				</div>
 
@@ -81,7 +81,8 @@
 						<div id="online">
 							<p id="online-title">${list.LMS_TITLE }</p>
 							<div id="onlien-cont">
-								<a id="lmsvideo-link" href="online?lms_no=${list.LMS_NO}" target="_blank"
+								<a id="lmsvideo-link" href="online?lms_no=${list.LMS_NO}"
+									target="_blank"
 									onclick="return openPagePopup(this.href,190,700);"
 									data-week=${list. LMS_DATE }> <span
 									class="material-symbols-outlined icon"></span> 영상 강의
@@ -142,9 +143,32 @@
 	            });
 	        });
 		
-		
-		
-		
+
+		  document.addEventListener('DOMContentLoaded', function() {
+			    var progressBar = document.getElementById('bar');
+			    var targetValue = ${AttendanceRate}; // 애니메이션을 원하는 목표 값으로 설정
+
+			    function animateProgressBar(element, start, end, duration) {
+			        let startTime = null;
+
+			        function step(currentTime) {
+			            if (startTime === null) startTime = currentTime;
+			            const progress = Math.min((currentTime - startTime) / duration, 1);
+			            element.value = Math.round(progress * (end - start) + start);
+			            if (progress < 1) {
+			                window.requestAnimationFrame(step);
+			            } else {
+			                element.value = end; // 목표 값으로 정확히 종료
+			            }
+			        }
+
+			        window.requestAnimationFrame(step);
+			    }
+
+			    animateProgressBar(progressBar, 0, targetValue, 1000); // 1000ms = 1초
+			});
+		  
+		  
 	</script>
 
 

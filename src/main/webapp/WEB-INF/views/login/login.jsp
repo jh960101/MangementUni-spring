@@ -34,11 +34,11 @@
 				<div id="inputBox">
 					<div class="input-form-box">
 						<span>아이디 </span><input type="text" id="loginId" name="loginid"
-							class="form-control">
+							class="form-control"maxlength='10'>
 					</div>
 					<div class="input-form-box">
 						<span>비밀번호 </span><input type="password" id="loginPassword"
-							name="loginPassword" class="form-control">
+							name="loginPassword" class="form-control"maxlength='20'>
 					</div>
 					<div class="radio-box">
 					<input type='radio' name='login' value='Employee'

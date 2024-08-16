@@ -69,7 +69,7 @@
 }
 
 .sin {
-	font-size: 23px;
+	font-size: 20px;
 	font-weight: bolder;
 	margin-left: 30px;
 }
@@ -139,20 +139,26 @@ body {
 				style="max-width: 540px; margin-top: 100px; margin-left: 300px;">
 				<div class="background">
 					<div class="row no-gutters">
-						<div class="col-md-4">
-							<img src="${path}/resources/img/유제욱.jpg"
-								class="img-fluid rounded-start" alt="설명">
+						<div class="col-md-4" style="padding: 30px 0px 30px 40px;">
+							<img src="${path}/resources/img/idcard.png"
+								class="img-fluid rounded-start" alt="설명" width="150px"
+								height="180px">
 						</div>
-						<div class="col-md-6">
-							<div class="card-body">
-								<div class="sin">
-									<p class="card-text">${stuno }</p>
-									<p class="card-text">${name }</p>
-									<p class="card-text" style="font-size: 18px;">${deptname }</p>
+						<div class="col-md-5">
+							<div class="card-body"
+								style="padding-right: 0px; padding-left: 0px">
+								<div class="sin" style="padding-top: 5px;">
+									<p class="card-text">
+										<strong>${name }</strong>
+									</p>
+									<p class="card-text" style="font-size: 16px;">${stuno }</p>
+									<p class="card-text" style="font-size: 16px;">${deptname }</p>
 								</div>
 								<div class="sin1">
-									<p class="card-text" style="font-size: 12px;">MONTH/YEAR</p>
-									<p class="card-text" style="font-size: 12px;">04/30</p>
+									<p class="card-text"
+										style="font-size: 12px; margin-bottom: 10px">MONTH/YEAR</p>
+									<p class="card-text"
+										style="font-size: 12px; margin-bottom: 20px">04/30</p>
 								</div>
 								<div class="title-container">
 									<h5 class="card-title mb-0">
@@ -165,8 +171,9 @@ body {
 									<img src="${path}/resources/img/logo2.png"
 										class="img-fluid logo2-img" alt="설명">
 								</div>
-								<img src="${path}/resources/img//바코드.png"
-									class="img-fluid rounded-start barcode-img" alt="설명">
+								<img src="${path}/resources/img/barcode.png"
+									class="img-fluid rounded-start barcode-img" alt="설명"
+									style="padding-top: 5px; width: 170px; height: 100px;">
 
 							</div>
 						</div>
@@ -185,7 +192,7 @@ body {
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 <div class="dispi">
-<jsp:include page="../common/footer.jsp" /></div>
+	<jsp:include page="../common/footer.jsp" /></div>
 
 </html>
 

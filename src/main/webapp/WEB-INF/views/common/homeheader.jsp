@@ -65,7 +65,7 @@
 											</c:if>
 											<c:if test="${login eq 'Student' }">
 											<a
-													href=myCoursesPage>마이페이지</a>
+													href=studentstatus>마이페이지</a>
 											</c:if>
 											</li>
 									</c:otherwise>
