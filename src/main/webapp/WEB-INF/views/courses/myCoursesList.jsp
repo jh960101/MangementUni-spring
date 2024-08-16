@@ -79,7 +79,7 @@
 				<div id="onlineList">
 					<c:forEach var="list" items="${lmslist}" varStatus="status">
 						<div id="online">
-							<p id="online-title">${list.LMS_TITLE }</p>
+							<p id="online-title">${list.LMS_TITLE } (${list.LMS_Period})</p>
 							<div id="onlien-cont">
 								<a id="lmsvideo-link" href="online?lms_no=${list.LMS_NO}"
 									target="_blank"

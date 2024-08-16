@@ -39,11 +39,13 @@ th {
 	padding: 8px;
 	font-size: 16px;
 }
-
-
 </style>
+
+<script defer src="${path}/resources/js/scrollbtn.js"></script>
+<link href="${path}/resources/css/scrollbtn.css" rel="stylesheet" />
 </head>
 <body>
+<p class="top_scrollbtn" onclick="location.href='#'">TOP</p>
 	<div>  <jsp:include page="../common/header.jsp"/>
       <h2 style="margin-top: 150px; text-align: center">
           <strong>학사 일정</strong>

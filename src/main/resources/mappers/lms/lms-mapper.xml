@@ -7,7 +7,7 @@
 		resultType="com.university.management.lms.dto.Lms">
 
 		select
-		l.LMS_NO,l.SUB_CODE,l.LMS_TITLE,l.LMS_FILE,l.LMS_DATE,l.LMS_CHECK,s.CO_CONTENT, s.SUB_NAME
+		l.LMS_NO,l.SUB_CODE,l.LMS_TITLE,l.LMS_FILE,l.LMS_DATE,l.LMS_CHECK,s.CO_CONTENT, s.SUB_NAME,l.lms_period
 		from LMS l
 		join subject s on(s.SUB_CODE=l.SUB_CODE)
 		where l.sub_code=#{sub_code}
