@@ -99,7 +99,7 @@ header, footer {
 						<div class="container text-center">
 							<div class="row row-cols-1">
 								<div class="input-group mb-3">
-									<span class="input-group-text">학번</span> <input type="text"
+									<span class="input-group-text">학　　번</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
 										name="STU_NO" placeholder="${id}" readonly>
 								</div>
@@ -110,25 +110,25 @@ header, footer {
 								</div>
 
 								<div class="input-group mb-3">
-									<span class="input-group-text">이전PW</span> <input
+									<span class="input-group-text" style="letter-spacing :0.7px;">이전PW</span> <input
 										type="password" class="form-control"
 										aria-describedby="basic-addon1" id="pwcheck"
-										placeholder="비밀번호를 입력하세요">
+										placeholder="기존 비밀번호를 입력해주세요">
 								</div>
 								<div class="input-group mb-3">
-									<span class="input-group-text">변경할PW</span> <input
+									<span class="input-group-text" style="letter-spacing :0.7px;">변경PW</span> <input
 										type="password" class="form-control"
 										aria-describedby="basic-addon1" id="password"
-										name="STU_PASSWORD" placeholder="비밀번호를 입력하세요."
+										name="STU_PASSWORD" placeholder="새 비밀번호를 입력해주세요"
 										oninput="pwdCheck()">
 
 								</div>
-								<span id="pwdch">비밀번호 8자리 이상 영문, 숫자, 특수문자 중 2가지 이상을 혼합</span>
+								<span id="pwdch" style="color: red">※비밀번호 8자리 이상 영문, 숫자, 특수문자 중 2가지 이상을 혼합</span>
 								<div class="input-group mb-3">
-									<span class="input-group-text">PW확인</span> <input
+									<span class="input-group-text" style="letter-spacing :0.7px;">PW확인</span> <input
 										type="password" class="form-control"
 										aria-describedby="basic-addon1" id="confirmPassword"
-										placeholder="비밀번호를 입력하세요" oninput="pwdCheck()">
+										placeholder="새 비밀번호를 입력해주세요" oninput="pwdCheck()">
 								</div>
 								  <span id="pwdConfirm"></span> </br>
 							</div>
