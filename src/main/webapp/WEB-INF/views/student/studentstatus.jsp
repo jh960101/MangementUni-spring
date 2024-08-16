@@ -52,33 +52,33 @@
 											<img src="${path}/resources/img/idcard.png" alt="student img" />
 										</tr>
 										<tr>
-											<th>이름</th>
+											<th>이　　름</th>
 											<td>${stuinfo.STU_NAME}</td>
-											<th>이메일</th>
+											<th style="letter-spacing :7.5px;">이메일</th>
 											<td>${stuinfo.STU_EMAIL}</td>
 											<th>생년월일</th>
 											<td>${stuinfo.STU_JUMIN}</td>
 										</tr>
 										<tr>
-											<th>학적 상태</th>
+											<th>학적상태</th>
 											<td>${status}</td>
-											<th>연락처</th>
+											<th style="letter-spacing :7.5px;">연락처</th>
 											<td>${stuinfo.STU_PHONE}</td>
-											<th>입학일</th>
+											<th style="letter-spacing :7.5px;">입학일</th>
 											<td>${stuinfo.STU_ADMISSION_DATE}</td>
 										</tr>
 										<tr>
-											<th>소속 학과</th>
+											<th>소속학과</th>
 											<td>${stuinfo.DEPT_NAME}</td>
 											<th>계좌번호</th>
 											<td>${stuinfo.STU_BK_NUM}</td>
-											<th>거주지</th>
+											<th style="letter-spacing :7.5px;">거주지</th>
 											<td>${stuinfo.STU_ADDRESS}</td>
 										</tr>
 										<tr>
-											<th>학번</th>
+											<th>학　　번</th>
 											<td>${stuinfo.STU_NO}</td>
-											<th>등록금</th>
+											<th style="letter-spacing :7.5px;">등록금</th>
 											<td>${stuinfo.TU_PRICE}</td>
 										</tr>
 									</c:forEach>
