@@ -166,7 +166,7 @@ body {
 										class="img-fluid logo2-img" alt="설명">
 								</div>
 		<img src="${path}/resources/img/barcode.png"
-									class="img-fluid rounded-start barcode-img" alt="설명" style="padding-top: 5px; width: 190px; height: 100px;margin-right: 20px" > 
+									class="img-fluid rounded-start barcode-img" alt="설명" style="padding-top: 5px; width: 170px; height: 100px;" > 
 
 							</div>
 						</div>
