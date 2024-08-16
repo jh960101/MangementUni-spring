@@ -26,7 +26,7 @@ public class Board {
 	private int readCount; // 조회수
 	private Date create_date; // 작성 날짜
 	private Date modify_date; // 수정 날짜
-	private int bo_Like; // 좋아요 버튼
+	private int boLike; // 좋아요 버튼
 	private List<Reply> replies; // 댓글
 	
 		
