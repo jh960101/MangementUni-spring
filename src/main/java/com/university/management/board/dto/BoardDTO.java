@@ -11,7 +11,7 @@ public class BoardDTO {
     private String renameFilename; // 변경된 파일 이름
     private Integer readCount; // 조회수
     private Boolean anonymous; // 익명 여부
-    private Integer boLike; // 좋아요 수
+    private Integer bo_Like; // 좋아요 수
 
     // Getter와 Setter 메서드들
     public Integer getBoNo() {
@@ -95,11 +95,11 @@ public class BoardDTO {
     }
 
     public Integer getBoLike() {
-        return boLike;
+        return bo_Like;
     }
 
-    public void setBoLike(Integer boLike) {
-        this.boLike = boLike;
+    public void setBoLike(Integer bo_Like) {
+        this.bo_Like = bo_Like;
     }
 
     @Override
@@ -115,7 +115,7 @@ public class BoardDTO {
                 ", renameFilename='" + renameFilename + '\'' +
                 ", readCount=" + readCount +
                 ", anonymous=" + anonymous +
-                ", boLike=" + boLike +
+                ", boLike=" + bo_Like +
                 '}';
     }
 }
