@@ -29,7 +29,7 @@
 
 				</video>
 				<div id="timeDisplay">
-					<p id="currentTime">현재 시간: 0:00</p>
+					<p id="currentTime">재생 시간: 0:00</p>
 					<p id="totalTime">총 시간: 0:00</p>
 				</div>
 			</div>
@@ -57,7 +57,7 @@
 
             // 비디오 재생 중 현재 시간을 업데이트
             videoPlayer.addEventListener('timeupdate', function() {
-                $('#currentTime').text('현재 시간: ' + formatTime(videoPlayer.currentTime));
+                $('#currentTime').text('재생 시간: ' + formatTime(videoPlayer.currentTime));
                 lastKnownTime = videoPlayer.currentTime; // 재생 중인 시간 업데이트
             });
 
