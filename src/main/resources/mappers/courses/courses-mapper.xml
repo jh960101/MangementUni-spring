@@ -68,8 +68,6 @@ ORDER BY
     c.YEAR, c.SMT
 
 
-
-
 	</select>
 
 
@@ -117,12 +115,7 @@ ORDER BY
 		#{CO_CONTENT},
 		#{SUB_CODE}
 		)
-
-
-
 	</insert>
-
-
 
 	<update id="coustatusupdate" parameterType="String">
 
