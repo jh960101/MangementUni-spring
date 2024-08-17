@@ -42,7 +42,7 @@
 								<ul>
 									<li id="uni-detail"><a href="#">대학소개</a></li>
 									<li><a href="infoboard">공지사항</a></li>
-									<li><a href="etmainpage">에타게시판</a></li>
+									<li><a href="everytimehot">에타게시판</a></li>
 								</ul>
 							</div>
 							<div class="col col-1">
@@ -60,7 +60,7 @@
 										<c:otherwise>
 											<li id="uni-detail"><a href="#">대학소개</a></li>
 											<li><a href="infoboard">공지사항</a></li>
-											<li><a href="etmainpage">에타게시판</a></li>
+											<li><a href="everytimehot">에타게시판</a></li>
 											<li><c:if test="${login eq 'Employee'}">
 													<a href=infoboard>관리페이지</a>
 												</c:if> <c:if test="${login eq 'Student' }">
