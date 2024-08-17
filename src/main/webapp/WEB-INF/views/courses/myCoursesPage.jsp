@@ -9,7 +9,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <html>
 <head>
-
+<title>나의 수강 페이지</title>
 <link href="${path}/resources/css/courses.css" rel="stylesheet" />
 </head>
 <body>
@@ -17,14 +17,14 @@
 	<div id="menuBar">
 		<div id="sub-menuBar" style="height: 380px">
 			<ul id="menulist">
-				<li><a href="studentstatus">학적 조회</a></li>
-				<li><a href="passwordchange">학생 비밀번호 변경</a></li>
-				<li><a href="studentinformation">학생 정보 변경</a></li>
-				<li><a href="objection">성적 조회</a></li>
+				<li><a href="studentstatus">학적조회</a></li>
+				<li><a href="passwordchange">비밀번호 변경</a></li>
+				<li><a href="studentinformation">정보변경</a></li>
+				<li><a href="objection">성적조회</a></li>
 				<li><a href="myCoursesPage">나의 수강 페이지</a></li>
 				<li><a href="courseregistrationpage">수강신청 페이지</a></li>
 				<li><a href="askpresident">총장님께 바랍니다</a></li>
-				<li><a href="idcard">학생증</a></li>
+				<li><a href="idcard">모바일 학생증</a></li>
 			</ul>
 		</div>
 	</div>

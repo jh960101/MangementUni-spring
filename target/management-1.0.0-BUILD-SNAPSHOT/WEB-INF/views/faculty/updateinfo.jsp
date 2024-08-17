@@ -113,7 +113,7 @@
 	font-size: 13px;
 	padding: 10px 20px;
 	border: none;
-	margin-left : 0;
+	margin-left: 0;
 	border-radius: 4px;
 	cursor: pointer;
 	width: 120px;
@@ -170,7 +170,7 @@
 		<c:set var="searchType" value="title" />
 	</c:if>
 
-	<div class="container" style="height: 1100px; margin-top: 100px;">
+	<div class="container" style="height: auto; margin-top: 100px;">
 		<div id="content">
 			<div id="pageTitle">
 				<h1>공지사항 수정</h1>
@@ -198,17 +198,25 @@
 						</tr>
 						<tr>
 							<th>첨부파일</th>
-							<td><input type="file" name="uploadFile" /> <c:if
+							<td><input type="file" name="uploadFile"
+								value="${board.originalFilename}" /> <c:if
 									test="${!empty board.originalFilename}">
-									<a
-										href="javascript:fileDownload('${board.originalFilename}', '${board.originalFilename}')">
-										<c:out value="${board.originalFilename}"></c:out>
-									</a>
+									<c:out value="${board.originalFilename}"></c:out>
 								</c:if></td>
 						</tr>
 						<tr>
 							<th>내 용</th>
-							<td><textarea name="content" rows="15">${board.content}</textarea></td>
+							<td>
+								<div id="contentLabel"
+									style="padding: 10px; width: 100%; height: auto;">
+									<textarea name="content" rows="10"
+										style="width: 100%; height: auto;">${board.content}</textarea>
+									<input type="file" id="imageUpload" accept="image/*"
+										name="imageUpload" style="margin-top: 10px;" />
+									<div id="imagePreview" style="margin-top: 10px;"></div>
+								</div>
+							</td>
+
 						</tr>
 					</table>
 					<div class="button-group">
@@ -226,6 +234,45 @@
 			<!-- pageContent -->
 		</div>
 	</div>
+	<script>
+		document.getElementById('imageUpload').addEventListener('change', function(event) {
+	        const file = event.target.files[0]; // 선택한 첫 번째 파일
+	
+	        // 파일이 있는 경우
+	        if (file) {
+	            const fileName = file.name; // 파일의 이름
+	            const extension = fileName.split('.').pop().toLowerCase(); // 파일 확장자 가져오기
+	
+	            // 유효한 이미지 확장자인지 확인
+	            if (!['jpg', 'jpeg', 'png', 'gif'].includes(extension)) {
+	                alert('이미지 파일만 선택할 수 있습니다. JPG, JPEG, PNG, GIF 형식의 이미지를 선택해 주세요.');
+	                event.target.value = ''; // 선택한 파일 초기화
+	                return; // 함수 종료
+	            }
+	
+	            // Image preview 처리
+	            const reader = new FileReader();
+	            reader.onload = function(e) {
+	                const img = document.createElement('img');
+	                img.src = e.target.result;
+	                img.style.maxWidth = '100%';
+	                img.style.maxHeight = '300px';
+	                img.style.marginTop = '10px';
+	                document.getElementById('imagePreview').innerHTML = ''; // 이전 미리보기 초기화
+	                document.getElementById('imagePreview').appendChild(img); // 미리보기 추가
+	            };
+	
+	            reader.readAsDataURL(file); // 선택한 파일 읽기
+	        }
+	    });
+	
+		function fileDownload(oriname, rename) {
+			const url = "${path}/board/fileDown";
+			let oName = encodeURIComponent(oriname);
+			let rName = encodeURIComponent(rename);
+			location.assign(url + "?oriname=" + oName + "&rename=" + rName);
+		}
+	</script>
 
 	<jsp:include page="../common/footer.jsp" />
 </body>

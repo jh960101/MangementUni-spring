@@ -26,7 +26,7 @@
 }
 
 .input-background {
-	width: 600px;
+	width: 500px;
 	margin: 0 auto;
 }
 
@@ -34,7 +34,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 20px;
+	margin-top: 50px;
 }
 
 .custom {
@@ -74,64 +74,70 @@ header, footer {
 	<div id="menuBar">
 		<div id="sub-menuBar" style="height: 380px">
 			<ul id="menulist">
-				<li><a href="studentstatus">학적 조회</a></li>
-				<li><a href="passwordchange">학생 비밀번호 변경</a></li>
-				<li><a href="studentinformation">학생 정보 변경</a></li>
-				<li><a href="objection">성적 조회</a></li>
+				<li><a href="studentstatus">학적조회</a></li>
+				<li><a href="passwordchange">비밀번호 변경</a></li>
+				<li><a href="studentinformation">정보변경</a></li>
+				<li><a href="objection">성적조회</a></li>
 				<li><a href="myCoursesPage">나의 수강 페이지</a></li>
 				<li><a href="courseregistrationpage">수강신청 페이지</a></li>
 				<li><a href="askpresident">총장님께 바랍니다</a></li>
-				<li><a href="idcard">학생증</a></li>
+				<li><a href="idcard">모바일 학생증</a></li>
 			</ul>
 		</div>
 	</div>
-	<div class="container" style="height: 750px; margin-top: 100px;">
+	<div class="container" style="height: 700px; margin-top: 100px;">
 		<form id="passwordChangeForm" action="${path}/passwordchangeInfo"
 			method="post" onsubmit="return chkpw()">
 			<div id="content">
 				<!-- title view -->
 				<div id="pageTitle">
-					<h1>학생 정보 변경</h1>
+					<h1>비밀번호 변경</h1>
 				</div>
-				<div id="pageContent">
+				<div id="pageContent" style="margin-top: 90px">
 					<!-- content view -->
 					<div class="input-background">
 						<div class="container text-center">
-							<div class="row row-cols-1">
-								<div class="input-group mb-3">
-									<span class="input-group-text">학번</span> <input type="text"
-										class="form-control" aria-describedby="basic-addon1"
-										name="STU_NO" placeholder="${id}" readonly>
-								</div>
-								<div class="input-group mb-3">
+							<div class="row row-cols-1" style="display: flex; flex-direction: column; gap:10px;">
+								<div class="input-group mb-2">
 									<span class="input-group-text">사용자명</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
-										placeholder="${name}" readonly>
+										placeholder="${name}" style="font-weight: bold;"
+										disabled="disabled">
 								</div>
-							
-								<div class="input-group mb-3">
-									<span class="input-group-text">이전PW</span> <input
-										type="password" class="form-control"
-										aria-describedby="basic-addon1" id="pwcheck"placeholder="비밀번호를 입력하세요">
+								<div class="input-group mb-2">
+									<span class="input-group-text">학　　번</span> <input type="text"
+										class="form-control" aria-describedby="basic-addon1"
+										name="STU_NO" placeholder="${id}" disabled="disabled"
+										style="font-weight: bold;"">
+								</div>
+
+								<div class="input-group mb-2">
+									<span class="input-group-text" style="letter-spacing: 0.7px;">이전PW</span>
+									<input type="password" class="form-control"
+										aria-describedby="basic-addon1" id="pwcheck"
+										placeholder="기존 비밀번호를 입력해주세요">
 								</div>
 								<div class="input-group mb-3">
-									<span class="input-group-text">변경할PW</span> <input
-										type="password" class="form-control"
+									<span class="input-group-text" style="letter-spacing: 0.7px;">변경PW</span>
+									<input type="password" class="form-control"
 										aria-describedby="basic-addon1" id="password"
-										name="STU_PASSWORD"placeholder="비밀번호를 입력하세요.">
-										
+										name="STU_PASSWORD" placeholder="새 비밀번호를 입력해주세요"
+										oninput="pwdCheck()">
 								</div>
-								<label>비밀번호 8자리 이상 영문, 숫자, 특수문자 중 2가지 이상을 혼합</label>
+								<span id="pwdch"
+									style="color: red; font-size: 14.5px;padding-bottom: 10px;">※ 비밀번호 8자리 이상 영문, 숫자, 특수문자 중 2가지 이상을 혼합해주세요.</span>
 								<div class="input-group mb-3">
-									<span class="input-group-text">PW확인</span> <input
-										type="password" class="form-control"
-										aria-describedby="basic-addon1" id="confirmPassword"placeholder="비밀번호를 입력하세요">
+									<span class="input-group-text" style="letter-spacing: 0.7px;">PW확인</span>
+									<input type="password" class="form-control"
+										aria-describedby="basic-addon1" id="confirmPassword"
+										placeholder="새 비밀번호를 입력해주세요" oninput="pwdCheck()">
 								</div>
+								<span id="pwdConfirm"></span>
 							</div>
 						</div>
-						<div class="d-flex justify-content-center mt-4">
+						<div class="d-flex justify-content-center mt-4" style="margin-top: 0px;">
 							<button type="submit" class="button btn-wide custom-button">
-								암호변경</button>
+								비밀번호 변경</button>
 						</div>
 					</div>
 				</div>
@@ -163,11 +169,12 @@ header, footer {
 	        alert("비밀번호와 확인 비밀번호가 일치하지 않습니다.");
 	        return false;
 	    }
+	    
 
 	    // 비밀번호 유효성 검사
 	    var num = password.search(/[0-9]/g);
 	    var eng = password.search(/[a-z]/ig);
-	    var spe = password.search(/[`~!@#$%^&*|₩'";:/?]/gi);
+	    var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
 	    if (password.length < 8 || password.length > 20) {
 	        alert("비밀번호는 8자리 ~ 20자리 이내로 입력해주세요.");
@@ -176,7 +183,7 @@ header, footer {
 	        alert("비밀번호는 공백 없이 입력해주세요.");
 	        return false;
 	    } else if ((num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0)) {
-	        alert("영문, 숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
+	      alert("영문, 숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
 	        return false;
 	    } else {
 	        // 비밀번호가 성공적으로 변경됨을 알리고 폼을 제출합니다.
@@ -184,6 +191,38 @@ header, footer {
 	        return true;
 	    }
 	}
+	
+	
+	
+	 function pwdCheck(){
+		var password =$('#password').val();
+		var pw = "${pw}";
+		const length = $('#confirmPassword').val().length;
+	    var num = password.search(/[0-9]/g);
+	    var eng = password.search(/[a-z]/ig);
+		var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+		
+				if ((num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0)) {
+					 $('#pwdch').text('※ 비밀번호 8자리 이상 영문, 숫자, 특수문자 중 2가지 이상을 혼합해주세요').css('color', 'red')
+				    }else{
+				    	 $('#pwdch').text('비밀번호 통과').css('color', 'green')
+				    }
+		
+			if( length !== 0 ){
+
+				
+
+		      if($('#password').val() == $('#confirmPassword').val()){
+		         $('#pwdConfirm').text('비밀번호 일치').css('color', 'green')
+		      }else{
+		         $('#pwdConfirm').text('확인 비밀번호 불일치').css('color', 'red')
+		      }
+			} else {
+		         $('#pwdConfirm').text('').css('color', 'black')
+			}
+		   
+		  }
+	  
     </script>
 
 	<footer>

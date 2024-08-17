@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>회원 번호 변경</title>
+<title>정보변경</title>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -29,11 +29,11 @@
 	margin: 0 auto;
 }
 
-.pageContent {
+#pageContent {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 20px;
+	margin-top: 90px;
 }
 
 .custom {
@@ -73,66 +73,66 @@ header, footer {
 	<div id="menuBar">
 		<div id="sub-menuBar" style="height: 380px">
 			<ul id="menulist">
-				<li><a href="studentstatus">학적 조회</a></li>
-				<li><a href="passwordchange">학생 비밀번호 변경</a></li>
-				<li><a href="studentinformation">학생 정보 변경</a></li>
-				<li><a href="objection">성적 조회</a></li>
+				<li><a href="studentstatus">학적조회</a></li>
+				<li><a href="passwordchange">비밀번호 변경</a></li>
+				<li><a href="studentinformation">정보변경</a></li>
+				<li><a href="objection">성적조회</a></li>
 				<li><a href="myCoursesPage">나의 수강 페이지</a></li>
 				<li><a href="courseregistrationpage">수강신청 페이지</a></li>
 				<li><a href="askpresident">총장님께 바랍니다</a></li>
-				<li><a href="idcard">학생증</a></li>
+				<li><a href="idcard">모바일 학생증</a></li>
 			</ul>
 		</div>
 	</div>
-	<div class="container" style="height: 750px; margin-top: 100px;">
+	<div class="container" style="height: 700px; margin-top: 100px;">
 		<form id="passwordChangeForm" action="${path}/studnetInformationchg"
 			method="post" onsubmit="return chkpw()">
 			<div id="content">
 				<!-- title view -->
 				<div id="pageTitle">
-					<h1>학생 정보 변경</h1>
+					<h1>정보변경</h1>
 				</div>
-				<div id="pageContent">
+				<div id="pageContent" style="margin-top: 90px;">
 					<!-- content view -->
 					<div class="input-background">
 						<div class="container text-center">
-							<div class="row row-cols-1">
-								<div class="input-group mb-3">
-									<span class="input-group-text">학번</span> <input type="text"
+							<div class="row row-cols-1" style="display: flex; flex-direction: column; gap:10px;">
+								<div class="input-group mb-2">
+									<span class="input-group-text">학　　번</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
 										name="STU_NO" placeholder="${id}" disabled="disabled">
 								</div>
-								<div class="input-group mb-3">
+								<div class="input-group mb-2">
 									<span class="input-group-text">사용자명</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
 										placeholder="${name}"  disabled="disabled">
 								</div>
-								<div class="input-group mb-3">
-									<span class="input-group-text">학과명</span> <input type="text"
+								<div class="input-group mb-2">
+									<span class="input-group-text" style="letter-spacing: 5.1px;">학과명</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
 										placeholder="${deptname}"  disabled="disabled">
 								</div>
-								<div class="input-group mb-3">
-									<span class="input-group-text">이메일</span> <input type="text"
+								<div class="input-group mb-2">
+									<span class="input-group-text" style="letter-spacing: 5.1px;">이메일</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
 										placeholder="${email}" id="email" name="email" value="${email}"maxlength='20'>
 								</div>
-								<div class="input-group mb-3">
+								<div class="input-group mb-2">
 									<span class="input-group-text">전화번호</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
 										placeholder="${phone}"oninput="oninputPhone(this)" maxlength="14"
 										id="phone" name="phone"value="${phone}">
 								</div>
-								<div class="input-group mb-3">
-									<span class="input-group-text">주소</span> <input type="text"
+								<div class="input-group mb-2">
+									<span class="input-group-text">주　　소</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
 										placeholder="${address}" id="address" name="address"value="${address}"maxlength='30'>
 								</div>
 							</div>
 						</div>
 						<div class="d-flex justify-content-center mt-4">
-							<button type="submit" class="button btn-wide custom-button">
-								저장</button>
+							<button type="submit" class="button btn-wide custom-button" style="margin-top: 18px;">
+								정보변경</button>
 						</div>
 					</div>
 				</div>
