@@ -131,7 +131,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="container" style="height: 1000px; margin-top: 100px;">
+	<div class="container" style="height: 800px; margin-top: 100px;">
 		<div id="content">
 			<!-- title view -->
 			<div id="pageTitle">
@@ -142,7 +142,7 @@
 				<div id="pageContent">
 					<form action="presidentplsWrite" method="post" style="margin-bottom: 20px;"
 						onsubmit="return validateForm()">
-						<table id="tbl-board">
+						<table id="tbl-board" style="margin-bottom: 50px;">
 							<tr>
 								<th><span>제목</span></th>
 								<td><input type="text" placeholder="제목을 입력하세요" name="title"></td>
@@ -157,7 +157,7 @@
 						</table>
 						<div class="table-secondary">
 							<div class="textLengthWrap"
-								style="display: flex; align-items: center;">
+								style="display: flex; align-items: center;margin-right: 10px;">
 								<p class="textCount"
 									style="margin-bottom: 0; display: flex; align-items: center;">0자</p>
 								<p class="textTotal"
@@ -173,7 +173,7 @@
 			</div>
 		</div>
 	</div>
-	<%-- <jsp:include page="../common/footer.jsp" /> --%>
+	 <jsp:include page="../common/footer.jsp" />
 
 	<script>
 		function validateForm() {
