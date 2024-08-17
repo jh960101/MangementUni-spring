@@ -95,7 +95,7 @@
 					<p>
 						<span class="line red">광역</span> <a
 							href="https://map.naver.com/p/search/22997/bus-station/156838?c=18.00,0,0,0,dh&isCorrectAnswer=true"
-							target="_blank">3008</a> , <a
+							target="_blank">3008</a>, <a
 							href="https://map.naver.com/p/search/22997/bus-station/156838?c=18.00,0,0,0,dh&isCorrectAnswer=true"
 							target="_blank">1006</a>, <a
 							href="https://map.naver.com/p/entry/bus-station/81593?c=20.00,0,0,0,dh"
