@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EverytimeService {
@@ -13,8 +14,8 @@ public class EverytimeService {
     @Autowired
     private EverytimeMapper mapper;
 
-    public List<Board> getAllEtaList() {
-        return mapper.getAllEtaList();
+    public List<Board> getAllEtaList(Map<String, Object> params) {
+        return mapper.getAllEtaList(params);
     }
 
     public Board getEtaBoardByNo(int bo_no) {
@@ -28,4 +29,8 @@ public class EverytimeService {
 	public List<Board> getAllEtaHotList() {
 		return mapper.getAllEtaHotList();
 	}
+
+    public int getListCount() {
+        return mapper.getListCount();
+    }
 }

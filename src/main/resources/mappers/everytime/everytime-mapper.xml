@@ -3,11 +3,15 @@
 <mapper
 	namespace="com.university.management.everytime.mapper.EverytimeMapper">
 
-	<select id="getAllEtaList"
+	<select id="getAllEtaList" parameterType="map"
 		resultType="com.university.management.board.dto.Board">
-		SELECT * FROM board WHERE TYPE = "e" order by CREATE_DATE
-		DESC
-	</select>
+        SELECT *
+        FROM board
+        WHERE TYPE = "e"
+        order by CREATE_DATE
+                DESC LIMIT #{listLimit}
+        OFFSET #{firstRow}
+    </select>
 
 	<select id="getEtaBoardByNo" parameterType="int"
 		resultType="com.university.management.board.dto.Board">
@@ -24,6 +28,11 @@
 		resultType="com.university.management.board.dto.Board">
 		SELECT * FROM board WHERE TYPE = "e" order by READCOUNT
 		DESC, BO_LIKE DESC limit 5 offset 0
+	</select>
+
+	<select id="getListCount"
+		resultType="int">
+		SELECT COUNT(*) FROM board WHERE TYPE = "e"
 	</select>
 
 
