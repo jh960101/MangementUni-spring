@@ -543,13 +543,11 @@ public class FacultyController {
 	public String scholarList(Model model, String scholarship_type, String department_type, String grade,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 		System.out.println("facultycontroller안에scholarlist실행");
-
 		// Map 생성
 		Map<String, Object> params = new HashMap<>();
 		params.put("scholarship_type", scholarship_type);
 		params.put("DEPT_CODE", department_type);
 		params.put("STU_GRADE", grade);
-
 //	============= 페이지 네이션 ================ 희만
 
 		int listLimit = 5; // 한 페이지에 보여질 게시글 수
@@ -574,12 +572,7 @@ public class FacultyController {
 		model.addAttribute("grade", grade);
 		model.addAttribute("pageInfo", pageSettings);
 		model.addAttribute("count", totalRowCount);
-//		model.addAttribute("param", param);
-//		model.addAttribute("searchType", searchType);
-//		model.addAttribute("searchValue", searchValue);
-
 		System.out.println("장학금 리스트: " + scholarList);
-
 		return "scholarship/scholarlist";
 	}
 
@@ -594,8 +587,7 @@ public class FacultyController {
 			int stuNo = Integer.parseInt(requestBody.get("STU_NO"));
 			int schNo = Integer.parseInt(requestBody.get("SCH_NO"));
 			String deptCode = requestBody.get("DEPT_CODE");
-
-			// 장학금 승인/취소 처리 로직 추가
+			// 장학금 승인/취소 처리 메소드
 			boolean success = processScholarlistInfo(schStatus, year, smt, stuNo, schNo, deptCode);
 			response.put("success", success);
 
@@ -608,9 +600,8 @@ public class FacultyController {
 		}
 		return response;
 	}
-
 	private boolean processScholarlistInfo(String schStatus, int year, int smt, int stuNo, int schNo, String deptCode) {
-		// 장학금 승인/취소 처리 로직 (예: 데이터베이스 업데이트)
+		// 장학금 승인/취소 처리 
 		System.out.println("확인" + schStatus + " " + year + " " + smt + " " + stuNo + " " + schNo + " " + deptCode);
 		// 성공적으로 처리되었으면 true, 실패하면 false를 반환
 		Scholar sch = new Scholar(stuNo, deptCode, schNo, year, smt, schStatus);
