@@ -128,8 +128,8 @@
 	<!-- 공지사항 게시글 추가 -->
 	<insert id="insertWrite" parameterType="Board">
 		INSERT INTO BOARD
-		(EMP_NO, TITLE, CONTENT, TYPE, ORIGINAL_FILENAME, RENAME_FILENAME, READCOUNT) VALUES
-		(#{emp_no},#{title},#{content},'G',#{originalFilename}, #{renameFilename}, 0)
+		(EMP_NO, TITLE, CONTENT, TYPE, ORIGINAL_FILENAME, READCOUNT) VALUES
+		(#{emp_no},#{title},#{content},'G',#{originalFilename}, 0)
 	</insert>
 
 	<!-- 공지사항 게시글 삭제 -->
