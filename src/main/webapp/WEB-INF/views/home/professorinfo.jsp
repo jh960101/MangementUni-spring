@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>대학 소개</title>
+<title>교수진 소개</title>
 <link href="${path}/resources/css/professor.css" rel="stylesheet" />
 <script defer src="${path}/resources/js/scrollbtn.js"></script>
 <link href="${path}/resources/css/scrollbtn.css" rel="stylesheet" />
