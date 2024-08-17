@@ -9,7 +9,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <html>
 <head>
-<title>나의 수강 페이지</title>
+<title>나의 수강 목록</title>
 <link href="${path}/resources/css/courses.css" rel="stylesheet" />
 </head>
 <body>
