@@ -98,15 +98,16 @@ header, footer {
 					<div class="input-background">
 						<div class="container text-center">
 							<div class="row row-cols-1" style="display: flex; flex-direction: column; gap:10px;">
+							<c:forEach var="list" items="${student}">
 								<div class="input-group mb-2">
 									<span class="input-group-text">학　　번</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
-										name="STU_NO" placeholder="${id}" disabled="disabled">
+										name="STU_NO" placeholder="${list.STU_NO}" disabled="disabled">
 								</div>
 								<div class="input-group mb-2">
 									<span class="input-group-text">사용자명</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
-										placeholder="${name}"  disabled="disabled">
+										placeholder="${list.STU_NAME}"  disabled="disabled">
 								</div>
 								<div class="input-group mb-2">
 									<span class="input-group-text" style="letter-spacing: 5.1px;">학과명</span> <input type="text"
@@ -116,19 +117,20 @@ header, footer {
 								<div class="input-group mb-2">
 									<span class="input-group-text" style="letter-spacing: 5.1px;">이메일</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
-										placeholder="${email}" id="email" name="email" value="${email}"maxlength='20'>
+										placeholder="${list.STU_EMAIL}" id="email" name="email" value="${list.STU_EMAIL}"maxlength='20'>
 								</div>
 								<div class="input-group mb-2">
 									<span class="input-group-text">전화번호</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
-										placeholder="${phone}"oninput="oninputPhone(this)" maxlength="14"
-										id="phone" name="phone"value="${phone}">
+										placeholder="${list.STU_PHONE}"oninput="oninputPhone(this)" maxlength="14"
+										id="phone" name="phone"value="${list.STU_PHONE}">
 								</div>
 								<div class="input-group mb-2">
 									<span class="input-group-text">주　　소</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
-										placeholder="${address}" id="address" name="address"value="${address}"maxlength='30'>
+										placeholder="${list.STU_ADDRESS}" id="address" name="address"value="${list.STU_ADDRESS}"maxlength='30'>
 								</div>
+								</c:forEach>
 							</div>
 						</div>
 						<div class="d-flex justify-content-center mt-4">
@@ -154,11 +156,7 @@ header, footer {
 	    var phone = document.getElementById("phone").value;
 		var address = document.getElementById("address").value;
 
-	    // 비밀번호와 확인 비밀번호가 일치하는지 확인
-	    if (pw !== pwcheck) {
-	        alert("이전 비밀번호가 일치하지 않습니다.");
-	        return false;
-	    }
+	
 		
 	    // 비밀번호와 확인 비밀번호가 모두 입력되었는지 확인
 	    if (!email || !phone || !address) {

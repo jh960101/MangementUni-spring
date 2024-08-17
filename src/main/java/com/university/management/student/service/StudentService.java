@@ -37,6 +37,11 @@ public class StudentService {
 		return mapper.tuitionSelect(loginNo);
 	}
 
+	public List<Student> stuselect(int id) {
+		
+		return mapper.stuselect(id);
+	}
+
 	
 
 }

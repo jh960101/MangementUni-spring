@@ -116,13 +116,13 @@ header, footer {
 									<span class="input-group-text" style="letter-spacing: 0.7px;">이전PW</span>
 									<input type="password" class="form-control"
 										aria-describedby="basic-addon1" id="pwcheck"
-										placeholder="기존 비밀번호를 입력해주세요">
+										placeholder="기존 비밀번호를 입력해주세요" maxlength="20">
 								</div>
 								<div class="input-group mb-3">
 									<span class="input-group-text" style="letter-spacing: 0.7px;">변경PW</span>
 									<input type="password" class="form-control"
 										aria-describedby="basic-addon1" id="password"
-										name="STU_PASSWORD" placeholder="새 비밀번호를 입력해주세요"
+										name="STU_PASSWORD" placeholder="새 비밀번호를 입력해주세요"  maxlength="20"
 										oninput="pwdCheck()">
 								</div>
 								<span id="pwdch"
@@ -131,7 +131,7 @@ header, footer {
 									<span class="input-group-text" style="letter-spacing: 0.7px;">PW확인</span>
 									<input type="password" class="form-control"
 										aria-describedby="basic-addon1" id="confirmPassword"
-										placeholder="새 비밀번호를 입력해주세요" oninput="pwdCheck()">
+										placeholder="새 비밀번호를 입력해주세요"maxlength="20" oninput="pwdCheck()" >
 								</div>
 								<span id="pwdConfirm"></span>
 							</div>
@@ -203,7 +203,7 @@ header, footer {
 	    var eng = password.search(/[a-z]/ig);
 		var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 		
-				if ((num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0)) {
+				if ((num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0 || password.length < 8 || password.length > 20)) {
 					 $('#pwdch').text('※ 비밀번호 8자리 이상 영문, 숫자, 특수문자 중 2가지 이상을 혼합해주세요').css('color', 'red')
 				    }else{
 				    	 $('#pwdch').text('비밀번호 통과').css('color', 'green')

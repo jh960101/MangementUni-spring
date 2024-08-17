@@ -21,6 +21,8 @@ public interface StudentMapper {
 
 	List<Tuition> tuitionSelect(Integer loginNo);
 
+	List<Student> stuselect(int id);
+
 	
 
 
