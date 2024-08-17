@@ -9,7 +9,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <html>
 <head>
-<title>나의 수강 페이지</title>
+<title>나의 수강 목록</title>
 <link href="${path}/resources/css/courses.css" rel="stylesheet" />
 </head>
 <body>
@@ -33,7 +33,7 @@
 
 			<!-- title view -->
 			<h2 style="margin-top: 0px; text-align: center">
-				<strong>나의 수강 페이지</strong>
+				<strong>나의 수강 목록</strong>
 			</h2>
 			<div style="width: 70px; height: 5px; background-color: #024C86; margin:0px auto;"></div>
 

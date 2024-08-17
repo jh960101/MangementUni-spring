@@ -117,7 +117,7 @@ body {
 				<li><a href="passwordchange">비밀번호 변경</a></li>
 				<li><a href="studentinformation">정보변경</a></li>
 				<li><a href="objection">성적조회</a></li>
-				<li><a href="myCoursesPage">나의 수강 모록</a></li>
+				<li><a href="myCoursesPage">나의 수강 목록</a></li>
 				<li><a href="courseregistrationpage">수강신청</a></li>
 				<li><a href="askpresident">총장님께 바랍니다</a></li>
 				<li><a href="idcard">모바일 학생증</a></li>

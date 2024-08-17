@@ -14,7 +14,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>수강신청 페이지</title>
+<title>수강신청</title>
 <link rel="stylesheet" type="text/css" href="courses.css">
 
 </head>
