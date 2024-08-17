@@ -34,23 +34,23 @@
 	<div id="menuBar">
 		<div id="sub-menuBar" style="height: 150px;">
 			<ul id="menulist">
+				<li><a href="everytimehot">HOT게시판</a></li>
 				<li><a href="etmainpage">자유게시판</a></li>
 				<li><a href="etmypage?stuno=${studentno}">내글 보기</a></li>
-				<li><a href="everytimehot">HOT게시판</a></li>
 			</ul>
 		</div>
 	</div>
 	<div class="container"
 		style="height: 1000px; width: 1000px; margin-top: 100px;">
 		<div id="content">
-			<form action="${pageContext.request.contextPath}/everytime/etmainpage" method="get" enctype="multipart/form-data">
-				<div class="input-group mb-0">
-					<input type="text" name="title" class="form-control1" placeholder="글 작성" >
-				</div>
-				<div class="input-group mb-0" style="border-bottom: none;">
-					<input type="text" name="content" class="form-control2" placeholder="글을 작성하시오">
-				</div>
-				<div class="form-controls-container">
+			<form action="${pageContext.request.contextPath}/insertBoard" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+    <div class="input-group mb-0">
+        <input type="text" name="title" class="form-control1" placeholder="글 제목" maxlength="50">
+    </div>
+    <div class="input-group mb-0" style="border-bottom: none;">
+        <input type="text" name="content" class="form-control2" placeholder="글을 작성하시오" maxlength="1000">
+    </div>
+    <div class="form-controls-container">
 					<div class="file-upload-section">
 						<label for="file-upload" class="file-upload-button">
 							<span>첨부파일</span>
@@ -88,7 +88,32 @@
 			}
 		}
 	</script>
+	
+	<!-- 글자수제한 -->
+<script>
+    function validateForm() {
+        const title = document.querySelector('input[name="title"]').value;
+        const content = document.querySelector('input[name="content"]').value;
 
+        if (title.length > 50) {
+            alert("제목은 50자 이하로 작성해야 합니다.");
+            return false;  =
+        }
+
+        if (content.length > 1000) {
+            alert("내용은 1000자 이하로 작성해야 합니다.");
+            return false;  =
+        }
+
+        return true;  // 폼 제출 허용
+    }
+</script>
+<%-- etmainpage.jsp 또는 etnew.jsp --%>
+<c:if test="${not empty message}">
+    <script>
+        alert("${message}");
+    </script>
+</c:if>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>

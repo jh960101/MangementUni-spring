@@ -3,21 +3,84 @@
 <mapper
 	namespace="com.university.management.everytime.mapper.EverytimeMapper">
 
-	<select id="getAllEtaList" resultType="com.university.management.board.dto.Board">
-		SELECT * FROM board WHERE TYPE = "e" order by CREATE_DATE DESC
+	<select id="getAllEtaList"
+		resultType="com.university.management.board.dto.BoardDTO">
+		SELECT * FROM board WHERE TYPE = "e" order by CREATE_DATE
+		DESC
 	</select>
 
-	<select id="getEtaBoardByNo" parameterType="int" resultType="com.university.management.board.dto.Board">
+	<select id="getEtaBoardByNo" parameterType="int"
+		resultType="com.university.management.board.dto.BoardDTO">
 		SELECT * FROM board WHERE TYPE = "e" AND BO_NO = #{bo_no}#
 	</select>
-	
-	<select id="getAllEtaListByStuNo" parameterType="int" resultType="com.university.management.board.dto.Board">
-		SELECT * FROM board WHERE TYPE = "e" AND stu_no = #{stu_no} order by CREATE_DATE DESC
+
+	<select id="getAllEtaListByStuNo" parameterType="int"
+		resultType="com.university.management.board.dto.BoardDTO">
+		SELECT * FROM board WHERE TYPE = "e" AND stu_no = #{stu_no}
+		order by CREATE_DATE DESC
 	</select>
-	
-	<select id="getAllEtaHotList" resultType="com.university.management.board.dto.Board">
-		SELECT * FROM board WHERE TYPE = "e" order by READCOUNT DESC, BO_LIKE DESC limit 5 offset 0
+
+	<select id="getAllEtaHotList"
+		resultType="com.university.management.board.dto.BoardDTO">
+		SELECT * FROM board WHERE TYPE = "e" order by READCOUNT
+		DESC, BO_LIKE DESC limit 5 offset 0
 	</select>
+
+
+
+
+
+
+
+<!-- 기능 -->
+
+	<insert id="insertBoard" parameterType="com.university.management.board.dto.BoardDTO">
+    INSERT INTO board 
+    (STU_NO, EMP_NO, TITLE, CONTENT, TYPE)
+    VALUES 
+    (#{stuNo}, #{empNo}, #{title}, #{content}, #{type})
+</insert>
+
+
+
+
+	<update id="updateBoard"
+		parameterType="com.university.management.board.dto.BoardDTO">
+		UPDATE board SET TITLE = #{title}, CONTENT = #{content},
+		MODIFY_DATE =
+		#{modifyDate} WHERE BO_NO = #{boNo}
+	</update>
+
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM board WHERE
+		BO_NO = #{boNo}
+	</delete>
+
+	<update id="incrementReadCount" parameterType="int">
+		UPDATE board SET
+		READCOUNT = READCOUNT + 1 WHERE BO_NO = #{boNo}
+	</update>
+
+	<update id="incrementLikeCount" parameterType="int">
+		UPDATE board SET
+		BO_LIKE = BO_LIKE + 1 WHERE BO_NO = #{boNo}
+	</update>
+
+	<insert id="reportBoard" parameterType="map">
+		INSERT INTO report
+		(BO_NO, USER) VALUES (#{boNo}, #{user})
+	</insert>
+
+	<update id="incrementReportCount" parameterType="int">
+		UPDATE board SET
+		REPORT_COUNT = REPORT_COUNT + 1 WHERE BO_NO = #{boNo}
+	</update>
+
+
+
+
+
+
 
 
 </mapper>
