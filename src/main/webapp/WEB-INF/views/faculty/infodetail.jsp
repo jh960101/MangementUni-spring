@@ -157,22 +157,8 @@
 						<th>내 용</th>
 						<td>
 							<div id="contentLabel"
-								style="padding: 10px; width: 100%; height: 300px; overflow-y: auto; display: block;">
+								style="padding: 10px; width: 100%; height: 300px; overflow-y: auto; display: block; height: auto;">
 								<p>${board.content}</p>
-								<c:if test="${not empty board.renameFilename}">
-									<c:choose>
-										<c:when
-											test="${fn:endsWith(board.renameFilename, '.jpg') || 
-                           							fn:endsWith(board.renameFilename, '.jpeg') || 
-                           							fn:endsWith(board.renameFilename, '.png') || 
-                           							fn:endsWith(board.renameFilename, '.gif')}">
-											<img src="${path}/download?fileName=${board.renameFilename}"
-												alt="${board.renameFilename}"
-												style="max-width: 100%; max-height: 300px; margin-top: 10px;" />
-										</c:when>
-									</c:choose>
-								</c:if>
-
 							</div>
 						</td>
 					</tr>
