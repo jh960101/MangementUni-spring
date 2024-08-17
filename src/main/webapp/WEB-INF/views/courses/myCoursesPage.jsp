@@ -37,8 +37,8 @@
 			</div>
 
 			<!-- content view -->
-			<div id="pageContent">
-				<div id="improtant">총 조회 건수 ${ count }건</div>
+			<div id="pageContent" style="margin-top: 80px;">
+<%--				<div id="improtant">총 조회 건수 ${ count }건</div>--%>
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
