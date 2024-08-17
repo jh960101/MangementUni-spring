@@ -103,50 +103,54 @@
 		</div>
 	</div>
 	<script>
-		function openPagePopup(url, width, height) {
-
+		function openPagePopup(url, width, height) { //동영상강의 설정
 			const screenWidth = window.screen.width;
 			const screenHeight = window.screen.height;
-
 			const left = (screenWidth - width) / 2;
 			const top = (screenHeight - height) / 2;
-
 			const popup = window
 					.open(url, 'popupWindow',
 							`width=1500,height=700,top=100,left=200,scrollbars=no,resizable=no`);
-
 			return false;
 		}
-		
-		
-		
-		
-		  document.addEventListener('DOMContentLoaded', function() {
-	            const startDate = new Date('2024-08-01'); // 시작 날짜
+		  document.addEventListener('DOMContentLoaded', function() { // 수강과목　주차별　조건설정
+	            const startDate = new Date('2024-08-01'); // 2학기시작 날짜
 	            const links = document.querySelectorAll('#online #lmsvideo-link');
 	            const currentDate = new Date();
-
+	            const startDate2= new Date('2024-03-02'); //1학기 시작 날짜
+	            if(${smt}==2){ //2학기
 	            links.forEach(link => {
 	                const weekText = link.getAttribute('data-week');
 	                const weekNumber = parseInt(weekText); // "1주차"에서 "1" 추출
 
 	                const weekStartDate = new Date(startDate);
-	                weekStartDate.setDate(startDate.getDate() + (weekNumber - 1) * 7);
-
-	                
+	                weekStartDate.setDate(startDate.getDate() + (weekNumber - 1) * 7);   
 	                // 활성화 조건
 	                if (currentDate >= weekStartDate) {
 	                    link.classList.remove('inactive');
-	                    
+	            
 	                } else {
-	                    link.classList.add('inactive');
-	                   
+	                    link.classList.add('inactive');                 
 	                }
 	            });
-	        });
-		
+	            }else if(${smt}==1){//1학기
+	                links.forEach(link => {
+		                const weekText = link.getAttribute('data-week');
+		                const weekNumber = parseInt(weekText); // "1주차"에서 "1" 추출
 
-		  document.addEventListener('DOMContentLoaded', function() {
+		                const weekStartDate = new Date(startDate2);
+		                weekStartDate.setDate(startDate2.getDate() + (weekNumber - 1) * 7);   
+		                // 활성화 조건
+		                if (currentDate >= weekStartDate) {
+		                    link.classList.remove('inactive');
+		            
+		                } else {
+		                    link.classList.add('inactive');                 
+		                }
+		            });
+	            }
+	        });
+		  document.addEventListener('DOMContentLoaded', function() { // 출석률 애니메이션
 			    var progressBar = document.getElementById('bar');
 			    var targetValue = ${AttendanceRate}; // 애니메이션을 원하는 목표 값으로 설정
 
@@ -163,14 +167,10 @@
 			                element.value = end; // 목표 값으로 정확히 종료
 			            }
 			        }
-
 			        window.requestAnimationFrame(step);
 			    }
-
 			    animateProgressBar(progressBar, 0, targetValue, 1000); // 1000ms = 1초
-			});
-		  
-		  
+			});			  
 	</script>
 
 

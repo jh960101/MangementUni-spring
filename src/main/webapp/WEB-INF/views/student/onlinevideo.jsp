@@ -46,33 +46,28 @@
             var isSeeking = false;
             var strdate = `${lms.LMS_DATE}`;
              var numberStr = strdate.replace("주차", "");
-             var number = parseInt(numberStr, 10);
-           
+             var number = parseInt(numberStr, 10);          
             // 비디오의 총 길이를 가져와서 표시
             videoPlayer.addEventListener('loadedmetadata', function() {
                 totalTime = videoPlayer.duration;
                 $('#totalTime').text('총 시간: ' + formatTime(totalTime));
                 lastKnownTime = videoPlayer.currentTime; // 초기 시간 저장
             });
-
             // 비디오 재생 중 현재 시간을 업데이트
             videoPlayer.addEventListener('timeupdate', function() {
                 $('#currentTime').text('재생 시간: ' + formatTime(videoPlayer.currentTime));
                 lastKnownTime = videoPlayer.currentTime; // 재생 중인 시간 업데이트
             });
-
             // 사용자가 시간을 이동하기 시작할 때
             videoPlayer.addEventListener('seeking', function() {
                 isSeeking = true;
             });
-
             // 사용자가 시간이 이동된 후
             videoPlayer.addEventListener('seeked', function() {
                 if (isSeeking) {
                     window.location.reload();
-                }
-            });
-
+                }  
+                });
             // 학습 종료 버튼 클릭 시 처리
             $('#saveProgress').on('click', function() {
                 if (Math.floor(videoPlayer.currentTime) === Math.floor(totalTime)) {
@@ -80,15 +75,13 @@
                 } else {
                     alert('영상이 끝나지 않았습니다. 학습을 완료해 주세요.');
                 }
-            });
-
+                });
             // 시간 포맷 함수
             function formatTime(seconds) {
                 var minutes = Math.floor(seconds / 60);
                 var secs = Math.floor(seconds % 60);
                 return minutes + ':' + (secs < 10 ? '0' : '') + secs;
             }
-
             // 완료 상태를 서버로 전송하는 함수
             function sendCompletionStatus() {	
                 $.ajax({
@@ -103,14 +96,10 @@
                     },
                     error: function(xhr, status, error) {
                     	 window.close(); // 창 닫기
-                    }
-                });
-            }
-        });
-        
-        
-        
-        
-    </script>
+                    } 
+                    }); 
+                }
+            });
+            </script>
 </body>
 </html>
