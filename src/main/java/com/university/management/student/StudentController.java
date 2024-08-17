@@ -199,20 +199,11 @@ public class StudentController {
 	public String studentinformation(Model model) {
 
 		int id = (int) session.getAttribute("studentno");
-		String name = (String) session.getAttribute("loginname");
+		List<Student> student= stuservice.stuselect(id);
 		String deptname = (String) session.getAttribute("studeptname");
-		String email = (String) session.getAttribute("email");
-		String phone = (String) session.getAttribute("phone");
-		String password = (String) session.getAttribute("loginPassword");
-		String address = (String) session.getAttribute("address");
-
-		model.addAttribute("id", id);
-		model.addAttribute("name", name);
+		model.addAttribute("student",student);
 		model.addAttribute("deptname", deptname);
-		model.addAttribute("email", email);
-		model.addAttribute("phone", phone);
-		model.addAttribute("password", password);
-		model.addAttribute("address", address);
+	
 		return "student/studentinformation";
 	}
 
@@ -236,7 +227,6 @@ public class StudentController {
 		System.out.println("myCoursesList subcode:"+sub_code);
 		List<Lms> lmslist= new ArrayList<Lms>();
 		lmslist= lmsservice.lmsSelect(sub_code);
-		System.out.println("제발해주세요..."+lmslist);
 		String coment=lmslist.get(0).getCO_CONTENT();
 		String sub_name = lmslist.get(0).getSUB_NAME();
 		
@@ -268,8 +258,7 @@ public class StudentController {
 		model.addAttribute("lmslist",lmslist);
 		model.addAttribute("coment", coment);
 		model.addAttribute("sub_name",sub_name);
-		
-
+		model.addAttribute("smt",smt);
 		return "courses/myCoursesList";
 	}
 
@@ -413,7 +402,7 @@ public class StudentController {
 		// 현재 월을 가져옵니다.
 		int month = today.getMonthValue();
 
-		// 월에 따라서 값을 결정합니다
+		// 월에 따라서 값을 결정합니다 (학기)
 		int smt = 0;
 		if (month >= 1 && month <= 7) {
 			smt = 1;
@@ -453,17 +442,13 @@ public class StudentController {
 
 		String strsub_code = sub_code.substring(0, sub_code.length() - 4);
 		String strsubstatus = SUB_STATUS.substring(0, SUB_STATUS.length() - 4);
-		System.out.println(SUB_STATUS);
 		if (strsubstatus.equals("y")) {
-			System.out.println("수강리스트 취소 실행 " + SUB_NAME);
 			String strsubname = SUB_NAME.substring(0, SUB_NAME.length() - 4);
 			System.out.println("strsubname:" + strsubname);
 			courservice.courdelete(strsubname);
 			courservice.classcapup(strsubname);
 
 		}
-
-		System.out.println("courInfo실행" + strsub_code);
 		courservice.coustatusupdate(strsub_code);
 		Courses course = new Courses();
 		course.setSTU_NO((int) session.getAttribute("studentno"));
@@ -475,11 +460,9 @@ public class StudentController {
 		course.setSMT(SMT);
 		course.setYEAR(YEAR);
 
-		System.out.println("확인용중요"+course);
 		if(strsubstatus.equals("n")) {
 		String strsubname=SUB_NAME.substring(0, SUB_NAME.length() - 4);
-		System.out.println("strsubname:"+strsubname);
-		System.out.println("제발"+course.getSUB_CODE());
+
 		courservice.courInsert(course);
 		courservice.classcapdown(strsubname);
 

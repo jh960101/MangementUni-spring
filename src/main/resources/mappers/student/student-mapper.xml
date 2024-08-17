@@ -81,4 +81,14 @@ join TUITION t on(d.DEPT_CODE= t.DEPT_CODE)
 where s.stu_no=${loginNo}
 order by year desc
 </select>
+
+
+
+<select id="stuselect" parameterType="int" resultType="com.university.management.student.dto.Student" >
+
+
+select * from student where stu_no=#{id}
+</select>
+
+
 </mapper>
