@@ -16,7 +16,7 @@ public class BoardService {
     }
 
     public void writePost(Integer stuNo, Integer empNo, String title, String content, String type,
-                          String originalFilename, String renameFilename, Boolean anonymous) {
+                          String originalFilename, String renameFilename, Boolean BO_STATUS) {
         BoardDTO boardDTO = new BoardDTO();
         boardDTO.setStuNo(stuNo);
         boardDTO.setEmpNo(empNo);
@@ -25,7 +25,7 @@ public class BoardService {
         boardDTO.setType(type);
         boardDTO.setOriginalFilename(originalFilename);
         boardDTO.setRenameFilename(renameFilename);
-        boardDTO.setAnonymous(anonymous);
+        boardDTO.setBO_STATUS(BO_STATUS);
 
         // 게시글 DB 저장
         boardMapper.insertBoard(boardDTO);

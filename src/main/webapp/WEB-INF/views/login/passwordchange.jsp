@@ -74,14 +74,14 @@ header, footer {
 	<div id="menuBar">
 		<div id="sub-menuBar" style="height: 380px">
 			<ul id="menulist">
-				<li><a href="studentstatus">학적 조회</a></li>
-				<li><a href="passwordchange">학생 비밀번호 변경</a></li>
-				<li><a href="studentinformation">학생 정보 변경</a></li>
-				<li><a href="objection">성적 조회</a></li>
+				<li><a href="studentstatus">학적조회</a></li>
+				<li><a href="passwordchange">비밀번호 변경</a></li>
+				<li><a href="studentinformation">정보변경</a></li>
+				<li><a href="objection">성적조회</a></li>
 				<li><a href="myCoursesPage">나의 수강 페이지</a></li>
 				<li><a href="courseregistrationpage">수강신청 페이지</a></li>
 				<li><a href="askpresident">총장님께 바랍니다</a></li>
-				<li><a href="idcard">학생증</a></li>
+				<li><a href="idcard">모바일 학생증</a></li>
 			</ul>
 		</div>
 	</div>
@@ -91,7 +91,7 @@ header, footer {
 			<div id="content">
 				<!-- title view -->
 				<div id="pageTitle">
-					<h1>학생 정보 변경</h1>
+					<h1>비밀번호 변경</h1>
 				</div>
 				<div id="pageContent" style="margin-top: 90px">
 					<!-- content view -->
@@ -137,7 +137,7 @@ header, footer {
 						</div>
 						<div class="d-flex justify-content-center mt-4" style="margin-top: 0px;">
 							<button type="submit" class="button btn-wide custom-button">
-								암호변경</button>
+								비밀번호 변경</button>
 						</div>
 					</div>
 				</div>

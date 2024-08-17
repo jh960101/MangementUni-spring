@@ -1,5 +1,15 @@
 package com.university.management.board.dto;
 
+import java.util.Date;
+import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BoardDTO {
     private Integer boNo; // 게시글 번호
     private Integer stuNo; // 학생 번호
@@ -10,112 +20,13 @@ public class BoardDTO {
     private String originalFilename; // 원본 파일 이름
     private String renameFilename; // 변경된 파일 이름
     private Integer readCount; // 조회수
-    private Boolean anonymous; // 익명 여부
+    private Boolean BO_STATUS; // 익명 여부
     private Integer bo_Like; // 좋아요 수
-
-    // Getter와 Setter 메서드들
-    public Integer getBoNo() {
-        return boNo;
-    }
-
-    public void setBoNo(Integer boNo) {
-        this.boNo = boNo;
-    }
-
-    public Integer getStuNo() {
-        return stuNo;
-    }
-
-    public void setStuNo(Integer stuNo) {
-        this.stuNo = stuNo;
-    }
-
-    public Integer getEmpNo() {
-        return empNo;
-    }
-
-    public void setEmpNo(Integer empNo) {
-        this.empNo = empNo;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getOriginalFilename() {
-        return originalFilename;
-    }
-
-    public void setOriginalFilename(String originalFilename) {
-        this.originalFilename = originalFilename;
-    }
-
-    public String getRenameFilename() {
-        return renameFilename;
-    }
-
-    public void setRenameFilename(String renameFilename) {
-        this.renameFilename = renameFilename;
-    }
-
-    public Integer getReadCount() {
-        return readCount;
-    }
-
-    public void setReadCount(Integer readCount) {
-        this.readCount = readCount;
-    }
-
-    public Boolean getAnonymous() {
-        return anonymous;
-    }
-
-    public void setAnonymous(Boolean anonymous) {
-        this.anonymous = anonymous;
-    }
-
-    public Integer getBoLike() {
-        return bo_Like;
-    }
-
-    public void setBoLike(Integer bo_Like) {
-        this.bo_Like = bo_Like;
-    }
-
-    @Override
-    public String toString() {
-        return "BoardDTO{" +
-                "boNo=" + boNo +
-                ", stuNo=" + stuNo +
-                ", empNo=" + empNo +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", type='" + type + '\'' +
-                ", originalFilename='" + originalFilename + '\'' +
-                ", renameFilename='" + renameFilename + '\'' +
-                ", readCount=" + readCount +
-                ", anonymous=" + anonymous +
-                ", boLike=" + bo_Like +
-                '}';
-    }
+    private Date create_date; // 작성 날짜
+	private Date modify_date; // 수정 날짜
+	private List<Reply> replies; // 댓글 
+	
+	
+	
+   
 }

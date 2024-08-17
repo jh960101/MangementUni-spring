@@ -109,7 +109,7 @@
 				<ul id="menulist">
 					<li><a href="infoboard">공지사항 관리</a></li>
 					<li><a href="scholarlist">장학금 관리</a></li>
-					<li><a href="objectionlist">성적 관리</a></li>
+					<li><a href="objectionlist">성적이의 관리</a></li>
 				</ul>
 			</div>
 		</div>
@@ -128,8 +128,7 @@
 					</tr>
 					<tr>
 						<th>제 목</th>
-						<td>
-							<label name="title" value="${board.title}">${board.title}</label>
+						<td><label name="title" value="${board.title}">${board.title}</label>
 						</td>
 					</tr>
 					<tr>
@@ -142,28 +141,43 @@
 					</tr>
 					<tr>
 						<th>작성 시간</th>
-						<td><fmt:formatDate type="both" pattern="yyyy.MM.dd" value="${board.create_date}" /></td>
+						<td><fmt:formatDate type="both" pattern="yyyy.MM.dd"
+								value="${board.create_date}" /></td>
 					</tr>
+
 					<tr>
 						<th>첨부파일</th>
-						<td>
-							<c:if test="${not empty board.originalFilename}">
-								${board.originalFilename}
-							</c:if>
-							<c:if test="${empty board.originalFilename}">
-								-
-							</c:if>
-							
-						</td>
+						<td><c:if test="${not empty board.originalFilename}">
+								<a href="${path}/download?fileName=${board.originalFilename}">${board.originalFilename}</a>
+							</c:if> <c:if test="${empty board.originalFilename}">
+						        -
+						    </c:if></td>
 					</tr>
 					<tr>
 						<th>내 용</th>
 						<td>
 							<div id="contentLabel"
 								style="padding: 10px; width: 100%; height: 300px; overflow-y: auto; display: block;">
-								${board.content}</div>
+								<p>${board.content}</p>
+								<c:if test="${not empty board.renameFilename}">
+									<c:choose>
+										<c:when
+											test="${fn:endsWith(board.renameFilename, '.jpg') || 
+                           							fn:endsWith(board.renameFilename, '.jpeg') || 
+                           							fn:endsWith(board.renameFilename, '.png') || 
+                           							fn:endsWith(board.renameFilename, '.gif')}">
+											<img src="${path}/download?fileName=${board.renameFilename}"
+												alt="${board.renameFilename}"
+												style="max-width: 100%; max-height: 300px; margin-top: 10px;" />
+										</c:when>
+									</c:choose>
+								</c:if>
+
+							</div>
 						</td>
 					</tr>
+
+					
 				</table>
 				<c:if test="${login == 'Employee'}">
 					<div class="button-group">
@@ -173,11 +187,11 @@
 							onclick="deleteFunc(${board.bo_no})">삭제</button>
 					</div>
 				</c:if>
-					<div class="backbtn">
-						<button type="button" id="btnCancel" class="btn"
-							onclick="window.history.back()"
-							style="color: white; font-weight: bold; font-size: 16px;">돌아가기</button>
-					</div>
+				<div class="backbtn">
+					<button type="button" id="btnCancel" class="btn"
+						onclick="window.location.href='${path}/infoboard'"
+						style="color: white; font-weight: bold; font-size: 16px;">돌아가기</button>
+				</div>
 			</div>
 		</div>
 	</div>

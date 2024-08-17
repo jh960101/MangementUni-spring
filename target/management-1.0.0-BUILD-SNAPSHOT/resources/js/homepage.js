@@ -19,6 +19,8 @@ $().ready(function () {
     $(window).on('scroll', function () {
         let scrollPosition = $(window).scrollTop();
 
+// addclass로 해볼 것.
+
         if (scrollPosition > 0) {
             $('.opq-header').css('background-color', 'white');
             $(".opq-header a").css("color", "black");

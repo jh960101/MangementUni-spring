@@ -37,7 +37,7 @@
 							<ul>
 								<li id="uni-detail"><a href="#" style="color: white">대학소개</a></li>
 								<li><a href="infoboard" style="color: white">공지사항</a></li>
-								<li><a href="etmainpage" style="color: white">에타게시판</a></li>
+								<li><a href="everytimehot" style="color: white">에타게시판</a></li>
 							</ul>
 						</div>
 						<div class="col col-1">
@@ -58,7 +58,7 @@
 										<!-- 다른 사용자가 로그인했을 때 -->
 										<li id="uni-detail"><a href="#">대학소개</a></li>
 										<li><a href="infoboard">공지사항</a></li>
-										<li><a href="etmainpage">에타게시판</a></li>
+										<li><a href="everytimehot">에타게시판</a></li>
 										<li><c:if test="${login eq 'Employee'}">
 												<a
 													href=infoboard>관리페이지</a>
