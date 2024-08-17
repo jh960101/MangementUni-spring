@@ -137,9 +137,8 @@
 			<div id="pageTitle">
 				<h1>총장님께 바랍니다</h1>
 			</div>
-			<div class="custom">
-				<h5 class="mt-4" style="text-align: left; color: red;">이 글은
-					익명성이 보장됩니다. 단 비방이나 혐오 욕설을 사용하면 처벌받을수 있습니다.</h5>
+			<div class="custom" style="margin-top: 90px;">
+				<h5 class="mt-4" style="color: red; font-size: 16px; padding-left: 97px;"> ※ 건강한 소통 문화를 위해 익명을 악용한 비방이나 혐오 표현은 절대 허용되지 않습니다.</h5>
 				<div id="pageContent">
 					<form action="presidentplsWrite" method="post" style="margin-bottom: 20px;"
 						onsubmit="return validateForm()">

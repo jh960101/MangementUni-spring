@@ -38,7 +38,7 @@
 	<div id="section1">
 		<main class="container news">
 			<h1 align="center">
-				<strong>MR Today</strong>
+				<strong>MIR Today</strong>
 			</h1>
 			<div class="row"></div>
 			<div class="row">
