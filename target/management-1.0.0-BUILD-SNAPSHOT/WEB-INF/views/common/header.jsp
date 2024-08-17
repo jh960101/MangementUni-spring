@@ -22,7 +22,7 @@
     <link href="${path}/resources/css/main.css" rel="stylesheet"/>
     <link href="${path}/resources/css/home.css" rel="stylesheet"/>
     <link href="${path}/resources/css/courses.css" rel="stylesheet"/>
-    <link rel="icon" href="${path}/resources/img/favicon.svg" type="image/x-icon">
+    <link rel="icon" href="${path}/resources/img/favicon.ico" type="image/x-icon">
 </head>
 <body>
 <div class="header">

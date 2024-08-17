@@ -19,7 +19,7 @@
     <script defer src="${path}/resources/js/homepage.js"></script>
     <link href="${path}/resources/css/main.css" rel="stylesheet"/>
     <link href="${path}/resources/css/home.css?힣" rel="stylesheet"/>
-    <link rel="icon" href="${path}/resources/img/favicon.svg" type="image/x-icon">
+    <link rel="icon" href="${path}/resources/img/favicon.ico" type="image/x-icon">
 </head>
 <div class="header">
     <div class="opq-header">
