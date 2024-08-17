@@ -29,11 +29,11 @@
 	margin: 0 auto;
 }
 
-.pageContent {
+#pageContent {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 20px;
+	margin-top: 90px;
 }
 
 .custom {
@@ -84,7 +84,7 @@ header, footer {
 			</ul>
 		</div>
 	</div>
-	<div class="container" style="height: 750px; margin-top: 100px;">
+	<div class="container" style="height: 700px; margin-top: 100px;">
 		<form id="passwordChangeForm" action="${path}/studnetInformationchg"
 			method="post" onsubmit="return chkpw()">
 			<div id="content">
@@ -92,47 +92,47 @@ header, footer {
 				<div id="pageTitle">
 					<h1>정보변경</h1>
 				</div>
-				<div id="pageContent">
+				<div id="pageContent" style="margin-top: 90px;">
 					<!-- content view -->
 					<div class="input-background">
 						<div class="container text-center">
-							<div class="row row-cols-1">
-								<div class="input-group mb-3">
-									<span class="input-group-text">학번</span> <input type="text"
+							<div class="row row-cols-1" style="display: flex; flex-direction: column; gap:10px;">
+								<div class="input-group mb-2">
+									<span class="input-group-text">학　　번</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
 										name="STU_NO" placeholder="${id}" disabled="disabled">
 								</div>
-								<div class="input-group mb-3">
+								<div class="input-group mb-2">
 									<span class="input-group-text">사용자명</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
 										placeholder="${name}"  disabled="disabled">
 								</div>
-								<div class="input-group mb-3">
-									<span class="input-group-text">학과명</span> <input type="text"
+								<div class="input-group mb-2">
+									<span class="input-group-text" style="letter-spacing: 5.1px;">학과명</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
 										placeholder="${deptname}"  disabled="disabled">
 								</div>
-								<div class="input-group mb-3">
-									<span class="input-group-text">이메일</span> <input type="text"
+								<div class="input-group mb-2">
+									<span class="input-group-text" style="letter-spacing: 5.1px;">이메일</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
 										placeholder="${email}" id="email" name="email" value="${email}"maxlength='20'>
 								</div>
-								<div class="input-group mb-3">
+								<div class="input-group mb-2">
 									<span class="input-group-text">전화번호</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
 										placeholder="${phone}"oninput="oninputPhone(this)" maxlength="14"
 										id="phone" name="phone"value="${phone}">
 								</div>
-								<div class="input-group mb-3">
-									<span class="input-group-text">주소</span> <input type="text"
+								<div class="input-group mb-2">
+									<span class="input-group-text">주　　소</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
 										placeholder="${address}" id="address" name="address"value="${address}"maxlength='30'>
 								</div>
 							</div>
 						</div>
 						<div class="d-flex justify-content-center mt-4">
-							<button type="submit" class="button btn-wide custom-button">
-								저장</button>
+							<button type="submit" class="button btn-wide custom-button" style="margin-top: 18px;">
+								정보변경</button>
 						</div>
 					</div>
 				</div>

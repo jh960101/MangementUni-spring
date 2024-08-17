@@ -137,7 +137,7 @@ header, footer {
 						</div>
 						<div class="d-flex justify-content-center mt-4" style="margin-top: 0px;">
 							<button type="submit" class="button btn-wide custom-button">
-								암호변경</button>
+								비밀번호 변경</button>
 						</div>
 					</div>
 				</div>
