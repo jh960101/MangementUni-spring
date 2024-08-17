@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>회원 번호 변경</title>
+<title>정보변경</title>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -73,14 +73,14 @@ header, footer {
 	<div id="menuBar">
 		<div id="sub-menuBar" style="height: 380px">
 			<ul id="menulist">
-				<li><a href="studentstatus">학적 조회</a></li>
-				<li><a href="passwordchange">학생 비밀번호 변경</a></li>
-				<li><a href="studentinformation">학생 정보 변경</a></li>
-				<li><a href="objection">성적 조회</a></li>
+				<li><a href="studentstatus">학적조회</a></li>
+				<li><a href="passwordchange">비밀번호 변경</a></li>
+				<li><a href="studentinformation">정보변경</a></li>
+				<li><a href="objection">성적조회</a></li>
 				<li><a href="myCoursesPage">나의 수강 페이지</a></li>
 				<li><a href="courseregistrationpage">수강신청 페이지</a></li>
 				<li><a href="askpresident">총장님께 바랍니다</a></li>
-				<li><a href="idcard">학생증</a></li>
+				<li><a href="idcard">모바일 학생증</a></li>
 			</ul>
 		</div>
 	</div>
@@ -90,7 +90,7 @@ header, footer {
 			<div id="content">
 				<!-- title view -->
 				<div id="pageTitle">
-					<h1>학생 정보 변경</h1>
+					<h1>정보변경</h1>
 				</div>
 				<div id="pageContent">
 					<!-- content view -->

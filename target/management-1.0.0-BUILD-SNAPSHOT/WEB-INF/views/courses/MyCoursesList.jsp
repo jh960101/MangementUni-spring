@@ -17,7 +17,16 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 <link href="${path}/resources/css/courses.css" rel="stylesheet" />
+<script src="${path}/resources/js/myCoursesList.js" defer></script>
 
+<style>
+/* 비활성화된 링크의 스타일 설정 */
+.inactive {
+	color: red !important;
+	pointer-events: none; /* 클릭 불가 */
+	text-decoration: none; /* 밑줄 제거 */
+}
+</style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
@@ -60,7 +69,8 @@
 				<div id="atten">
 					<h5>출석률 현황</h5>
 					<div class="present">
-						<progress value="22" max="100" id="bar"></progress>
+						<label>${AttendanceRate}%</label>
+						<progress value="0" max="100" id="bar"></progress>
 					</div>
 				</div>
 
@@ -69,13 +79,18 @@
 				<div id="onlineList">
 					<c:forEach var="list" items="${lmslist}" varStatus="status">
 						<div id="online">
-							<p id="online-title">${list.LMS_TITLE }</p>
+							<p id="online-title">${list.LMS_TITLE } (${list.LMS_Period})</p>
 							<div id="onlien-cont">
-								<a href="online" target="_blank"
-									onclick="return openPagePopup(this.href,190,700);"> <span
+								<a id="lmsvideo-link" href="online?lms_no=${list.LMS_NO}"
+									target="_blank"
+									onclick="return openPagePopup(this.href,190,700);"
+									data-week=${list. LMS_DATE }  style="color: #10df10e8;"> <span 
 									class="material-symbols-outlined icon"></span> 영상 강의
-								</a> <span class="material-symbols-outlined icon">description</span>[강의
-								자료]
+								</a> <a href="${path}/resources/pdf/${list.LMS_FILE}" download>
+									<span class="material-symbols-outlined icon">description</span>[강의
+									자료]
+								</a>
+
 							</div>
 
 						</div>
@@ -102,6 +117,60 @@
 
 			return false;
 		}
+		
+		
+		
+		
+		  document.addEventListener('DOMContentLoaded', function() {
+	            const startDate = new Date('2024-08-01'); // 시작 날짜
+	            const links = document.querySelectorAll('#online #lmsvideo-link');
+	            const currentDate = new Date();
+
+	            links.forEach(link => {
+	                const weekText = link.getAttribute('data-week');
+	                const weekNumber = parseInt(weekText); // "1주차"에서 "1" 추출
+
+	                const weekStartDate = new Date(startDate);
+	                weekStartDate.setDate(startDate.getDate() + (weekNumber - 1) * 7);
+
+	                
+	                // 활성화 조건
+	                if (currentDate >= weekStartDate) {
+	                    link.classList.remove('inactive');
+	                    
+	                } else {
+	                    link.classList.add('inactive');
+	                   
+	                }
+	            });
+	        });
+		
+
+		  document.addEventListener('DOMContentLoaded', function() {
+			    var progressBar = document.getElementById('bar');
+			    var targetValue = ${AttendanceRate}; // 애니메이션을 원하는 목표 값으로 설정
+
+			    function animateProgressBar(element, start, end, duration) {
+			        let startTime = null;
+
+			        function step(currentTime) {
+			            if (startTime === null) startTime = currentTime;
+			            const progress = Math.min((currentTime - startTime) / duration, 1);
+			            element.value = Math.round(progress * (end - start) + start);
+			            if (progress < 1) {
+			                window.requestAnimationFrame(step);
+			            } else {
+			                element.value = end; // 목표 값으로 정확히 종료
+			            }
+			        }
+
+			        window.requestAnimationFrame(step);
+			    }
+
+			    animateProgressBar(progressBar, 0, targetValue, 1000); // 1000ms = 1초
+			});
+		  
+		  
 	</script>
 
 

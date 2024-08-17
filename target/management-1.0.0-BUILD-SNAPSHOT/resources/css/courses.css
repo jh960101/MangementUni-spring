@@ -1,282 +1,322 @@
 @charset "UTF-8";
 
 /* courses - MyCoursesPage */
+#atten {
+	margin: 20px;
+}
+
+.present {
+	position: relative; /* 자식 요소의 절대 위치 지정을 가능하게 함 */
+	margin-bottom: 20px; /* 아래에 공간을 추가하여 라벨과 진행 바 사이의 공간을 조절함 */
+}
+
+.present label {
+	position: absolute;
+	top: 6px; /* 진행 바 위쪽에 라벨을 위치시키기 위해 위쪽으로 이동 */
+	left: 550px; /* 진행 바의 시작 위치와 맞추기 위해 왼쪽으로 이동 */
+	font-weight: bold; /* 라벨의 글씨를 두껍게 */
+	color: #333; /* 글씨 색상 설정 */
+}
+
 #sub-menuBar {
-    margin-left: 50px;
-    background-color: #024C86;
-    margin-top: 110px;
-    width: 200px;
-    height: 330px;
-    float: left;
+	margin-left: 50px;
+	background-color: #024C86;
+	margin-top: 110px;
+	width: 200px;
+	height: 330px;
+	float: left;
 }
 
 #menulist {
-    text-decoration: none;
-    list-style: none;
-    font-weight: bold;
-    align-items: center;
-    margin-top: 10px;
+	text-decoration: none;
+	list-style: none;
+	font-weight: bold;
+	align-items: center;
+	margin-top: 10px;
 }
 
 #menulist a {
-    text-decoration: none;
-    color: white;
+	text-decoration: none;
+	color: white;
 }
 
 #menulist a:hover {
-    border-bottom: 1px solid;
-    border-bottom-color: white;
+	border-bottom: 1px solid;
+	border-bottom-color: white;
 }
 
 #menulist li {
-    margin: 20px 0px;
+	margin: 20px 0px;
 }
 
 /* content */
 #content {
-    padding: 50px;
+	padding: 50px;
 }
 
 #improtant {
-    text-align: right;
+	text-align: right;
 }
 
 #pageTitle {
-    border-bottom: 3px solid;
-    border-bottom-color: #024C86;
+	border-bottom: 3px solid;
+	border-bottom-color: #024C86;
 }
 
 #pageContent {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .table {
-    text-align: center;
-    position: static;
+	text-align: center;
+	position: static;
 }
 
 /* courses - MyCourseList */
 /* content */
-
 #improtant2 {
-    text-align: left;
-    margin-top: 50px;
-    padding: 30px;
-    border-radius: 10px;
-    background-color: RGB(231, 240, 254);
-    padding: 30px;
+	text-align: left;
+	margin-top: 50px;
+	padding: 30px;
+	border-radius: 10px;
+	background-color: RGB(231, 240, 254);
+	padding: 30px;
 }
 
 #pageTitle {
-    border-bottom: 3px solid;
-    border-bottom-color: #024C86;
+	border-bottom: 3px solid;
+	border-bottom-color: #024C86;
 }
 
 #pageContent {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 #atten {
-    margin-top: 50px;
+	margin-top: 50px;
 }
 
 .present {
-    text-align: center;
+	text-align: center;
 }
 
 progress {
-    width: 100%;
-    height: 35px;
-    background-color: #024C86;
-    border-radius: 50%;
+	width: 100%;
+	height: 35px;
+	background-color: #024C86;
+	border-radius: 50%;
 }
 
 progress::-webkit-progress-bar {
-    background-color: RGB(230, 230, 230);
-    border-radius: 18px;
+	background-color: RGB(230, 230, 230);
+	border-radius: 18px;
 }
 
 progress::-webkit-progress-value {
-    border-radius: 18px;
-    background-image: linear-gradient(60deg, RGB(206, 225, 253), RGB(168, 198, 247));
+	border-radius: 18px;
+	background-image: linear-gradient(60deg, RGB(206, 225, 253),
+		RGB(168, 198, 247));
+		   transition: width 1s ease; /* 애니메이션 효과 추가 */
 }
 
 progress::-moz-progress-bar {
-    border-radius: 18px;
-    background-image: linear-gradient(60deg, RGB(206, 225, 253), RGB(168, 198, 247));
+	border-radius: 18px;
+	background-image: linear-gradient(60deg, RGB(206, 225, 253),
+		RGB(168, 198, 247));
+		 transition: width 1s ease; /* 애니메이션 효과 추가 */
+	
 }
 
+
+
+
+
+
+
 #comm {
-    padding: 10px;
-    margin-top: 60px;
-    border-bottom: 3px solid #024C86;
+	padding: 10px;
+	margin-top: 60px;
+	border-bottom: 3px solid #024C86;
 }
 
 #onlineList a {
-    text-decoration: none;
-    color: black;
+	text-decoration: none;
+	color: black;
 }
 
 #online {
-    padding: 30px;
-    border-bottom: 2px solid #024C86;
+	padding: 30px;
+	border-bottom: 2px solid #024C86;
 }
 
 #online-title {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 #onlien-cont {
-    margin-top: 15px;
-    padding: 10px;
+	margin-top: 15px;
+	padding: 10px;
 }
 
 .icon {
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 /* 수강 신청 페이지 */
 #pageTitle2 {
-    border-bottom: 3px solid #024C86;
+	border-bottom: 3px solid #024C86;
 }
 
-.table2 th,
-.table2 td {
-    padding: 15px;
-    text-align: center;
-    width: 800px;
-    border-bottom: 1px solid #ccc;
-    
+.table2 th, .table2 td {
+	padding: 15px;
+	text-align: center;
+	width: 800px;
+	border-bottom: 1px solid #ccc;
 }
 
 .table2 th {
-    background-color: RGB(231, 240, 254);
-    
+	background-color: RGB(231, 240, 254);
 }
 
-
-
 button.apply2 {
-    background-color: RGB(231, 240, 254);
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-weight: bold;
-
+	background-color: RGB(231, 240, 254);
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-weight: bold;
 }
 
 button.apply2:hover {
-    background-color: #024C86;
-    color: white;
+	background-color: #024C86;
+	color: white;
 }
 
 .filters {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    width: 100%;
-   
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+	width: 100%;
 }
 
 .filters-left {
-    display: flex;
-    align-items: center;
-    
+	display: flex;
+	align-items: center;
 }
+
 .filters-left select {
-    margin-right: 10px;
-    height: 42px;
-    background-color: RGB(231, 240, 254);
-    border: none;
-    font-weight: bold;
-    border-radius: 5px;
-    text-align: center;
-    
+	margin-right: 10px;
+	height: 42px;
+	background-color: RGB(231, 240, 254);
+	border: none;
+	font-weight: bold;
+	border-radius: 5px;
+	text-align: center;
 }
 
 .filters-right {
-    display: flex;
-    align-items: center;
-    height: 42px;
-    font-weight: bold;
-    border-radius: 5px;
-    
+	display: flex;
+	align-items: center;
+	height: 42px;
+	font-weight: bold;
+	border-radius: 5px;
 }
-.검색{
-    border-radius: 5px;
-    font-weight: bold;
+
+.검색 {
+	border-radius: 5px;
+	font-weight: bold;
 }
-.filters select,
-.filters input,
-.filters button {
-    padding: 10px;
-    font-size: 16px;
+
+.filters select, .filters input, .filters button {
+	padding: 10px;
+	font-size: 16px;
 }
 
 .filters input {
-    width: 300px; /* 원하는 길이로 설정 */
-    margin: 0 10px;
+	width: 300px; /* 원하는 길이로 설정 */
+	margin: 0 10px;
 }
 
 .filters button {
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: RGB(231, 240, 254);
-    border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+	background-color: RGB(231, 240, 254);
+	border: none;
 }
 
 .filters button:hover {
-    background-color: #024C86;
-    color: white;
+	background-color: #024C86;
+	color: white;
 }
+
 .table2 {
-    width: 100%;
-    border-collapse: collapse;
+	width: 100%;
+	border-collapse: collapse;
 }
+
 .container2 {
-    width: 1200px;
-    max-width: 100%;
-    margin: 0 auto;
+	width: 1200px;
+	max-width: 100%;
+	margin: 0 auto;
 }
-.summary{
-   margin: 10px; 
+
+.summary {
+	margin: 10px;
 }
+
 .table2 {
-    width: 100%;
-    border-collapse: collapse;
-    
+	width: 100%;
+	border-collapse: collapse;
 }
+
 .table2 th, .table2 td {
-    padding: 15px;
-    text-align: center;
-    
+	padding: 15px;
+	text-align: center;
 }
+
 .table2 th {
-    background-color: RGB(231, 240, 254);
+	background-color: RGB(231, 240, 254);
 }
+
 .table2 td {
-    border-left: none;
-    border-right: none;
+	border-left: none;
+	border-right: none;
 }
+
 button.apply2 {
-    background-color: RGB(231, 240, 254);
-    border: none;
-    padding: 10px;
-    cursor: pointer;
+	background-color: RGB(231, 240, 254);
+	border: none;
+	padding: 10px;
+	cursor: pointer;
 }
+
 button.apply2:hover {
-    background-color: #024C86;
-    color: white;
+	background-color: #024C86;
+	color: white;
 }
+
 colgroup col {
-    width: auto;
-    
+	width: auto;
 }
-colgroup col:nth-child(1) { width: 5%; }   /* 번호 */
-colgroup col:nth-child(2) { width: 30%; }  /* 강좌명 */
-colgroup col:nth-child(3) { width: 15%; }  /* 교수명 */
-colgroup col:nth-child(4) { width: 10%; }  /* 인원제한 */
-colgroup col:nth-child(5) { width: 25%; }  /* 강의시간 */
-colgroup col:nth-child(6) { width: 5%; }  /* 학점 */
-colgroup col:nth-child(7) { width: 10%; }  /* 신청 */
+
+colgroup col:nth-child(1) {
+	width: 5%;
+} /* 번호 */
+colgroup col:nth-child(2) {
+	width: 30%;
+} /* 강좌명 */
+colgroup col:nth-child(3) {
+	width: 15%;
+} /* 교수명 */
+colgroup col:nth-child(4) {
+	width: 10%;
+} /* 인원제한 */
+colgroup col:nth-child(5) {
+	width: 25%;
+} /* 강의시간 */
+colgroup col:nth-child(6) {
+	width: 5%;
+} /* 학점 */
+colgroup col:nth-child(7) {
+	width: 10%;
+} /* 신청 */

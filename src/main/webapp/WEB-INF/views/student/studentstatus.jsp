@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>학적 조회</title>
+<title>학적조회</title>
 <link href="${path}/resources/css/studentinfo.css" rel="stylesheet" />
 <link rel='stylesheet'
 	href='https://cdn-uicons.flaticon.com/2.5.1/uicons-solid-straight/css/uicons-solid-straight.css'>
@@ -19,14 +19,14 @@
 	<div id="menuBar">
 		<div id="sub-menuBar" style="height: 380px">
 			<ul id="menulist">
-				<li><a href="studentstatus">학적 조회</a></li>
-				<li><a href="passwordchange">학생 비밀번호 변경</a></li>
-				<li><a href="studentinformation">학생 정보 변경</a></li>
-				<li><a href="objection">성적 조회</a></li>
+				<li><a href="studentstatus">학적조회</a></li>
+				<li><a href="passwordchange">비밀번호 변경</a></li>
+				<li><a href="studentinformation">정보변경</a></li>
+				<li><a href="objection">성적조회</a></li>
 				<li><a href="myCoursesPage">나의 수강 페이지</a></li>
 				<li><a href="courseregistrationpage">수강신청 페이지</a></li>
 				<li><a href="askpresident">총장님께 바랍니다</a></li>
-				<li><a href="idcard">학생증</a></li>
+				<li><a href="idcard">모바일 학생증</a></li>
 			</ul>
 		</div>
 	</div>
@@ -36,7 +36,7 @@
 
 			<!-- title view -->
 			<div id="pagetitle" >
-				<h1>학적 조회</h1>
+				<h1>학적조회</h1>
 			</div>
 
 			<div id="contentview" style="margin-top: 80px;">

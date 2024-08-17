@@ -77,41 +77,38 @@
 			<div id="pagetitle">
 				<h1>성적 이의 신청</h1>
 			</div>
-
 			<div class="contentView"
 				style="margin: 50px; margin-left: 300px; text-align: center; font-size: 20px;">
-				<form action="${path}/objectionWritePro" method="post">
-				<input type="hidden" name="sub_code" value="${odjection.sub_code}" />
+				<form action="${path}/objectionWritePro" method="post" id="objectionForm">
+					<input type="hidden" name="sub_code" value="${sub_code}" />
+					<input type="hidden" name="sub_name" value="${sub_name}" />
 					<div class="row mb-3">
-						<label for="subjectTitle" class="col-sm-2 col-form-label"
+						<label for="subjectTitle" class="col-sm-2 col-form-label" 
 							style="text-align: left;"><b>&gt; 수강 과목</b></label>
 						<div class="col-sm-10 titlebox">
 							<label for="subjectTitle"
-								style="text-align: left; margin-top: 5px;">${odjection.sub_name}</label>
+								style="text-align: left; margin-top: 5px;">${sub_name}</label>
 						</div>
-					</div>
+					</div> 
 					<div class="row mb-3">
-						<label for="inputPassword3" class="col-sm-2 col-form-label"
+						<label for="input" class="col-sm-2 col-form-label" 
 							style="text-align: left; font-weight: 700;"><b>&gt;
 								신청 내용</b></label>
 						<div class="col-sm-10 contentbox">
-							<textarea rows="6" cols="60" style="width: 500px;"
-								placeholder="이의 신청 내용을 입력하세요" name="detail"></textarea>
+							<textarea rows="6" cols="60" style="width: 500px;" id="objectionContent"
+								placeholder="이의 신청 내용을 입력하세요" name="content"></textarea>
 						</div>
 					</div>
 
 					<div class="btnbox">
-						<button type="submit" class="btn " value="등록" onclick="${path}/objectionWrite?sub_code=${odjection.sub_code}"
+						<button type="submit" class="btn " value="등록" onclick="${path}/objectionWritePro?sub_code=${sub_code}" id="submitButton"
 							style="font-size: 15px; width: 100px; height: 40px; background-color: #024C86; color: white; text-align: center; border: none !important;">등록</button>
 						<button type="reset" class="btn " value="다시쓰기"
 							style="font-size: 15px; width: 100px; height: 40px; background-color: #024C86; color: white; text-align: center; border: none !important;">다시쓰기</button>
 						<button type="button" class="btn " value="돌아가기"
-							onclick="history.back()"
+							id="backButton" onclick="history.back();"
 							style="font-size: 15px; width: 100px; height: 40px; background-color: #024C86; color: white; text-align: center; border: none !important;">돌아가기</button>
 					</div>
-					
-					
-					
 				</form>
 			</div>
 			<!-- contentView -->
@@ -119,6 +116,17 @@
 		<!-- content -->
 	</div>
 	<!-- container -->
+	<script>
+	
+	document.getElementById('objectionForm').addEventListener('submit', function(event) {
+        const content = document.getElementById('objectionContent').value.trim();
+        if (content === '') {
+            alert('이의 신청 내용을 입력하세요.');
+            event.preventDefault(); // 폼 제출 방지
+        } 
+    });
+	
+	</script>
 </body>
 </html>
 <jsp:include page="../common/footer.jsp" />
