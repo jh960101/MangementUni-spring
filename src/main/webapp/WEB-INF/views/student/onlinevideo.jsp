@@ -98,6 +98,7 @@
                     success: function(response) {
                         alert('출석 완료!');
                         console.log(response);
+                        opener.location.reload();
                         window.close(); // 창 닫기
                     },
                     error: function(xhr, status, error) {
