@@ -35,11 +35,11 @@
 <p class="top_scrollbtn" onclick="scrollbtn('main-img')">TOP</p>
 
 <div>
-    <img id="main-img" src="${path}/resources/img/eta_img.png" style="margin-top: 130px; width: 100%"/>
+    <img id="main-img" src="${path}/resources/img/eta_img.png" style="width: 100%"/>
 
 </div>
 
-<jsp:include page="../common/header.jsp"/>
+<jsp:include page="../common/homeheader.jsp"/>
 <div id="menuBar">
     <div id="sub-menuBar" style="height: 150px;">
         <ul id="menulist">
