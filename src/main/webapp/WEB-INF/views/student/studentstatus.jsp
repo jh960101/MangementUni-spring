@@ -17,14 +17,14 @@
 
 	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
-		<div id="sub-menuBar" style="height: 380px">
+		<div id="sub-menuBar" style="height: 380px;margin-top: 182px;">
 			<ul id="menulist">
 				<li><a href="studentstatus">학적조회</a></li>
 				<li><a href="passwordchange">비밀번호 변경</a></li>
 				<li><a href="studentinformation">정보변경</a></li>
 				<li><a href="objection">성적조회</a></li>
-				<li><a href="myCoursesPage">나의 수강 페이지</a></li>
-				<li><a href="courseregistrationpage">수강신청 페이지</a></li>
+				<li><a href="myCoursesPage">나의 수강 목록</a></li>
+				<li><a href="courseregistrationpage">수강신청</a></li>
 				<li><a href="askpresident">총장님께 바랍니다</a></li>
 				<li><a href="idcard">모바일 학생증</a></li>
 			</ul>
@@ -35,9 +35,10 @@
 		<div id="content">
 
 			<!-- title view -->
-			<div id="pagetitle" >
-				<h1>학적조회</h1>
-			</div>
+				<h2 style="margin-top: 0px; text-align: center">
+					<strong>학적조회</strong>
+				</h2>
+				<div style="width: 70px; height: 5px; background-color: #024C86; margin:0px auto;"></div>
 
 			<div id="contentview" style="margin-top: 80px;">
 

@@ -118,32 +118,32 @@
 
 	<jsp:include page="../common/header.jsp" />
 	<div id="menuBar">
-		<div id="sub-menuBar" style="height: 380px">
+		<div id="sub-menuBar" style="height: 380px;margin-top: 182px;">
 			<ul id="menulist">
 				<li><a href="studentstatus">학적조회</a></li>
 				<li><a href="passwordchange">비밀번호 변경</a></li>
 				<li><a href="studentinformation">정보변경</a></li>
 				<li><a href="objection">성적조회</a></li>
-				<li><a href="myCoursesPage">나의 수강 페이지</a></li>
-				<li><a href="courseregistrationpage">수강신청 페이지</a></li>
+				<li><a href="myCoursesPage">나의 수강 목록</a></li>
+				<li><a href="courseregistrationpage">수강신청</a></li>
 				<li><a href="askpresident">총장님께 바랍니다</a></li>
 				<li><a href="idcard">모바일 학생증</a></li>
 			</ul>
 		</div>
 	</div>
-	<div class="container" style="height: 1000px; margin-top: 100px;">
+	<div class="container" style="height: 800px; margin-top: 100px;">
 		<div id="content">
 			<!-- title view -->
-			<div id="pageTitle">
-				<h1>총장님께 바랍니다</h1>
-			</div>
-			<div class="custom">
-				<h5 class="mt-4" style="text-align: left; color: red;">이 글은
-					익명성이 보장됩니다. 단 비방이나 혐오 욕설을 사용하면 처벌받을수 있습니다.</h5>
+			<h2 style="margin-top: 0px; text-align: center">
+				<strong>총장님께 바랍니다</strong>
+			</h2>
+			<div style="width: 70px; height: 5px; background-color: #024C86; margin:0px auto;"></div>
+			<div class="custom" style="margin-top: 90px;">
+				<h5 class="mt-4" style="color: red; font-size: 16px; padding-left: 97px;"> ※ 건강한 소통 문화를 위해 익명을 악용한 비방이나 혐오 표현은 절대 허용되지 않습니다.</h5>
 				<div id="pageContent">
 					<form action="presidentplsWrite" method="post" style="margin-bottom: 20px;"
 						onsubmit="return validateForm()">
-						<table id="tbl-board">
+						<table id="tbl-board" style="margin-bottom: 50px;">
 							<tr>
 								<th><span>제목</span></th>
 								<td><input type="text" placeholder="제목을 입력하세요" name="title"></td>
@@ -158,7 +158,7 @@
 						</table>
 						<div class="table-secondary">
 							<div class="textLengthWrap"
-								style="display: flex; align-items: center;">
+								style="display: flex; align-items: center;margin-right: 10px;">
 								<p class="textCount"
 									style="margin-bottom: 0; display: flex; align-items: center;">0자</p>
 								<p class="textTotal"
@@ -174,7 +174,7 @@
 			</div>
 		</div>
 	</div>
-	<%-- <jsp:include page="../common/footer.jsp" /> --%>
+	 <jsp:include page="../common/footer.jsp" />
 
 	<script>
 		function validateForm() {
