@@ -27,6 +27,7 @@ public class Board {
 	private Date create_date; // 작성 날짜
 	private Date modify_date; // 수정 날짜
 	private int bo_Like; // 좋아요 버튼
+	private String bo_status;
 	private List<Reply> replies; // 댓글
 	
 		
