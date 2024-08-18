@@ -71,7 +71,7 @@
                 <img
                         src="${pageContext.request.contextPath}/resources/img/프로필사진.png"
                         class="프로필사진" alt="Profile Image"> <span
-                    class="username">${board.emp_no eq 0?"익명":board.emp_no}</span>
+                    class="username">${board.bo_status eq 'Y'?"익명":board.writer_no}</span>
             </div>
             <div class="stats-section">
                 <div class="stat-item">
