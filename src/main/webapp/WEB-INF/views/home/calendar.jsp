@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>학사일정</title>
+<title>학사 일정</title>
 <style>
 .container1 {
 	background-color: #fff;

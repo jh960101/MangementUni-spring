@@ -6,19 +6,26 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.Part;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +40,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -64,9 +72,6 @@ public class FacultyController {
 
 	@Autowired
 	private StudentService stuservice;
-
-	@Autowired
-	private ServletContext context;
 
 	// 공지사항 목록처리
 	@RequestMapping("/infoboard")
@@ -141,7 +146,7 @@ public class FacultyController {
 
 		// 조회 수 증가
 		int readCount = service.readCount(no);
-		
+
 		Board board = service.findByNo(no);
 		System.out.println(board);
 		System.out.println("파일명 : " + board.getOriginalFilename());
@@ -163,8 +168,7 @@ public class FacultyController {
 	// 공지사항 작성 처리
 	@RequestMapping("/writeinfoPro")
 	public String writeinfoPro(Model model, @RequestParam Map<String, Object> param, @ModelAttribute Board board,
-			@RequestParam("uploadFile") MultipartFile file, @RequestParam("imageUpload") MultipartFile imageFile,
-			RedirectAttributes redirectAttributes) throws IOException {
+			@RequestParam("uploadFile") MultipartFile file, RedirectAttributes redirectAttributes) throws IOException {
 		System.out.println("FacultyController-writeinfoPro() 실행");
 
 		String loginname = (String) session.getAttribute("loginname");
@@ -182,44 +186,34 @@ public class FacultyController {
 		if (title != null && detail != null) {
 
 			String fileReadName = "";
-			String imgReadName = "";
-			if (!file.isEmpty() || !imageFile.isEmpty()) {
+			if (!file.isEmpty()) {
 				try {
-				// 파일명을 얻어서 출력
-				fileReadName = file.getOriginalFilename();
-				imgReadName = imageFile.getOriginalFilename();
-				
-				System.out.println("file : " + file);
-				System.out.println("file : " + imageFile);
+					// 파일명을 얻어서 출력
+					fileReadName = file.getOriginalFilename();
 
-				// 폼의 파일 필드에서 파일을 가져옵니다.
-				String uploadDir = "C:\\fullstack\\part4\\src\\MangementUni-spring\\src\\main\\webapp\\resources\\upload";
-				File uploadDirFile = new File(uploadDir);
+					System.out.println("file : " + file);
 
-				if (!uploadDirFile.exists()) {
-					uploadDirFile.mkdirs(); // 디렉토리가 없으면 생성
-				}
-				
-				// 일반 파일 저장
-				File dest = new File(uploadDir + File.separator + fileReadName);
-				file.transferTo(dest); // 파일 저장
-				
-				// 이미지 파일 저장
-		        if (!imageFile.isEmpty()) {
-		            //String uniqueImgName = System.currentTimeMillis() + "_" + imgReadName; // 고유한 이름
-		            File destImg = new File(uploadDir + File.separator + imgReadName);
-		            imageFile.transferTo(destImg); // 이미지 파일 저장
-		            board.setRenameFilename(imgReadName); 
-		        }
+					// 폼의 파일 필드에서 파일을 가져옵니다.
+					String uploadDir = "C:\\fullstack\\part4\\src\\MangementUni-spring\\src\\main\\webapp\\resources\\upload";
+					File uploadDirFile = new File(uploadDir);
 
-		        board.setOriginalFilename(fileReadName); // 일반 파일명 설정
-		        System.out.println("파일 저장 성공");
+					if (!uploadDirFile.exists()) {
+						uploadDirFile.mkdirs(); // 디렉토리가 없으면 생성
+					}
+
+					// 일반 파일 저장
+					File dest = new File(uploadDir + File.separator + fileReadName);
+					file.transferTo(dest); // 파일 저장
+
+					board.setOriginalFilename(fileReadName); // 일반 파일명 설정
+					System.out.println("파일 저장 성공");
+
 				} catch (IOException e) {
-			        e.printStackTrace();
-			        // 오류 처리 추가
-			        redirectAttributes.addFlashAttribute("msg", "파일 업로드 중 오류가 발생했습니다.");
-			        return "redirect:/infoboard"; // 오류 발생 시 리디렉션
-			    }
+					e.printStackTrace();
+					// 오류 처리 추가
+					redirectAttributes.addFlashAttribute("msg", "파일 업로드 중 오류가 발생했습니다.");
+					return "redirect:/infoboard"; // 오류 발생 시 리디렉션
+				}
 			} else {
 				fileReadName = "-";
 			}
@@ -228,7 +222,7 @@ public class FacultyController {
 			board.setEmp_no(loginNo);
 			board.setTitle(title);
 			board.setContent(detail);
-			board.setOriginalFilename(fileReadName);
+			System.out.println("insert detail : " + detail);
 
 			int res = service.insertWrite(board);
 
@@ -245,6 +239,45 @@ public class FacultyController {
 		}
 
 		return "redirect:/infoboard"; // 리디렉션
+	}
+
+	@PostMapping("/summernoteUpload")
+	public ResponseEntity<?> imageUpload(@RequestParam("imageUpload") MultipartFile imageFile)
+			throws IllegalStateException, IOException {
+		System.out.println("summernoteUpload() 실행!");
+
+		String originalFileName = "";
+		try {
+			// String fileReadName = imageFile.getOriginalFilename();
+
+			// 폼의 파일 필드에서 파일을 가져옵니다.
+			String uploadDir = "C:\\fullstack\\part4\\src\\MangementUni-spring\\src\\main\\webapp\\resources\\upload";
+
+			File uploadDirFile = new File(uploadDir);
+			if (!uploadDirFile.exists()) {
+				uploadDirFile.mkdirs(); // 디렉토리가 없으면 생성
+			}
+			// 업로드 된 파일의 이름
+			originalFileName = imageFile.getOriginalFilename();
+
+			// 위에서 설정한 서버 경로에 이미지 저장
+			File dest = new File(uploadDir + File.separator + originalFileName);
+			imageFile.transferTo(dest); // 파일 저장
+
+			System.out.println("파일 저장 성공");
+			System.out.println("originalFileName : " + originalFileName);
+			// 한글 파일명을 UTF-8로 인코딩
+			String encodedFileName = URLEncoder.encode(originalFileName, "UTF-8");
+
+			File uploadedFile = new File(uploadDir);
+			uploadedFile.setLastModified(System.currentTimeMillis());
+
+			return ResponseEntity.ok(encodedFileName);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error during file upload.");
+		}
+		// return originalFileName;
 	}
 
 	@RequestMapping("/updateinfo")
@@ -265,9 +298,7 @@ public class FacultyController {
 	@RequestMapping("/updateinfoPro")
 	public String updateinfoPro(Model model, @RequestParam("bo_no") int no, @RequestParam Map<String, Object> param,
 			@ModelAttribute Board board, // Board DTO로 받아오기
-			@ModelAttribute("uploadFile") MultipartFile uploadFile, 
-			@ModelAttribute("imageUpload") MultipartFile imageUpload,
-			RedirectAttributes redirectAttributes) {
+			@ModelAttribute("uploadFile") MultipartFile uploadFile, RedirectAttributes redirectAttributes) {
 		System.out.println("FacultyController-updateinfoPro() 실행");
 
 		System.out.println("bo_no : " + no);
@@ -288,21 +319,21 @@ public class FacultyController {
 		// 파라미터에서 값을 가져오기
 		String title = (String) param.get("title");
 		String content = (String) param.get("content");
+		String originalFilename = (String) param.get("originalFilename");
 
 		System.out.println("제목 : " + title);
 		System.out.println("파일 : " + uploadFile);
-		System.out.println("textarea - file : " + imageUpload);
+		System.out.println("hidden originalFilename : " + originalFilename);
 		System.out.println("내용 : " + content);
 
-		String fileReadName = "";
-		String imgReadName = "";
+		//
 		if (!uploadFile.isEmpty()) {
+
+			String fileReadName = "";
 			try {
 				// 파일명을 얻어서 출력
 				fileReadName = uploadFile.getOriginalFilename();
-				imgReadName = imageUpload.getOriginalFilename();
 				System.out.println("file : " + uploadFile);
-				System.out.println("imgfile : " + imgReadName);
 
 				// 폼의 파일 필드에서 파일을 가져옵니다.
 				String uploadDir = "C:\\fullstack\\part4\\src\\MangementUni-spring\\src\\main\\webapp\\resources\\upload";
@@ -321,21 +352,22 @@ public class FacultyController {
 
 				// File dest = new File(uploadDir, uploadFile.getOriginalFilename());
 				File dest = new File(uploadDir + File.separator + fileReadName);
-				File destImg = new File(uploadDir + File.separator + fileReadName);
-				uploadFile.transferTo(dest); 
-				imageUpload.transferTo(destImg); 
-				// 파일 저장
-
-				board.setOriginalFilename(fileReadName); // 파일명 설정
-				board.setRenameFilename(imgReadName);
-				System.out.println("파일 저장 성공");
+				uploadFile.transferTo(dest); // 파일 저장
+				if (!uploadFile.getOriginalFilename().isEmpty()) {
+					board.setOriginalFilename(fileReadName); // 파일명 설정
+					System.out.println("추가 파일 저장 성공");
+				} 
 			} catch (IOException e) {
 				e.printStackTrace();
 				// 에러 처리 추가 (예: redirect 에러 메시지 추가)
 				redirectAttributes.addFlashAttribute("msg", "파일 업로드 중 오류가 발생했습니다.");
 				return "redirect:/infoboard"; // 오류 발생 시 리디렉션
 			}
+		} else if(!originalFilename.isEmpty()){
+			board.setOriginalFilename(originalFilename); // 기존 파일명 설정
+			System.out.println("기존 파일 저장 성공");
 		} else {
+			System.out.println("기존 파일/ 추가 파일 없음!");
 			board.setOriginalFilename(""); // 파일이 선택되지 않았다면 적절한 처리
 		}
 
@@ -378,42 +410,43 @@ public class FacultyController {
 
 	// 파일 다운로드 메서드
 	@GetMapping("/download")
-	public void downloadFile(@RequestParam("fileName") String fileName, HttpServletResponse response) throws UnsupportedEncodingException {
-	    // 파일 저장 경로 설정
-	    String uploadDir = "C:\\fullstack\\part4\\src\\MangementUni-spring\\src\\main\\webapp\\resources\\upload" 
-	                       + File.separator + fileName; // 파일의 절대 경로
+	public void downloadFile(@RequestParam("fileName") String fileName, HttpServletResponse response)
+			throws UnsupportedEncodingException {
+		// 파일 저장 경로 설정
+		String uploadDir = "C:\\fullstack\\part4\\src\\MangementUni-spring\\src\\main\\webapp\\resources\\upload"
+				+ File.separator + fileName; // 파일의 절대 경로
 
-	    File file = new File(uploadDir);
-	    if (!file.exists()) {
-	        // 파일이 존재하지 않을 경우
-	        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-	        System.out.println("파일이 존재하지 않음.");
-	        return;
-	    }
+		File file = new File(uploadDir);
+		if (!file.exists()) {
+			// 파일이 존재하지 않을 경우
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			System.out.println("파일이 존재하지 않음.");
+			return;
+		}
 
-	    // 다운로드를 위한 response 설정
-	    response.setContentType("application/octet-stream");
-	    String encodedFileName = new String(file.getName().getBytes("UTF-8"), "ISO-8859-1");
-	    response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + encodedFileName + "\"");
-	    //response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"");
-	    System.out.println("다운로드 파일명 : " + file.getName());
-	    
+		// 다운로드를 위한 response 설정
+		response.setContentType("application/octet-stream");
+		String encodedFileName = new String(file.getName().getBytes("UTF-8"), "ISO-8859-1");
+		response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + encodedFileName + "\"");
+		// response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""
+		// + file.getName() + "\"");
+		System.out.println("다운로드 파일명 : " + file.getName());
 
-	    try (FileInputStream fileInputStream = new FileInputStream(file);
-	         OutputStream outputStream = response.getOutputStream()) {
-	        
-	        byte[] buffer = new byte[4096]; // 4KB 버퍼
-	        int bytesRead;
+		try (FileInputStream fileInputStream = new FileInputStream(file);
+				OutputStream outputStream = response.getOutputStream()) {
 
-	        // 파일을 읽어서 응답에 작성
-	        while ((bytesRead = fileInputStream.read(buffer)) != -1) {
-	            outputStream.write(buffer, 0, bytesRead);
-	        }
-	        outputStream.flush(); // 응답 내보내기
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-	    }
+			byte[] buffer = new byte[4096]; // 4KB 버퍼
+			int bytesRead;
+
+			// 파일을 읽어서 응답에 작성
+			while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+				outputStream.write(buffer, 0, bytesRead);
+			}
+			outputStream.flush(); // 응답 내보내기
+		} catch (IOException e) {
+			e.printStackTrace();
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	// 성적

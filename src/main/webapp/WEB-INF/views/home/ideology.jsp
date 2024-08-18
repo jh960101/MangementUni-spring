@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>학교 이념</title>
 <link href="${path}/resources/css/scrollbtn.css" rel="stylesheet" />
 <script defer src="${path}/resources/js/scrollbtn.js"></script>
 </head>

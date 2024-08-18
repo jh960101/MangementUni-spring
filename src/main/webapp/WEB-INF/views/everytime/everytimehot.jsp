@@ -34,36 +34,23 @@
 
 	<div>
 		<img id="main-img" src="${path}/resources/img/eta_img.png"
-			style="margin-top: 130px; width: 100%" />
+			style="width: 100%" />
 
 	</div>
-	<jsp:include page="../common/header.jsp" />
+	<jsp:include page="../common/homeheader.jsp" />
 	<div id="menuBar">
 		<div id="sub-menuBar" style="height: 150px;">
 			<ul id="menulist">
+				<li><a href="everytimehot">🔥HOT 게시판🔥</a></li>
 				<li><a href="etmainpage">자유게시판</a></li>
 				<li><a href="etmypage?stuno=${studentno}">내글 보기</a></li>
-				<li><a href="everytimehot">HOT게시판</a></li>
 			</ul>
 		</div>
 	</div>
 	<div class="container" style="height: 1000px;">
-		<div id="content">
+		<div id="content" style="margin-top: 60px;">
 			<!-- title view -->
 			<div class="list-group">
-				<div class="dropdown-container">
-					<div class="dropdown">
-						<button class="dropbtn" id="dropdownButton">제목&nbsp;&nbsp;▼</button>
-						<div class="dropdown-content">
-							<a href="#" onclick="setDropdownText('제목')">제목</a> <a href="#"
-								onclick="setDropdownText('작성자')">작성자</a> <a href="#"
-								onclick="setDropdownText('내용')">내용</a>
-						</div>
-					</div>
-					<input type="text" id="searchBox" class="search-box"
-						value="검색어를 입력해주세요" onfocus="clearPlaceholder()"
-						onblur="setPlaceholder()">
-				</div>
 				<input type="text" id="Box" class="box" value="&nbsp;🔥HOT 게시판🔥"
 					readonly>
 			</div>
