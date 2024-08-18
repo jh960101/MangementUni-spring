@@ -63,11 +63,11 @@
 
         <div class="input-group">
             <input type="text" class="form-control1" value="${board.title}"
-                   readonly>
+                   readonly style="padding-left: 15px;">
         </div>
 
         <div class="horizontal-container">
-            <div class="profile-section">
+            <div class="profile-section" style="padding-left: 15px;">
                 <img
                         src="${pageContext.request.contextPath}/resources/img/프로필사진.png"
                         class="프로필사진" alt="Profile Image"> <span
@@ -94,7 +94,7 @@
         <div>
             <div class="input-group">
 					<textarea class="form-control2" rows="30" id="mainContent" readonly
-                              style="overflow: hidden;">${board.content}
+                              style="overflow: hidden;padding-left: 15px;">${board.content}
                     </textarea>
 
             </div>
@@ -158,7 +158,6 @@
                         </form>
                     </div>
 
-
                     <div class="form-check d-inline">
                         <input class="form-check-input" style="font-weight: bolder;"
                                type="checkbox" value="" id="flexCheckDefault"> <label
@@ -167,7 +166,7 @@
                     </div>
                     <div class="d-flex align-items-center">
                         <button class="custom-submit-button" type="button"
-                                id="postCommentButton" onclick="history.back()">글 작성
+                                id="postCommentButton" onclick="history.back()">댓글 작성
                         </button>
                     </div>
                 </div>
@@ -183,108 +182,6 @@
     </div>
 </div>
 
-<script
-        src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script>
-    document.getElementById('postCommentButton').addEventListener('click', function () {
-        const commentInput = document.getElementById('commentInput');
-        const commentText = commentInput.value.trim();
-
-        if (commentText !== '') {
-            const commentContainer = document.createElement('div');
-            commentContainer.classList.add('comment');
-
-            const horizontalContainer = document.createElement('div');
-            horizontalContainer.classList.add('horizontal-container');
-
-            const profileSection = document.createElement('div');
-            profileSection.classList.add('profile-section');
-
-            const profileImage = document.createElement('img');
-            profileImage.src = '${pageContext.request.contextPath}/resources/img/프로필사진.png';
-            profileImage.classList.add('프로필사진');
-            profileImage.alt = 'Profile Image';
-
-            const usernameSpan = document.createElement('span');
-            usernameSpan.classList.add('username');
-            usernameSpan.textContent = document.getElementById('flexCheckDefault').checked ? '익명' : 'ghdgns82';
-
-            profileSection.appendChild(profileImage);
-            profileSection.appendChild(usernameSpan);
-
-            const statsSection = document.createElement('div');
-            statsSection.classList.add('stats-section');
-
-            const statItem = document.createElement('div');
-            statItem.classList.add('stat-item');
-
-            const recommendButton = document.createElement('img');
-            recommendButton.src = '${pageContext.request.contextPath}/resources/img/추천버튼.png';
-            recommendButton.classList.add('button-img', 'recommend-button');
-
-            const counterDiv = document.createElement('div');
-            counterDiv.classList.add('counter');
-            counterDiv.textContent = '0';
-
-            statItem.appendChild(recommendButton);
-            statItem.appendChild(counterDiv);
-            statsSection.appendChild(statItem);
-
-            horizontalContainer.appendChild(profileSection);
-            horizontalContainer.appendChild(statsSection);
-
-            const inputGroup = document.createElement('div');
-            inputGroup.classList.add('input-group', 'mb-0');
-
-            const commentBox = document.createElement('input');
-            commentBox.type = 'text';
-            commentBox.classList.add('form-control3');
-            commentBox.value = commentText;
-            commentBox.readOnly = true;
-
-            inputGroup.appendChild(commentBox);
-
-            commentContainer.appendChild(horizontalContainer);
-            commentContainer.appendChild(inputGroup);
-
-            const hr = document.createElement('hr');
-            hr.style.width = '1000px';
-
-            commentContainer.appendChild(hr);
-
-            const commentsContainer = document.getElementById('commentsContainer');
-            commentsContainer.insertBefore(commentContainer, commentsContainer.firstChild);
-
-            commentInput.value = '';
-            commentInput.placeholder = '댓글 작성';
-
-            // 추천 버튼 기능 추가
-            recommendButton.addEventListener('click', function () {
-                if (!recommendButton.classList.contains('clicked')) {
-                    const counter = recommendButton.nextElementSibling;
-                    counter.textContent = parseInt(counter.textContent) + 1;
-                    recommendButton.classList.add('clicked');
-                }
-            });
-        }
-    });
-
-    document.querySelectorAll('.recommend-button').forEach(button => {
-        button.addEventListener('click', function () {
-            if (!button.classList.contains('clicked')) {
-                const counter = button.nextElementSibling;
-                counter.textContent = parseInt(counter.textContent) + 1;
-                button.classList.add('clicked');
-            }
-        });
-    });
-
-    // 자동 길이 조정을 위한 스크립트
-    document.getElementById('mainContent').addEventListener('input', function () {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight) + 'px';
-    });
-</script>
 </body>
 
 </html>
