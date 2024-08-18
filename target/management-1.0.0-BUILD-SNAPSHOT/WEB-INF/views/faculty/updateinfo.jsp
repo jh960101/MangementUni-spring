@@ -10,6 +10,12 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 수정 및 삭제</title>
+<jsp:include page="../common/header.jsp" />
+<!-- include summernote css/js-->
+<script type="text/javascript" src='${path}/resources/js/summernote/summernote-lite.js'></script>
+<script type="text/javascript" src='${path}/resources/js/summernote/lang/summernote-ko-KR.js'></script>
+<link rel="stylesheet" href="${path}/resources/css/summernote/summernote-lite.css">
+
 <link href="${path}/resources/css/objection.css" rel="stylesheet" />
 <link href="${path}/resources/css/infodetail.css" rel="stylesheet" />
 
@@ -163,7 +169,6 @@
 </style>
 </head>
 <body>
-	<jsp:include page="../common/header.jsp" />
 
 	<c:set var="searchType" value="${param.searchType}" />
 	<c:if test="${empty searchType}">
@@ -179,6 +184,7 @@
 				<form action="${path}/updateinfoPro" method="post"
 					enctype="multipart/form-data" style="margin-bottom: 20px;">
 					<input type="hidden" name="bo_no" value="${board.bo_no}" />
+					<input type="hidden" name="originalFilename" value="${board.originalFilename}" />
 					<table id="tbl-board">
 						<tr>
 							<th>글번호</th>
@@ -209,11 +215,9 @@
 							<td>
 								<div id="contentLabel"
 									style="padding: 10px; width: 100%; height: auto;">
-									<textarea name="content" rows="10"
-										style="width: 100%; height: auto;">${board.content}</textarea>
-									<input type="file" id="imageUpload" accept="image/*"
-										name="imageUpload" style="margin-top: 10px;" />
-									<div id="imagePreview" style="margin-top: 10px;"></div>
+									<textarea name="content" rows="10" id="summernote"
+										style="width: 100%; height: auto;" >${board.content}</textarea>
+									
 								</div>
 							</td>
 
@@ -235,36 +239,105 @@
 		</div>
 	</div>
 	<script>
-		document.getElementById('imageUpload').addEventListener('change', function(event) {
-	        const file = event.target.files[0]; // 선택한 첫 번째 파일
 	
-	        // 파일이 있는 경우
-	        if (file) {
-	            const fileName = file.name; // 파일의 이름
-	            const extension = fileName.split('.').pop().toLowerCase(); // 파일 확장자 가져오기
+		// textarea - summernote
+			function fn_summernote(element) {
+		    $("#" + element).summernote({
+		        toolbar: [
+		            ['fontname', ['fontname']],
+		            ['fontsize', ['fontsize']],
+		            ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+		            ['color', ['forecolor', 'color']],
+		            ['table', ['table']],
+		            ['para', ['ul', 'ol', 'paragraph']],
+		            ['height', ['height']],
+		            ['insert', ['picture', 'link', 'video']],
+		            ['view', ['fullscreen', 'help']]
+		        ],
+		        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+		        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+		        width: 850,
+		        height: 200,
+		        minHeight: null,
+		        maxHeight: null,
+		        focus: false,
+		        lang: "ko-KR",
+		        placeholder: '내용을 작성하십시오.',
+		        callbacks: {
+		            onImageUpload: function(files, editor, welEditable) {
+		                // 다중 이미지 처리를 위해 for문을 사용했습니다.
+		                for (var i = 0; i < files.length; i++) {
+		                    imageUploader(files[i], this);
+		                }
+		            },
+		            onInit: function() {
+		                // 모달창의 스타일 또는 속성을 변경
+		            	$('.note-modal-header').css({
+		            	    'padding': '20px',
+		            	    'margin-top': '30px',
+		            	    'border': '1px solid #ededef'
+		            	});
 	
-	            // 유효한 이미지 확장자인지 확인
-	            if (!['jpg', 'jpeg', 'png', 'gif'].includes(extension)) {
-	                alert('이미지 파일만 선택할 수 있습니다. JPG, JPEG, PNG, GIF 형식의 이미지를 선택해 주세요.');
-	                event.target.value = ''; // 선택한 파일 초기화
-	                return; // 함수 종료
-	            }
+		            	$('.note-modal-footer').css({
+		            	    'padding-right': '20px !improtant',
+		            	    'padding': '0px',
+		            	    'margin-right': '20px',
+		            	    'height': '60px',
+		            	    'text-align': 'center'
+		            	});
+
+		            	$('.note-modal-footer .note-btn').css({
+		            	    'height': '35px',
+		            	    'float': 'right',
+		            	    'margin': '10px',
+		            	    'padding': '5px',
+		            	    'text-align': 'center',
+		            	    'width': '100px',
+		            	    'font-size': 'medium',
+		            	    'background-color': '#024C86',
+		            	    'border': 'none'
+		            	});
+		            }
+		        }
+		    });
+		}
 	
-	            // Image preview 처리
-	            const reader = new FileReader();
-	            reader.onload = function(e) {
-	                const img = document.createElement('img');
-	                img.src = e.target.result;
-	                img.style.maxWidth = '100%';
-	                img.style.maxHeight = '300px';
-	                img.style.marginTop = '10px';
-	                document.getElementById('imagePreview').innerHTML = ''; // 이전 미리보기 초기화
-	                document.getElementById('imagePreview').appendChild(img); // 미리보기 추가
-	            };
-	
-	            reader.readAsDataURL(file); // 선택한 파일 읽기
-	        }
-	    });
+		// 페이지 로딩시 호출
+		$(document).ready(function () {
+		    fn_summernote("summernote");
+		});
+		
+		function imageUploader(imageUpload, el) {
+					
+					console.log("imageUploader 실행");
+					
+					var formData = new FormData();
+					formData.append('imageUpload', imageUpload);
+				  
+					$.ajax({                                                              
+						data : formData,
+						type : "POST",
+						url : '${path}/summernoteUpload',  
+						contentType : false,
+						processData : false,
+						cache: false,
+						enctype : 'multipart/form-data',                                  
+						success : function(data) {   
+							console.log("imageUploader 실행 - success");
+							console.log("path : " + "${path}");
+								$(el).summernote('insertImage', "${path}/resources/upload/"+decodeURIComponent(data), function($image) {
+								$image.css('width', "100%");
+								}); 
+							console.log(data);
+						},
+						error: function(jqXHR, textStatus, errorThrown) {
+						    console.error('AJAX Error: ' + textStatus + ' : ' + errorThrown);
+						    console.log('Response Text:', jqXHR.responseText);
+						    alert('오류 발생: ' + textStatus);
+						}
+					});
+				}  
+		
 	
 		function fileDownload(oriname, rename) {
 			const url = "${path}/board/fileDown";

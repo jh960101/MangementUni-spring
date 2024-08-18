@@ -113,6 +113,7 @@
 	<c:if test="${not empty msg}">
 		<script>
 			alert('${msg}');
+			<c:remove var=" msg"/>
 		</script>
 	</c:if>
 

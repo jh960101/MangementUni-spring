@@ -28,12 +28,20 @@
 </head>
 
 <body>
+<c:if test="${not empty msg }">
+    <script>
+		alert('${msg}');
+		<c:remove var=" msg"/>
+	</script>
+</c:if>
+
 <c:if test="${loginname == null}">
 	<script>
 		alert('교직원 및 재학생만 접근이 가능합니다.');
 		window.location.href = "login";
 	</script>
 </c:if>
+
 	<p class="top_scrollbtn" onclick="scrollbtn('main-img')">TOP</p>
 
 	<div>
@@ -59,7 +67,7 @@
 					<div class="dropdown">
 						<button class="dropbtn">제목&nbsp;&nbsp;▼</button>
 						<div class="dropdown-content">
-							<a href="#">제목</a> <a href="#">작성자</a> <a href="#">내용</a>
+							<a href="">제목</a> <a href="#">작성자</a> <a href="#">내용</a>
 						</div>
 					</div>
 					<input type="text" id="searchBox" class="search-box"
@@ -81,7 +89,7 @@
 			<c:if test="${list.size()!=0 }">
 				<c:forEach var="board" items="${list}">
 					<div class="list-group">
-						<a href="etaupdate?no=${board.bo_no}"
+						<a href="etaupdate?bo_no=${board.bo_no}"
 							class="list-group-item list-group-item-action list-group-item-large"
 							aria-current="true" style="margin-top: 5px;"> ${board.title}</a>
 						<a href="#"

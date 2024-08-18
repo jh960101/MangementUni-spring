@@ -21,4 +21,8 @@ public interface EverytimeMapper {
 	List<Board> getAllEtaHotList();
 
     int getListCount();
+
+    int insertBoard(Board board);
+
+    int updateBoard(Board board);
 }

@@ -33,4 +33,12 @@ public class EverytimeService {
     public int getListCount() {
         return mapper.getListCount();
     }
+
+    public int insertBoard(Board board) {
+        return mapper.insertBoard(board);
+    }
+
+    public int updateBoard(Board board) {
+        return mapper.updateBoard(board);
+    }
 }
