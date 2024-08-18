@@ -1,58 +1,53 @@
+/* 배경 및 기본 설정 */
 body {
-	font-family: Arial, sans-serif;
+	font-family: 'Helvetica Neue', sans-serif;
 	margin: 0;
 	padding: 0;
-	background-color: #f4f4f4;
+	background-color: #f0f2f5;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
 }
 
+/* 플레이어 컨테이너 */
 .player-container {
 	display: flex;
 	flex-direction: column;
-	width: 80%;
+	width: 85%;
 	max-width: 1200px;
-	background-color: #fff;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	border-radius: 8px;
+	background-color: #ffffff;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 12px;
 	overflow: hidden;
 }
 
+/* 헤더 섹션 */
 .header {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
-	padding: 10px 20px;
-	background-color: #ddd;
-	border-bottom: 1px solid #ccc;
+	padding: 15px 25px;
+	background-color: RGB(231, 240, 254);
+	border-bottom: 2px RGB(231, 240, 254);
+	
 }
 
 .header img {
-	height: 40px;
-	margin-right: 20px;
-}
-
-.header-title {
-	display: flex;
-	flex-direction: column;
+	height: 45px;
+	margin-right: 15px;
 }
 
 .header-title h1 {
 	margin: 0;
-	font-size: 24px;
+	font-size: 28px;
+	color: #024C86;
 }
 
-.header-title h2 {
-	margin: 0;
-	font-size: 18px;
-	color: #666;
-}
-
+/* 콘텐츠 섹션 */
 .content-section {
 	display: flex;
 	flex: 1;
+	padding: 20px;
 }
 
 .video-section {
@@ -61,93 +56,95 @@ body {
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
-}
-
-.video-placeholder, .video-player {
-	width: 100%;
-	height: 400px;
 	background-color: #000;
-	color: #fff;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 24px;
-	border-radius: 8px;
-	cursor: pointer;
+	border-radius: 10px;
 }
 
+.video-player {
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	background-color: #000;
+}
+
+#timeDisplay {
+	margin-top: 10px;
+	color: #fff;
+}
+
+#timeDisplay p {
+	margin: 0;
+	font-size: 14px;
+}
+
+/* 컨트롤 섹션 */
 .controls-section {
 	width: 30%;
-	height: 500px;
-	padding: 30px;
+	padding: 25px;
 	box-sizing: border-box;
-	border-left: 1px solid #ddd;
-	background-color: #f9f9f9;
+	border-left: 1px solid #e9ecef;
+	background-color: #f8f9fa;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	align-items: center;
+	border-radius: 10px;
 }
 
-.info-box {
-	margin-bottom: 20px;
-	padding: 20px;
-	background-color: #fff;
-	border: 1px solid #ddd;
-	border-radius: 5px;
-	height: 490px;
-}
 
-.info-box p {
-	margin: 5px 0;
-	cursor: pointer;
-	color: #007bff;
-	text-decoration: underline;
-}
-
-.info-box p:hover {
-	color: #0056b3;
-}
 
 .button {
-	display: inline-block;
-	margin: 5px 0;
-	padding: 10px 15px;
-	font-size: 14px;
+	width: 100%;
+	padding: 12px 20px;
+	font-size: 16px;
 	cursor: pointer;
 	border: none;
-	border-radius: 5px;
+	border-radius: 8px;
 	background-color: #007bff;
 	color: #fff;
-	transition: background-color 0.3s;
+	transition: background-color 0.3s, transform 0.2s;
+	text-transform: uppercase;
 }
 
 .button:hover {
-	background-color: #0056b3;
+	background-color: #024C86;
+	transform: translateY(-2px);
 }
 
-.footer-container {
-	display: flex;
+.button:active {
+	transform: translateY(1px);
+}
+
+/* 메모장 추가 */
+.memo-section {
 	width: 100%;
-	padding: 20px;
-	box-sizing: border-box;
-	justify-content: space-between;
-	align-items: center;
-	background-color: #ddd;
-	border-top: 1px solid #ccc;
+	margin-top: 10px;
 }
 
-.dropdown {
-	width: 85%;
+.memo-section textarea {
+	width: 100%;
+	height: 400px;
 	padding: 10px;
-	font-size: 14px;
+	box-sizing: border-box;
 	border: 1px solid #ccc;
-	border-radius: 5px;
+	border-radius: 8px;
+	font-size: 14px;
+	font-family: 'Helvetica Neue', sans-serif;
+	resize: none;
+	background-color: #ffffff;
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	margin-bottom: 20px;
 }
 
-.footer-right {
-	display: flex;
-	
-	
+/* 반응형 디자인 */
+@media ( max-width : 768px) {
+	.content-section {
+		flex-direction: column;
+	}
+	.video-section, .controls-section {
+		width: 100%;
+	}
+	.memo-section textarea {
+		height: 100px;
+	}
 }
