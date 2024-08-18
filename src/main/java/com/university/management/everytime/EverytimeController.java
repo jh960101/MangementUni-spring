@@ -103,7 +103,16 @@ public class EverytimeController {
     }
 
     @RequestMapping("/etmypage")
-    public String etmypage(Model model, @RequestParam("stuno") int stu_no) {
+    public String etmypage(Model model) {
+
+        String login = (String) session.getAttribute("login");
+
+        if(login.equals("Employee")) {
+            model.addAttribute("msg", "교직원은 사용할 수 없는 메뉴입니다!");
+            return "everytime/etmypage";
+        }
+        
+        int stu_no  = (int) session.getAttribute("studentno");
 
         List<Board> list = service.getAllEtaListByStuNo(stu_no);
 
@@ -114,7 +123,15 @@ public class EverytimeController {
     }
 
     @RequestMapping("/etnew")
-    public String etnew() {
+    public String etnew(Model model) {
+
+        String login = (String) session.getAttribute("login");
+
+        if(login.equals("Employee")) {
+
+            model.addAttribute("msg", "교직원은 사용할 수 없는 메뉴입니다!");
+        }
+
         return "everytime/etnew";
     }
 

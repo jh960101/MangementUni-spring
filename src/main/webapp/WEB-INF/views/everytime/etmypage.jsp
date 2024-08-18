@@ -28,11 +28,14 @@
 </head>
 
 <body>
-<c:if test="${not empty msg }">
-    <script>
+
+<c:if test="${not empty msg}">
+
+	<script>
 		alert('${msg}');
-		<c:remove var=" msg"/>
+		history.back();
 	</script>
+	<c:remove var=" msg" />
 </c:if>
 
 <c:if test="${loginname == null}">
@@ -55,7 +58,7 @@
 			<ul id="menulist">
 				<li><a href="everytimehot">🔥HOT 게시판🔥</a></li>
 				<li><a href="etmainpage">자유게시판</a></li>
-				<li><a href="etmypage?stuno=${studentno}">내글 보기</a></li>
+				<li><a href="etmypage">내글 보기</a></li>
 			</ul>
 		</div>
 	</div>

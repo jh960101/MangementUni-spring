@@ -23,6 +23,15 @@
 
 
 </head>
+<c:if test="${not empty msg}">
+
+    <script>
+        alert('${msg}');
+        history.back();
+    </script>
+    <c:remove var=" msg" />
+</c:if>
+
 <c:if test="${loginname == null}">
     <script>
         alert('교직원 및 재학생만 접근이 가능합니다.');
