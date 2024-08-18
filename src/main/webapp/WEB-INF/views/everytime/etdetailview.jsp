@@ -49,8 +49,8 @@
 <div id="menuBar">
     <div id="sub-menuBar" style="height: 150px;">
         <ul id="menulist">
-            <li><a href="etmainpage">🔥HOT 게시판🔥</a></li>
-            <li><a href="everytimehot">자유 게시판</a></li>
+            <li><a href="everytimehot">🔥HOT 게시판🔥</a></li>
+            <li><a href="etmainpage">자유 게시판</a></li>
             <li><a href="etmypage">내글 보기</a></li>
         </ul>
     </div>
@@ -71,7 +71,7 @@
                 <img
                         src="${pageContext.request.contextPath}/resources/img/프로필사진.png"
                         class="프로필사진" alt="Profile Image"> <span
-                    class="username">${board.bo_status eq 'Y'?"익명":board.stu_no}</span>
+                    class="username">${board.bo_status eq 'Y'?"익명":student[0].STU_NAME}</span>
             </div>
             <div class="stats-section">
                 <div class="stat-item">

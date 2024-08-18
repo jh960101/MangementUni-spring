@@ -4,6 +4,8 @@ package com.university.management.everytime;
 import com.university.management.board.dto.Board;
 import com.university.management.board.dto.PageInfo;
 import com.university.management.everytime.service.EverytimeService;
+import com.university.management.student.dto.Student;
+import com.university.management.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,9 @@ public class EverytimeController {
 
     @Autowired
     private HttpSession session;
+
+    @Autowired
+    private StudentService studentService;
 
     @RequestMapping("/etmainpage")
     public String etmainpage(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
@@ -67,7 +72,7 @@ public class EverytimeController {
 
     @RequestMapping("/updateBoard")
     public String updateBoard(Board board, Model model) {
-        
+
         System.out.println(board.toString());
         int stu_no = (int) session.getAttribute("studentno");
 
@@ -87,7 +92,13 @@ public class EverytimeController {
 
         Board etaboard = service.getEtaBoardByNo(boNo);
 
+        int stu_no = etaboard.getStu_no();
+
+        List<Student> students = studentService.stuselect(stu_no);
+        System.out.println(students);
+
         model.addAttribute("board", etaboard);
+        model.addAttribute("student",students);
 
         return "everytime/etdetailview";
     }
@@ -107,12 +118,12 @@ public class EverytimeController {
 
         String login = (String) session.getAttribute("login");
 
-        if(login.equals("Employee")) {
+        if (login.equals("Employee")) {
             model.addAttribute("msg", "교직원은 사용할 수 없는 메뉴입니다!");
             return "everytime/etmypage";
         }
 
-        int stu_no  = (int) session.getAttribute("studentno");
+        int stu_no = (int) session.getAttribute("studentno");
 
         List<Board> list = service.getAllEtaListByStuNo(stu_no);
 
@@ -127,7 +138,7 @@ public class EverytimeController {
 
         String login = (String) session.getAttribute("login");
 
-        if(login.equals("Employee")) {
+        if (login.equals("Employee")) {
 
             model.addAttribute("msg", "교직원은 사용할 수 없는 메뉴입니다!");
         }
