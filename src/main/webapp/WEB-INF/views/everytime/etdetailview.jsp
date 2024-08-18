@@ -90,7 +90,7 @@
         </div>
         <hr style="width: 1000px;">
     </div>
-    <div class="container2" style="height: 800px; margin-bottom: 100px;">
+    <div class="container2" style="height: 500px; margin-bottom: 100px;">
         <div>
             <div class="input-group">
 					<textarea class="form-control2" rows="30" id="mainContent" readonly
