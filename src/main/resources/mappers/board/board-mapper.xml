@@ -17,7 +17,7 @@
 		<result property="readCount" column="READCOUNT" />            		<!-- 조회수 -->
 		<result property="create_date" column="CREATE_DATE" />         	 	<!-- 작성 날짜 -->
 		<result property="modify_date" column="MODIFY_DATE" />          		<!-- 수정 날짜 -->
-		<result property="boLike" column="BO_LIKE" />                  		<!-- 좋아요 버튼 -->
+		<result property="bo_Like" column="BO_LIKE" />                  		<!-- 좋아요 버튼 -->
 	</resultMap>
 
 
