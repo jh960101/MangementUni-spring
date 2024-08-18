@@ -37,8 +37,8 @@
     <div id="sub-menuBar" style="height: 150px;">
         <ul id="menulist">
             <li><a href="everytimehot">🔥HOT 게시판🔥</a></li>
-            <li><a href="etmainpage">자유게시판</a></li>
-            <li><a href="etmypage?stuno=${studentno}">내글 보기</a></li>
+            <li><a href="etmainpage">자유 게시판</a></li>
+            <li><a href="etmypage">내글 보기</a></li>
         </ul>
     </div>
 </div>
@@ -73,7 +73,7 @@
                     <div class="form-check d-inline">
                         <input class="form-check-input" name="bo_status"
                                style="font-weight: bolder; border: 2px solid rgb(2, 76, 134)"
-                               type="checkbox" value="y" id="flexCheckDefault"> <label
+                               type="checkbox" value="Y" id="flexCheckDefault"> <label
                             class="form-check-label" style="font-weight: bolder;"
                             for="flexCheckDefault">익명</label>
                     </div>

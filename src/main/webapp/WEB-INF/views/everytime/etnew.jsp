@@ -23,6 +23,15 @@
 
 
 </head>
+<c:if test="${not empty msg}">
+
+    <script>
+        alert('${msg}');
+        history.back();
+    </script>
+    <c:remove var=" msg" />
+</c:if>
+
 <c:if test="${loginname == null}">
     <script>
         alert('교직원 및 재학생만 접근이 가능합니다.');
@@ -37,7 +46,7 @@
         <ul id="menulist">
             <li><a href="everytimehot">🔥HOT 게시판🔥</a></li>
             <li><a href="etmainpage">자유게시판</a></li>
-            <li><a href="etmypage?stuno=${studentno}">내글 보기</a></li>
+            <li><a href="etmypage">내글 보기</a></li>
         </ul>
     </div>
 </div>
@@ -63,7 +72,7 @@
                     <div class="form-check d-inline">
                         <input class="form-check-input"
                                style="font-weight: bolder; border: 2px solid rgb(2, 76, 134)"
-                               type="checkbox" name="bo_status" value="y" id="flexCheckDefault">
+                               type="checkbox" name="bo_status" value="Y" id="flexCheckDefault">
                         <label class="form-check-label" style="font-weight: bolder;" for="flexCheckDefault">익명</label>
                     </div>
                     <div class="d-flex align-items-center">
