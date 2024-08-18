@@ -63,7 +63,7 @@
                     <div class="form-check d-inline">
                         <input class="form-check-input"
                                style="font-weight: bolder; border: 2px solid rgb(2, 76, 134)"
-                               type="checkbox" name="bo_status" value="y" id="flexCheckDefault">
+                               type="checkbox" name="bo_status" value="Y" id="flexCheckDefault">
                         <label class="form-check-label" style="font-weight: bolder;" for="flexCheckDefault">익명</label>
                     </div>
                     <div class="d-flex align-items-center">
