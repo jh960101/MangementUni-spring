@@ -47,9 +47,10 @@
     <div id="content">
         <input type="text" id="Box" class="box" value="&nbsp;글 수정" readonly>
 
-        <form>
+        <form action="updateBoard" method="post">
+        <input type="hidden" name="bo_no" value="${board.bo_no}"/>
             <div class="input-group mb-0">
-                <input type="text" class="form-control1" name="titile"
+                <input type="text" class="form-control1" name="title"
                        placeholder="&nbsp;&nbsp;${board.title}" aria-label="Recipient's username"
                        aria-describedby="button-addon2">
             </div>
@@ -66,7 +67,7 @@
                     <%--							<input type="file" id="file-upload" name="file-upload"--%>
                     <%--							onchange="updateFilePath()">--%>
                     <%--						</label>--%>
-<%--                    <span id="file-path" class="file-upload-path">첨부된 파일이 없습니다</span>--%>
+                    <%--                    <span id="file-path" class="file-upload-path">첨부된 파일이 없습니다</span>--%>
                 </div>
                 <div class="오른쪽정렬1">
                     <div class="form-check d-inline">
@@ -77,19 +78,19 @@
                             for="flexCheckDefault">익명</label>
                     </div>
                     <div class="d-flex align-items-center">
-                        <button class="custom-submit-button" type="button"
+                        <button class="custom-submit-button" type="submit"
                                 id="button-addon2" style="width:100px">수정
                         </button>
                     </div>
-                </div>
-                <button type="button" class="btn1 center-delete" style="margin-left:50px; width:100px;">삭제</button>
-            </div>
-        </form>
-        <div class="btn-container">
 
-            <button type="button" class="btn1" onclick="history.back()">◀뒤로가기</button>
-        </div>
+                </div>
+        </form>
+        <button type="button" class="btn1 center-delete" style="margin-left:50px; width:100px;">삭제</button>
     </div>
+    <div class="btn-container">
+        <button type="button" class="btn1" onclick="history.back()">◀뒤로가기</button>
+    </div>
+</div>
 </div>
 
 <script>

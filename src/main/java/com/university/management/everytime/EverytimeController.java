@@ -56,13 +56,30 @@ public class EverytimeController {
     }
 
     @RequestMapping("/etaupdate")
-    public String etamend(@RequestParam ("bo_no") int bo_no, Model model) {
+    public String etamend(@RequestParam("bo_no") int bo_no, Model model) {
 
         Board etaboard = service.getEtaBoardByNo(bo_no);
 
         model.addAttribute("board", etaboard);
 
         return "everytime/evereytimeupdate";
+    }
+
+    @RequestMapping("/updateBoard")
+    public String updateBoard(Board board, Model model) {
+        
+        System.out.println(board.toString());
+        int stu_no = (int) session.getAttribute("studentno");
+
+        int result = service.updateBoard(board);
+
+        if (result == 1) {
+            model.addAttribute("msg", "글 수정이 완료되었습니다.");
+        } else {
+            model.addAttribute("msg", "글 수정에 실패하였습니다.");
+        }
+
+        return "redirect:/etmypage?stuno=" + stu_no;
     }
 
     @RequestMapping("/etdetailview")

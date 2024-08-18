@@ -39,4 +39,9 @@
 		INSERT INTO BOARD(stu_no, title, content, type) VALUES (#{stu_no},#{title},#{content},"E")
 	</insert>
 
+	<update id="updateBoard" parameterType="com.university.management.board.dto.Board">
+		UPDATE BOARD SET TITLE = #{title}, CONTENT = #{content}, CREATE_DATE = now()
+		WHERE BO_NO = #{bo_no}
+	</update>
+
 </mapper>

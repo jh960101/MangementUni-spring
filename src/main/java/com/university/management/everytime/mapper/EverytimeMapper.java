@@ -23,4 +23,6 @@ public interface EverytimeMapper {
     int getListCount();
 
     int insertBoard(Board board);
+
+    int updateBoard(Board board);
 }
