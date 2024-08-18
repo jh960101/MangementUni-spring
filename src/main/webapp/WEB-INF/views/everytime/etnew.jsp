@@ -46,7 +46,7 @@
         <ul id="menulist">
             <li><a href="everytimehot">🔥HOT 게시판🔥</a></li>
             <li><a href="etmainpage">자유게시판</a></li>
-            <li><a href="etmypage?stuno=${studentno}">내글 보기</a></li>
+            <li><a href="etmypage">내글 보기</a></li>
         </ul>
     </div>
 </div>

@@ -50,8 +50,8 @@
     <div id="sub-menuBar" style="height: 150px;">
         <ul id="menulist">
             <li><a href="etmainpage">🔥HOT 게시판🔥</a></li>
-            <li><a href="etmypage?stuno=${studentno}">내글 보기</a></li>
-            <li><a href="everytimehot">HOT게시판</a></li>
+            <li><a href="everytimehot">자유 게시판</a></li>
+            <li><a href="etmypage">내글 보기</a></li>
         </ul>
     </div>
 </div>

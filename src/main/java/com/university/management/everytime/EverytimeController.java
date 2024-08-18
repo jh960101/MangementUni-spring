@@ -111,7 +111,7 @@ public class EverytimeController {
             model.addAttribute("msg", "교직원은 사용할 수 없는 메뉴입니다!");
             return "everytime/etmypage";
         }
-        
+
         int stu_no  = (int) session.getAttribute("studentno");
 
         List<Board> list = service.getAllEtaListByStuNo(stu_no);
