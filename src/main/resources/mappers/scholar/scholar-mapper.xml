@@ -83,7 +83,7 @@
 	<insert id="scholarInsert"
 		parameterType="com.university.management.scholar.dto.Scholar">
 		INSERT INTO university.SCHOLARLIST (STU_NO, DEPT_CODE,
-		SCH_NO, SUB_STATUS,
+		SCH_NO, SCH_STATUS,
 		YEAR, SMT)
 		VALUES (#{STU_NO}, #{DEPT_CODE},
 		#{SCH_NO}, #{SUB_STATUS}, #{YEAR}, #{SMT})
@@ -176,99 +176,5 @@
 
 	</select>
 
-<<<<<<< HEAD
-=======
-	<insert id="scholarInsert"
-		parameterType="com.university.management.scholar.dto.Scholar">
-		INSERT INTO university.SCHOLARLIST (STU_NO, DEPT_CODE, SCH_NO, SCH_STATUS,
-		YEAR, SMT)
-		VALUES (#{STU_NO}, #{DEPT_CODE}, #{SCH_NO}, #{SUB_STATUS}, #{YEAR}, #{SMT})
-	</insert>
 
-
-	<select id="stuScholarList" parameterType="int"
-		resultType="com.university.management.scholar.dto.StuScholar">
-		
-		select YEAR,SMT,sch.sch_name,sch.sch_discount from SCHOLARLIST sc
-		join student s on(s.stu_no=sc.stu_no)
-		join SCHOLARSHIP sch on(sc.sch_no=sch.sch_no)
-		where s.stu_no=#{loginNo}
-
-	</select>
-
-	<select id="getListCount" parameterType="map" resultType="int">
-
-        WITH RankedStudents AS (
-        SELECT
-        s.DEPT_CODE,
-        r.YEAR,
-        r.SMT,
-        d.DEPT_NAME,
-        s.STU_NO,
-        s.STU_GRADE,
-        s.STU_NAME,
-        s.SCH_STATUS,
-        ROUND(AVG(CASE
-        WHEN r.GRADE = 'A+' THEN 4.5
-        WHEN r.GRADE = 'A' THEN 4.0
-        WHEN r.GRADE = 'B+' THEN 3.5
-        WHEN r.GRADE = 'B' THEN 3.0
-        WHEN r.GRADE = 'C+' THEN 2.5
-        WHEN r.GRADE = 'C' THEN 2.0
-        WHEN r.GRADE = 'D+' THEN 1.5
-        WHEN r.GRADE = 'D' THEN 1.0
-        WHEN r.GRADE = 'F' THEN 0.0
-        END), 1) AS RESULTSAVG,
-        ROW_NUMBER() OVER (
-        PARTITION BY s.DEPT_CODE, s.STU_GRADE
-        ORDER BY ROUND(AVG(CASE
-        WHEN r.GRADE = 'A+' THEN 4.5
-        WHEN r.GRADE = 'A' THEN 4.0
-        WHEN r.GRADE = 'B+' THEN 3.5
-        WHEN r.GRADE = 'B' THEN 3.0
-        WHEN r.GRADE = 'C+' THEN 2.5
-        WHEN r.GRADE = 'C' THEN 2.0
-        WHEN r.GRADE = 'D+' THEN 1.5
-        WHEN r.GRADE = 'D' THEN 1.0
-        WHEN r.GRADE = 'F' THEN 0.0
-        END), 1) DESC
-        ) AS r
-        FROM
-        university.RESULTS r
-        JOIN
-        university.STUDENT s ON r.STU_NO = s.STU_NO
-        JOIN
-        university.DEPARTMENT d ON s.DEPT_CODE = d.DEPT_CODE
-        WHERE
-        r.YEAR = 2024 AND r.SMT = 1
-        GROUP BY
-        s.DEPT_CODE, d.DEPT_NAME, s.STU_NO, s.STU_NAME, s.STU_GRADE, r.YEAR, r.SMT
-        )
-        SELECT COUNT(*)
-        FROM RankedStudents
-        WHERE r &lt;
-		4
-
-        <if test="scholarship_type != 0">
-            <if test="scholarship_type != null">
-                AND r = #{scholarship_type}
-            </if>
-        </if>
-
-        <if test="DEPT_CODE != 'deptall'">
-            <if test="DEPT_CODE != null">
-                AND DEPT_CODE = #{DEPT_CODE}
-            </if>
-        </if>
-
-        <if test="STU_GRADE != 'gradeall'">
-            <if test="STU_GRADE != null">
-                AND STU_GRADE = #{STU_GRADE}
-            </if>
-        </if>
-
-
-    </select>
-
->>>>>>> master
 </mapper>
