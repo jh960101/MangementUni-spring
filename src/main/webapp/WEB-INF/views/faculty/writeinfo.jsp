@@ -145,7 +145,7 @@
 					<table id="tbl-board">
 						<tr>
 							<th><span>제목</span></th>
-							<td><input type="text" placeholder="제목을 입력하세요" name="title"></td>
+							<td><input type="text" placeholder="제목을 입력하세요" name="title" maxlength="20"></td>
 						</tr>
 						<tr>
 							<th>첨부파일</th>

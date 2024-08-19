@@ -18,6 +18,11 @@
 	margin-top: 10px;
 }
 
+td{
+height: 50px;
+align-content: center;
+}
+
 #menulist a {
 	text-decoration: none;
 	color: white;
@@ -147,7 +152,7 @@
 							<c:if test="${not empty boardList}">
 								<c:forEach var="board" items="${boardList}">
 									<tr>
-										<td><a id="listtitle"
+										<td style="width: 400px;"><a id="listtitle"
 											href="${path}/infodetail?bo_no=${board.bo_no}"> <c:out
 													value="${board.title}" />
 										</a></td>

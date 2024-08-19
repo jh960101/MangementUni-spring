@@ -13,7 +13,7 @@ where EMP_NO =#{loginid}and EMP_PASSWORD =#{loginPassword}
 <select id="employeepwfind" parameterType="map" resultType="com.university.management.employee.dto.Employee">
 
 select * from employee
-where EMP_NAME =#{loginid}and EMP_EMAIL =#{loginemail}
+where EMP_NO =#{loginid}and EMP_EMAIL =#{loginemail}
 
 
 </select>

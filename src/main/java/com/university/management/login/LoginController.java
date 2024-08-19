@@ -114,7 +114,7 @@ System.out.println("실행");
 
 	@RequestMapping("/findpasswordinfo")
 	public String findPasswords(Model model, String loginid, String login ,String email,HttpSession session) {
-		System.out.println(loginid+" "+ email);
+		System.out.println(loginid+" "+ email+"login"+login);
 		if (loginid == null || loginid.isEmpty()  || email == null || email.isEmpty()) {
 			model.addAttribute("msg", "아이디와 이메일을 입력해 주세요.");
 			return "login/findpassword";
@@ -127,10 +127,10 @@ System.out.println("실행");
 		params.put("loginemail", email);
 
 		if (login.equals("Employee")) {
-	
+		
 				Employee employee = loginService.employeepwfind(params);
 				
-				System.out.println("확인 :" + employee.getEMP_EMAIL()+ employee.getEMP_NAME());
+				
 				
 				if (employee != null  && employee.getEMP_EMAIL().equals(email)) {
 					
@@ -189,11 +189,9 @@ System.out.println("실행");
 		}
 			else if (login.equals("Student")) {
 			Student student = loginService.studentpwfind(params);
+		
 			if (student != null  && student.getSTU_EMAIL().equals(email)) {
-				
-				
-				
-				
+
 				//api이메일
 				System.out.println("email:" + email);
 				// 난수의 범위 111111~999999(6자리의 난수 지정)
