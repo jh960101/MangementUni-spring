@@ -21,7 +21,7 @@
 		<property name="host" value="smtp.naver.com" />
 		<property name="port" value="465" />
 		<property name="username" value="ghdgns1226" />
-		<property name="password" value="" />
+		<property name="password" value="wjdgns6425!@#" />
 		<property name="javaMailProperties">
 			<!-- props 여러개의 속성을 그룹화하는 태그 -->
 			<props>

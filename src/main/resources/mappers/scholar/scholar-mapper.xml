@@ -126,7 +126,7 @@
 
 	<insert id="scholarInsert"
 		parameterType="com.university.management.scholar.dto.Scholar">
-		INSERT INTO university.SCHOLARLIST (STU_NO, DEPT_CODE, SCH_NO, SUB_STATUS,
+		INSERT INTO university.SCHOLARLIST (STU_NO, DEPT_CODE, SCH_NO, SCH_STATUS,
 		YEAR, SMT)
 		VALUES (#{STU_NO}, #{DEPT_CODE}, #{SCH_NO}, #{SUB_STATUS}, #{YEAR}, #{SMT})
 	</insert>
