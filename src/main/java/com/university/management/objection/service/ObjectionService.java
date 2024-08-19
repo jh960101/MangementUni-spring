@@ -106,4 +106,13 @@ public class ObjectionService {
 		return mapper.getListCount(params);
 	}
 
+	public int objStatusUpdate(String sub_code, int stu_no) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sub_code", sub_code);
+		map.put("stu_no", stu_no);
+		
+		return mapper.objStatusUpdate(map);
+	}
+
 }

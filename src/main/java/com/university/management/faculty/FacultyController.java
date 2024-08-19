@@ -565,7 +565,11 @@ public class FacultyController {
 		System.out.println("objUpdate res : " + res);
 
 		if (res > 0) {
-			session.setAttribute("msg", "저장 되었습니다.");
+			int resStatus = objservice.objStatusUpdate(sub_code, stu_no);
+			if(resStatus > 0) {
+				System.out.println("성적 변경 완료");
+				session.setAttribute("msg", "저장 되었습니다.");
+			}
 		} else {
 			session.setAttribute("msg", "정상적으로 저장되지 않았습니다.");
 		}
@@ -640,6 +644,7 @@ public class FacultyController {
 		Scholar sch = new Scholar(stuNo, deptCode, schNo, year, smt, schStatus);
 		boolean success = false;
 		int result = scholarservice.scholarInsert(sch);
+		System.out.println("result:"+result);
 		if (result == 1) {
 			stuservice.studentUpdate(stuNo);
 			success = true;

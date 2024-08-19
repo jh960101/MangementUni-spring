@@ -83,7 +83,7 @@
                 <div class="stat-item">
                     <img
                             src="${pageContext.request.contextPath}/resources/img/추천버튼.png"
-                            class="button-img recommend-button" id="contentButton2">
+                            class="button-img recommend-button" id="contentButton2"  onclick="window.location.href='etaLikeUp?bo_no=${board.bo_no}'">
                     <div class="counter" id="contentCounter2">${board.bo_Like}</div>
                 </div>
             </div>

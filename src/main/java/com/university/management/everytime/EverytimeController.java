@@ -35,6 +35,9 @@ public class EverytimeController {
     @RequestMapping("/etmainpage")
     public String etmainpage(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
 
+        session.removeAttribute("readCheck");
+        session.removeAttribute("likeCheck");
+
         Map<String, Object> params = new HashMap<>();
 
         int listLimit = 4; // 한 페이지에 보여질 게시글 수
@@ -90,21 +93,31 @@ public class EverytimeController {
     @RequestMapping("/etdetailview")
     public String etdetailview(Model model, @RequestParam("no") int boNo) {
 
-        Board etaboard = service.getEtaBoardByNo(boNo);
 
+
+        if (session.getAttribute("readCheck") == null) {
+            session.setAttribute("readCheck", true);
+            service.readCountUp(boNo);
+        }
+
+        Board etaboard = service.getEtaBoardByNo(boNo);
+        
         int stu_no = etaboard.getStu_no();
 
         List<Student> students = studentService.stuselect(stu_no);
         System.out.println(students);
 
         model.addAttribute("board", etaboard);
-        model.addAttribute("student",students);
+        model.addAttribute("student", students);
 
         return "everytime/etdetailview";
     }
 
     @RequestMapping("/everytimehot")
     public String everytimehot(Model model) {
+
+        session.removeAttribute("readCheck");
+        session.removeAttribute("likeCheck");
 
         List<Board> list = service.getAllEtaHotList();
         model.addAttribute("list", list);
@@ -160,6 +173,17 @@ public class EverytimeController {
             rttr.addAttribute("msg", "글 작성에 실패하였습니다.");
         }
         return "redirect:/etmypage?stuno=" + stu_no;
+    }
+
+    @RequestMapping("/etaLikeUp")
+    public String etaLikeUp(@RequestParam("bo_no") int bo_no) {
+
+        if (session.getAttribute("likeCheck") == null) {
+            session.setAttribute("likeCheck", true);
+            service.etaLikeUp(bo_no);
+        }
+
+        return "redirect:/etdetailview?no=" + bo_no;
     }
 
 }

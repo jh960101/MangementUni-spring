@@ -56,10 +56,10 @@
 			</div>
 
 			<c:forEach var="board" items="${list}" varStatus="status">
-				<div class="list-group">
+				<div class="list-group" style="border: 1px solid black;margin-top: 20px;margin-bottom: 20px">
 					<a href="etdetailview?no=${board.bo_no}"
 						class="list-group-item list-group-item-action list-group-item-large"
-						aria-current="true" style="margin-top: 5px;"> <span
+						aria-current="true" style="border-bottom: 1px solid #333;background-color: #eee"> <span
 						style="font-size: 20px; vertical-align: middle;"> <c:if
 								test="${status.count<=3 }">
 								<img src="${path}/resources/img/etahotimg${status.count}.png" />
@@ -67,9 +67,9 @@
 							</c:if>
 					</span> <c:if test="${status.count>3 }">${status.count}th ${board.title}</c:if>
 					</a> <a href="#"
-						class="list-group-item list-group-item-action list-group-item-small disabled">
+						class="list-group-item list-group-item-action list-group-item-small disabled" style="border: none;font-size: 18px;">
 						${board.content} </a> <a href="#"
-						class="list-group-item list-group-item-action list-group-item-small2 disabled">
+						class="list-group-item list-group-item-action list-group-item-small2 disabled" style="border: none">
 						<div style="display: flex; align-items: center;">
 							<div style="padding: 1px; margin-right: 10px; font-size: 15px;">
 								<c:set var="now" value="<%=new java.util.Date()%>" />
@@ -124,5 +124,5 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 
-</html>
 <jsp:include page="../common/footer.jsp" />
+</html>

@@ -197,7 +197,14 @@
 	
 	<update id="objUpdate" parameterType="java.util.Map">
 		UPDATE RESULTS 
-    	SET GRADE_P = #{grade_p}, GRADE = #{grade}, OBJ_STATUS = 'Y'
+    	SET GRADE_P = #{grade_p}, GRADE = #{grade}
+   		WHERE 
+        STU_NO = #{stu_no} AND SUB_CODE = #{sub_code}
+	</update>
+	
+	<update id="objStatusUpdate"  parameterType="java.util.Map">
+		UPDATE OBJECTION 
+    	SET OBJ_STATUS = 'Y'
    		WHERE 
         STU_NO = #{stu_no} AND SUB_CODE = #{sub_code}
 	</update>
