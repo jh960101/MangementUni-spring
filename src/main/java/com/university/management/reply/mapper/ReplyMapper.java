@@ -12,4 +12,6 @@ public interface ReplyMapper {
     List<Reply> selectAllReply(int bo_no);
 
     void deleteReplies(int bo_no);
+
+    void deleteReply(int re_No);
 }

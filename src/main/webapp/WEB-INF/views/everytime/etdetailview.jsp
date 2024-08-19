@@ -140,6 +140,7 @@
                  padding-bottom: 500px;
             ">
                 <c:forEach var="reply" items="${list}">
+                    <input type="hidden" id="re_no" value="${reply.re_No}"/>
                     <div class="comment">
                         <div class="horizontal-container">
                             <div class="profile-section">

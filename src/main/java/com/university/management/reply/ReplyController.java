@@ -47,4 +47,14 @@ public class ReplyController {
         return ResponseEntity.status(HttpStatus.OK).body(list);
 
     }
+    @RequestMapping("/deleteReply")
+    public  ResponseEntity<List<Reply>> deleteReply(@RequestBody Reply reply){
+        System.out.println(reply);
+
+        service.deleteReply(reply.getRe_No());
+
+        List<Reply> list = service.selectAllReply(reply.getBo_No());
+
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
 }

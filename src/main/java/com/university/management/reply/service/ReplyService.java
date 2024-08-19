@@ -24,4 +24,8 @@ public class ReplyService {
     public void deleteReplies(int bo_no) {
         mapper.deleteReplies(bo_no);
     }
+
+    public void deleteReply(int re_No) {
+        mapper.deleteReply(re_No);
+    }
 }
