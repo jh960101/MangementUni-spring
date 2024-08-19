@@ -92,13 +92,16 @@ public class EverytimeController {
 
         Board etaboard = service.getEtaBoardByNo(boNo);
 
+        service.readCountUp(boNo);
+//      새로고침 막는 기능 필요.
+
         int stu_no = etaboard.getStu_no();
 
         List<Student> students = studentService.stuselect(stu_no);
         System.out.println(students);
 
         model.addAttribute("board", etaboard);
-        model.addAttribute("student",students);
+        model.addAttribute("student", students);
 
         return "everytime/etdetailview";
     }

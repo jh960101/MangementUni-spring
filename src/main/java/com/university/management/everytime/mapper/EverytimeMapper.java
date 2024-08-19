@@ -25,4 +25,6 @@ public interface EverytimeMapper {
     int insertBoard(Board board);
 
     int updateBoard(Board board);
+
+    void readCountUp(int boNo);
 }

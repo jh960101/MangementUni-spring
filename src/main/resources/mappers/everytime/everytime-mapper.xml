@@ -44,4 +44,9 @@
 		WHERE BO_NO = #{bo_no}
 	</update>
 
+	<update id="readCountUp" parameterType="int">
+		UPDATE BOARD SET READCOUNT = READCOUNT + 1
+		WHERE BO_NO = #{bono}
+	</update>
+
 </mapper>
