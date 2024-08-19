@@ -103,6 +103,9 @@
 
             </div>
 
+            <div id="commentsContainer" style="height: 100px;">
+
+            </div>
             <div class="form-controls-container">
                 <div class="file-upload-section">
 								<textarea id="commentInput" class="form-control" rows="3"
@@ -110,9 +113,7 @@
                                           style="width: 100%;"></textarea>
                 </div>
                 <hr style="width: 1000px;">
-                <div id="commentsContainer">
 
-                </div>
                 <div class="form-check d-inline">
                     <input class="form-check-input" style="font-weight: bolder;"
                            type="checkbox" value="" id="flexCheckDefault"> <label

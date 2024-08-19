@@ -1,4 +1,4 @@
-package com.university.management.board.dto;
+package com.university.management.reply.dto;
 
 import java.util.Date;
 
