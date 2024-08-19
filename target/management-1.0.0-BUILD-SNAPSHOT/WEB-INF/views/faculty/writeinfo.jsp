@@ -1,4 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page session="false"%>
@@ -9,14 +8,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+<title>공지사항 게시글 작성</title>
+<jsp:include page="../common/header.jsp" />
+<!-- include summernote css/js-->
+<script type="text/javascript" src='${path}/resources/js/summernote/summernote-lite.js'></script>
+<script type="text/javascript" src='${path}/resources/js/summernote/lang/summernote-ko-KR.js'></script>
+<link rel="stylesheet" href="${path}/resources/css/summernote/summernote-lite.css">
 
 <link href="${path}/resources/css/objection.css" rel="stylesheet" />
 <link href="${path}/resources/css/infodetail.css" rel="stylesheet" />
-<title>공지사항 게시글 작성</title>
 <style>
 #tbl-board {
 	width: 100%;
@@ -117,7 +117,6 @@
 </head>
 <body>
 
-	<jsp:include page="../common/header.jsp" />
 
 	<c:set var="searchType" value="${param.searchType}" />
 	<c:if test="${empty searchType}">
@@ -125,7 +124,7 @@
 	</c:if>
 
 	<div id="menuBar">
-		<div id="sub-menubar" style="height: 150px; font-size:16px;">
+		<div id="sub-menubar" style="height: 150px; font-size: 16px;">
 			<ul id="menulist">
 				<li><a href="infoboard">공지사항 관리</a></li>
 				<li><a href="scholarlist">장학금 관리</a></li>
@@ -172,16 +171,7 @@
 						<tr>
 							<th width="50"><span>내용</span></th>
 							<td>
-								<!-- <div id="contentLabel"
-									style="padding: 10px; width: 100%; height: auto;">
-									<textarea placeholder="내용을 입력하세요" name="detail" id="summernote"
-										style="border: 1px solid #ccc; padding: 5px; width: 100%; height: 200px; overflow-y: auto;"></textarea>
-									<input type="file" id="imageUpload" accept="image/*"
-										name="imageUpload" style="margin-top: 10px;" />
-									<div id="imagePreview" style="margin-top: 10px;"></div>
-								</div> -->
-								<textarea id="summernote" name="editordata"></textarea>
-								
+								<textarea id="summernote" name="detail" style="height: auto;"></textarea>
 							</td>
 						</tr>
 					</table>
@@ -203,43 +193,74 @@
 
 
 	<script>
-		/* document.getElementById('imageUpload').addEventListener('change',
-						function(event) {
-							const file = event.target.files[0]; // 선택한 첫 번째 파일
+		
+	function fn_summernote(element) {
+	    $("#" + element).summernote({
+	        toolbar: [
+	            ['fontname', ['fontname']],
+	            ['fontsize', ['fontsize']],
+	            ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+	            ['color', ['forecolor', 'color']],
+	            ['table', ['table']],
+	            ['para', ['ul', 'ol', 'paragraph']],
+	            ['height', ['height']],
+	            ['insert', ['picture', 'link', 'video']],
+	            ['view', ['fullscreen', 'help']]
+	        ],
+	        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+	        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+	        width: 850,
+	        height: 200,
+	        minHeight: null,
+	        maxHeight: null,
+	        focus: false,
+	        lang: "ko-KR",
+	        placeholder: '내용을 작성하십시오.',
+	        callbacks: {
+	            onImageUpload: function(files, editor, welEditable) {
+	                // 다중 이미지 처리를 위해 for문을 사용했습니다.
+	                for (var i = 0; i < files.length; i++) {
+	                    imageUploader(files[i], this);
+	                }
+	            },
+	            onInit: function() {
+	                // 모달창의 스타일 또는 속성을 변경
+	            	$('.note-modal-header').css({
+	            	    'padding': '20px',
+	            	    'margin-top': '30px',
+	            	    'border': '1px solid #ededef'
+	            	});
 
-							// 파일이 있는 경우
-							if (file) {
-								const fileName = file.name; // 파일의 이름
-								const extension = fileName.split('.').pop()
-										.toLowerCase(); // 파일 확장자 가져오기
+	            	$('.note-modal-footer').css({
+	            	    'padding-right': '20px !improtant',
+	            	    'padding': '0px',
+	            	    'margin-right': '20px',
+	            	    'height': '60px',
+	            	    'text-align': 'center'
+	            	});
 
-								// 유효한 이미지 확장자인지 확인
-								if (![ 'jpg', 'jpeg', 'png', 'gif' ]
-										.includes(extension)) {
-									alert('이미지 파일만 선택할 수 있습니다. JPG, JPEG, PNG, GIF 형식의 이미지를 선택해 주세요.');
-									event.target.value = ''; // 선택한 파일 초기화
-									return; // 함수 종료
-								}
-
-								// Image preview 처리
-								const reader = new FileReader();
-								reader.onload = function(e) {
-									const img = document.createElement('img');
-									img.src = e.target.result;
-									img.style.maxWidth = '100%';
-									img.style.maxHeight = '300px';
-									img.style.marginTop = '10px';
-									document.getElementById('imagePreview').innerHTML = ''; // 이전 미리보기 초기화
-									document.getElementById('imagePreview')
-											.appendChild(img); // 미리보기 추가
-								};
-
-								reader.readAsDataURL(file); // 선택한 파일 읽기
-							}
-						});
-
-		// textarea - summernote
-		$('#summernote').summernote(
+	            	$('.note-modal-footer .note-btn').css({
+	            	    'height': '35px',
+	            	    'float': 'right',
+	            	    'margin': '10px',
+	            	    'padding': '5px',
+	            	    'text-align': 'center',
+	            	    'width': '100px',
+	            	    'font-size': 'medium',
+	            	    'background-color': '#024C86',
+	            	    'border': 'none'
+	            	});
+	            }
+	        }
+	    });
+	}
+	
+		// 페이지 로딩시 호출
+		$(document).ready(function () {
+		    fn_summernote("summernote");
+		});
+		
+		/* $('#summernote').summernote(
 				{
 					// 에디터 크기 설정
 					height : 800,
@@ -284,9 +305,9 @@
 						}
 					}
 
-				});
+				}); */
 		
-		// 서머노트에 text 쓰기
+		/* // 서머노트에 text 쓰기
 		$('#summernote').summernote('insertText', 써머노트에 쓸 텍스트);
 
 		// 서머노트 쓰기 비활성화
@@ -302,30 +323,38 @@
 		$('#summernote').summernote('undo');
 		// 앞으로가기
 		$('#summernote').summernote('redo');
+		*/ 
 		
-		
-		function imageUploader(file, el) {
+		function imageUploader(imageUpload, el) {
+			
+			console.log("imageUploader 실행");
+			
 			var formData = new FormData();
-			formData.append('file', file);
+			formData.append('imageUpload', imageUpload);
 		  
 			$.ajax({                                                              
 				data : formData,
 				type : "POST",
-		        // url은 자신의 이미지 업로드 처리 컨트롤러 경로로 설정해주세요.
-				url : '/post/image-upload',  
+				url : '${path}/summernoteUpload',  
 				contentType : false,
 				processData : false,
+				cache: false,
 				enctype : 'multipart/form-data',                                  
 				success : function(data) {   
-					$(el).summernote('insertImage', "${pageContext.request.contextPath}/assets/images/upload/"+data, function($image) {
+					console.log("imageUploader 실행 - success");
+					console.log("path : " + "${path}");
+						$(el).summernote('insertImage', "${path}/resources/upload/"+decodeURIComponent(data), function($image) {
 						$image.css('width', "100%");
-					});
-		            // 값이 잘 넘어오는지 콘솔 확인 해보셔도됩니다.
+						}); 
 					console.log(data);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+				    console.error('AJAX Error: ' + textStatus + ' : ' + errorThrown);
+				    console.log('Response Text:', jqXHR.responseText);
+				    alert('오류 발생: ' + textStatus);
 				}
 			});
-		} */
-		
+		}  
 		
 		// 폼 빈칸일 경우 alert창 띄우기
 		function validateForm() {

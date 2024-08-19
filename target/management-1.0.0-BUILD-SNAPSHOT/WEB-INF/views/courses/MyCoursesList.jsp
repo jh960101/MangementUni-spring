@@ -110,7 +110,7 @@
 			const top = (screenHeight - height) / 2;
 			const popup = window
 					.open(url, 'popupWindow',
-							`width=1500,height=700,top=100,left=200,scrollbars=no,resizable=no`);
+							`width=1280,height=720,top=100,left=200,scrollbars=no,resizable=no`);
 			return false;
 		}
 		  document.addEventListener('DOMContentLoaded', function() { // 수강과목　주차별　조건설정

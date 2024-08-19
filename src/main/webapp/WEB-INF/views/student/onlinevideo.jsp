@@ -34,8 +34,13 @@
 				</div>
 			</div>
 			<div class="controls-section">
+				<div class="memo-section">
+					<label for="memo"></label>
+					<textarea id="memo" placeholder="여기에 임시 메모를 작성하세요"></textarea>
+				</div>
 				<button class="button" id="saveProgress">학습 종료</button>
 			</div>
+
 		</div>
 	</div>
 	<script type="text/javascript">

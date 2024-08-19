@@ -35,5 +35,13 @@
 		SELECT COUNT(*) FROM board WHERE TYPE = "e"
 	</select>
 
+	<insert id="insertBoard" parameterType="com.university.management.board.dto.Board">
+		INSERT INTO BOARD(stu_no, title, content, type,bo_status) VALUES (#{stu_no},#{title},#{content},"E",#{bo_status})
+	</insert>
+
+	<update id="updateBoard" parameterType="com.university.management.board.dto.Board">
+		UPDATE BOARD SET TITLE = #{title}, CONTENT = #{content}, BO_STATUS= #{bo_status}, CREATE_DATE = now()
+		WHERE BO_NO = #{bo_no}
+	</update>
 
 </mapper>

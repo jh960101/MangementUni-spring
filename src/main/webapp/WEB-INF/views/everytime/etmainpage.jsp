@@ -61,8 +61,8 @@
     <div id="sub-menuBar" style="height: 150px;">
         <ul id="menulist">
             <li><a href="everytimehot">🔥HOT 게시판🔥</a></li>
-            <li><a href="etmainpage">자유게시판</a></li>
-            <li><a href="etmypage?stuno=${studentno}">내글 보기</a></li>
+            <li><a href="etmainpage">자유 게시판</a></li>
+            <li><a href="etmypage">내글 보기</a></li>
         </ul>
     </div>
 </div>
@@ -104,8 +104,8 @@
                    class="list-group-item list-group-item-action list-group-item-large"
                    aria-current="true" style="margin-top: 5px;"> ${board.title} </a> <a href="#"
                                                                                         class="list-group-item list-group-item-action list-group-item-small disabled">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${board.content}</a> <a href="#"
-                                                                      class="list-group-item list-group-item-action list-group-item-small2 disabled">
+                    ${board.content}</a> <a href="#"
+                                            class="list-group-item list-group-item-action list-group-item-small2 disabled">
                 <div style="display: flex; align-items: center;">
                     <div style="padding: 1px; margin-right: 10px; font-size: 15px;">
                         <c:set var="now" value="<%=new java.util.Date()%>"/>
