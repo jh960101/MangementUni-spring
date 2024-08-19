@@ -22,12 +22,12 @@
 
 	</select>
 
-<select id="lmsstatusUpdate" parameterType="int">
+<update id="lmsstatusUpdate" parameterType="int">
 
-	 update lms set lms_check='y'
+	 update lms set lms_check='Y'
     where LMS_NO=#{lms_no}
 
-	</select>
+	</update>
 
 
 

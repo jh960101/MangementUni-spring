@@ -26,4 +26,6 @@ public interface ObjectionMapper {
 
 	List<Objection> objectionFilterData(Map<String, Object> params);
 
+	int objStatusUpdate(Map<String, Object> map);
+
 }
