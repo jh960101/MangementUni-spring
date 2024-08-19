@@ -22,9 +22,17 @@
 <style>
 /* 비활성화된 링크의 스타일 설정 */
 .inactive {
-	color: red !important;
+	color: black !important;
 	pointer-events: none; /* 클릭 불가 */
 	text-decoration: none; /* 밑줄 제거 */
+	font-weight:normal !important;
+}
+
+.lable-box{
+margin-left: 10px;
+padding: 3px;
+width: 100px;
+text-align:center;
 }
 </style>
 </head>
@@ -79,12 +87,23 @@
 				<div id="onlineList">
 					<c:forEach var="list" items="${lmslist}" varStatus="status">
 						<div id="online">
-							<p id="online-title">${list.LMS_TITLE } (${list.LMS_Period})</p>
+							<p id="online-title">${list.LMS_TITLE } (${list.LMS_Period})
+							<c:if test="${list.LMS_CHECK eq 'N'}">
+					
+							<label class="lable-box" style=" border: 3px solid gray;  color: gray;  ">출석미반영</label>
+							
+							</c:if>
+							<c:if test="${list.LMS_CHECK eq 'Y'}">
+						
+							<label class="lable-box" style=" border: 3px solid #2872ec; color:#2872ec;   ">출석반영</label>
+					
+							</c:if>
+							</p>
 							<div id="onlien-cont">
 								<a id="lmsvideo-link" href="online?lms_no=${list.LMS_NO}"
 									target="_blank"
 									onclick="return openPagePopup(this.href,190,700);"
-									data-week=${list. LMS_DATE }  style="color: #10df10e8;"> <span 
+									data-week=${list. LMS_DATE }  style="color: #2872ec; font-weight:bold;"> <span 
 									class="material-symbols-outlined icon"></span> 영상 강의
 								</a> <a href="${path}/resources/pdf/${list.LMS_FILE}" download>
 									<span class="material-symbols-outlined icon">description</span>[강의
