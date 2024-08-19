@@ -13,4 +13,7 @@
         SELECT * FROM REPLY WHERE BO_NO = ${bo_no} ORDER BY CREATE_DATE
     </select>
 
+    <delete id="deleteReplies" parameterType="int">
+        DELETE FROM REPLY WHERE BO_NO = #{bo_no}
+    </delete>
 </mapper>

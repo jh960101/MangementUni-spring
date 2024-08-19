@@ -10,4 +10,6 @@ public interface ReplyMapper {
     int insertReply(Reply reply);
 
     List<Reply> selectAllReply(int bo_no);
+
+    void deleteReplies(int bo_no);
 }

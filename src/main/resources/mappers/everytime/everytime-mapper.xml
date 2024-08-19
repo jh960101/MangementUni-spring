@@ -55,4 +55,7 @@
 		WHERE BO_NO = #{boNo}
 	</update>
 
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM BOARD WHERE TYPE ='e' AND BO_NO = #{bo_no}
+	</delete>
 </mapper>
