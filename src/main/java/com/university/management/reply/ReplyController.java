@@ -26,6 +26,7 @@ public class ReplyController {
         int stu_no = (int) session.getAttribute("studentno");
         reply.setStu_No(stu_no);
 
+        service.insertReply(reply);
 
         return ResponseEntity.status(HttpStatus.OK).body(reply);
     }
@@ -35,6 +36,7 @@ public class ReplyController {
         System.out.println(bo_no);
 
         List<Reply> list = service.selectAllReply(bo_no);
+        System.out.println(list);
 
         return ResponseEntity.status(HttpStatus.OK).body(list);
 

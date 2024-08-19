@@ -4,6 +4,8 @@ package com.university.management.everytime;
 import com.university.management.board.dto.Board;
 import com.university.management.board.dto.PageInfo;
 import com.university.management.everytime.service.EverytimeService;
+import com.university.management.reply.dto.Reply;
+import com.university.management.reply.service.ReplyService;
 import com.university.management.student.dto.Student;
 import com.university.management.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class EverytimeController {
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private ReplyService replyService;
 
     @RequestMapping("/etmainpage")
     public String etmainpage(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
@@ -104,10 +109,14 @@ public class EverytimeController {
         int stu_no = etaboard.getStu_no();
 
         List<Student> students = studentService.stuselect(stu_no);
-        System.out.println(students);
+
+
+        List<Reply> list = replyService.selectAllReply(boNo);
+        System.out.println(list);
 
         model.addAttribute("board", etaboard);
         model.addAttribute("student", students);
+        model.addAttribute("list",list);
 
         return "everytime/etdetailview";
     }
