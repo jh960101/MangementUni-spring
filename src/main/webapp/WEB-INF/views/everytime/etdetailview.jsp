@@ -26,8 +26,13 @@
             rel="stylesheet"
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.5.1/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel='stylesheet'
+          href='https://cdn-uicons.flaticon.com/2.5.1/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <script defer src="${pageContext.request.contextPath}/resources/js/reply.js"></script>
+    <style>
 
+    </style>
 </head>
 <c:if test="${loginname eq null}">
     <script>
@@ -55,7 +60,7 @@
     </div>
 </div>
 <div class="container"
-     style="height: 1600px; margin-top: 100px; margin-left: 450px;">
+     style="height: 1900px; margin-top: 100px; margin-left: 450px;">
     <div type="box" id="content" class="header2">
         <input type="text" id="Box" class="box" value="&nbsp;자유게시판" readonly>
 
@@ -94,67 +99,103 @@
         </div>
         <hr style="width: 1000px;">
     </div>
-    <div class="container container2" style="height: 300px; margin-bottom: 100px;">
+    <div class="container container2">
         <div>
-                <div class="input-group">
+            <div class="input-group">
 					<textarea class="form-control2" rows="30" id="mainContent" readonly
-                              style="overflow: hidden;padding-left: 15px;">${board.content}
+                              style="padding-left: 10px;">${board.content}
                     </textarea>
 
-                </div>
+            </div>
 
-                <div id="commentsContainer" style="">
-                    <c:forEach var="reply" items="${list}">
-                        <div class="comment">
-                            <div class="horizontal-container">
-                                <div class="profile-section">
-                                    <img src="${pageContext.request.contextPath}/resources/img/프로필사진.png" class="프로필사진" alt="Profile Image">
-                                    <span class="username">익명</span>
-                                </div>
-                                <div class="stats-section">
-                                    <div class="stat-item"></div>
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control3" value="${reply.reply_Content}" readonly>
-                            </div>
-                            <hr style="width: 1000px;">
-                        </div>
-                    </c:forEach>
-                </div>
-
-                <div class="form-controls-container">
-                    <div class="file-upload-section">
+            <div class="form-controls-container">
+                <div class="file-upload-section">
 								<textarea id="commentInput" class="form-control" rows="3"
                                           cols="80" placeholder="댓글 작성" maxlength="100"
                                           style="width: 100%;"></textarea>
-                    </div>
-<%--                    <hr style="width: 1000px;">--%>
-
-                    <div class="form-check d-inline">
-<%--                        <input class="form-check-input" style="font-weight: bolder;"--%>
-<%--                               type="checkbox" value="" id="flexCheckDefault"> <label--%>
-<%--                            class="form-check-label" style="font-weight: bolder;"--%>
-<%--                            for="flexCheckDefault">익명</label>--%>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <button class="custom-submit-button" type="button"
-                                id="insertReply">댓글 작성
-                        </button>
-                    </div>
                 </div>
-                <div class="downbtn">
-                    <button type="button" class="btn3">
-                        <img
-                                src="${pageContext.request.contextPath}/resources/img/글목록.png"
-                                width="20" height="20">&nbsp;글 목록
+                <%--                    <hr style="width: 1000px;">--%>
+
+                <div class="form-check d-inline">
+                    <%--                        <input class="form-check-input" style="font-weight: bolder;"--%>
+                    <%--                               type="checkbox" value="" id="flexCheckDefault"> <label--%>
+                    <%--                            class="form-check-label" style="font-weight: bolder;"--%>
+                    <%--                            for="flexCheckDefault">익명</label>--%>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="custom-submit-button" type="button"
+                            id="insertReply">댓글 작성
                     </button>
                 </div>
             </div>
+            <div class="downbtn">
+                <button type="button" class="btn3" onclick="window.location.href='etmainpage'">
+                    <img
+                            src="${pageContext.request.contextPath}/resources/img/글목록.png"
+                            width="20" height="20">&nbsp;글 목록
+                </button>
+            </div>
+            <div id="commentsContainer" style=" height: auto;
+                 min-height: 100%;
+                 padding-bottom: 500px;
+            ">
+                <c:forEach var="reply" items="${list}">
+                    <div class="comment">
+                        <div class="horizontal-container">
+                            <div class="profile-section">
+                                <img src="${pageContext.request.contextPath}/resources/img/프로필사진.png" class="프로필사진"
+                                     alt="Profile Image">
+                                <span class="username">익명</span>
+                            </div>
+                            <div class="stats-section">
+                                <div class="stat-item"></div>
+                            </div>
+                        </div>
+                        <div class="input-group" style="gap: 90px;">
+                            <textarea class="replycontent" class="form-control-3" rows="3"
+                                      cols="70" placeholder="댓글 작성" maxlength="100"
+                                      style="width: 750px;margin: 10px 0 20px 20px;border-radius: 5px;border: none;outline: none;padding:10px;  " readonly>${reply.reply_Content}</textarea>
+                            <div class="d-flex align-items-center">
+                                <button class="custom-submit-button" type="button"
+                                        id="updatereply()" style="display: none">댓글 수정
+                                </button>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button style="background-color: white;border:none;" class="nestedreply"><i
+                                    class="fi fi-br-redo"></i> 댓글달기
+                            </button>
+                            <button style="background-color: white;border:none;" class="updatereply"><i
+                                    class="fi fi-br-edit-message" style="position: relative; top: 2px;"></i> 수정하기
+                            </button>
+                            <button style="background-color: white;border:none;" class="deletereply"><i
+                                    class="fi fi-rr-delete" style="position: relative; top: 2px;"></i> 삭제하기
+                            </button>
+                        </div>
+                        <div class="nestedreplybox" style="display: none;transition: all 0.5ms;">
+                            <div class="form-controls-container"
+                                 style="margin-top: 10px;padding-left: 20px;display: flex;background-color: white;border: none">
+                                <div>
+								<textarea id="nestedreplytext" class="form-control" rows="3"
+                                          cols="80" placeholder="대댓글 작성" maxlength="100"
+                                          style="width: 100%;"></textarea>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <button class="custom-submit-button" type="button"
+                                            id="insertNestedReply">답글 작성
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="width: 1000px;">
+                    </div>
+                </c:forEach>
+            </div>
         </div>
     </div>
+</div>
 
 </body>
 
-</html>
 <jsp:include page="../common/footer.jsp"/>
+</html>

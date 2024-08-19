@@ -5,12 +5,12 @@
     
     <insert id="insertReply" parameterType="reply">
         INSERT INTO REPLY
-            (STU_NO, BO_NO, REPLY_CONTENT) VALUES
-            (#{stu_No},#{bo_No},#{reply_Content})
+            (STU_NO, BO_NO, REPLY_CONTENT,CREATE_DATE) VALUES
+            (#{stu_No},#{bo_No},#{reply_Content},#{create_Date})
     </insert>
 
     <select id="selectAllReply" parameterType="int" resultType="com.university.management.reply.dto.Reply">
-        SELECT * FROM REPLY WHERE BO_NO = ${bo_no}
+        SELECT * FROM REPLY WHERE BO_NO = ${bo_no} ORDER BY CREATE_DATE
     </select>
 
 </mapper>
