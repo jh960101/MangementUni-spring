@@ -26,8 +26,7 @@
             rel="stylesheet"
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous">
-    <style>
-    </style>
+    <script defer src="${pageContext.request.contextPath}/resources/js/reply.js"></script>
 
 </head>
 <c:if test="${loginname eq null}">
@@ -62,6 +61,10 @@
 
 
         <div class="input-group">
+            <input type="hidden" id="boardNo" value="${board.bo_no}"/>
+            <input type="hidden" id="stuNo" value="${board.stu_no}"/>
+            <input type="hidden" id="path" value="${pageContext.request.contextPath}"/>
+
             <input type="text" class="form-control1" value="${board.title}"
                    readonly style="padding-left: 15px;">
         </div>
@@ -83,7 +86,8 @@
                 <div class="stat-item">
                     <img
                             src="${pageContext.request.contextPath}/resources/img/추천버튼.png"
-                            class="button-img recommend-button" id="contentButton2"  onclick="window.location.href='etaLikeUp?bo_no=${board.bo_no}'">
+                            class="button-img recommend-button" id="contentButton2"
+                            onclick="window.location.href='etaLikeUp?bo_no=${board.bo_no}'">
                     <div class="counter" id="contentCounter2">${board.bo_Like}</div>
                 </div>
             </div>
@@ -101,13 +105,14 @@
 
             <div class="form-controls-container">
                 <div class="file-upload-section">
-                    <form>
 								<textarea id="commentInput" class="form-control" rows="3"
                                           cols="80" placeholder="댓글 작성" maxlength="100"
                                           style="width: 100%;"></textarea>
-                    </form>
                 </div>
+                <hr style="width: 1000px;">
+                <div id="commentsContainer">
 
+                </div>
                 <div class="form-check d-inline">
                     <input class="form-check-input" style="font-weight: bolder;"
                            type="checkbox" value="" id="flexCheckDefault"> <label
@@ -116,7 +121,7 @@
                 </div>
                 <div class="d-flex align-items-center">
                     <button class="custom-submit-button" type="button"
-                            id="postCommentButton" onclick="history.back()">댓글 작성
+                            id="insertReply">댓글 작성
                     </button>
                 </div>
             </div>

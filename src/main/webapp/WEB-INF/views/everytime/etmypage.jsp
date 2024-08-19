@@ -91,14 +91,14 @@
 
 			<c:if test="${list.size()!=0 }">
 				<c:forEach var="board" items="${list}">
-					<div class="list-group">
+					<div class="list-group" style="border: 1px solid black;margin-top: 20px;margin-bottom: 20px;">
 						<a href="etaupdate?bo_no=${board.bo_no}"
 							class="list-group-item list-group-item-action list-group-item-large"
-							aria-current="true" style="margin-top: 5px;"> ${board.title}</a>
+							aria-current="true" style="background-color: #eee"> ${board.title}</a>
 						<a href="#"
-							class="list-group-item list-group-item-action list-group-item-small disabled">
+							class="list-group-item list-group-item-action list-group-item-small disabled" style="border: none;font-size: 18px;">
 							${board.content}</a> <a href="#"
-							class="list-group-item list-group-item-action list-group-item-small2 disabled">
+							class="list-group-item list-group-item-action list-group-item-small2 disabled" style="border: none;">
 							<div style="display: flex; align-items: center;">
 								<div style="padding: 1px; margin-right: 10px; font-size: 15px;">글
 									작성 1초전</div>
