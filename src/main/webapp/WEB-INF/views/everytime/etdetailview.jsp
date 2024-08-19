@@ -94,48 +94,65 @@
         </div>
         <hr style="width: 1000px;">
     </div>
-    <div class="container2" style="height: 200px; margin-bottom: 100px;">
+    <div class="container container2" style="height: 300px; margin-bottom: 100px;">
         <div>
-            <div class="input-group">
+                <div class="input-group">
 					<textarea class="form-control2" rows="30" id="mainContent" readonly
                               style="overflow: hidden;padding-left: 15px;">${board.content}
                     </textarea>
 
-            </div>
+                </div>
 
-            <div class="form-controls-container">
-                <div class="file-upload-section">
+                <div id="commentsContainer" style="">
+                    <c:forEach var="reply" items="${list}">
+                        <div class="comment">
+                            <div class="horizontal-container">
+                                <div class="profile-section">
+                                    <img src="${pageContext.request.contextPath}/resources/img/프로필사진.png" class="프로필사진" alt="Profile Image">
+                                    <span class="username">익명</span>
+                                </div>
+                                <div class="stats-section">
+                                    <div class="stat-item"></div>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control3" value="${reply.reply_Content}" readonly>
+                            </div>
+                            <hr style="width: 1000px;">
+                        </div>
+                    </c:forEach>
+                </div>
+
+                <div class="form-controls-container">
+                    <div class="file-upload-section">
 								<textarea id="commentInput" class="form-control" rows="3"
                                           cols="80" placeholder="댓글 작성" maxlength="100"
                                           style="width: 100%;"></textarea>
-                </div>
-                <hr style="width: 1000px;">
-                <div id="commentsContainer">
+                    </div>
+<%--                    <hr style="width: 1000px;">--%>
 
+                    <div class="form-check d-inline">
+<%--                        <input class="form-check-input" style="font-weight: bolder;"--%>
+<%--                               type="checkbox" value="" id="flexCheckDefault"> <label--%>
+<%--                            class="form-check-label" style="font-weight: bolder;"--%>
+<%--                            for="flexCheckDefault">익명</label>--%>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <button class="custom-submit-button" type="button"
+                                id="insertReply">댓글 작성
+                        </button>
+                    </div>
                 </div>
-                <div class="form-check d-inline">
-                    <input class="form-check-input" style="font-weight: bolder;"
-                           type="checkbox" value="" id="flexCheckDefault"> <label
-                        class="form-check-label" style="font-weight: bolder;"
-                        for="flexCheckDefault">익명</label>
-                </div>
-                <div class="d-flex align-items-center">
-                    <button class="custom-submit-button" type="button"
-                            id="insertReply">댓글 작성
+                <div class="downbtn">
+                    <button type="button" class="btn3">
+                        <img
+                                src="${pageContext.request.contextPath}/resources/img/글목록.png"
+                                width="20" height="20">&nbsp;글 목록
                     </button>
                 </div>
             </div>
-            <div class="downbtn">
-                <button type="button" class="btn3">
-                    <img
-                            src="${pageContext.request.contextPath}/resources/img/글목록.png"
-                            width="20" height="20">&nbsp;글 목록
-                </button>
-            </div>
         </div>
     </div>
-</div>
-</div>
 
 </body>
 
