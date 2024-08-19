@@ -259,6 +259,7 @@ public class StudentController {
 		model.addAttribute("coment", coment);
 		model.addAttribute("sub_name",sub_name);
 		model.addAttribute("smt",smt);
+		System.out.println(lmslist);
 		return "courses/myCoursesList";
 	}
 

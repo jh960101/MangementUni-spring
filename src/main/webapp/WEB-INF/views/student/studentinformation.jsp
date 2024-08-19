@@ -118,7 +118,9 @@ header, footer {
 									<span class="input-group-text" style="letter-spacing: 5.1px;">이메일</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
 										placeholder="${list.STU_EMAIL}" id="email" name="email" value="${list.STU_EMAIL}"maxlength='20'>
+										
 								</div>
+								<p style="margin-left:-77px;padding: 0;font-size: 15px">이메일은 20자 이내로 작성해주세요.</p>
 								<div class="input-group mb-2">
 									<span class="input-group-text">전화번호</span> <input type="text"
 										class="form-control" aria-describedby="basic-addon1"
