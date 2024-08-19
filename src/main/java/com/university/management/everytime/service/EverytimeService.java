@@ -45,4 +45,8 @@ public class EverytimeService {
     public void readCountUp(int boNo) {
         mapper.readCountUp(boNo);
     }
+
+    public void etaLikeUp(int boNo) {
+        mapper.etaLikeUp(boNo);
+    }
 }
