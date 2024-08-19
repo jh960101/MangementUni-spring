@@ -41,4 +41,12 @@ public class EverytimeService {
     public int updateBoard(Board board) {
         return mapper.updateBoard(board);
     }
+
+    public void readCountUp(int boNo) {
+        mapper.readCountUp(boNo);
+    }
+
+    public void etaLikeUp(int boNo) {
+        mapper.etaLikeUp(boNo);
+    }
 }
