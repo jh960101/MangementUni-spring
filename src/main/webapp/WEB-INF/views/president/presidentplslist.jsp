@@ -84,17 +84,7 @@
 	</c:if>
 
 
-	<c:if test="${login == '미르총장'}">
-		<div id="menuBar">
-			<div id="sub-menubar" style="height: 150px;">
-				<ul id="menulist">
-					<li><a href="infoboard">공지사항 관리</a></li>
-					<li><a href="scholarlist">장학금 관리</a></li>
-					<li><a href="objectionlist">성적 관리</a></li>
-				</ul>
-			</div>
-		</div>
-	</c:if>
+	
 
 	<div class="container" style="height: 750px; margin-top: 100px;">
 		<div id="content">
