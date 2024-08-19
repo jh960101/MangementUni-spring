@@ -115,7 +115,7 @@ header, footer {
 										placeholder="${deptname}"  disabled="disabled">
 								</div>
 								<div class="input-group mb-2">
-									<span class="input-group-text" style="letter-spacing: 5.1px;">이메일</span> <input type="text"
+									<span class="input-group-text" style="letter-spacing: 5.1px;">이메일</span> <input type="email"
 										class="form-control" aria-describedby="basic-addon1"
 										placeholder="${list.STU_EMAIL}" id="email" name="email" value="${list.STU_EMAIL}"maxlength='20'>
 										
