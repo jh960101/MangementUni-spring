@@ -99,15 +99,16 @@
         <%--        eta 게시물 리스트 가져와서 for문으로 출력--%>
 
         <c:forEach var="board" items="${list}">
-            <div class="list-group">
+            <div class="list-group" style="border: 1px solid #333;margin-bottom: 20px;margin-top: 20px">
                 <a href="etdetailview?no=${board.bo_no}"
                    class="list-group-item list-group-item-action list-group-item-large"
-                   aria-current="true" style="margin-top: 5px;"> ${board.title} </a> <a href="#"
-                                                                                        class="list-group-item list-group-item-action list-group-item-small disabled">
+                   aria-current="true" style="border-bottom: 1px solid #333;background-color: #eee"> ${board.title} </a> <a href="#"
+                                                                                                                          class="list-group-item list-group-item-action list-group-item-small disabled" style="border: none;font-size: 18px;">
                     ${board.content}</a> <a href="#"
-                                            class="list-group-item list-group-item-action list-group-item-small2 disabled">
+                                            class="list-group-item list-group-item-action list-group-item-small2 disabled"
+                                            style="border: none">
                 <div style="display: flex; align-items: center;">
-                    <div style="padding: 1px; margin-right: 10px; font-size: 15px;">
+                    <div style="padding: 1px;margin-right: 10px;  font-size: 15px;">
                         <c:set var="now" value="<%=new java.util.Date()%>"/>
                         <fmt:parseNumber value="${board.create_date.time / (1000*60*60*24)}" var="prevDate"
                                          integerOnly="true"/>
