@@ -130,7 +130,7 @@
 								<img
 									src="${pageContext.request.contextPath}/resources/img/msg.png"
 									width="15" height="15">
-								<div style="padding: 1px; margin-right: 10px; font-size: 15px;">20</div>
+								<div style="padding: 1px; margin-right: 10px; font-size: 15px;">${board.replyCount}</div>
 								<img
 									src="${pageContext.request.contextPath}/resources/img/조회수.png"
 									width="15" height="15">
