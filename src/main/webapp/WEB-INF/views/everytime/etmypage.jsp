@@ -63,20 +63,9 @@
 		</div>
 	</div>
 	<div class="container" style="height: 1000px;">
-		<div id="content">
+		<div id="content" style="margin-top: 60px;">
 			<!-- title view -->
 			<div class="list-group">
-				<div class="dropdown-container">
-					<div class="dropdown">
-						<button class="dropbtn">제목&nbsp;&nbsp;▼</button>
-						<div class="dropdown-content">
-							<a href="">제목</a> <a href="#">작성자</a> <a href="#">내용</a>
-						</div>
-					</div>
-					<input type="text" id="searchBox" class="search-box"
-						value="검색어를 입력해주세요" onfocus="clearPlaceholder()"
-						onblur="setPlaceholder()">
-				</div>
 				<input type="text" id="Box" class="box" value="&nbsp;내글 보기"
 					readonly>
 			</div>
