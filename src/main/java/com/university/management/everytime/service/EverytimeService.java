@@ -22,8 +22,8 @@ public class EverytimeService {
         return mapper.getEtaBoardByNo(bo_no);
     }
 
-	public List<Board> getAllEtaListByStuNo(int stu_no) {
-		return mapper.getAllEtaListByStuNo(stu_no);
+	public List<Board> getAllEtaListByStuNo(Map<String, Object> params) {
+		return mapper.getAllEtaListByStuNo(params);
 	}
 
 	public List<Board> getAllEtaHotList() {

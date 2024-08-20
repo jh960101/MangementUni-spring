@@ -16,7 +16,7 @@ public interface EverytimeMapper {
     Board getEtaBoardByNo(int no_no);
 
     /** eta 리스트 학생번호 기준으로 가져오기 **/
-	List<Board> getAllEtaListByStuNo(int stu_no);
+	List<Board> getAllEtaListByStuNo(Map<String, Object> params);
 
 	List<Board> getAllEtaHotList();
 
