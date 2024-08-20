@@ -110,8 +110,23 @@
 							class="list-group-item list-group-item-action list-group-item-small2 disabled"
 							style="border: none;">
 							<div style="display: flex; align-items: center;">
-								<div style="padding: 1px; margin-right: 10px; font-size: 15px;">글
-									작성 1초전</div>
+								<div style="padding: 1px; margin-right: 10px; font-size: 15px;">
+									<div style="padding: 1px; margin-right: 10px; font-size: 15px;">
+										<c:set var="now" value="<%=new java.util.Date()%>" />
+										<fmt:parseNumber
+											value="${board.create_date.time / (1000*60*60*24)}"
+											var="prevDate" integerOnly="true" />
+										<fmt:parseNumber value="${now.time  / (1000*60*60*24)}"
+											var="nowDate" integerOnly="true" />
+										<c:if test="${nowDate-prevDate-1 < 0}">
+									오늘
+								</c:if>
+										<c:if test="${nowDate-prevDate-1 > 0}">
+									${nowDate-prevDate-1}일전
+								</c:if>
+
+									</div>
+								</div>
 								<img
 									src="${pageContext.request.contextPath}/resources/img/msg.png"
 									width="15" height="15">
@@ -131,7 +146,8 @@
 			</c:if>
 
 			<c:if test="${list.size()!=0 }">
-				<div class="btn-container" style="display: flex;justify-content: center;margin-top: 50px;">
+				<div class="btn-container"
+					style="display: flex; justify-content: center; margin-top: 50px;">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">
 							<!-- 이전 페이지 -->
