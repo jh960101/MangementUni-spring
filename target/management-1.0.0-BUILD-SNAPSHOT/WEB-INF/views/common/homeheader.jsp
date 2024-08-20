@@ -53,7 +53,7 @@
                         <div class="col col-9">
                             <ul>
                                 <c:choose>
-                                    <c:when test="${loginname == '미르총장'}">
+                                    <c:when test="${empNO == '300'}">
                                         <!-- 미르총장이 로그인했을 때 -->
                                         <li><a href="${path}/presidentplslist">총장페이지</a></li>
                                     </c:when>

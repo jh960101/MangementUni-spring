@@ -80,7 +80,6 @@ public class EverytimeController {
     @RequestMapping("/updateBoard")
     public String updateBoard(Board board, Model model) {
 
-        System.out.println(board.toString());
         int stu_no = (int) session.getAttribute("studentno");
 
         int result = service.updateBoard(board);
@@ -98,25 +97,23 @@ public class EverytimeController {
     public String etdetailview(Model model, @RequestParam("no") int boNo) {
 
 
-
         if (session.getAttribute("readCheck") == null) {
             session.setAttribute("readCheck", true);
             service.readCountUp(boNo);
         }
 
         Board etaboard = service.getEtaBoardByNo(boNo);
-        
+
         int stu_no = etaboard.getStu_no();
 
         List<Student> students = studentService.stuselect(stu_no);
 
 
         List<Reply> list = replyService.selectAllReply(boNo);
-        System.out.println(list);
 
         model.addAttribute("board", etaboard);
         model.addAttribute("student", students);
-        model.addAttribute("list",list);
+        model.addAttribute("list", list);
 
         return "everytime/etdetailview";
     }
@@ -129,7 +126,6 @@ public class EverytimeController {
 
         List<Board> list = service.getAllEtaHotList();
         model.addAttribute("list", list);
-        System.out.println(list);
 
         return "everytime/everytimehot";
     }
@@ -176,9 +172,9 @@ public class EverytimeController {
         int result = service.insertBoard(board);
 
         if (result == 1) {
-            rttr.addAttribute("msg", "글 작성이 완료되었습니다.");
+            rttr.addAttribute("msg", "게시물 작성이 완료되었습니다.");
         } else {
-            rttr.addAttribute("msg", "글 작성에 실패하였습니다.");
+            rttr.addAttribute("msg", "게시물 작성에 실패하였습니다.");
         }
         return "redirect:/etmypage?stuno=" + stu_no;
     }
@@ -194,4 +190,21 @@ public class EverytimeController {
         return "redirect:/etdetailview?no=" + bo_no;
     }
 
+    @RequestMapping("/deleteBoard")
+    public String deleteBoard(@RequestParam("bo_no") int bo_no,RedirectAttributes rttr) {
+
+        int stu_no = (int) session.getAttribute("studentno");
+
+        replyService.deleteReplies(bo_no);
+
+        int result = service.deleteBoard(bo_no);
+
+        if (result == 1) {
+            rttr.addAttribute("msg", "게시물 삭제가 완료되었습니다.");
+        } else {
+            rttr.addAttribute("msg", "게시물 삭제에 실패하였습니다.");
+        }
+
+        return "redirect:/etmypage?stuno=" + stu_no;
+    }
 }

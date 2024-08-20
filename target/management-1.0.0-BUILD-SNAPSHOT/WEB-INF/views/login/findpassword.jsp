@@ -36,11 +36,11 @@
 				<div id="inputBox">
 					<div class="input-form-box">
 						<span>아이디 </span><input type="text" id="loginId" name="loginid"
-							class="form-control" />
+							class="form-control"maxlength="10" />
 					</div>
 					<div class="input-form-box">
 						<span>이메일 </span><input type="email" id="loginemail" name="email"
-							class="form-control" />
+							class="form-control" maxlength="20"/>
 					</div>
 					<div>
 						<input type='radio' name='login' value='Student'
