@@ -22,6 +22,7 @@ $().ready(function () {
                     let outhtml = '';
                     $.each(result, function (index, item) {
                         outhtml += `
+                    <input type="hidden" id="re_no" value="${item.re_No}"/>
                     <div class="comment">
                         <div class="horizontal-container">
                             <div class="profile-section">
@@ -94,7 +95,7 @@ $().ready(function () {
         $('.replycontent').css('outline', '1px solid #333');
     })
 
-    $('.deletereply').on("click", () => {
+    $(document).on("click", '.deletereply', () => {
 
         const re_No = $('#re_no').val();
         const bo_No = $('#boardNo').val();
@@ -112,6 +113,7 @@ $().ready(function () {
                 let outhtml = '';
                 $.each(result, function (index, item) {
                     outhtml += `
+                    <input type="hidden" id="re_no" value="${item.re_No}"/>
                     <div class="comment">
                         <div class="horizontal-container">
                             <div class="profile-section">
@@ -173,7 +175,7 @@ $().ready(function () {
         });
 
     })
-    $('#update-btn').on("click", () => {
+    $(document).on("click", '#update-btn', () => {
 
         const re_No = $('#re_no').val();
         const bo_No = $('#boardNo').val();
@@ -195,6 +197,7 @@ $().ready(function () {
                     let outhtml = '';
                     $.each(result, function (index, item) {
                         outhtml += `
+                    <input type="hidden" id="re_no" value="${item.re_No}"/>
                     <div class="comment">
                         <div class="horizontal-container">
                             <div class="profile-section">
