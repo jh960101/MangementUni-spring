@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>자유게시판</title>
+    <title>상세 페이지</title>
 
 
     <link
@@ -62,7 +62,7 @@
 <div class="container"
      style="height: 1900px; margin-top: 100px; margin-left: 450px;">
     <div type="box" id="content" class="header2">
-        <input type="text" id="Box" class="box" value="&nbsp;자유게시판" readonly>
+        <input type="text" id="Box" class="box" value="&nbsp;상세 페이지" readonly>
 
 
         <div class="input-group">
