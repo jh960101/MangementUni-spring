@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -21,24 +23,49 @@ public class ReplyController {
     private HttpSession session;
 
     @RequestMapping("/insertReply")
-    public ResponseEntity<Reply> insertReply(@RequestBody Reply reply) {
+    public ResponseEntity<List<Reply>> insertReply(@RequestBody Reply reply) {
 
+        Date date = Calendar.getInstance().getTime();
         int stu_no = (int) session.getAttribute("studentno");
+
         reply.setStu_No(stu_no);
+        reply.setCreate_Date(date);
 
         service.insertReply(reply);
 
-        return ResponseEntity.status(HttpStatus.OK).body(reply);
+        List<Reply> list = service.selectAllReply(reply.getBo_No());
+        return ResponseEntity.status(HttpStatus.OK).body(list);
     }
+
     @GetMapping("/selectAllReply/{bo_no}")
     public ResponseEntity<List<Reply>> selectAllReply(@PathVariable("bo_no") int bo_no){
 
         System.out.println(bo_no);
 
         List<Reply> list = service.selectAllReply(bo_no);
-        System.out.println(list);
 
         return ResponseEntity.status(HttpStatus.OK).body(list);
 
+    }
+    @RequestMapping("/deleteReply")
+    public  ResponseEntity<List<Reply>> deleteReply(@RequestBody Reply reply){
+        System.out.println(reply);
+
+        service.deleteReply(reply.getRe_No());
+
+        List<Reply> list = service.selectAllReply(reply.getBo_No());
+
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
+
+    @RequestMapping("/updateReply")
+    public  ResponseEntity<List<Reply>> updatereply(@RequestBody Reply reply){
+
+        service.updateReply(reply);
+
+        System.out.println(reply);
+        List<Reply> list = service.selectAllReply(reply.getBo_No());
+
+        return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 }

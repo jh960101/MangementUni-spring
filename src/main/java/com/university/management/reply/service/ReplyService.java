@@ -20,4 +20,15 @@ public class ReplyService {
     public List<Reply> selectAllReply(int bo_no) {
         return mapper.selectAllReply(bo_no);
     }
+
+    public void deleteReplies(int bo_no) {
+        mapper.deleteReplies(bo_no);
+    }
+
+    public void deleteReply(int re_No) {
+        mapper.deleteReply(re_No);
+    }
+
+    public void updateReply(Reply reply) {mapper.updateReply(reply);
+    }
 }

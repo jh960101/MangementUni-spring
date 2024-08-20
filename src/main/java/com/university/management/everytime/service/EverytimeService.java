@@ -49,4 +49,8 @@ public class EverytimeService {
     public void etaLikeUp(int boNo) {
         mapper.etaLikeUp(boNo);
     }
+
+    public int deleteBoard(int bo_no) {
+         return mapper.deleteBoard(bo_no);
+    }
 }

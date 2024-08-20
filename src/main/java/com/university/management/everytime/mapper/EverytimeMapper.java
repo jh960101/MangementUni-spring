@@ -29,4 +29,6 @@ public interface EverytimeMapper {
     void readCountUp(int boNo);
 
     void etaLikeUp(int boNo);
+
+    int deleteBoard(int boNo);
 }

@@ -85,7 +85,7 @@
 
                 </div>
         </form>
-        <button type="button" class="btn1 center-delete" style="margin-left:50px; width:100px;">삭제</button>
+        <button type="button" class="btn1 center-delete" style="margin-left:50px; width:100px;" onclick="location.href='deleteBoard?bo_no=${board.bo_no}'">삭제</button>
     </div>
     <div class="btn-container">
         <button type="button" class="btn1" onclick="history.back()">◀뒤로가기</button>

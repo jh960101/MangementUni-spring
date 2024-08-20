@@ -75,9 +75,9 @@ public class LoginController {
 				session.setAttribute("address", student.getSTU_ADDRESS());
 				session.setAttribute("login",login);
 				if(student.getSTU_PASSWORD().equals("0")) {
-					model.addAttribute("msg", student.getSTU_NAME() + "학생 로그인 되었습니다.초기비밀번호를 변경해주세요.");
+					model.addAttribute("msg", student.getSTU_NAME() + "님 환영합니다. 초기비밀번호를 변경해주세요.");
 				}else {
-					model.addAttribute("msg", student.getSTU_NAME() + "학생 로그인 되었습니다.");
+					model.addAttribute("msg", student.getSTU_NAME() + "님 환영합니다.");
 				}
 				
 				return "home";
