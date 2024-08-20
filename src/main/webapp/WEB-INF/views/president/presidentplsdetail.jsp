@@ -28,7 +28,7 @@
 }
 
 #tbl-board th {
-	background-color: #f2f2f2;
+	background-color: RGB(231, 240, 254);
 	font-weight: bold;
 	border: 1px solid #ddd;
 }
@@ -86,6 +86,9 @@
 	width: 110px;
 	height: 65px;
 }
+.pageContent{
+margin-bottom:230px;
+}
 </style>
 </head>
 <body>
@@ -99,11 +102,14 @@
 		
 	</c:if>
 
-	<div class="container" style="height: auto; margin-top: 100px;">
+			<h2 style="margin-top: 100px; text-align: center">
+			<strong>총장님께 바랍니다</strong>
+		</h2>
+		<div
+			style="width: 70px; height: 5px; background-color: #024C86; margin: 0px auto;"></div>
+	
+	<div class="container" style="height: 600px; margin-top: 50px;">
 		<div id="content">
-			<div id="pageTitle" style="margin-bottom: 50px;">
-				<h1>총장님께부탁드립니다</h1>
-			</div>
 			<div id="pageContent">
 				<table id="tbl-board">
 					<tr>
