@@ -5,6 +5,8 @@ import java.util.List;
 
 
 import com.university.management.reply.dto.Reply;
+import com.university.management.reply.service.ReplyService;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,9 +30,14 @@ public class Board {
 	private Date modify_date; // 수정 날짜
 	private int bo_Like; // 좋아요 버튼
 	private String bo_status;
-	private List<Reply> replies; // 댓글
+	private List<Reply> replies;
 	
+	public int getReplyCount() {
 		
+		ReplyService service = new ReplyService();
+		
+		return service.selectAllReply(bo_no).size();
+	}
 	
 
 }

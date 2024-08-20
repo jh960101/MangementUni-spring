@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -183,9 +185,12 @@ public class EverytimeController {
 
 		Board board = new Board();
 		int stu_no = (int) session.getAttribute("studentno");
+		Date date = Calendar.getInstance().getTime();
+		
 		board.setStu_no(stu_no);
 		board.setTitle(title);
 		board.setContent(content);
+		board.setCreate_date(date);
 		
 		int result = service.insertBoard(board);
 
