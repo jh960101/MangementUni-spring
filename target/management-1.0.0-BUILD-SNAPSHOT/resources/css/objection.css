@@ -1,8 +1,9 @@
 @charset "UTF-8";
 /* objection */
-.container{
+.container {
 	
 }
+
 #sub-menubar {
 	margin-left: 50px;
 	background-color: #024C86;
@@ -36,9 +37,15 @@
 
 /* container */
 #pagetitle {
-	
 	border-bottom: 3px solid;
 	border-bottom-color: #024C86;
+}
+
+#pagetitle2 {
+	width: 70px;
+	height: 5px;
+	background-color: #024C86;
+	margin: 0px auto;
 }
 
 #pageContent {
@@ -50,13 +57,13 @@
 	vertical-align: middle;
 }
 
-#tablelist{
-	margin-top:20px;
-	margin-bottom:60px;
+#tablelist {
+	margin-top: 20px;
+	margin-bottom: 60px;
 }
 
 #midtitle {
-	margin-top:15px;
+	margin-top: 15px;
 	text-align: left;
 	font-weight: bold;
 }

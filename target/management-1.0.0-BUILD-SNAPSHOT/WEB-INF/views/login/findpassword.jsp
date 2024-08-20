@@ -21,7 +21,7 @@
 	</script>
 	<c:remove var=" msg" />
 </c:if>
-<section id="content" style="height: 500px;margin-bottom: 150px;">
+<section id="content" style="height: 550px;margin-bottom: 150px;">
 
 
 	<!--  html 전체 영역을 지정하는 container -->

@@ -153,6 +153,16 @@
                 <c:forEach var="reply" items="${list}">
                     <div class="comment" data-re-no="${reply.re_No}">
                         <input type="hidden" class="replyId" value="${reply.re_No}"/>
+                        <div class="horizontal-container">
+                            <div class="profile-section">
+                                <img src="${pageContext.request.contextPath}/resources/img/프로필사진.png" class="프로필사진"
+                                     alt="Profile Image">
+                                <span class="username">익명</span>
+                            </div>
+                            <div class="stats-section">
+                                <div class="stat-item"></div>
+                            </div>
+                        </div>
                         <div style="display: flex">
                         <textarea class="replycontent"
                                   style="width: 780px;border: none;border-radius: 5px;height: 80px;outline: none;padding: 10px"
