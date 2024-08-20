@@ -14,4 +14,6 @@ public interface ReplyMapper {
     void deleteReplies(int bo_no);
 
     void deleteReply(int re_No);
+
+    void updateReply(Reply reply);
 }

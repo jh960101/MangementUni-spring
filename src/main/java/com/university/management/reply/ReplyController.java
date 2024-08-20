@@ -57,4 +57,15 @@ public class ReplyController {
 
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
+
+    @RequestMapping("/updateReply")
+    public  ResponseEntity<List<Reply>> updatereply(@RequestBody Reply reply){
+
+        service.updateReply(reply);
+
+        System.out.println(reply);
+        List<Reply> list = service.selectAllReply(reply.getBo_No());
+
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
 }

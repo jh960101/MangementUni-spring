@@ -28,4 +28,7 @@ public class ReplyService {
     public void deleteReply(int re_No) {
         mapper.deleteReply(re_No);
     }
+
+    public void updateReply(Reply reply) {mapper.updateReply(reply);
+    }
 }

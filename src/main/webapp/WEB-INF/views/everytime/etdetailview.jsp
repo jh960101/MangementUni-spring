@@ -155,10 +155,11 @@
                         <div class="input-group" style="gap: 90px;">
                             <textarea class="replycontent" class="form-control-3" rows="3"
                                       cols="70" placeholder="댓글 작성" maxlength="100"
-                                      style="width: 750px;margin: 10px 0 20px 20px;border-radius: 5px;border: none;outline: none;padding:10px;  " readonly>${reply.reply_Content}</textarea>
+                                      style="width: 750px;margin: 10px 0 20px 20px;border-radius: 5px;border: none;outline: none;padding:10px;  "
+                                      readonly>${reply.reply_Content}</textarea>
                             <div class="d-flex align-items-center">
-                                <button class="custom-submit-button" type="button"
-                                        id="updatereply()" style="display: none">댓글 수정
+                                <button id="update-btn" class="custom-submit-button"
+                                        style="display: none">댓글 수정
                                 </button>
                             </div>
                         </div>
