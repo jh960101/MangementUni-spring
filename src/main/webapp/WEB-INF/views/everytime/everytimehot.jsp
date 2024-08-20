@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>everytimemain</title>
+<title>HOT 게시판</title>
 
 <link href="${path}/resources/css/courses.css" rel="stylesheet" />
 <link href="${path}/resources/css/everytime.css" rel="stylesheet" />
@@ -75,7 +75,7 @@
 								<c:set var="now" value="<%=new java.util.Date()%>" />
 								<fmt:parseNumber value="${board.create_date.time / (1000*60*60*24)}" var="prevDate" integerOnly="true" />
 								<fmt:parseNumber value="${now.time  / (1000*60*60*24)}" var="nowDate" integerOnly="true" />
-								<c:if test="${nowDate-prevDate-1 eq 0}">
+								<c:if test="${nowDate-prevDate-1 < 0}">
 									오늘
 								</c:if>
 								<c:if test="${nowDate-prevDate-1 > 0}">
