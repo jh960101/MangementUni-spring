@@ -107,7 +107,7 @@ public class EverytimeController {
 
 		List<Student> students = studentService.stuselect(stu_no);
 
-		List<Reply> list = replyService.selectAllReply(boNo);
+		List<Reply> list = replyService.getReplyList(boNo);
 
 		model.addAttribute("board", etaboard);
 		model.addAttribute("student", students);
@@ -218,7 +218,7 @@ public class EverytimeController {
 
 		int stu_no = (int) session.getAttribute("studentno");
 
-		replyService.deleteReplies(bo_no);
+//		replyService.deleteReplyByBoNo(bo_no);
 
 		int result = service.deleteBoard(bo_no);
 

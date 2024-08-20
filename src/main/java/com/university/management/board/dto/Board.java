@@ -32,12 +32,12 @@ public class Board {
 	private String bo_status;
 	private List<Reply> replies;
 	
-	public int getReplyCount() {
-		
-		ReplyService service = new ReplyService();
-		
-		return service.selectAllReply(bo_no).size();
-	}
+//	public int getReplyCount() {
+//
+//		ReplyService service = new ReplyService();
+//
+//		return service.selectAllReply(bo_no).size();
+//	}
 	
 
 }

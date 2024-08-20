@@ -12,23 +12,34 @@ public class ReplyService {
     @Autowired
     private ReplyMapper mapper;
 
-    public int insertReply(Reply reply) {
 
-        return mapper.insertReply(reply);
+    public void insertReply(Reply replyVO) {
+        mapper.insertReply(replyVO);
     }
 
-    public List<Reply> selectAllReply(int bo_no) {
-        return mapper.selectAllReply(bo_no);
+    public void updateReply(Reply replyVO) {
+        mapper.updateReply(replyVO);
     }
 
-    public void deleteReplies(int bo_no) {
-        mapper.deleteReplies(bo_no);
+    public void deleteReply(int re_no) {
+        mapper.deleteReply(re_no);
     }
 
-    public void deleteReply(int re_No) {
-        mapper.deleteReply(re_No);
+    public List<Reply> getReplyList(int bo_no) {
+        return mapper.getReplyList(bo_no);
     }
 
-    public void updateReply(Reply reply) {mapper.updateReply(reply);
+    public void insertNestedReply(Reply replyVO) throws Exception {
+        mapper.insertNestedReply(replyVO);
     }
+
+    public List<Reply> getRepliesWithNested(int boNo) {
+        List<Reply> replies = mapper.getRepliesByBoardNo(boNo);
+        for (Reply reply : replies) {
+            List<Reply> nestedReplies = mapper.getNestedReplies(reply.getRe_No());
+            reply.setNestedReplies(nestedReplies);
+        }
+        return replies;
+    }
+
 }
