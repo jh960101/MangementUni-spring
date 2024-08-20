@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>everytimemain</title>
+    <title>자유 게시판</title>
 
     <link href="${path}/resources/css/courses.css" rel="stylesheet"/>
     <link href="${path}/resources/css/everytime.css" rel="stylesheet"/>
@@ -70,7 +70,7 @@
     <div id="content" style="margin-top: 60px;">
         <!-- title view -->
         <div class="list-group">
-            <input type="text" id="Box" class="box" value="&nbsp;자유게시판" readonly>
+            <input type="text" id="Box" class="box" value="&nbsp;자유 게시판" readonly>
         </div>
 
         <div class="input-group mb-0" style="margin-top: 5px;">
