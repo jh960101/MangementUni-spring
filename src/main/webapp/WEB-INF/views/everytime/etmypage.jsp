@@ -25,25 +25,44 @@
 	crossorigin="anonymous">
 <script defer src="${path}/resources/js/scrollbtn.js"></script>
 <link href="${path}/resources/css/scrollbtn.css" rel="stylesheet" />
+
+<style>
+.page-link {
+	color: black !important;
+}
+
+.page-item.active .page-link {
+	z-index: 1;
+	font-weight: bold;
+	color: white !important;
+	background-color: #024C86;
+	border: 1px solid white;
+	border-radius: 5px;
+}
+
+.page-link:focus, .page-link:hover {
+	color: #024C86;
+}
+</style>
 </head>
 
 <body>
 
-<c:if test="${not empty msg}">
+	<c:if test="${not empty msg}">
 
-	<script>
+		<script>
 		alert('${msg}');
 		history.back();
 	</script>
-	<c:remove var=" msg" />
-</c:if>
+		<c:remove var=" msg" />
+	</c:if>
 
-<c:if test="${loginname == null}">
-	<script>
+	<c:if test="${loginname == null}">
+		<script>
 		alert('교직원 및 재학생만 접근이 가능합니다.');
 		window.location.href = "login";
 	</script>
-</c:if>
+	</c:if>
 
 	<p class="top_scrollbtn" onclick="scrollbtn('main-img')">TOP</p>
 
@@ -63,11 +82,10 @@
 		</div>
 	</div>
 	<div class="container" style="height: 1000px;">
-		<div id="content" style="margin-top: 60px;">
+		<div id="content" style="height: 60px;">
 			<!-- title view -->
 			<div class="list-group">
-				<input type="text" id="Box" class="box" value="&nbsp;내글 보기"
-					readonly>
+				<input type="text" id="Box" class="box" value="&nbsp;내글 보기" readonly>
 			</div>
 
 			<div class="input-group mb-0" style="margin-top: 5px;">
@@ -80,14 +98,17 @@
 
 			<c:if test="${list.size()!=0 }">
 				<c:forEach var="board" items="${list}">
-					<div class="list-group" style="border: 1px solid black;margin-top: 20px;margin-bottom: 20px;">
+					<div class="list-group"
+						style="border: 1px solid black; margin-top: 20px; margin-bottom: 20px;">
 						<a href="etaupdate?bo_no=${board.bo_no}"
 							class="list-group-item list-group-item-action list-group-item-large"
-							aria-current="true" style="background-color: #eee"> ${board.title}</a>
-						<a href="#"
-							class="list-group-item list-group-item-action list-group-item-small disabled" style="border: none;font-size: 18px;">
-							${board.content}</a> <a href="#"
-							class="list-group-item list-group-item-action list-group-item-small2 disabled" style="border: none;">
+							aria-current="true" style="background-color: #eee">
+							${board.title}</a> <a href="#"
+							class="list-group-item list-group-item-action list-group-item-small disabled"
+							style="border: none; font-size: 18px;"> ${board.content}</a> <a
+							href="#"
+							class="list-group-item list-group-item-action list-group-item-small2 disabled"
+							style="border: none;">
 							<div style="display: flex; align-items: center;">
 								<div style="padding: 1px; margin-right: 10px; font-size: 15px;">글
 									작성 1초전</div>
@@ -110,15 +131,46 @@
 			</c:if>
 
 			<c:if test="${list.size()!=0 }">
-				<div class="btn-container">
-					<button type="button" class="btn2">▼&nbsp;더보기</button>
-					<div class="btn-list">
-						<button type="button" class="btn3">
-							<img
-								src="${pageContext.request.contextPath}/resources/img/글목록.png"
-								width="25" height="25">&nbsp;글 목록
-						</button>
-					</div>
+				<div class="btn-container" style="display: flex;justify-content: center;margin-top: 50px;">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+							<!-- 이전 페이지 -->
+							<li
+								class="page-item <c:if test="${pageInfo.prevPage == 0}">disabled</c:if>">
+								<button class="page-link" type="button"
+									onclick="if(${pageInfo.prevPage} > 0) { window.location.href='${path}/etmypage?page=${pageInfo.prevPage}'; } else { return false; }"
+									aria-label="Previous"
+									<c:if test="${pageInfo.prevPage == 0}">disabled</c:if>>
+									<span aria-hidden="true">&laquo;</span>
+								</button>
+							</li>
+
+							<!-- 페이지 목록 -->
+							<c:forEach begin="${pageInfo.startPage}"
+								end="${pageInfo.lastPage}" step="1" var="page">
+								<c:if test="${page == pageInfo.currentPage}">
+									<li class="page-item active"><span class="page-link">${page}</span></li>
+								</c:if>
+								<c:if test="${page != pageInfo.currentPage}">
+									<li class="page-item"><span class="page-link"
+										style="cursor: pointer;"
+										onclick="window.location.href='${path}/etmypage?page=${page}';">
+											${page}</span></li>
+								</c:if>
+							</c:forEach>
+
+							<!-- 다음 페이지 -->
+							<li
+								class="page-item <c:if test="${pageInfo.nextPage == 0}">disabled</c:if>">
+								<button class="page-link" type="button"
+									onclick="if(${pageInfo.nextPage} > 0) { window.location.href='${path}/etmypage?page=${pageInfo.nextPage}'; } else { return false; }"
+									aria-label="Next"
+									<c:if test="${pageInfo.nextPage == 0}">disabled</c:if>>
+									<span aria-hidden="true">&raquo;</span>
+								</button>
+							</li>
+						</ul>
+					</nav>
 				</div>
 			</c:if>
 
