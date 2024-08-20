@@ -8,17 +8,20 @@ $().ready(function () {
         let stu_No = $('#stuNo').val();
         let path = $('#path').val();
 
-        $.ajax({
-            method: 'POST',
-            url: `${path}/insertReply/`,
-            contentType: 'application/json',
-            dataType: 'json',
-            data: JSON.stringify({bo_No, stu_No, reply_Content}),
-            success: (result) => {
-                alert('댓글작성을 완료하였습니다.');
-                let outhtml = '';
-                $.each(result, function (index, item) {
-                    outhtml += `
+        if (reply_Content === '') {
+            alert('댓글을 입력해주세요!');
+        } else {
+            $.ajax({
+                method: 'POST',
+                url: `${path}/insertReply/`,
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({bo_No, stu_No, reply_Content}),
+                success: (result) => {
+                    alert('댓글작성을 완료하였습니다.');
+                    let outhtml = '';
+                    $.each(result, function (index, item) {
+                        outhtml += `
                     <div class="comment">
                         <div class="horizontal-container">
                             <div class="profile-section">
@@ -68,17 +71,17 @@ $().ready(function () {
                         <hr style="width: 1000px;">
                     </div>
                     `;
-                });
+                    });
 
-                $("#commentsContainer").empty();
-                $("#commentsContainer").html(outhtml);
-                $('#commentInput').val('');
-            },
-            error: (e) => {
-                alert('댓글 삭제에 실패하였습니다.');
-            }
-        });
-
+                    $("#commentsContainer").empty();
+                    $("#commentsContainer").html(outhtml);
+                    $('#commentInput').val('');
+                },
+                error: (e) => {
+                    alert('댓글 삭제에 실패하였습니다.');
+                }
+            });
+        }
     });
 
     $(document).on("click", '.nestedreply', () => {
@@ -177,19 +180,21 @@ $().ready(function () {
         const path = $('#path').val();
         const reply_Content = $('.replycontent').val();
 
+        if (reply_Content === '') {
+            alert('수정할 댓글을 입력해주세요!');
+        } else {
+            $.ajax({
+                method: 'POST',
+                url: `${path}/updateReply/`,
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({re_No, bo_No, reply_Content}),
+                success: (result) => {
+                    alert('댓글이 수정되었습니다.');
 
-        $.ajax({
-            method: 'POST',
-            url: `${path}/updateReply/`,
-            contentType: 'application/json',
-            dataType: 'json',
-            data: JSON.stringify({re_No, bo_No,reply_Content}),
-            success: (result) => {
-                alert('댓글이 수정되었습니다.');
-
-                let outhtml = '';
-                $.each(result, function (index, item) {
-                    outhtml += `
+                    let outhtml = '';
+                    $.each(result, function (index, item) {
+                        outhtml += `
                     <div class="comment">
                         <div class="horizontal-container">
                             <div class="profile-section">
@@ -239,18 +244,20 @@ $().ready(function () {
                         <hr style="width: 1000px;">
                     </div>
                     `;
-                });
+                    });
 
-                $("#commentsContainer").empty();
-                $("#commentsContainer").html(outhtml);
+                    $("#commentsContainer").empty();
+                    $("#commentsContainer").html(outhtml);
 
 
-            },
-            error: (e) => {
-                alert('댓글 수정에 실패하였습니다.');
-            }
-        });
+                },
+                error: (e) => {
+                    alert('댓글 수정에 실패하였습니다.');
+                }
+            });
+        }
     })
+
 });
 
 
