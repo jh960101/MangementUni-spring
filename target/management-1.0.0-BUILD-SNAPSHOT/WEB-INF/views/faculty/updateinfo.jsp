@@ -224,9 +224,7 @@
 						</tr>
 					</table>
 					<div class="button-group">
-						<button type="submit" id="btnUpdate" class="btnlist">수정</button>
-						<button type="button" id="btnDelete" class="btnlist"
-							onclick="deleteFunc(${board.bo_no})">삭제</button>
+						<button type="submit" id="btnUpdate" class="btnlist">저장</button>
 					</div>
 					<div class="backbtn">
 						<button type="button" id="btnCancel" class="btn btnlist"
