@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>evereytimeupdate</title>
+    <title>글 수정</title>
 
     <link
             href="${pageContext.request.contextPath}/resources/css/courses.css"
