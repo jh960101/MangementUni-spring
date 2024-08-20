@@ -9,35 +9,12 @@
 <html>
 <head>
 <link href="${path}/resources/css/objection.css" rel="stylesheet" />
-<link href="${path}/resources/css/infodetail.css" rel="stylesheet" />
-<style>
 
+<style>
 .pagination {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-
-
-
-
-
-#menulist {
-	text-decoration: none;
-	list-style: none;
-	font-weight: bold;
-	align-items: center;
-	margin-top: 10px;
-}
-
-#menulist a {
-	text-decoration: none;
-	color: white;
-}
-
-#menulist a:hover {
-	border-bottom: 1px solid;
-	border-bottom-color: white;
 }
 
 .sch_smit {
@@ -53,24 +30,19 @@
 	color: black;
 }
 
+
+
 .page-link {
-	color: black !important;
+	color: black;
 }
 
-.page-item.active .page-link {
-	z-index: 1;
-	font-weight: bold;
-	color: white important;
-	background-color: #024C86;
-	border: 1px solid white;
-	border-radius: 5px;
+.under {
+	margin-top: 100px;
 }
 
-.page-link:focus, .page-link:hover {
-	color: #024C86;
-}
+
+
 </style>
-
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
@@ -78,48 +50,49 @@
 		<div id="content">
 			<!-- title view -->
 			<div id="pageTitle">
-				<h1>총장님부탁드립니다</h1>
+				<h1>총장님께 바랍니다</h1>
 			</div>
-
-			<div class="table-responsive">
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">제목</th>
-							<th scope="col">작성일</th>
-						</tr>
-					</thead>
-					<tbody class="table-group-divider">
-
-						<c:if test="${empty list}">
+			<div class="under">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
 							<tr>
-								<td colspan="2">조회된 글이 없습니다.</td>
+								<th scope="col">제목</th>
+								<th scope="col">작성일</th>
 							</tr>
-						</c:if>
-						<c:if test="${not empty list}">
-							<c:forEach var="board" items="${list}">
-								<tr>
-									<td><a id="listtitle"
-										href="${path}/presidentplsdetail?bo_no=${board.bo_no}"> <c:out
-												value="${board.title}" />
-									</a></td>
-									<td><fmt:formatDate value="${board.create_date}"
-											pattern="yyyy-MM-dd" /></td>
-								</tr>
-							</c:forEach>
-						</c:if>
+						</thead>
+						<tbody class="table-group-divider">
 
-					</tbody>
-				</table>
+							<c:if test="${empty list}">
+								<tr>
+									<td colspan="2">조회된 글이 없습니다.</td>
+								</tr>
+							</c:if>
+							<c:if test="${not empty list}">
+								<c:forEach var="board" items="${list}">
+									<tr>
+										<td><a id="listtitle"
+											href="${path}/presidentplsdetail?bo_no=${board.bo_no}"> <c:out
+													value="${board.title}" />
+										</a></td>
+										<td><fmt:formatDate value="${board.create_date}"
+												pattern="yyyy-MM-dd" /></td>
+									</tr>
+								</c:forEach>
+							</c:if>
+
+						</tbody>
+					</table>
+				</div>
+				<!-- table-responsive div -->
 			</div>
-			<!-- table-responsive div -->
 		</div>
 		<nav aria-label="Page navigation example">
 			<ul class="pagination">
 				<li
-					class="page-item <c:if test='${currentPage == 1}'>disabled</c:if>'">
+					class="page-item <c:if test='${currentPage <= 1}'>disabled</c:if>'">
 					<a class="page-link"
-					href="?page=${currentPage - 1}&recordsPerPage=${recordsPerPage}"
+					href="?page=${currentPage > 1 ? currentPage - 1 : 1}&recordsPerPage=${recordsPerPage}"
 					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 				</a>
 				</li>
@@ -131,14 +104,15 @@
 					</li>
 				</c:forEach>
 				<li
-					class="page-item <c:if test='${currentPage == totalPages}'>disabled</c:if>'">
+					class="page-item <c:if test='${currentPage >= totalPages}'>disabled</c:if>'">
 					<a class="page-link"
-					href="?page=${currentPage + 1}&recordsPerPage=${recordsPerPage}"
+					href="?page=${currentPage < totalPages ? currentPage + 1 : totalPages}&recordsPerPage=${recordsPerPage}"
 					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 				</a>
 				</li>
 			</ul>
 		</nav>
+
 	</div>
 	<jsp:include page="../common/footer.jsp" />
 </body>
