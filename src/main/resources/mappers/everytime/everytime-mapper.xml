@@ -21,7 +21,8 @@
 	<select id="getAllEtaListByStuNo" parameterType="int"
 		resultType="com.university.management.board.dto.Board">
 		SELECT * FROM board WHERE TYPE = "e" AND stu_no = #{stu_no}
-		order by CREATE_DATE DESC
+		order by CREATE_DATE DESC LIMIT #{listLimit}
+        OFFSET #{firstRow}
 	</select>
 
 	<select id="getAllEtaHotList"

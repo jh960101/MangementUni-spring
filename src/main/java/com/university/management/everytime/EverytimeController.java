@@ -1,6 +1,5 @@
 package com.university.management.everytime;
 
-
 import com.university.management.board.dto.Board;
 import com.university.management.board.dto.PageInfo;
 import com.university.management.everytime.service.EverytimeService;
@@ -24,187 +23,203 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class EverytimeController {
 
-    @Autowired
-    private EverytimeService service;
+	@Autowired
+	private EverytimeService service;
 
-    @Autowired
-    private HttpSession session;
+	@Autowired
+	private HttpSession session;
 
-    @Autowired
-    private StudentService studentService;
+	@Autowired
+	private StudentService studentService;
 
-    @Autowired
-    private ReplyService replyService;
+	@Autowired
+	private ReplyService replyService;
 
-    @RequestMapping("/etmainpage")
-    public String etmainpage(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+	@RequestMapping("/etmainpage")
+	public String etmainpage(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
 
-        session.removeAttribute("readCheck");
-        session.removeAttribute("likeCheck");
+		session.removeAttribute("readCheck");
+		session.removeAttribute("likeCheck");
 
-        Map<String, Object> params = new HashMap<>();
+		Map<String, Object> params = new HashMap<>();
 
-        int listLimit = 4; // 한 페이지에 보여질 게시글 수
-        int totalRowCount = service.getListCount(); // 전체 게시글의 수
+		int listLimit = 4; // 한 페이지에 보여질 게시글 수
+		int totalRowCount = service.getListCount(); // 전체 게시글의 수
 
-        // 페이지네이션 설정
-        PageInfo pageSettings = new PageInfo(page, totalRowCount, listLimit);
-        pageSettings.pageSetting(totalRowCount);
+		// 페이지네이션 설정
+		PageInfo pageSettings = new PageInfo(page, totalRowCount, listLimit);
+		pageSettings.pageSetting(totalRowCount);
 
-        int firstRow = pageSettings.getFirstRow();
+		int firstRow = pageSettings.getFirstRow();
 
-        params.put("firstRow", firstRow);
-        params.put("listLimit", listLimit);
+		params.put("firstRow", firstRow);
+		params.put("listLimit", listLimit);
 
-        // 데이터 가져오기
-        List<Board> list = service.getAllEtaList(params);
+		// 데이터 가져오기
+		List<Board> list = service.getAllEtaList(params);
 
+		model.addAttribute("list", list);
+		model.addAttribute("pageInfo", pageSettings);
+		model.addAttribute("count", totalRowCount);
 
-        model.addAttribute("list", list);
-        model.addAttribute("pageInfo", pageSettings);
-        model.addAttribute("count", totalRowCount);
+		return "everytime/etmainpage";
+	}
 
-        return "everytime/etmainpage";
-    }
+	@RequestMapping("/etaupdate")
+	public String etamend(@RequestParam("bo_no") int bo_no, Model model) {
 
-    @RequestMapping("/etaupdate")
-    public String etamend(@RequestParam("bo_no") int bo_no, Model model) {
+		Board etaboard = service.getEtaBoardByNo(bo_no);
 
-        Board etaboard = service.getEtaBoardByNo(bo_no);
+		model.addAttribute("board", etaboard);
 
-        model.addAttribute("board", etaboard);
+		return "everytime/evereytimeupdate";
+	}
 
-        return "everytime/evereytimeupdate";
-    }
+	@RequestMapping("/updateBoard")
+	public String updateBoard(Board board, Model model) {
 
-    @RequestMapping("/updateBoard")
-    public String updateBoard(Board board, Model model) {
+		int stu_no = (int) session.getAttribute("studentno");
 
-        int stu_no = (int) session.getAttribute("studentno");
+		int result = service.updateBoard(board);
 
-        int result = service.updateBoard(board);
+		if (result == 1) {
+			model.addAttribute("msg", "글 수정이 완료되었습니다.");
+		} else {
+			model.addAttribute("msg", "글 수정에 실패하였습니다.");
+		}
 
-        if (result == 1) {
-            model.addAttribute("msg", "글 수정이 완료되었습니다.");
-        } else {
-            model.addAttribute("msg", "글 수정에 실패하였습니다.");
-        }
+		return "redirect:/etmypage?stuno=" + stu_no;
+	}
 
-        return "redirect:/etmypage?stuno=" + stu_no;
-    }
+	@RequestMapping("/etdetailview")
+	public String etdetailview(Model model, @RequestParam("no") int boNo) {
 
-    @RequestMapping("/etdetailview")
-    public String etdetailview(Model model, @RequestParam("no") int boNo) {
+		if (session.getAttribute("readCheck") == null) {
+			session.setAttribute("readCheck", true);
+			service.readCountUp(boNo);
+		}
 
+		Board etaboard = service.getEtaBoardByNo(boNo);
 
-        if (session.getAttribute("readCheck") == null) {
-            session.setAttribute("readCheck", true);
-            service.readCountUp(boNo);
-        }
+		int stu_no = etaboard.getStu_no();
 
-        Board etaboard = service.getEtaBoardByNo(boNo);
+		List<Student> students = studentService.stuselect(stu_no);
 
-        int stu_no = etaboard.getStu_no();
+		List<Reply> list = replyService.selectAllReply(boNo);
 
-        List<Student> students = studentService.stuselect(stu_no);
+		model.addAttribute("board", etaboard);
+		model.addAttribute("student", students);
+		model.addAttribute("list", list);
 
+		return "everytime/etdetailview";
+	}
 
-        List<Reply> list = replyService.selectAllReply(boNo);
+	@RequestMapping("/everytimehot")
+	public String everytimehot(Model model) {
 
-        model.addAttribute("board", etaboard);
-        model.addAttribute("student", students);
-        model.addAttribute("list", list);
+		session.removeAttribute("readCheck");
+		session.removeAttribute("likeCheck");
 
-        return "everytime/etdetailview";
-    }
+		List<Board> list = service.getAllEtaHotList();
+		model.addAttribute("list", list);
 
-    @RequestMapping("/everytimehot")
-    public String everytimehot(Model model) {
+		return "everytime/everytimehot";
+	}
 
-        session.removeAttribute("readCheck");
-        session.removeAttribute("likeCheck");
+	@RequestMapping("/etmypage")
+	public String etmypage(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
 
-        List<Board> list = service.getAllEtaHotList();
-        model.addAttribute("list", list);
+		String login = (String) session.getAttribute("login");
 
-        return "everytime/everytimehot";
-    }
+		if (login.equals("Employee")) {
+			model.addAttribute("msg", "교직원은 사용할 수 없는 메뉴입니다!");
+			return "everytime/etmypage";
+		}
 
-    @RequestMapping("/etmypage")
-    public String etmypage(Model model) {
+		int stu_no = (int) session.getAttribute("studentno");
 
-        String login = (String) session.getAttribute("login");
+		Map<String, Object> params = new HashMap<>();
 
-        if (login.equals("Employee")) {
-            model.addAttribute("msg", "교직원은 사용할 수 없는 메뉴입니다!");
-            return "everytime/etmypage";
-        }
+		int listLimit = 4; // 한 페이지에 보여질 게시글 수
+		int totalRowCount = service.getListCount(); // 전체 게시글의 수
 
-        int stu_no = (int) session.getAttribute("studentno");
+		// 페이지네이션 설정
+		PageInfo pageSettings = new PageInfo(page, totalRowCount, listLimit);
+		pageSettings.pageSetting(totalRowCount);
 
-        List<Board> list = service.getAllEtaListByStuNo(stu_no);
+		int firstRow = pageSettings.getFirstRow();
 
-        model.addAttribute("list", list);
+		params.put("firstRow", firstRow);
+		params.put("listLimit", listLimit);
+		params.put("stu_no",stu_no);
 
-        return "everytime/etmypage";
+		// 데이터 가져오기
 
-    }
+		List<Board> list = service.getAllEtaListByStuNo(params);
 
-    @RequestMapping("/etnew")
-    public String etnew(Model model) {
+		model.addAttribute("list", list);
+		model.addAttribute("pageInfo", pageSettings);
+		model.addAttribute("count", totalRowCount);
 
-        String login = (String) session.getAttribute("login");
+		return "everytime/etmypage";
 
-        if (login.equals("Employee")) {
+	}
 
-            model.addAttribute("msg", "교직원은 사용할 수 없는 메뉴입니다!");
-        }
+	@RequestMapping("/etnew")
+	public String etnew(Model model) {
 
-        return "everytime/etnew";
-    }
+		String login = (String) session.getAttribute("login");
 
-    @RequestMapping("/insertBoard")
-    public String insertBoard(RedirectAttributes rttr, Board board) {
+		if (login.equals("Employee")) {
 
-        int stu_no = (int) session.getAttribute("studentno");
-        board.setStu_no(stu_no);
+			model.addAttribute("msg", "교직원은 사용할 수 없는 메뉴입니다!");
+		}
 
-        int result = service.insertBoard(board);
+		return "everytime/etnew";
+	}
 
-        if (result == 1) {
-            rttr.addAttribute("msg", "게시물 작성이 완료되었습니다.");
-        } else {
-            rttr.addAttribute("msg", "게시물 작성에 실패하였습니다.");
-        }
-        return "redirect:/etmypage?stuno=" + stu_no;
-    }
+	@RequestMapping("/insertBoard")
+	public String insertBoard(RedirectAttributes rttr, Board board) {
 
-    @RequestMapping("/etaLikeUp")
-    public String etaLikeUp(@RequestParam("bo_no") int bo_no) {
+		int stu_no = (int) session.getAttribute("studentno");
+		board.setStu_no(stu_no);
 
-        if (session.getAttribute("likeCheck") == null) {
-            session.setAttribute("likeCheck", true);
-            service.etaLikeUp(bo_no);
-        }
+		int result = service.insertBoard(board);
 
-        return "redirect:/etdetailview?no=" + bo_no;
-    }
+		if (result == 1) {
+			rttr.addAttribute("msg", "게시물 작성이 완료되었습니다.");
+		} else {
+			rttr.addAttribute("msg", "게시물 작성에 실패하였습니다.");
+		}
+		return "redirect:/etmypage?stuno=" + stu_no;
+	}
 
-    @RequestMapping("/deleteBoard")
-    public String deleteBoard(@RequestParam("bo_no") int bo_no,RedirectAttributes rttr) {
+	@RequestMapping("/etaLikeUp")
+	public String etaLikeUp(@RequestParam("bo_no") int bo_no) {
 
-        int stu_no = (int) session.getAttribute("studentno");
+		if (session.getAttribute("likeCheck") == null) {
+			session.setAttribute("likeCheck", true);
+			service.etaLikeUp(bo_no);
+		}
 
-        replyService.deleteReplies(bo_no);
+		return "redirect:/etdetailview?no=" + bo_no;
+	}
 
-        int result = service.deleteBoard(bo_no);
+	@RequestMapping("/deleteBoard")
+	public String deleteBoard(@RequestParam("bo_no") int bo_no, RedirectAttributes rttr) {
 
-        if (result == 1) {
-            rttr.addAttribute("msg", "게시물 삭제가 완료되었습니다.");
-        } else {
-            rttr.addAttribute("msg", "게시물 삭제에 실패하였습니다.");
-        }
+		int stu_no = (int) session.getAttribute("studentno");
 
-        return "redirect:/etmypage?stuno=" + stu_no;
-    }
+		replyService.deleteReplies(bo_no);
+
+		int result = service.deleteBoard(bo_no);
+
+		if (result == 1) {
+			rttr.addAttribute("msg", "게시물 삭제가 완료되었습니다.");
+		} else {
+			rttr.addAttribute("msg", "게시물 삭제에 실패하였습니다.");
+		}
+
+		return "redirect:/etmypage?stuno=" + stu_no;
+	}
 }

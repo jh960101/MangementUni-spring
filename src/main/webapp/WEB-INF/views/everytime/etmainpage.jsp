@@ -66,25 +66,10 @@
         </ul>
     </div>
 </div>
-<div class="container" style="height: 1000px; ">
-    <div id="content">
+<div class="container" style="height: 1000px;">
+    <div id="content" style="margin-top: 60px;">
         <!-- title view -->
         <div class="list-group">
-            <div class="dropdown-container">
-                <div class="dropdown">
-                    <button class="dropbtn" id="dropdownButton">제목&nbsp;&nbsp;▼</button>
-                    <div class="dropdown-content">
-                        <a href="#" onclick="setDropdownText('제목')">제목</a> <a href="#"
-                                                                              onclick="setDropdownText('작성자')">작성자</a>
-                        <a href="#"
-                           onclick="setDropdownText('내용')">내용</a>
-                    </div>
-                </div>
-                <input type="text" id="searchBox" class="search-box"
-                       value="검색어를 입력해주세요" onfocus="clearPlaceholder()"
-                       onblur="setPlaceholder()">
-                <button id="actionButton" style="width: 100px;" onclick="performAction()">검색</button>
-            </div>
             <input type="text" id="Box" class="box" value="&nbsp;자유게시판" readonly>
         </div>
 
