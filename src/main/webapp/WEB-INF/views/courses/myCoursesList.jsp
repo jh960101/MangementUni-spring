@@ -92,6 +92,7 @@
 									자료]
 								</a>
 							</div>
+							<!--출석 미반영  -->
 							<div id="lavel-position">
 							<c:if test="${list.LMS_CHECK eq 'N'}">
 									<label id="attendanceStatus-${status.index+1}" class="lable-box"
@@ -101,6 +102,7 @@
 										</label>
 
 								</c:if>
+								<!-- 출석 반영 -->
 								<c:if test="${list.LMS_CHECK eq 'Y'}">
 									<label id="attendanceStatus-${status.index+1}" class="lable-box"
 										style=" color:black">출석
