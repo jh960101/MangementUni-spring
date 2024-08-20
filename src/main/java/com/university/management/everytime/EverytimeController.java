@@ -60,6 +60,11 @@ public class EverytimeController {
 		// 데이터 가져오기
 		List<Board> list = service.getAllEtaList(params);
 
+		for(Board board:list){
+			int count = replyService.getReplyList(board.getBo_no()).size();
+			board.setReplyCount(count);
+		}
+
 		model.addAttribute("list", list);
 		model.addAttribute("pageInfo", pageSettings);
 		model.addAttribute("count", totalRowCount);
@@ -123,6 +128,12 @@ public class EverytimeController {
 		session.removeAttribute("likeCheck");
 
 		List<Board> list = service.getAllEtaHotList();
+
+		for(Board board:list){
+			int count = replyService.getReplyList(board.getBo_no()).size();
+			board.setReplyCount(count);
+		}
+
 		model.addAttribute("list", list);
 
 		return "everytime/everytimehot";
@@ -158,6 +169,11 @@ public class EverytimeController {
 		// 데이터 가져오기
 
 		List<Board> list = service.getAllEtaListByStuNo(params);
+
+		for(Board board:list){
+			int count = replyService.getReplyList(board.getBo_no()).size();
+			board.setReplyCount(count);
+		}
 
 		model.addAttribute("list", list);
 		model.addAttribute("pageInfo", pageSettings);
