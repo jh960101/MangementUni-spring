@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>everytimemain</title>
+<title>HOT 게시판</title>
 
 <link href="${path}/resources/css/courses.css" rel="stylesheet" />
 <link href="${path}/resources/css/everytime.css" rel="stylesheet" />
