@@ -82,7 +82,7 @@
 		</div>
 	</div>
 	<div class="container" style="height: 1000px;">
-		<div id="content" style="height: 60px;">
+		<div id="content" style="margin-top: 60px;">
 			<!-- title view -->
 			<div class="list-group">
 				<input type="text" id="Box" class="box" value="&nbsp;내글 보기" readonly>
