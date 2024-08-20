@@ -99,8 +99,8 @@
         <div id="pagetitle">
             <h1>성적 이의 신청 목록</h1>
         </div>
-        <div id="pageContent">
-            <div id="selectbox">
+        <div id="pageContent" style="margin-top:50px;">
+            <div id="selectbox" >
                 <form id="filterForm" method="POST" action="${path}/objectionlist">
                     <select name="department" id="department" required onchange="filterResults(); ajaxData();"
                             style="padding: 5px;">
@@ -133,7 +133,7 @@
             </div>
         </div>
 
-        <div id="selectTable">
+        <div id="selectTable" style="margin-top:50px;">
             <table class="table">
                 <thead>
                 <tr>
@@ -177,8 +177,8 @@
         <!-- selectTable -->
         <c:if test="${objListEmp.size()==0}">
 
-            <div style="height: 650px;">
-                <h2 style="text-align: center;padding-top: 250px;">조회 결과가 없습니다.</h2>
+            <div style="height: 500px;">
+                <h2 style="text-align: center;padding-top: 200px;">조회 결과가 없습니다.</h2>
 
             </div>
 
