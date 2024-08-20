@@ -179,11 +179,14 @@ public class EverytimeController {
 	}
 
 	@RequestMapping("/insertBoard")
-	public String insertBoard(RedirectAttributes rttr, Board board) {
+	public String insertBoard(RedirectAttributes rttr, @RequestParam("title") String title, @RequestParam("content") String content) {
 
+		Board board = new Board();
 		int stu_no = (int) session.getAttribute("studentno");
 		board.setStu_no(stu_no);
-
+		board.setTitle(title);
+		board.setContent(content);
+		
 		int result = service.insertBoard(board);
 
 		if (result == 1) {
