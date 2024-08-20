@@ -3,69 +3,65 @@ package com.university.management.reply;
 import com.university.management.reply.dto.Reply;
 import com.university.management.reply.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
+
 @Controller
+@RequestMapping("/reply")
 public class ReplyController {
 
     @Autowired
-    private ReplyService service;
+    private ReplyService replyService;
 
-    @Autowired
-    private HttpSession session;
-
-    @RequestMapping("/insertReply")
-    public ResponseEntity<List<Reply>> insertReply(@RequestBody Reply reply) {
-
-        Date date = Calendar.getInstance().getTime();
-        int stu_no = (int) session.getAttribute("studentno");
-
-        reply.setStu_No(stu_no);
-        reply.setCreate_Date(date);
-
-        service.insertReply(reply);
-
-        List<Reply> list = service.selectAllReply(reply.getBo_No());
-        return ResponseEntity.status(HttpStatus.OK).body(list);
+    @PostMapping("/insert")
+    @ResponseBody
+    public String insertReply(@ModelAttribute Reply replyVO) {
+        replyService.insertReply(replyVO);
+        return "success";
     }
 
-    @GetMapping("/selectAllReply/{bo_no}")
-    public ResponseEntity<List<Reply>> selectAllReply(@PathVariable("bo_no") int bo_no){
-
-        System.out.println(bo_no);
-
-        List<Reply> list = service.selectAllReply(bo_no);
-
-        return ResponseEntity.status(HttpStatus.OK).body(list);
-
-    }
-    @RequestMapping("/deleteReply")
-    public  ResponseEntity<List<Reply>> deleteReply(@RequestBody Reply reply){
-        System.out.println(reply);
-
-        service.deleteReply(reply.getRe_No());
-
-        List<Reply> list = service.selectAllReply(reply.getBo_No());
-
-        return ResponseEntity.status(HttpStatus.OK).body(list);
+    @PostMapping("/update")
+    @ResponseBody
+    public String updateReply(@ModelAttribute Reply replyVO) {
+        System.out.println(replyVO);
+        replyService.updateReply(replyVO);
+        return "success";
     }
 
-    @RequestMapping("/updateReply")
-    public  ResponseEntity<List<Reply>> updatereply(@RequestBody Reply reply){
+    @PostMapping("/delete")
+    @ResponseBody
+    public String deleteReply(@RequestParam("re_no") int re_no) {
+        replyService.deleteReply(re_no);
+        return "success";
+    }
 
-        service.updateReply(reply);
+//    @GetMapping("/list")
+//    @ResponseBody
+//    public List<Reply> getReplyList(@RequestParam("bo_no") int bo_no) {
+//        return replyService.getReplyList(bo_no);
+//    }
 
-        System.out.println(reply);
-        List<Reply> list = service.selectAllReply(reply.getBo_No());
+    @GetMapping("/list")
+    public String listReplies(@RequestParam("bo_no") int boNo, Model model) {
+        List<Reply> replies = replyService.getRepliesWithNested(boNo);
+        model.addAttribute("list", replies);
+        return "reply/list";  // JSP 파일 이름
+    }
 
-        return ResponseEntity.status(HttpStatus.OK).body(list);
+    @PostMapping("/insertNestedReply")
+    @ResponseBody
+    public String insertNestedReply(@ModelAttribute Reply replyVO) {
+        System.out.println(replyVO.getRePlus());
+        try {
+            replyService.insertNestedReply(replyVO);
+            return "success";
+        } catch (Exception e) {
+            e.printStackTrace();  // 서버 콘솔에 오류를 출력
+            return "error";
+        }
     }
 }
