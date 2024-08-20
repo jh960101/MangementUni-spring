@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>everymypage</title>
+<title>내글 보기</title>
 
 <link
 	href="${pageContext.request.contextPath}/resources/css/courses.css"
@@ -77,7 +77,7 @@
 						value="검색어를 입력해주세요" onfocus="clearPlaceholder()"
 						onblur="setPlaceholder()">
 				</div>
-				<input type="text" id="Box" class="box" value="&nbsp;내가 작성한 글"
+				<input type="text" id="Box" class="box" value="&nbsp;내글 보기"
 					readonly>
 			</div>
 
@@ -134,7 +134,7 @@
 			</c:if>
 
 			<c:if test="${list.size()==0 }">
-				<div style="text-align: center; padding-top: 100px">
+				<div style="text-align: center; padding-top: 300px">
 					<h2>게시글이 존재하지 않습니다</h2>
 				</div>
 			</c:if>
