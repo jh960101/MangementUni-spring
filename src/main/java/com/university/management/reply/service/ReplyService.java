@@ -45,4 +45,8 @@ public class ReplyService {
     public List<Reply> getNestedReplies(int re_No) {
         return mapper.getNestedReplies(re_No);
     }
+
+    public void deleteReplyByBoard(int bo_No) {
+        mapper.deleteReplyByBoard(bo_No);
+    }
 }

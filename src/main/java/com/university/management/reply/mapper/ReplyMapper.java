@@ -23,6 +23,8 @@ public interface ReplyMapper {
     
     List<Reply> getNestedReplies(int re_No);
 
+    void deleteReplyByBoard(int bo_No);
+
 //    int insertReply(Reply reply);
 //
 //    List<Reply> selectAllReply(int bo_no);
