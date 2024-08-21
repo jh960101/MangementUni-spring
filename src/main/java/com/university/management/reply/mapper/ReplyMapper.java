@@ -21,7 +21,7 @@ public interface ReplyMapper {
 
     List<Reply> getRepliesByBoardNo(int boNo);
     
-    List<Reply> getNestedReplies(int boNo);
+    List<Reply> getNestedReplies(int re_No);
 
 //    int insertReply(Reply reply);
 //
