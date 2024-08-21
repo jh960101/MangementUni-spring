@@ -103,6 +103,7 @@ public class ObjectionService {
 	}
 
 	public int getListCount(Map<String, Object> params) {
+		System.out.println("params : " + params);
 		return mapper.getListCount(params);
 	}
 
