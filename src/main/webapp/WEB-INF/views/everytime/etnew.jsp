@@ -53,6 +53,7 @@
 	<div class="container"
 		style="height: 1000px; width: 1000px; margin-top: 100px;">
 		<div id="content">
+		 <input type="text" id="Box" class="box" value="&nbsp;글 작성" readonly>
 			<div class="input-group mb-0">
 				<input id="title" type="text" name="title" class="form-control1"
 					placeholder="글 제목" maxlength="50">

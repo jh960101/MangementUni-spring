@@ -22,13 +22,16 @@ public class LoginController {
 
 	@Autowired
 	private JavaMailSenderImpl mailSender;
-
+	
 	@Autowired
 	private HttpSession session;
-
+	
 	@Autowired
 	private LoginService loginService;
 
+
+	
+	
 	@RequestMapping("/login")
 	public String login() {
 		return "login/login";
@@ -37,11 +40,11 @@ public class LoginController {
 	@RequestMapping("/loginpro")
 	public String loginpro(Model model, String loginid, String loginPassword, String login, HttpSession session) {
 		if (loginid == null || loginid.isEmpty() || loginPassword == null || loginPassword.isEmpty()) {
-			model.addAttribute("msg", "¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+			model.addAttribute("msg", "ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.");
 			return "login/login";
 		}
 
-		// Map »ı¼º
+		// Map ìƒì„±
 		Map<String, String> params = new HashMap<>();
 		params.put("loginid", loginid);
 		params.put("loginPassword", loginPassword);
@@ -51,12 +54,12 @@ public class LoginController {
 			if (employee != null && employee.getEMP_PASSWORD().equals(loginPassword)) {
 				session.setAttribute("loginname", employee.getEMP_NAME());
 				session.setAttribute("empNO", employee.getEMP_NO());
-				model.addAttribute("msg", employee.getEMP_NAME() + "°ü¸®ÀÚ´Ô ·Î±×ÀÎ µÇ¾ú½À´Ï´Ù.");
-
-				session.setAttribute("login", login);
+				model.addAttribute("msg",  employee.getEMP_NAME() + "ê´€ë¦¬ìë‹˜ ë¡œê·¸ì¸ ë˜ì—ˆìŠµë‹ˆë‹¤.");
+				
+				session.setAttribute("login",login);
 				return "home";
 			} else {
-				model.addAttribute("msg", "¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£¸¦ Á¦´ë·Î ÀÔ·ÂÇÏ¼¼¿ä.");
+				model.addAttribute("msg", "ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì œëŒ€ë¡œ ì…ë ¥í•˜ì„¸ìš”.");
 				return "login/login";
 			}
 		} else if (login.equals("Student")) {
@@ -70,254 +73,271 @@ public class LoginController {
 				session.setAttribute("phone", student.getSTU_PHONE());
 				session.setAttribute("loginPassword", student.getSTU_PASSWORD());
 				session.setAttribute("address", student.getSTU_ADDRESS());
-				session.setAttribute("login", login);
-				if (student.getSTU_PASSWORD().equals("0")) {
-					model.addAttribute("msg", student.getSTU_NAME() + "´Ô È¯¿µÇÕ´Ï´Ù. ÃÊ±âºñ¹Ğ¹øÈ£¸¦ º¯°æÇØÁÖ¼¼¿ä.");
-				} else {
-					model.addAttribute("msg", student.getSTU_NAME() + "´Ô È¯¿µÇÕ´Ï´Ù.");
+				session.setAttribute("login",login);
+				if(student.getSTU_PASSWORD().equals("0")) {
+					model.addAttribute("msg", student.getSTU_NAME() + "ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤. ì´ˆê¸°ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³€ê²½í•´ì£¼ì„¸ìš”.");
+				}else {
+					model.addAttribute("msg", student.getSTU_NAME() + "ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤.");
 				}
-
+				
 				return "home";
 			} else {
-				model.addAttribute("msg", "¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£¸¦ Á¦´ë·Î ÀÔ·ÂÇÏ¼¼¿ä.");
+				model.addAttribute("msg", "ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì œëŒ€ë¡œ ì…ë ¥í•˜ì„¸ìš”.");
 				return "login/login";
 			}
 		}
 
 		return "home";
 	}
+	
+	
+	 @RequestMapping("/logout")
+	    public String logout(HttpSession session, Model model) {
+	        // ì„¸ì…˜ ë¬´íš¨í™”
+	        session.invalidate();
+	        
+	        // ë¡œê·¸ì•„ì›ƒ ë©”ì‹œì§€
+	        model.addAttribute("msg", "ë¡œê·¸ì•„ì›ƒ ë˜ì—ˆìŠµë‹ˆë‹¤.");
+	        
+	        // ë¡œê·¸ì¸ í˜ì´ì§€ë¡œ ë¦¬ë””ë ‰ì…˜
+	        return "home";
+	    }
+	 
+	
 
-	@RequestMapping("/logout")
-	public String logout(HttpSession session, Model model) {
-		// ¼¼¼Ç ¹«È¿È­
-		session.invalidate();
-
-		// ·Î±×¾Æ¿ô ¸Ş½ÃÁö
-		model.addAttribute("msg", "·Î±×¾Æ¿ô µÇ¾ú½À´Ï´Ù.");
-
-		// ·Î±×ÀÎ ÆäÀÌÁö·Î ¸®µğ·º¼Ç
-		return "home";
-	}
-
-	@RequestMapping("/findpassword")
-	public String findpassword() {
-		System.out.println("½ÇÇà");
-		return "login/findpassword";
-	}
+	 @RequestMapping("/findpassword")
+	    public String findpassword() {
+System.out.println("ì‹¤í–‰");
+	        return "login/findpassword";
+	    }
+	 
 
 	@RequestMapping("/findpasswordinfo")
-	public String findPasswords(Model model, String loginid, String login, String email, HttpSession session) {
-		System.out.println(loginid + " " + email + "login" + login);
-		if (loginid == null || loginid.isEmpty() || email == null || email.isEmpty()) {
-			model.addAttribute("msg", "¾ÆÀÌµğ¿Í ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+	public String findPasswords(Model model, String loginid, String login ,String email,HttpSession session) {
+		System.out.println(loginid+" "+ email+"login"+login);
+		if (loginid == null || loginid.isEmpty()  || email == null || email.isEmpty()) {
+			model.addAttribute("msg", "ì•„ì´ë””ì™€ ì´ë©”ì¼ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”.");
 			return "login/findpassword";
 		}
-
-		// Map »ı¼º
+		
+		
+		// Map ìƒì„±
 		Map<String, String> params = new HashMap<>();
 		params.put("loginid", loginid);
 		params.put("loginemail", email);
 
 		if (login.equals("Employee")) {
+		
+				Employee employee = loginService.employeepwfind(params);
+				
+				
+				
+				if (employee != null  && employee.getEMP_EMAIL().equals(email)) {
+					
+					
+					//apiì´ë©”ì¼
+					System.out.println("email:" + email);
+					// ë‚œìˆ˜ì˜ ë²”ìœ„ 111111~999999(6ìë¦¬ì˜ ë‚œìˆ˜ ì§€ì •)
+					Random random = new Random();
+					int checkNum = random.nextInt(888888) + 111111;
+					// ì´ë©”ì¼ ë³´ë‚¼ ì–‘ì‹ ì„¤ì •
+					// ë°œì‹ ì ì´ë©”ì¼ ì£¼ì†Œ
+					String setFrom = "ghdgns1226@naver.com";
+					// ìˆ˜ì§„ì ì´ë©”ì¼ ì£¼ì†Œ
+					String toMail = email;
+					// ì´ë©”ì¼ ì œëª©
+					String title = "ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°  ì¸ì¦ ë©”ì¼ ì…ë‹ˆë‹¤.";
+					String content = "ì¸ì¦ì½”ë“œëŠ”" + checkNum + "ì…ë‹ˆë‹¤." + "<br>" + "í•´ë‹¹ ì¸ì¦ì½”ë“œë¥¼ ì¸ì¦ì½”ë“œí™•ì¸ë€ì— ì‘ì„±í•˜ì„¸ìš”!";
 
-			Employee employee = loginService.employeepwfind(params);
+					try {
+						// ìë°” ë©”ì¼ API í´ë˜ìŠ¤ ì¤‘ì— í•˜ë‚˜
+						// ë³µí•©í˜• ì´ë©”ì¼ ë©”ì‹œì§€(í…ìŠ¤íŠ¸,html
+						// ì²¨ë¶€íŒŒì¼ ë“±)ë¥¼ ìƒì„±í•˜ëŠ”ë° ì‚¬ìš©ëœë‹¤.
+						MimeMessage message = mailSender.createMimeMessage();
 
-			if (employee != null && employee.getEMP_EMAIL().equals(email)) {
+						// ìœ„ì— MimeMessageí´ë˜ìŠ¤ì—
+						// ì„¤ì •ì„ í•˜ëŠ” í´ë˜ìŠ¤
+						// message ì²«ë²ˆì§¸ ë§¤ê°œë³€ìˆ˜ ìœ„ì— ë§¤ì¼ ìƒì„±
+						// true ì´ë©”ì¼ ë©”ì‹œì§€ë¥¼ html,í…ìŠ¤íŠ¸,ì²¨ë¶€íŒŒì¼ë“±
+						// í•¨ê»˜ í¬í•¨í•´ì„œ ì „ì†¡
+						// false ë¬´ì¡°ê±´ í…ìŠ¤íŠ¸ë§Œ ê°„ë‹¤.
+						MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+						helper.setFrom(setFrom);// ë°œì‹ ì ì„¤ì •
+						helper.setTo(toMail); // ìˆ˜ì‹ ì ì„¤ì •
+						helper.setSubject(title);// ì œëª© ì„¤ì •
 
-				// apiÀÌ¸ŞÀÏ
-				System.out.println("email:" + email);
-				// ³­¼öÀÇ ¹üÀ§ 111111~999999(6ÀÚ¸®ÀÇ ³­¼ö ÁöÁ¤)
-				Random random = new Random();
-				int checkNum = random.nextInt(888888) + 111111;
-				// ÀÌ¸ŞÀÏ º¸³¾ ¾ç½Ä ¼³Á¤
-				// ¹ß½ÅÀÚ ÀÌ¸ŞÀÏ ÁÖ¼Ò
-				String setFrom = "ghdgns1226@naver.com";
-				// ¼öÁøÀÚ ÀÌ¸ŞÀÏ ÁÖ¼Ò
-				String toMail = email;
-				// ÀÌ¸ŞÀÏ Á¦¸ñ
-				String title = "ºñ¹Ğ¹øÈ£ Ã£±â  ÀÎÁõ ¸ŞÀÏ ÀÔ´Ï´Ù.";
-				String content = "ÀÎÁõÄÚµå´Â" + checkNum + "ÀÔ´Ï´Ù." + "<br>" + "ÇØ´ç ÀÎÁõÄÚµå¸¦ ÀÎÁõÄÚµåÈ®ÀÎ¶õ¿¡ ÀÛ¼ºÇÏ¼¼¿ä!";
+						// ë‚´ìš©ì„¤ì •(trueëŠ” htmlí¬ë§·ì„ ì‚¬ìš©í•œë‹¤ëŠ” ëœ»)
+						helper.setText(content, true);
 
-				try {
-					// ÀÚ¹Ù ¸ŞÀÏ API Å¬·¡½º Áß¿¡ ÇÏ³ª
-					// º¹ÇÕÇü ÀÌ¸ŞÀÏ ¸Ş½ÃÁö(ÅØ½ºÆ®,html
-					// Ã·ºÎÆÄÀÏ µî)¸¦ »ı¼ºÇÏ´Âµ¥ »ç¿ëµÈ´Ù.
-					MimeMessage message = mailSender.createMimeMessage();
+						// ì´ë©”ì¼ ì „ì†¡
+						mailSender.send(message);
 
-					// À§¿¡ MimeMessageÅ¬·¡½º¿¡
-					// ¼³Á¤À» ÇÏ´Â Å¬·¡½º
-					// message Ã¹¹øÂ° ¸Å°³º¯¼ö À§¿¡ ¸ÅÀÏ »ı¼º
-					// true ÀÌ¸ŞÀÏ ¸Ş½ÃÁö¸¦ html,ÅØ½ºÆ®,Ã·ºÎÆÄÀÏµî
-					// ÇÔ²² Æ÷ÇÔÇØ¼­ Àü¼Û
-					// false ¹«Á¶°Ç ÅØ½ºÆ®¸¸ °£´Ù.
-					MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
-					helper.setFrom(setFrom);// ¹ß½ÅÀÚ ¼³Á¤
-					helper.setTo(toMail); // ¼ö½ÅÀÚ ¼³Á¤
-					helper.setSubject(title);// Á¦¸ñ ¼³Á¤
-
-					// ³»¿ë¼³Á¤(true´Â htmlÆ÷¸ËÀ» »ç¿ëÇÑ´Ù´Â ¶æ)
-					helper.setText(content, true);
-
-					// ÀÌ¸ŞÀÏ Àü¼Û
-					mailSender.send(message);
-
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-
-				model.addAttribute("msg", "ÀÔ·ÂÇÏ½Å ÀÌ¸ŞÀÏ·Î ÀÎ°¡ ÄÚµå¸¦ Àü¼ÛÇß½À´Ï´Ù.");
-				session.setAttribute("findpw", employee.getEMP_PASSWORD());
-				session.setAttribute("email", email);
-				session.setAttribute("checkNum", checkNum);
-				return "login/logincode";
-			} else {
-				model.addAttribute("msg", "¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£¿Í ÀÌ¸ŞÀÏÀ» Á¦´ë·Î ÀÔ·ÂÇÏ¼¼¿ä.");
-				return "login/findpassword";
-			}
-		} else if (login.equals("Student")) {
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+					
+					
+					model.addAttribute("msg", "ì…ë ¥í•˜ì‹  ì´ë©”ì¼ë¡œ ì¸ê°€ ì½”ë“œë¥¼ ì „ì†¡í–ˆìŠµë‹ˆë‹¤.");
+					session.setAttribute("findpw", employee.getEMP_PASSWORD());
+					session.setAttribute("email",email);
+					session.setAttribute("checkNum",checkNum);
+					return "login/logincode";
+				} else {
+					model.addAttribute("msg", "ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ì™€ ì´ë©”ì¼ì„ ì œëŒ€ë¡œ ì…ë ¥í•˜ì„¸ìš”.");
+					return "login/findpassword";
+				}	
+		}
+			else if (login.equals("Student")) {
 			Student student = loginService.studentpwfind(params);
+		
+			if (student != null  && student.getSTU_EMAIL().equals(email)) {
 
-			if (student != null && student.getSTU_EMAIL().equals(email)) {
-
-				// apiÀÌ¸ŞÀÏ
+				//apiì´ë©”ì¼
 				System.out.println("email:" + email);
-				// ³­¼öÀÇ ¹üÀ§ 111111~999999(6ÀÚ¸®ÀÇ ³­¼ö ÁöÁ¤)
+				// ë‚œìˆ˜ì˜ ë²”ìœ„ 111111~999999(6ìë¦¬ì˜ ë‚œìˆ˜ ì§€ì •)
 				Random random = new Random();
 				int checkNum = random.nextInt(888888) + 111111;
-				// ÀÌ¸ŞÀÏ º¸³¾ ¾ç½Ä ¼³Á¤
-				// ¹ß½ÅÀÚ ÀÌ¸ŞÀÏ ÁÖ¼Ò
+				// ì´ë©”ì¼ ë³´ë‚¼ ì–‘ì‹ ì„¤ì •
+				// ë°œì‹ ì ì´ë©”ì¼ ì£¼ì†Œ
 				String setFrom = "ghdgns1226@naver.com";
-				// ¼öÁøÀÚ ÀÌ¸ŞÀÏ ÁÖ¼Ò
+				// ìˆ˜ì§„ì ì´ë©”ì¼ ì£¼ì†Œ
 				String toMail = email;
-				// ÀÌ¸ŞÀÏ Á¦¸ñ
-				String title = "ºñ¹Ğ¹øÈ£ Ã£±â  ÀÎÁõ ¸ŞÀÏ ÀÔ´Ï´Ù.";
-				String content = "ÀÎÁõÄÚµå´Â" + checkNum + "ÀÔ´Ï´Ù." + "<br>" + "ÇØ´ç ÀÎÁõÄÚµå¸¦ ÀÎÁõÄÚµåÈ®ÀÎ¶õ¿¡ ÀÛ¼ºÇÏ¼¼¿ä!";
+				// ì´ë©”ì¼ ì œëª©
+				String title = "ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°  ì¸ì¦ ë©”ì¼ ì…ë‹ˆë‹¤.";
+				String content = "ì¸ì¦ì½”ë“œëŠ”" + checkNum + "ì…ë‹ˆë‹¤." + "<br>" + "í•´ë‹¹ ì¸ì¦ì½”ë“œë¥¼ ì¸ì¦ì½”ë“œí™•ì¸ë€ì— ì‘ì„±í•˜ì„¸ìš”!";
 
 				try {
-					// ÀÚ¹Ù ¸ŞÀÏ API Å¬·¡½º Áß¿¡ ÇÏ³ª
-					// º¹ÇÕÇü ÀÌ¸ŞÀÏ ¸Ş½ÃÁö(ÅØ½ºÆ®,html
-					// Ã·ºÎÆÄÀÏ µî)¸¦ »ı¼ºÇÏ´Âµ¥ »ç¿ëµÈ´Ù.
+					// ìë°” ë©”ì¼ API í´ë˜ìŠ¤ ì¤‘ì— í•˜ë‚˜
+					// ë³µí•©í˜• ì´ë©”ì¼ ë©”ì‹œì§€(í…ìŠ¤íŠ¸,html
+					// ì²¨ë¶€íŒŒì¼ ë“±)ë¥¼ ìƒì„±í•˜ëŠ”ë° ì‚¬ìš©ëœë‹¤.
 					MimeMessage message = mailSender.createMimeMessage();
 
-					// À§¿¡ MimeMessageÅ¬·¡½º¿¡
-					// ¼³Á¤À» ÇÏ´Â Å¬·¡½º
-					// message Ã¹¹øÂ° ¸Å°³º¯¼ö À§¿¡ ¸ÅÀÏ »ı¼º
-					// true ÀÌ¸ŞÀÏ ¸Ş½ÃÁö¸¦ html,ÅØ½ºÆ®,Ã·ºÎÆÄÀÏµî
-					// ÇÔ²² Æ÷ÇÔÇØ¼­ Àü¼Û
-					// false ¹«Á¶°Ç ÅØ½ºÆ®¸¸ °£´Ù.
+					// ìœ„ì— MimeMessageí´ë˜ìŠ¤ì—
+					// ì„¤ì •ì„ í•˜ëŠ” í´ë˜ìŠ¤
+					// message ì²«ë²ˆì§¸ ë§¤ê°œë³€ìˆ˜ ìœ„ì— ë§¤ì¼ ìƒì„±
+					// true ì´ë©”ì¼ ë©”ì‹œì§€ë¥¼ html,í…ìŠ¤íŠ¸,ì²¨ë¶€íŒŒì¼ë“±
+					// í•¨ê»˜ í¬í•¨í•´ì„œ ì „ì†¡
+					// false ë¬´ì¡°ê±´ í…ìŠ¤íŠ¸ë§Œ ê°„ë‹¤.
 					MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
-					helper.setFrom(setFrom);// ¹ß½ÅÀÚ ¼³Á¤
-					helper.setTo(toMail); // ¼ö½ÅÀÚ ¼³Á¤
-					helper.setSubject(title);// Á¦¸ñ ¼³Á¤
+					helper.setFrom(setFrom);// ë°œì‹ ì ì„¤ì •
+					helper.setTo(toMail); // ìˆ˜ì‹ ì ì„¤ì •
+					helper.setSubject(title);// ì œëª© ì„¤ì •
 
-					// ³»¿ë¼³Á¤(true´Â htmlÆ÷¸ËÀ» »ç¿ëÇÑ´Ù´Â ¶æ)
+					// ë‚´ìš©ì„¤ì •(trueëŠ” htmlí¬ë§·ì„ ì‚¬ìš©í•œë‹¤ëŠ” ëœ»)
 					helper.setText(content, true);
 
-					// ÀÌ¸ŞÀÏ Àü¼Û
+					// ì´ë©”ì¼ ì „ì†¡
 					mailSender.send(message);
 
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
-
-				model.addAttribute("msg", "ÀÔ·ÂÇÏ½Å ÀÌ¸ŞÀÏ·Î ÀÎ°¡ ÄÚµå¸¦ Àü¼ÛÇß½À´Ï´Ù.");
+				
+				
+				model.addAttribute("msg", "ì…ë ¥í•˜ì‹  ì´ë©”ì¼ë¡œ ì¸ê°€ ì½”ë“œë¥¼ ì „ì†¡í–ˆìŠµë‹ˆë‹¤.");
 				session.setAttribute("findpw", student.getSTU_PASSWORD());
-				session.setAttribute("email", email);
-				session.setAttribute("checkNum", checkNum);
+				session.setAttribute("email",email);
+				session.setAttribute("checkNum",checkNum);
 				return "login/logincode";
 			} else {
-				model.addAttribute("msg", "¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£¿Í ÀÌ¸ŞÀÏÀ» Á¦´ë·Î ÀÔ·ÂÇÏ¼¼¿ä.");
+				model.addAttribute("msg", "ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ì™€ ì´ë©”ì¼ì„ ì œëŒ€ë¡œ ì…ë ¥í•˜ì„¸ìš”.");
 				return "login/findpassword";
 			}
 		}
 		return "login/findpassword";
 	}
-
+	
+	
+	
+	
 	@RequestMapping("/logincodecheck")
-	public String logincodecheck(Model model, String pw, String checkNumcode, String pwcode, String email) {
-
-		System.out.println("checkNumcode:" + checkNumcode + "  " + "pwcode" + pwcode);
-		if (!checkNumcode.equals(pwcode)) {
-			model.addAttribute("msg", "ÀÎ°¡ ÄÚµå°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.");
+	public String logincodecheck(Model model ,String pw, String checkNumcode,String pwcode, String email) {
+		
+		System.out.println("checkNumcode:"+checkNumcode +"  "+"pwcode"+pwcode);
+		if(!checkNumcode.equals(pwcode)) {
+			model.addAttribute("msg","ì¸ê°€ ì½”ë“œê°€ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			return "login/logincode";
-		} else {
+		}
+		else {
 
-			// apiÀÌ¸ŞÀÏ
+			//apiì´ë©”ì¼
 			System.out.println("email:" + email);
-			// ³­¼öÀÇ ¹üÀ§ 111111~999999(6ÀÚ¸®ÀÇ ³­¼ö ÁöÁ¤)
+			// ë‚œìˆ˜ì˜ ë²”ìœ„ 111111~999999(6ìë¦¬ì˜ ë‚œìˆ˜ ì§€ì •)
 			Random random = new Random();
-
-			// ÀÌ¸ŞÀÏ º¸³¾ ¾ç½Ä ¼³Á¤
-			// ¹ß½ÅÀÚ ÀÌ¸ŞÀÏ ÁÖ¼Ò
+		
+			// ì´ë©”ì¼ ë³´ë‚¼ ì–‘ì‹ ì„¤ì •
+			// ë°œì‹ ì ì´ë©”ì¼ ì£¼ì†Œ
 			String setFrom = "ghdgns1226@naver.com";
-			// ¼öÁøÀÚ ÀÌ¸ŞÀÏ ÁÖ¼Ò
+			// ìˆ˜ì§„ì ì´ë©”ì¼ ì£¼ì†Œ
 			String toMail = email;
-			// ÀÌ¸ŞÀÏ Á¦¸ñ
-			String title = "ºñ¹Ğ¹øÈ£ ¾Ë¸² ¸ŞÀÏ ÀÔ´Ï´Ù.";
-			String content = "ºñ¹Ğ¹øÈ£´Â" + pw + "ÀÔ´Ï´Ù.";
+			// ì´ë©”ì¼ ì œëª©
+			String title = "ë¹„ë°€ë²ˆí˜¸ ì•Œë¦¼ ë©”ì¼ ì…ë‹ˆë‹¤.";
+			String content = "ë¹„ë°€ë²ˆí˜¸ëŠ”" + pw + "ì…ë‹ˆë‹¤." ;
 
 			try {
-				// ÀÚ¹Ù ¸ŞÀÏ API Å¬·¡½º Áß¿¡ ÇÏ³ª
-				// º¹ÇÕÇü ÀÌ¸ŞÀÏ ¸Ş½ÃÁö(ÅØ½ºÆ®,html
-				// Ã·ºÎÆÄÀÏ µî)¸¦ »ı¼ºÇÏ´Âµ¥ »ç¿ëµÈ´Ù.
+				// ìë°” ë©”ì¼ API í´ë˜ìŠ¤ ì¤‘ì— í•˜ë‚˜
+				// ë³µí•©í˜• ì´ë©”ì¼ ë©”ì‹œì§€(í…ìŠ¤íŠ¸,html
+				// ì²¨ë¶€íŒŒì¼ ë“±)ë¥¼ ìƒì„±í•˜ëŠ”ë° ì‚¬ìš©ëœë‹¤.
 				MimeMessage message = mailSender.createMimeMessage();
 
-				// À§¿¡ MimeMessageÅ¬·¡½º¿¡
-				// ¼³Á¤À» ÇÏ´Â Å¬·¡½º
-				// message Ã¹¹øÂ° ¸Å°³º¯¼ö À§¿¡ ¸ÅÀÏ »ı¼º
-				// true ÀÌ¸ŞÀÏ ¸Ş½ÃÁö¸¦ html,ÅØ½ºÆ®,Ã·ºÎÆÄÀÏµî
-				// ÇÔ²² Æ÷ÇÔÇØ¼­ Àü¼Û
-				// false ¹«Á¶°Ç ÅØ½ºÆ®¸¸ °£´Ù.
+				// ìœ„ì— MimeMessageí´ë˜ìŠ¤ì—
+				// ì„¤ì •ì„ í•˜ëŠ” í´ë˜ìŠ¤
+				// message ì²«ë²ˆì§¸ ë§¤ê°œë³€ìˆ˜ ìœ„ì— ë§¤ì¼ ìƒì„±
+				// true ì´ë©”ì¼ ë©”ì‹œì§€ë¥¼ html,í…ìŠ¤íŠ¸,ì²¨ë¶€íŒŒì¼ë“±
+				// í•¨ê»˜ í¬í•¨í•´ì„œ ì „ì†¡
+				// false ë¬´ì¡°ê±´ í…ìŠ¤íŠ¸ë§Œ ê°„ë‹¤.
 				MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
-				helper.setFrom(setFrom);// ¹ß½ÅÀÚ ¼³Á¤
-				helper.setTo(toMail); // ¼ö½ÅÀÚ ¼³Á¤
-				helper.setSubject(title);// Á¦¸ñ ¼³Á¤
+				helper.setFrom(setFrom);// ë°œì‹ ì ì„¤ì •
+				helper.setTo(toMail); // ìˆ˜ì‹ ì ì„¤ì •
+				helper.setSubject(title);// ì œëª© ì„¤ì •
 
-				// ³»¿ë¼³Á¤(true´Â htmlÆ÷¸ËÀ» »ç¿ëÇÑ´Ù´Â ¶æ)
+				// ë‚´ìš©ì„¤ì •(trueëŠ” htmlí¬ë§·ì„ ì‚¬ìš©í•œë‹¤ëŠ” ëœ»)
 				helper.setText(content, true);
 
-				// ÀÌ¸ŞÀÏ Àü¼Û
+				// ì´ë©”ì¼ ì „ì†¡
 				mailSender.send(message);
 
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			model.addAttribute("msg", "ºñ¹Ğ¹øÈ£¸¦ ±ÍÇÏÀÇ ÀÌ¸ŞÀÏ·Î º¸³Â½À´Ï´Ù.");
+			model.addAttribute("msg","ë¹„ë°€ë²ˆí˜¸ë¥¼ ê·€í•˜ì˜ ì´ë©”ì¼ë¡œ ë³´ëƒˆìŠµë‹ˆë‹¤.");
 			return "login/login";
 		}
-
+		
 	}
+	
 
 	@RequestMapping("/passwordchange")
-	public String passwordChange(Model model) {
+	public String passwordChange(Model model ) {
+		
+	int id=(int)session.getAttribute("studentno");
+	String name=(String)session.getAttribute("loginname");
+	String deptname=(String)session.getAttribute("studeptname");
+	String email=(String)session.getAttribute("email");
+	String phone=(String)session.getAttribute("phone");
+	String password=(String)session.getAttribute("loginPassword");
 
-		int id = (int) session.getAttribute("studentno");
-		String name = (String) session.getAttribute("loginname");
-		String deptname = (String) session.getAttribute("studeptname");
-		String email = (String) session.getAttribute("email");
-		String phone = (String) session.getAttribute("phone");
-		String password = (String) session.getAttribute("loginPassword");
-
-		model.addAttribute("id", id);
-		model.addAttribute("name", name);
-		model.addAttribute("password", password);
-
+		model.addAttribute("id",id);
+		model.addAttribute("name",name);
+		model.addAttribute("password",password);
+		
 		return "login/passwordchange";
 	}
-
+	
 	@RequestMapping("/passwordchangeInfo")
 	public String passwordchangeInfo(Model model, String STU_PASSWORD) {
-
-		System.out.println("passwordchangeInfo½ÇÇà" + STU_PASSWORD);
-		int STU_NO = (int) session.getAttribute("studentno");
-		Map<String, Object> params = new HashMap<>();
-		params.put("STU_PASSWORD", STU_PASSWORD);
-		params.put("STU_NO", STU_NO);
-		System.out.println("params:" + params);
-		loginService.pwschange(params);
-		logout(session, model);
+		
+		System.out.println("passwordchangeInfoì‹¤í–‰"+STU_PASSWORD);
+		int STU_NO=(int)session.getAttribute("studentno");
+		  Map<String, Object> params = new HashMap<>();  
+	        params.put("STU_PASSWORD", STU_PASSWORD);
+	        params.put("STU_NO", STU_NO);
+		System.out.println("params:"+params);
+	loginService.pwschange(params);
+	logout(session, model);
 
 		return "home";
 	}
-
+	
+	
 }
