@@ -147,7 +147,7 @@
 						<table id="tbl-board" style="margin-bottom: 50px;">
 							<tr>
 								<th><span>제목</span></th>
-								<td><input type="text" placeholder="제목을 입력하세요" name="title"></td>
+								<td><input type="text" placeholder="제목을 입력하세요(30자 제한)" name="title" maxlength="30"></td>
 							</tr>
 
 							<tr>
@@ -180,14 +180,16 @@
 	<script>
 		function validateForm() {
 			var title = document.getElementsByName("title")[0].value.trim(); // 제목 필드의 값 가져오기 및 공백 제거
-			var detail = document.getElementsByName("detail")[0].value.trim(); // 내용 필드의 값 가져오기 및 공백 제거
-
-			if (title === "") {
+			var detail = document.getElementsByName("content")[0].value.trim(); // 내용 필드의 값 가져오기 및 공백 제거
+			
+				console.log(title);
+			
+			if (title ==="") {
 				alert("제목을 입력하세요.");
 				return false; // 폼 제출 중단
 			}
 
-			if (detail === "") {
+			if (detail ==="") {
 				alert("내용을 입력하세요.");
 				return false; // 폼 제출 중단
 			}

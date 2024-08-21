@@ -175,7 +175,7 @@
 				</c:if>
 				<div class="backbtn">
 					<button type="button" id="btnCancel" class="btn"
-						onclick="window.location.href='${path}/infoboard'"
+						onclick="history.back();"
 						style="color: white; font-weight: bold; font-size: 16px;">돌아가기</button>
 				</div>
 			</div>
