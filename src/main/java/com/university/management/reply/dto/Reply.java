@@ -1,6 +1,7 @@
 package com.university.management.reply.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +19,7 @@ public class Reply {
 	private String reply_Content;	// 댓글 내용
 	private Date create_Date;		// 작성날짜
 	private Date modifyDate;		// 수정날짜
-	private int rePlus;				// 대댓글
+	private int re_Plus;				// 대댓글
+	private List<Reply> nestedReplies;
 
 }

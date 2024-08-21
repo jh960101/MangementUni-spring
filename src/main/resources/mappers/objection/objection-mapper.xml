@@ -224,14 +224,15 @@
 		AND E.OBJ_NO IS NOT NULL
 		AND E.OBJ_STATUS = 'N'
 		<if test="department != null and department != ''">
-			AND D.DEPT_CODE = #{department} 
+			AND D.DEPT_NAME = #{department} 
 		</if>
 		<if test="subject != null and subject != ''">
-			AND B.SUB_CODE = #{subject}
+			AND B.SUB_NAME = #{subject}
 		</if>
 		<if test="grade != null and grade != ''">
 			AND C.STU_GRADE = #{grade}
 		</if>
 	</select>
+
 
 </mapper>

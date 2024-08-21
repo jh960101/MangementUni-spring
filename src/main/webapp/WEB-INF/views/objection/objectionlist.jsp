@@ -1,191 +1,193 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>성적 이의 신청 목록</title>
-    <script defer src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <%-- <script defer src="${path}/resources/js/.js"></script> --%>
-    <style>
-        #sub-menubar {
-            margin-left: 50px;
-            background-color: #024C86;
-            margin-top: 160px;
-            width: 200px;
-            height: 150px;
-            float: left;
-        }
+<meta charset="UTF-8">
+<title>성적 이의 신청 목록</title>
+<script defer src="https://code.jquery.com/jquery-latest.min.js"></script>
+<%-- <script defer src="${path}/resources/js/.js"></script> --%>
+<style>
+#sub-menubar {
+	margin-left: 50px;
+	background-color: #024C86;
+	margin-top: 160px;
+	width: 200px;
+	height: 150px;
+	float: left;
+}
 
-        #menulist {
-            text-decoration: none;
-            list-style: none;
-            font-weight: bold;
-            align-items: center;
-            margin-top: 10px;
-        }
+#menulist {
+	text-decoration: none;
+	list-style: none;
+	font-weight: bold;
+	align-items: center;
+	margin-top: 10px;
+}
 
-        #menulist a {
-            text-decoration: none;
-            color: white;
-        }
+#menulist a {
+	text-decoration: none;
+	color: white;
+}
 
-        #menulist a:hover {
-            border-bottom: 1px solid;
-            border-bottom-color: white;
-        }
+#menulist a:hover {
+	border-bottom: 1px solid;
+	border-bottom-color: white;
+}
 
-        #menulist li {
-            margin: 20px 0px;
-        }
+#menulist li {
+	margin: 20px 0px;
+}
 
-        #pagetitle {
-            margin-top: 50px;
-            border-bottom: 3px solid;
-            border-bottom-color: #024C86;
-        }
+#pagetitle {
+	margin-top: 50px;
+	border-bottom: 3px solid;
+	border-bottom-color: #024C86;
+}
 
-        #results th {
-            text-align: center;
-            align-items: center;
-            vertical-align: center;
-        }
+#results th {
+	text-align: center;
+	align-items: center;
+	vertical-align: center;
+}
 
-        .page-link {
-            color: black !important;
-        }
+.page-link {
+	color: black !important;
+}
 
-        .page-item.active .page-link {
-            z-index: 1;
-            font-weight: bold;
-            color: white !important;
-            background-color: #024C86;
-            border: 1px solid white;
-            border-radius: 5px;
-        }
+.page-item.active .page-link {
+	z-index: 1;
+	font-weight: bold;
+	color: white !important;
+	background-color: #024C86;
+	border: 1px solid white;
+	border-radius: 5px;
+}
 
-        .page-link:focus, .page-link:hover {
-            color: #024C86;
-        }
-    </style>
+.page-link:focus, .page-link:hover {
+	color: #024C86;
+}
+
+.btn btn-xs btn-primary {
+	background-color: #024C86;
+	color: white;
+	padding: 5px 10px 5px 10px;
+	border: none !important;
+}
+</style>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<c:if test="${not empty sessionScope.msg}">
-    <script>
+	<c:if test="${not empty sessionScope.msg}">
+		<script>
         alert('${fn:escapeXml(sessionScope.msg)}');
     </script>
-    <c:remove var="msg" scope="session"/>
-</c:if>
+		<c:remove var="msg" scope="session" />
+	</c:if>
 
-<div id="menuBar">
-    <div id="sub-menubar">
-        <ul id="menulist">
-            <li><a href="infoboard">공지사항 관리</a></li>
-            <li><a href="scholarlist">장학금 관리</a></li>
-            <li><a href="objectionlist">성적이의 관리</a></li>
-        </ul>
-    </div>
-</div>
+	<div id="menuBar">
+		<div id="sub-menubar">
+			<ul id="menulist">
+				<li><a href="infoboard">공지사항 관리</a></li>
+				<li><a href="scholarlist">장학금 관리</a></li>
+				<li><a href="objectionlist">성적이의 관리</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="container" style="height: auto; margin-top: 50px;">
+		<div id="content">
+			<!-- title view -->
+			<div id="pagetitle">
+				<h1>성적 이의 목록</h1>
+			</div>
+			<div id="pageContent" style="margin-top: 55px; margin-left: 20px;">
+				<div id="selectbox">
+					<form id="filterForm" method="POST" action="${path}/objectionlist">
+						<select name="department" id="department" required
+							onchange="filterResults(); ajaxData();" style="padding: 5px;">
+							<option value="%" selected>전체</option>
+							<option value="AI인공지능과">AI인공지능과</option>
+							<option value="정보보호학과">정보보호학과</option>
+							<option value="정보통신학과">정보통신학과</option>
+							<option value="응용소프트웨어학과">응용소프트웨어학과</option>
+							<option value="수학과">수학과</option>
+							<option value="컴퓨터공학과">컴퓨터공학과</option>
+							<option value="화학공학과">화학공학과</option>
+							<option value="물리학과">물리학과</option>
+						</select> <select name="subject" id="subject" required
+							style="padding: 5px;" onchange="ajaxData();">
+							<option disabled selected value="">과목 선택</option>
+							<option value="%">전체</option>
+							<!-- 기본 옵션 -->
+						</select> <select name="grade" required id="grade" style="padding: 5px;"
+							onchange="ajaxData();">
+							<option value="" disabled selected>학년 선택</option>
+							<option value="%">전체</option>
+							<option value="1학년">1학년</option>
+							<option value="2학년">2학년</option>
+							<option value="3학년">3학년</option>
+							<option value="4학년">4학년</option>
+						</select>
+					</form>
+				</div>
+			</div>
 
-<div class="container" style="height: auto; margin-top: 50px;">
-    <div id="content">
-        <!-- title view -->
-        <div id="pagetitle">
-            <h1>성적 이의 신청 목록</h1>
-        </div>
-        <div id="pageContent" style="margin-top:50px;">
-            <div id="selectbox" >
-                <form id="filterForm" method="POST" action="${path}/objectionlist">
-                    <select name="department" id="department" required onchange="filterResults(); ajaxData();"
-                            style="padding: 5px;">
-                        <option value="" disabled selected>학과 선택</option>
-                        <option value="%">전체</option>
-                        <option value="AI인공지능학과">AI인공지능학과</option>
-                        <option value="정보보호학과">정보보호학과</option>
-                        <option value="정보통신학과">정보통신학과</option>
-                        <option value="응용소프트웨어학과">응용소프트웨어학과</option>
-                        <option value="수학과">수학과</option>
-                        <option value="컴퓨터공학과">컴퓨터공학과</option>
-                        <option value="화학과">화학과</option>
-                        <option value="물리학과">물리학과</option>
-                    </select>
-                    <select name="subject" id="subject" required style="padding: 5px;" onchange="ajaxData();">
-                        <option disabled selected value="">과목 선택</option>
-                        <option value="%">전체</option>
-                        <!-- 기본 옵션 -->
-                    </select>
-                    <select name="grade" required id="grade" style="padding: 5px;"
-                            onchange="ajaxData();">
-                        <option value="" disabled selected>학년 선택</option>
-                        <option value="%">전체</option>
-                        <option value="1학년">1학년</option>
-                        <option value="2학년">2학년</option>
-                        <option value="3학년">3학년</option>
-                        <option value="4학년">4학년</option>
-                    </select>
-                </form>
-            </div>
-        </div>
+			<div id="selectTable" style="margin-top: 50px;">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col"></th>
+							<th scope="col">학기</th>
+							<th scope="col" style="width: 200px;">학과</th>
+							<th scope="col">학년</th>
+							<th scope="col">이름</th>
+							<th scope="col" style="width: 250px;">신청 과목</th>
+							<th scope="col">등급</th>
+							<th scope="col">점수</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody id="results" class="table-group-divider">
+						<!-- 검색 결과가 들어올 부분 -->
+						<c:if test="${objListEmp.size()>1}">
+							<c:forEach var="item" items="${objListEmp}">
+								<tr style="vertical-align: center;">
+									<th scope="row">${item.num}</th>
+									<td>${item.smt}</td>
+									<td>${item.dept_name}</td>
+									<td>${item.stu_grade}</td>
+									<td>${item.stu_name}</td>
+									<td>${item.sub_name}</td>
+									<td>${item.grade}</td>
+									<td>${item.grade_p}</td>
+									<td>
+										<button type="button" class="btn btn-xs btn-primary"
+											onclick="location.href='${path}/objectionUpdate?sub_code=${item.sub_code}&sub_name=${item.sub_name}&stu_no=${item.stu_no}'"
+											style="background-color: #024C86; color: white; padding: 5px 10px 5px 10px; border: none !important;">
+											보기</button>
+									</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</tbody>
+				</table>
+			</div>
+			<!-- selectTable -->
+			<c:if test="${objListEmp.size()==0}">
 
-        <div id="selectTable" style="margin-top:50px;">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">학기</th>
-                    <th scope="col">학과</th>
-                    <th scope="col">학년</th>
-                    <th scope="col">이름</th>
-                    <th scope="col">신청 과목</th>
-                    <th scope="col">등급</th>
-                    <th scope="col">점수</th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                <tbody id="results" class="table-group-divider">
-                <!-- 검색 결과가 들어올 부분 -->
-                <c:if test="${objListEmp.size()>1}">
-                    <c:forEach var="item" items="${objListEmp}">
-                        <tr style="vertical-align: center;">
-                            <th scope="row">${item.num}</th>
-                            <td>${item.smt}</td>
-                            <td>${item.dept_name}</td>
-                            <td>${item.stu_grade}</td>
-                            <td>${item.stu_name}</td>
-                            <td>${item.sub_name}</td>
-                            <td>${item.grade}</td>
-                            <td>${item.grade_p}</td>
-                            <td>
-                                <button type="button" class="btn btn-xs btn-primary"
-                                        onclick="location.href='${path}/objectionUpdate?sub_code=${item.sub_code}&sub_name=${item.sub_name}&stu_no=${item.stu_no}'"
-                                        style="background-color: #024C86; color: white; padding: 5px 10px 5px 10px; border: none !important;">
-                                    보기
-                                </button>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </c:if>
-                </tbody>
-            </table>
-        </div>
-        <!-- selectTable -->
-        <c:if test="${objListEmp.size()==0}">
+				<div style="height: 500px;">
+					<h2 style="text-align: center; padding-top: 200px;">조회 결과가 없습니다.</h2>
+				</div>
 
-            <div style="height: 500px;">
-                <h2 style="text-align: center;padding-top: 200px;">조회 결과가 없습니다.</h2>
-
-            </div>
-
-        </c:if>
-        <!-- 페이징 처리 -->
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
+			</c:if>
+			<!-- 페이징 처리 -->
+			<nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center" id="pagination">
                 <!-- 이전 페이지 -->
                 <li
                         class="page-item <c:if test="${pageInfo.prevPage == 0}">disabled</c:if>">
@@ -223,10 +225,10 @@
                 </li>
             </ul>
         </nav>
-    </div>
-    <!-- pageContent -->
-</div>
-<script>
+		</div>
+		<!-- pageContent -->
+	</div>
+	<script>
 
     function filterResults() {
         const departmentSelect = document.querySelector('select[name="department"]');
@@ -260,7 +262,7 @@
                     '제어 시스템', '전자기장 이론', '집적 회로 설계', '통신 네트워크', '전자기기 실험',
                     '고급 제어 시스템', '무선 통신', '반도체 신호', '전자기기 설계', '전력 시스템'
                 ],
-                "AI인공지능학과": [
+                "AI인공지능과": [
                     '인공지능 기초', '기계학습 기초', '데이터 분석 기초', '알고리즘 기반', '인공지능 스위치',
                     '딥러닝', '자연어 처리', '로봇 공학', '강화학습', '인공지능 응용',
                     '인공지능 모델링', '인공지능 시스템 설계', '머신 비전', 'AI 연구 동향', '지능형 에이전트',
@@ -307,7 +309,6 @@
 
 
     function ajaxData() {
-        debugger;
         const departmentSelect = document.querySelector('select[name="department"]');
         const subjectSelect = document.querySelector('select[name="subject"]');
         const gradeSelect = document.querySelector('select[name="grade"]');
@@ -315,7 +316,7 @@
         const selectedDepartment = departmentSelect.value;
         const selectedSubject = subjectSelect.value;
         const selectedGrade = gradeSelect.value;
-        const selectedPage = document.querySelector('.pagination .page-item.active .page-link').textContent;
+        const selectedPage = 1;
 
 
         $.ajax({
@@ -330,37 +331,90 @@
             processData: false,
             contentType: 'application/json',
             success: function (data) {
-                console.log(data);
+            	console.log("data.results : " + data.results);
 
                 const resultsTable = document.getElementById('results');
                 resultsTable.innerHTML = ''; // 기존 내용을 지우고
 
-                data.forEach((item, index) => {
-                    const row = document.createElement('tr');
-                    console.log("item : " + item.smt);
-                    row.innerHTML = '<th scope="row">' + (index + 1) + '</th>'
-                        + '<td>' + item.smt + '</td>'
-                        + '<td>' + item.dept_name + '</td>'
-                        + '<td>' + item.stu_grade + '</td>'
-                        + '<td>' + item.stu_name + '</td>'
-                        + '<td>' + item.sub_name + '</td>'
-                        + '<td>' + item.grade + '</td>'
-                        + '<td>' + item.grade_p + '</td>'
-                        + '<td>' + '<button type="button" class="btn btn-xs btn-primary" onclick="location.href=\'${path}/objectionUpdate?sub_code=' + item.sub_code
-                        + '&sub_name=' + item.sub_name + '&stu_no=' + item.stu_no + '\'">보기</button>' + '</td>';
-                    resultsTable.appendChild(row);
-                });
+                    // 데이터의 길이를 체크합니다.
+                    if (data.results.length > 0) {
+                    	
+                        data.results.forEach((item, index) => {
+                            const row = document.createElement('tr');
+                            console.log("item : " + item.smt);
+                            row.innerHTML = '<th scope="row">' + (index + 1) + '</th>'
+                                + '<td>' + item.smt + '</td>'
+                                + '<td>' + item.dept_name + '</td>'
+                                + '<td>' + item.stu_grade + '</td>'
+                                + '<td>' + item.stu_name + '</td>'
+                                + '<td>' + item.sub_name + '</td>'
+                                + '<td>' + item.grade + '</td>'
+                                + '<td>' + item.grade_p + '</td>'
+                                + '<td>' + '<button type="button" class="btn btn-xs btn-primary" onclick="location.href=\'${path}/objectionUpdate?sub_code=' + item.sub_code
+                                + '&sub_name=' + item.sub_name + '&stu_no=' + item.stu_no + '\' "style="background-color: #024C86; color: white; padding: 5px 10px 5px 10px; border: none !important;">보기</button>' + '</td>';
+                            resultsTable.appendChild(row);
+                        });
+                     
+                
+                     // 페이지네이션 업데이트
+                    const paginationContainer = document.getElementById('pagination');
+				    paginationContainer.innerHTML = ''; // 기존 페이지네이션 초기화
+				
+				    // 이전 페이지 버튼 추가
+				    if (data.currentPage > 0) {
+				        paginationContainer.innerHTML += `
+				            <li class="page-item">
+				                <button class="page-link" onclick="loadFilteredResults(${currentPage - 1})" aria-label="Previous">
+				                    <span aria-hidden="true">&laquo;</span>
+				                </button>
+				            </li>
+				        `;
+				    }
+				
+				    // 페이지 번호 버튼 생성
+				    for (let i = data.startPage; i < data.totalPages; i++) {
+				        if (data.currentPage === data.currentPage) {
+				        	console.log("currentPage === " + i);
+				            paginationContainer.innerHTML += `
+				                <li class="page-item active">
+				                    <span class="page-link">\${data.currentPage}</span>
+				                </li>
+				            `;
+				        } else if(data.currentPage !== data.currentPage) {
+				        	console.log("else 코드 실행");
+				            paginationContainer.innerHTML += `
+				                <li class="page-item">
+				                    <span class="page-link" style="cursor: pointer;" onclick="loadFilteredResults(\${i})"></span>
+				                </li>
+				            `;
+				        }
+				    }
+				
+				    // 다음 페이지 버튼 추가
+				    if (data.currentPage < data.totalPages) {
+				        paginationContainer.innerHTML += `
+				            <li class="page-item">
+				                <button class="page-link" onclick="loadFilteredResults(${currentPage + 1})" aria-label="Next">
+				                    <span aria-hidden="true">&raquo;</span>
+				                </button>
+				            </li>
+				        `;
+				     }       
+				 }
             },
             error: function (error) {
                 console.error('Error:', error);
                 alert('데이터를 불러오는 데 오류가 발생했습니다.');
             }
         });
-
-    }
-
+        
+	     // 페이지 로드 시 초기 AJAX 요청
+	        document.addEventListener('DOMContentLoaded', function() {
+	            ajaxData(); // 페이지 로드 시 AJAX 요청
+	        });
+    	}
 
 </script>
 </body>
 </html>
-<jsp:include page="../common/footer.jsp"/>
+<jsp:include page="../common/footer.jsp" />

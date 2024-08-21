@@ -493,13 +493,13 @@ public class FacultyController {
 	// 성적이의신청 데이터 목록 받아오기
 	@PostMapping("/objectionSearch")
 	@ResponseBody
-	public List<Objection> objectionSearch(@RequestBody Map<String, Object> requestData) {
+	public ResponseEntity<Map<String, Object>> objectionSearch(@RequestBody Map<String, Object> requestData) {
 		System.out.println("facultycontroller-objectionSearch() 실행");
 
 		String department = (String) requestData.get("department");
 		String subject = (String) requestData.get("subject");
 		String grade = (String) requestData.get("grade");
-		int page = Integer.valueOf((String) requestData.get("page"));
+		int page = (int) requestData.get("page");
 
 		System.out.println("department : " + department);
 		System.out.println("subject : " + subject);
@@ -513,17 +513,32 @@ public class FacultyController {
 
 		int listLimit = 5; // 한 페이지에 보여질 게시글 수
 		int totalRowCount = objservice.getListCount(params); // 전체 게시글의 수
-
+		System.out.println("objectionSearch totalRowCount : " + totalRowCount);
+		
 		// 페이지네이션 설정
 		PageInfo pageSettings = new PageInfo(page, totalRowCount, 5);
 		pageSettings.pageSetting(totalRowCount);
+		int startPage = pageSettings.getStartPage();
 
 		int firstRow = pageSettings.getFirstRow();
+		int lastPage = pageSettings.getLastPage();
 
 		params.put("firstRow", firstRow);
 		params.put("listLimit", listLimit);
 
-		return objservice.objectionFilterData(params);
+//		return objservice.objectionFilterData(params);
+		
+		// 데이터 불러오기
+	    List<Objection> results = objservice.objectionFilterData(params);
+	    
+	    // 응답 구성
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("startPage", startPage);
+	    response.put("results", results);
+	    response.put("totalPages", lastPage); 	// lastPage 포함
+	    response.put("currentPage", page); 		// 현재 페이지 정보를 포함
+
+	    return ResponseEntity.ok(response); // JSON 형태로 반환
 	}
 
 	// 이의 신청 업데이트

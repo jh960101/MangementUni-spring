@@ -31,6 +31,17 @@
           href='https://cdn-uicons.flaticon.com/2.5.1/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <script defer src="${pageContext.request.contextPath}/resources/js/reply.js"></script>
     <style>
+        .comment {
+            margin-bottom: 10px; /* Space between comments */
+        }
+
+        .nested-replies-container {
+            margin-left: 20px; /* Indentation for nested replies */
+        }
+
+        .nested-comment {
+            margin-bottom: 10px; /* Space between nested comments */
+        }
 
     </style>
 </head>
@@ -60,14 +71,14 @@
     </div>
 </div>
 <div class="container"
-     style="height: 1900px; margin-top: 100px; margin-left: 450px;">
+     style="margin-top: 100px; margin-left: 450px;">
     <div type="box" id="content" class="header2">
         <input type="text" id="Box" class="box" value="&nbsp;상세 페이지" readonly>
 
 
         <div class="input-group">
             <input type="hidden" id="boardNo" value="${board.bo_no}"/>
-            <input type="hidden" id="stuNo" value="${board.stu_no}"/>
+            <input type="hidden" id="stuNo" value="${studentno}"/>
             <input type="hidden" id="path" value="${pageContext.request.contextPath}"/>
 
             <input type="text" class="form-control1" value="${board.title}"
@@ -137,66 +148,103 @@
             </div>
             <div id="commentsContainer" style=" height: auto;
                  min-height: 100%;
-                 padding-bottom: 500px;
+                 padding-bottom: 100px;
             ">
                 <c:forEach var="reply" items="${list}">
-                    <input type="hidden" id="re_no" value="${reply.re_No}"/>
-                    <div class="comment">
-                        <div class="horizontal-container">
-                            <div class="profile-section">
-                                <img src="${pageContext.request.contextPath}/resources/img/프로필사진.png" class="프로필사진"
-                                     alt="Profile Image">
-                                <span class="username">익명</span>
+                    <c:if test="${reply.re_Plus == -1}">
+                        <div class="comment" data-re-no="${reply.re_No}">
+                            <input type="hidden" class="replyId" value="${reply.re_No}"/>
+                            <div class="horizontal-container">
+                                <div class="profile-section">
+                                    <img src="${pageContext.request.contextPath}/resources/img/프로필사진.png" class="프로필사진"
+                                         alt="Profile Image">
+                                    <span class="username">익명</span>
+                                </div>
+                                <div class="stats-section">
+                                    <div class="stat-item"></div>
+                                </div>
                             </div>
-                            <div class="stats-section">
-                                <div class="stat-item"></div>
-                            </div>
-                        </div>
-                        <div class="input-group" style="gap: 90px;">
-                            <textarea class="replycontent" class="form-control-3" rows="3"
-                                      cols="70" placeholder="댓글 작성" maxlength="100"
-                                      style="width: 750px;margin: 10px 0 20px 20px;border-radius: 5px;border: none;outline: none;padding:10px;  "
-                                      readonly>${reply.reply_Content}</textarea>
-                            <div class="d-flex align-items-center">
-                                <button id="update-btn" class="custom-submit-button"
-                                        style="display: none">댓글 수정
+                            <div style="display: flex">
+                        <textarea class="replycontent"
+                                  style="width: 780px;border: none;border-radius: 5px;height: 80px;outline: none;padding: 10px"
+                                  maxlength="100" readonly>${reply.reply_Content}</textarea>
+                                <button class="replyupdate"
+                                        style="display: none; background-color: #024C86;color: white;border: none; border-radius: 5px;padding: 0px 20px;margin-left: 80px;">
+                                    수정하기
                                 </button>
                             </div>
-                        </div>
-                        <div style="display: flex; gap: 10px;">
-                            <button style="background-color: white;border:none;" class="nestedreply"><i
-                                    class="fi fi-br-redo"></i> 댓글달기
-                            </button>
-                            <button style="background-color: white;border:none;" class="updatereply"><i
-                                    class="fi fi-br-edit-message" style="position: relative; top: 2px;"></i> 수정하기
-                            </button>
-                            <button style="background-color: white;border:none;" class="deletereply"><i
-                                    class="fi fi-rr-delete" style="position: relative; top: 2px;"></i> 삭제하기
-                            </button>
-                        </div>
-                        <div class="nestedreplybox" style="display: none;transition: all 0.5ms;">
-                            <div class="form-controls-container"
-                                 style="margin-top: 10px;padding-left: 20px;display: flex;background-color: white;border: none">
-                                <div>
-								<textarea id="nestedreplytext" class="form-control" rows="3"
-                                          cols="80" placeholder="대댓글 작성" maxlength="100"
-                                          style="width: 100%;"></textarea>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <button class="custom-submit-button" type="button"
-                                            id="insertNestedReply">답글 작성
+                            <div style="display: flex; gap: 10px;margin-top: 20px;">
+                                    <%--                            대댓글 구현 --%>
+                                <button style="background-color: white;border:none;" class="nestedreply"><i
+                                        class="fi fi-br-redo"></i> 댓글달기
+                                </button>
+                                    <%--                                    --%>
+                                <c:if test="${studentno == reply.stu_No}">
+                                    <button class="updatereply" style="background-color: white;border: none"><i
+                                            class="fi fi-br-edit-message" style="vertical-align: -2px;"></i> 수정하기
                                     </button>
-                                </div>
+                                    <button class="deletereply" style="background-color: white;border: none"><i
+                                            class="fi fi-rr-delete" style="vertical-align: -2px;"></i> 삭제하기
+                                    </button>
+                                </c:if>
                             </div>
+                                <%--                        답글 작성 빈칸--%>
+                            <div class="nestedreplybox" style="display: none; margin-top: 20px;">
+                                        <textarea class="form-control nested-reply-text" rows="3" cols="80"
+                                                  placeholder="대댓글 작성" style="width: 980px;"></textarea>
+                                <button class="custom-submit-button insert-nested-reply" style="margin-top: 20px;">답글
+                                    작성
+                                </button>
+                            </div>
+                            <hr style="width: 980px;">
+
+                                <%--                        --%>
+                                <%--                        대댓글 출력--%>
+                            <c:forEach var="nestedReply" items="${reply.nestedReplies}">
+                                <div class="nested-replies-container" style="margin-top: 10px;">
+                                    <div class="profile-section" style="margin-top: 10px">
+                                        <i class="fi fi-br-arrow-turn-down-right"></i>
+                                        <img src="${pageContext.request.contextPath}/resources/img/프로필사진.png"
+                                             class="프로필사진"
+                                             alt="Profile Image" style="margin-left: 10px;">
+                                        <span class="username">익명</span>
+                                    </div>
+                                    <div class="nested-comment"
+                                         style="margin-left: 40px; margin-top: 10px;display: flex;flex-direction: column">
+                                        <input type="hidden" class="nested-id" value="${nestedReply.re_No}"/>
+                                        <textarea class="nestedreplycontent"
+                                                  style="border: none;width:900px;height: 80px; outline: none;border-radius: 5px;"
+                                                  readonly>${nestedReply.reply_Content}</textarea>
+                                        <div>
+                                            <button class="custom-submit-button nestedupdatebtn " style="margin-top: 20px;display: none">답글
+                                                작성
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <c:if test="${studentno == nestedReply.stu_No}">
+                                        <button class="nestedupdatereply" style="background-color: white;border: none">
+                                            <i
+                                                    class="fi fi-br-edit-message" style="vertical-align: -2px;"></i>
+                                            수정하기
+                                        </button>
+                                        <button class="nesteddeletereply" style="background-color: white;border: none">
+                                            <i
+                                                    class="fi fi-rr-delete" style="vertical-align: -2px;"></i> 삭제하기
+                                        </button>
+                                    </c:if>
+
+                                    <hr style="width: 980px;">
+                                </div>
+                            </c:forEach>
+                                <%--                        --%>
                         </div>
-                        <hr style="width: 1000px;">
-                    </div>
+                    </c:if>
                 </c:forEach>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 
 <jsp:include page="../common/footer.jsp"/>

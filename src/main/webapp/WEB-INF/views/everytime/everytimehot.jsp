@@ -56,7 +56,7 @@
 			</div>
 
 			<c:forEach var="board" items="${list}" varStatus="status">
-				<div class="list-group" style="border: 1px solid black;margin-top: 20px;margin-bottom: 20px">
+				<div class="list-group" style="border: 1px solid black;margin-top: 20px;margin-bottom: 20px;cursor: pointer" onclick="location.href='etdetailview?no=${board.bo_no}'">
 					<a href="etdetailview?no=${board.bo_no}"
 						class="list-group-item list-group-item-action list-group-item-large"
 						aria-current="true" style="border-bottom: 1px solid #333;background-color: #eee"> <span
@@ -84,7 +84,7 @@
 								
 							</div>
 							<img src="${path}/resources/img/msg.png" width="15" height="15">
-							<div style="padding: 1px; margin-right: 10px; font-size: 15px;">20</div>
+							<div style="padding: 1px; margin-right: 10px; font-size: 15px;">${board.replyCount}</div>
 							<img src="${path}/resources/img/조회수.png" width="15" height="15">
 							<div style="padding: 1px; margin-right: 10px; font-size: 15px;">${board.readCount}</div>
 							<img src="${path}/resources/img/추천버튼.png" width="15" height="15">
