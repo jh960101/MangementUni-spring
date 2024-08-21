@@ -243,6 +243,7 @@ public class EverytimeController {
 
 //		replyService.deleteReplyByBoNo(bo_no);
 
+		replyService.deleteReplyByBoard(bo_no);
 		int result = service.deleteBoard(bo_no);
 
 		if (result == 1) {

@@ -20,6 +20,11 @@
         FROM REPLY
         WHERE RE_NO = #{re_No}
     </delete>
+    <delete id="deleteReplyByBoard" parameterType="int">
+        DELETE
+        FROM REPLY
+        WHERE BO_NO = #{bo_No}
+    </delete>
 
     <select id="getReplyList" resultType="com.university.management.reply.dto.Reply">
         SELECT *
