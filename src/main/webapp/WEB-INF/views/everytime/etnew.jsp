@@ -41,6 +41,7 @@
 <body>
 <jsp:include page="../common/homeheader.jsp"/>
 
+
 <div id="menuBar">
     <div id="sub-menuBar" style="height: 150px;">
         <ul id="menulist">
@@ -89,6 +90,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     $().ready(() => {
