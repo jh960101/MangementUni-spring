@@ -38,6 +38,7 @@ public class ReplyController {
     }
 
     @GetMapping("/selectAllReply/{bo_no}")
+    
     public ResponseEntity<List<Reply>> selectAllReply(@PathVariable("bo_no") int bo_no){
 
         System.out.println(bo_no);

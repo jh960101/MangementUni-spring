@@ -3,7 +3,7 @@
 <mapper
         namespace="com.university.management.reply.mapper.ReplyMapper">
     
-    <insert id="insertReply" parameterType="reply">
+    <insert id="insertReply" parameterType="com.university.management.reply.dto.Reply">
         INSERT INTO REPLY
             (STU_NO, BO_NO, REPLY_CONTENT,CREATE_DATE) VALUES
             (#{stu_No},#{bo_No},#{reply_Content},#{create_Date})
