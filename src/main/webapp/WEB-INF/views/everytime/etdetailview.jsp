@@ -150,6 +150,7 @@
                  min-height: 100%;
                  padding-bottom: 100px;
             ">
+                    ${list}
                 <c:forEach var="reply" items="${list}">
                     <c:if test="${reply.rePlus == 0}">
                         <div class="comment" data-re-no="${reply.re_No}">
@@ -158,7 +159,7 @@
                                 <div class="profile-section">
                                     <img src="${pageContext.request.contextPath}/resources/img/프로필사진.png" class="프로필사진"
                                          alt="Profile Image">
-                                    <span class="username">익명</span>
+                                    <span class="username">익명${reply.rePlus}</span>
                                 </div>
                                 <div class="stats-section">
                                     <div class="stat-item"></div>
@@ -199,13 +200,14 @@
                             <div class="nested-replies-container">
                                 <c:forEach var="nestedReply" items="${reply.nestedReplies}">
                                     <div class="profile-section" style="margin-top: 10px">
+                                        <i class="fi fi-br-arrow-turn-down-right"></i>
                                         <img src="${pageContext.request.contextPath}/resources/img/프로필사진.png"
                                              class="프로필사진"
-                                             alt="Profile Image">
+                                             alt="Profile Image" style="margin-left: 10px;">
                                         <span class="username">익명</span>
                                     </div>
-                                    <div class="nested-comment" style="margin-left: 20px;">
-                                        <textarea class="replycontent" readonly>${nestedReply.reply_Content}</textarea>
+                                    <div class="nested-comment" style="margin-left: 40px; margin-top: 10px;">
+                                        <textarea class="nestedreplycontent" style="border: none;width:800px;height: 80px;" readonly>${nestedReply.reply_Content}</textarea>
                                     </div>
                                 </c:forEach>
                             </div>
@@ -218,9 +220,6 @@
         </div>
     </div>
 </div>
-<script>
-    console.log('${studentno}');
-</script>
 </body>
 
 <jsp:include page="../common/footer.jsp"/>
