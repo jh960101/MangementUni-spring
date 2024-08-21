@@ -175,7 +175,7 @@
 				</c:if>
 				<div class="backbtn">
 					<button type="button" id="btnCancel" class="btn"
-						onclick="history.back();"
+						onclick="location.href = document.referrer;"
 						style="color: white; font-weight: bold; font-size: 16px;">돌아가기</button>
 				</div>
 			</div>
@@ -195,6 +195,18 @@
 			
 		}
 	
+		function reload(){
+			
+			history.back();
+		setTimeout(function() {
+		    location.reload();
+		}, 100);
+			
+			
+		}
+		
+		
+		
 	</script>
 	<jsp:include page="../common/footer.jsp" />
 </body>

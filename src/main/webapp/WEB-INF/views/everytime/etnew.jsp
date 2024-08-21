@@ -74,7 +74,7 @@
                 <div class="form-check d-inline">
                     <input class="form-check-input"
                            style="font-weight: bolder; border: 2px solid rgb(2, 76, 134)"
-                           type="checkbox" id="bo_status" value="Y" id="flexCheckDefault">
+                           type="checkbox" name="bo_status" value="Y" id="flexCheckDefault">
                     <label class="form-check-label" style="font-weight: bolder;"
                            for="flexCheckDefault">익명</label>
                 </div>
@@ -99,7 +99,14 @@
 
             const title = $('#title').val();
             const detail = $('#detail').val();
-            const bo_status = $('#bo_status').val();
+            let bo_status = '';
+
+            if ($('#flexCheckDefault').is(':checked')){
+                bo_status = 'Y';
+            }
+            else {
+                bo_status = 'N';
+            }
 
             if (title === '' || detail === '') {
                 alert('제목과 내용을 작성해 주세요!');
