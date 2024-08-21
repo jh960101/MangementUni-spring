@@ -147,7 +147,7 @@
 						<table id="tbl-board" style="margin-bottom: 50px;">
 							<tr>
 								<th><span>제목</span></th>
-								<td><input type="text" placeholder="제목을 입력하세요" name="title"></td>
+								<td><input type="text" placeholder="제목을 입력하세요(30자 제한)" name="title" maxlength="30"></td>
 							</tr>
 
 							<tr>
