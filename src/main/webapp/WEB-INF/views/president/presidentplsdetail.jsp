@@ -119,9 +119,6 @@ margin-bottom:230px;
 						</td>
 					</tr>
 					
-					
-					
-					
 					<tr>
 						<th>내 용</th>
 						<td>
