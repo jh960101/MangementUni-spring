@@ -1,6 +1,7 @@
 package com.university.management.reply.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,4 +21,14 @@ public class Reply {
 	private Date modifyDate;		// 수정날짜
 	private int rePlus;				// 대댓글
 
+	private List<Reply> nestedReplies;
+
+	// getters and setters
+	public List<Reply> getNestedReplies() {
+		return nestedReplies;
+	}
+
+	public void setNestedReplies(List<Reply> nestedReplies) {
+		this.nestedReplies = nestedReplies;
+	}
 }
