@@ -78,9 +78,8 @@
 					<c:forEach var="list" items="${lmslist}" varStatus="status">
 						<div id="online">
 							<div id="onlien-cont">
-							<p id="online-title">${list.LMS_TITLE }
-								(${list.LMS_Period})			
-							</p>
+								<p id="online-title">${list.LMS_TITLE }(${list.LMS_Period})
+								</p>
 								<a id="lmsvideo-link" href="online?lms_no=${list.LMS_NO}"
 									target="_blank"
 									onclick="return openPagePopup(this.href,190,700);"
@@ -94,24 +93,23 @@
 							</div>
 							<!--출석 미반영  -->
 							<div id="lavel-position">
-							<c:if test="${list.LMS_CHECK eq 'N'}">
-									<label id="attendanceStatus-${status.index+1}" class="lable-box"
-										style="color: black;">출석
-										<img src="${path}/resources/img/fail.png" width="20%"
-							height="20%" />
-										</label>
+								<c:if test="${list.LMS_CHECK eq 'N'}">
+									<label id="attendanceStatus-${status.index+1}"
+										class="lable-box" style="color: black;">출석 <img
+										src="${path}/resources/img/fail.png" width="20%" height="20%" />
+									</label>
 
 								</c:if>
 								<!-- 출석 반영 -->
 								<c:if test="${list.LMS_CHECK eq 'Y'}">
-									<label id="attendanceStatus-${status.index+1}" class="lable-box"
-										style=" color:black">출석
-										<img src="${path}/resources/img/Success.png" width="20%"
-							height="20%" />
-										</label>
+									<label id="attendanceStatus-${status.index+1}"
+										class="lable-box" style="color: black">출석 <img
+										src="${path}/resources/img/Success.png" width="20%"
+										height="20%" />
+									</label>
 
 								</c:if>
-								</div>
+							</div>
 						</div>
 					</c:forEach>
 
@@ -147,17 +145,18 @@
                 const weekNumber = parseInt(weekText); // "1주차"에서 "1" 추출
 
                 const weekStartDate = new Date(startDate);
-                weekStartDate.setDate(startDate.getDate() + (weekNumber - 1) * 7);
-      			const labelById = `#attendanceStatus-\${weekNumber}`;
-                const attendanceStatusLabel = document.querySelector(labelById);
+                weekStartDate.setDate(startDate.getDate() + (weekNumber - 1) * 7); // 주차별 시작날짜를 추출
+                console.log(weekStartDate);
+      			const labelById = `#attendanceStatus-\${weekNumber}`;   //강의주차별 출석여부사항 라벨 id가져오기
+                const attendanceStatusLabel = document.querySelector(labelById); //출석여부사항 라벨 id 요소값 가져오기
       
-                // 활성화 조건
-                if (currentDate >= weekStartDate) {
+                // 활성화 조건: 주차별 시작 날짜 보다 같거나 크면 강의 링크 활성화 style를 첨부,강의 출석여부사항 표시 
+                if (currentDate >= weekStartDate) { 
                     link.classList.remove('inactive');
                     if (attendanceStatusLabel) {
                         attendanceStatusLabel.style.display = 'inline-block'; 
                     }
-                } else {
+                } else { //현재날짜가 아직 주차별 시작 날짜 이전이라면 강의링크 비활성 style를 첨부,강의 출석여부사항 비표시
                     link.classList.add('inactive');
                     if (attendanceStatusLabel) {
                         attendanceStatusLabel.style.display = 'none'; 
@@ -172,20 +171,16 @@
             links.forEach(link => {
                 const weekText = link.getAttribute('data-week');
                 const weekNumber = parseInt(weekText); // "1주차"에서 "1" 추출
-
                 const weekStartDate = new Date(startDate2);
-                weekStartDate.setDate(startDate2.getDate() + (weekNumber - 1) * 7);
-            	
+                weekStartDate.setDate(startDate2.getDate() + (weekNumber - 1) * 7);            	
                 const labelById = `#attendanceStatus-\${weekNumber}`;  
-                const attendanceStatusLabel = document.querySelector(labelById);
-                
+                const attendanceStatusLabel = document.querySelector(labelById);                
                 // 활성화 조건
                 if (currentDate >= weekStartDate) {
                     link.classList.remove('inactive');
                     if (attendanceStatusLabel) {
                         attendanceStatusLabel.style.display = 'inline-block'; 
-                    }
-
+                    }ㄴ
                 } else {
                     link.classList.add('inactive');
                     if (attendanceStatusLabel) {
