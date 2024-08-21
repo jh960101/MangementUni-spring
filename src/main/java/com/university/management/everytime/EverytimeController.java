@@ -202,15 +202,17 @@ public class EverytimeController {
 	}
 
 	@RequestMapping("/insertBoard")
-	public String insertBoard(RedirectAttributes rttr, @RequestParam("title") String title, @RequestParam("content") String content) {
+	public String insertBoard(RedirectAttributes rttr, @RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("bo_status") String bo_status) {
 
 		Board board = new Board();
 		int stu_no = (int) session.getAttribute("studentno");
 		Date date = Calendar.getInstance().getTime();
-		
+
+		System.out.println("익명상태: "+bo_status);
 		board.setStu_no(stu_no);
 		board.setTitle(title);
 		board.setContent(content);
+		board.setBo_status(bo_status);
 		board.setCreate_date(date);
 		
 		int result = service.insertBoard(board);
