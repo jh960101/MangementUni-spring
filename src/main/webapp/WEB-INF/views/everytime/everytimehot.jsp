@@ -56,7 +56,7 @@
 			</div>
 
 			<c:forEach var="board" items="${list}" varStatus="status">
-				<div class="list-group" style="border: 1px solid black;margin-top: 20px;margin-bottom: 20px;cursor: pointer" onclick="location.href='etdetailview?no=${board.bo_no}'">
+				<div class="list-group" style="border: 1px solid black;margin-top: 20px;margin-bottom: 20px;cursor:pointer" onclick="location.href='etdetailview?no=${board.bo_no}'">
 					<a href="etdetailview?no=${board.bo_no}"
 						class="list-group-item list-group-item-action list-group-item-large"
 						aria-current="true" style="border-bottom: 1px solid #333;background-color: #eee"> <span
@@ -66,7 +66,7 @@
 								<strong>${board.title}</strong>
 							</c:if>
 					</span> <c:if test="${status.count>3 }">${status.count}th ${board.title}</c:if>
-					</a> <a href="#"
+					</a> <a 
 						class="list-group-item list-group-item-action list-group-item-small disabled" style="border: none;font-size: 18px;">
 						${board.content} </a> <a href="#"
 						class="list-group-item list-group-item-action list-group-item-small2 disabled" style="border: none">
