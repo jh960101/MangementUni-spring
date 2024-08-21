@@ -357,11 +357,15 @@
                     + '<td>' + item.sub_name + '</td>'
                     + '<td>' + item.grade + '</td>'
                     + '<td>' + item.grade_p + '</td>'
-                    + '<td>' +  '<button type="button" class="btn btn-xs btn-primary selectBtn" id="selectBtn"' +
-                    'onclick="location.href=\'${path}/objectionUpdate?sub_code=' + item.sub_code +
-                    '&sub_name=' + item.sub_name + '&stu_no=' + item.stu_no + '\' ' +
-                    'style="background-color: #024C86 !important; color: white; padding: 5px 10px; border: none !important;">보기</button>' +
-                    '</td>';
+                    + `
+                    <td>
+                    <button type="button" class="btn btn-xs btn-primary"
+                        onclick="location.href='${path}/objectionUpdate?sub_code=\${item.sub_code}&sub_name=\${item.sub_name}&stu_no=\${item.stu_no}'"
+                        style="background-color: #024C86; color: white; padding: 5px 10px; border: none;">
+                        보기
+                    </button>
+                </td>
+                `;
                 resultsTableBody.appendChild(row);
             }); 
         } else {

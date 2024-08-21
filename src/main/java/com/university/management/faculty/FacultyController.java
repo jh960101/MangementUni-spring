@@ -511,8 +511,8 @@ public class FacultyController {
 		params.put("subject", subject);
 		params.put("grade", grade);
 
-		int listLimit = 5; // 한 페이지에 보여질 게시글 수
-		int totalRowCount = objservice.getListCount(params); // 전체 게시글의 수
+		int listLimit = 5; 										// 한 페이지에 보여질 게시글 수
+		int totalRowCount = objservice.getListCount(params); 	// 전체 게시글의 수
 		System.out.println("objectionSearch totalRowCount : " + totalRowCount);
 		
 		// 페이지네이션 설정
@@ -525,8 +525,6 @@ public class FacultyController {
 
 		params.put("firstRow", firstRow);
 		params.put("listLimit", listLimit);
-
-//		return objservice.objectionFilterData(params);
 		
 		// 데이터 불러오기
 	    List<Objection> results = objservice.objectionFilterData(params);
@@ -535,10 +533,10 @@ public class FacultyController {
 	    Map<String, Object> response = new HashMap<>();
 	    response.put("startPage", startPage);
 	    response.put("results", results);
-	    response.put("totalPages", lastPage); 	// lastPage 포함
-	    response.put("currentPage", page); 		// 현재 페이지 정보를 포함
+	    response.put("totalPages", lastPage); 			// lastPage 포함
+	    response.put("currentPage", page); 				// 현재 페이지 정보를 포함
 
-	    return ResponseEntity.ok(response); // JSON 형태로 반환
+	    return ResponseEntity.ok(response); 			// JSON 형태로 반환
 	}
 
 	// 이의 신청 업데이트
