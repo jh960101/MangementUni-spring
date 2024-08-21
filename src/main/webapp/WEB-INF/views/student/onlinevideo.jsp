@@ -96,7 +96,7 @@
                     success: function(response) {
                         alert('출석 완료!');
                         console.log(response);
-                        opener.location.reload(); //부모창 새고침
+                        opener.location.reload(); //부모창 새로고침
                         window.close(); // 창 닫기
                     },
                     error: function(xhr, status, error) {
