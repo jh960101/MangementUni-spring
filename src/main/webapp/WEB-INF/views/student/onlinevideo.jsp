@@ -90,13 +90,13 @@
             // 완료 상태를 서버로 전송하는 함수
             function sendCompletionStatus() {	
                 $.ajax({
-                    url: '${path}/onlinestatus', // 여기에 실제 컨트롤러 URL을 입력하세요.
+                    url: '${path}/onlinestatus', 
                     type: 'POST',
                     data: { y: 1, lms_no: ${lms.LMS_NO} ,lms_date:number},
                     success: function(response) {
                         alert('출석 완료!');
                         console.log(response);
-                        opener.location.reload();
+                        opener.location.reload(); //부모창 새고침
                         window.close(); // 창 닫기
                     },
                     error: function(xhr, status, error) {
