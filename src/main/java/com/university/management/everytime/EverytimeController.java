@@ -114,6 +114,10 @@ public class EverytimeController {
 
 		List<Reply> list = replyService.getReplyList(boNo);
 
+		for(Reply reply:list){
+			 reply.setNestedReplies(replyService.getNestedReplies(reply.getRe_No()));
+		}
+
 		model.addAttribute("board", etaboard);
 		model.addAttribute("student", students);
 		model.addAttribute("list", list);

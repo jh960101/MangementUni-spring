@@ -20,15 +20,6 @@ public class Reply {
 	private Date create_Date;		// 작성날짜
 	private Date modifyDate;		// 수정날짜
 	private int rePlus;				// 대댓글
-
 	private List<Reply> nestedReplies;
 
-	// getters and setters
-	public List<Reply> getNestedReplies() {
-		return nestedReplies;
-	}
-
-	public void setNestedReplies(List<Reply> nestedReplies) {
-		this.nestedReplies = nestedReplies;
-	}
 }
