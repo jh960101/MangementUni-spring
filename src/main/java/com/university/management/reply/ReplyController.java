@@ -55,7 +55,7 @@ public class ReplyController {
     @PostMapping("/insertNestedReply")
     @ResponseBody
     public String insertNestedReply(@ModelAttribute Reply replyVO) {
-        System.out.println(replyVO.getRePlus());
+        System.out.println(replyVO.getRe_Plus());
         try {
             replyService.insertNestedReply(replyVO);
             return "success";

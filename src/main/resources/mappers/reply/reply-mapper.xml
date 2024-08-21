@@ -3,10 +3,9 @@
 <mapper
         namespace="com.university.management.reply.mapper.ReplyMapper">
 
-
     <insert id="insertReply" parameterType="com.university.management.reply.dto.Reply">
-        INSERT INTO REPLY (BO_NO, STU_NO, REPLY_CONTENT, CREATE_DATE, RE_PLUS)
-        VALUES (#{bo_No}, #{stu_No}, #{reply_Content}, NOW(), #{rePlus})
+        INSERT INTO REPLY (BO_NO, STU_NO, REPLY_CONTENT, CREATE_DATE)
+        VALUES (#{bo_No}, #{stu_No}, #{reply_Content}, NOW())
     </insert>
 
     <update id="updateReply" parameterType="com.university.management.reply.dto.Reply">
@@ -31,7 +30,7 @@
 
     <insert id="insertNestedReply" parameterType="com.university.management.reply.dto.Reply">
         INSERT INTO UNIVERSITY.REPLY (BO_NO, STU_NO, REPLY_CONTENT, CREATE_DATE, RE_PLUS)
-        VALUES (#{bo_No}, #{stu_No}, #{reply_Content}, NOW(), #{rePlus})
+        VALUES (#{bo_No}, #{stu_No}, #{reply_Content}, NOW(), #{re_Plus})
     </insert>
 
     <select id="getRepliesByBoardNo" parameterType="int" resultType="com.university.management.reply.dto.Reply">

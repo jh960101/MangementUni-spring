@@ -43,12 +43,11 @@ $().ready(function () {
         console.log(nestedReplyContent);
         console.log(parentReplyId);
 
-
         $.ajax({
             url: `${path}/reply/insertNestedReply`,
             type: 'POST',
             data: {
-                rePlus: parentReplyId,
+                re_Plus: parentReplyId,
                 reply_Content: nestedReplyContent,
                 bo_No: boardNo,
                 stu_No: stuNo
