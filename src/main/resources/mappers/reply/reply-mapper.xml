@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper
         namespace="com.university.management.reply.mapper.ReplyMapper">
-
-
+        
     <insert id="insertReply" parameterType="com.university.management.reply.dto.Reply">
         INSERT INTO REPLY (BO_NO, STU_NO, REPLY_CONTENT, CREATE_DATE, RE_PLUS)
         VALUES (#{bo_No}, #{stu_No}, #{reply_Content}, NOW(), #{rePlus})
