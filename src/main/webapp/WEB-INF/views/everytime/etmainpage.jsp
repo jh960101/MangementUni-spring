@@ -89,7 +89,7 @@
 			<c:forEach var="board" items="${list}">
 				<div class="list-group"
 					style="border: 1px solid #333; margin-bottom: 20px; margin-top: 20px;cursor:pointer" onclick="location.href='etdetailview?no=${board.bo_no}'">
-					<a href=""
+					<a
 						class="list-group-item list-group-item-action list-group-item-large"
 						aria-current="true"
 						style="border-bottom: 1px solid #333; background-color: #eee">
