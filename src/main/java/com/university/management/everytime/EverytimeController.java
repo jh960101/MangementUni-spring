@@ -113,6 +113,11 @@ public class EverytimeController {
 		List<Student> students = studentService.stuselect(stu_no);
 
 		List<Reply> list = replyService.getReplyList(boNo);
+		System.out.println(list);
+
+		for(Reply reply:list){
+			 reply.setNestedReplies(replyService.getNestedReplies(reply.getRe_No()));
+		}
 
 		model.addAttribute("board", etaboard);
 		model.addAttribute("student", students);

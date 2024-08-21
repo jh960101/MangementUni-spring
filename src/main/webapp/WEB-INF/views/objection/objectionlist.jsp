@@ -71,6 +71,14 @@
         .page-link:focus, .page-link:hover {
             color: #024C86;
         }
+        
+        .btn btn-xs btn-primary{
+        background-color: #024C86; 
+        color: white; 
+        padding: 5px 10px 5px 10px; 
+        border: none !important;
+        
+        }
     </style>
 </head>
 <body>
@@ -92,46 +100,44 @@
         </ul>
     </div>
 </div>
-
-<div class="container" style="height: auto; margin-top: 50px;">
-    <div id="content">
-        <!-- title view -->
-        <div id="pagetitle">
-            <h1>성적 이의 신청 목록</h1>
-        </div>
-        <div id="pageContent" style="margin-top:50px;">
-            <div id="selectbox" >
-                <form id="filterForm" method="POST" action="${path}/objectionlist">
-                    <select name="department" id="department" required onchange="filterResults(); ajaxData();"
-                            style="padding: 5px;">
-                        <option value="" disabled selected>학과 선택</option>
-                        <option value="%">전체</option>
-                        <option value="AI인공지능학과">AI인공지능학과</option>
-                        <option value="정보보호학과">정보보호학과</option>
-                        <option value="정보통신학과">정보통신학과</option>
-                        <option value="응용소프트웨어학과">응용소프트웨어학과</option>
-                        <option value="수학과">수학과</option>
-                        <option value="컴퓨터공학과">컴퓨터공학과</option>
-                        <option value="화학과">화학과</option>
-                        <option value="물리학과">물리학과</option>
-                    </select>
-                    <select name="subject" id="subject" required style="padding: 5px;" onchange="ajaxData();">
-                        <option disabled selected value="">과목 선택</option>
-                        <option value="%">전체</option>
-                        <!-- 기본 옵션 -->
-                    </select>
-                    <select name="grade" required id="grade" style="padding: 5px;"
-                            onchange="ajaxData();">
-                        <option value="" disabled selected>학년 선택</option>
-                        <option value="%">전체</option>
-                        <option value="1학년">1학년</option>
-                        <option value="2학년">2학년</option>
-                        <option value="3학년">3학년</option>
-                        <option value="4학년">4학년</option>
-                    </select>
-                </form>
-            </div>
-        </div>
+	<div class="container" style="height: auto; margin-top: 50px;">
+		<div id="content">
+			<!-- title view -->
+			<div id="pagetitle">
+				<h1>성적 이의 목록</h1>
+			</div>
+			<div id="pageContent" style="margin-top : 55px; margin-left:20px;">
+				<div id="selectbox">
+					<form id="filterForm" method="POST" action="${path}/objectionlist">
+						<select name="department" id="department" required onchange="filterResults(); ajaxData();"
+							style="padding: 5px;">
+							<option value="%" selected>전체</option>
+							<option value="AI인공지능과">AI인공지능과</option>
+							<option value="정보보호학과">정보보호학과</option>
+							<option value="정보통신학과">정보통신학과</option>
+							<option value="응용소프트웨어학과">응용소프트웨어학과</option>
+							<option value="수학과">수학과</option>
+							<option value="컴퓨터공학과">컴퓨터공학과</option>
+							<option value="화학공학과">화학공학과</option>
+							<option value="물리학과">물리학과</option>
+						</select> 
+						<select name="subject" id="subject" required style="padding: 5px;" onchange="ajaxData();">
+							<option disabled selected value="">과목 선택</option>
+							<option value="%">전체</option>
+							<!-- 기본 옵션 -->
+						</select> 
+						<select name="grade" required  id="grade" style="padding: 5px;"
+							onchange="ajaxData();">
+							<option value="" disabled selected>학년 선택</option>
+							<option value="%">전체</option>
+							<option value="1학년">1학년</option>
+							<option value="2학년">2학년</option>
+							<option value="3학년">3학년</option>
+							<option value="4학년">4학년</option>
+						</select>
+					</form>
+				</div>
+			</div>
 
         <div id="selectTable" style="margin-top:50px;">
             <table class="table">
@@ -139,10 +145,10 @@
                 <tr>
                     <th scope="col"></th>
                     <th scope="col">학기</th>
-                    <th scope="col">학과</th>
+                    <th scope="col" style="width:200px;">학과</th>
                     <th scope="col">학년</th>
                     <th scope="col">이름</th>
-                    <th scope="col">신청 과목</th>
+                    <th scope="col"  style="width:250px;">신청 과목</th>
                     <th scope="col">등급</th>
                     <th scope="col">점수</th>
                     <th scope="col"></th>
@@ -260,7 +266,7 @@
                     '제어 시스템', '전자기장 이론', '집적 회로 설계', '통신 네트워크', '전자기기 실험',
                     '고급 제어 시스템', '무선 통신', '반도체 신호', '전자기기 설계', '전력 시스템'
                 ],
-                "AI인공지능학과": [
+                "AI인공지능과": [
                     '인공지능 기초', '기계학습 기초', '데이터 분석 기초', '알고리즘 기반', '인공지능 스위치',
                     '딥러닝', '자연어 처리', '로봇 공학', '강화학습', '인공지능 응용',
                     '인공지능 모델링', '인공지능 시스템 설계', '머신 비전', 'AI 연구 동향', '지능형 에이전트',
@@ -307,7 +313,6 @@
 
 
     function ajaxData() {
-        debugger;
         const departmentSelect = document.querySelector('select[name="department"]');
         const subjectSelect = document.querySelector('select[name="subject"]');
         const gradeSelect = document.querySelector('select[name="grade"]');
@@ -335,22 +340,25 @@
                 const resultsTable = document.getElementById('results');
                 resultsTable.innerHTML = ''; // 기존 내용을 지우고
 
-                data.forEach((item, index) => {
-                    const row = document.createElement('tr');
-                    console.log("item : " + item.smt);
-                    row.innerHTML = '<th scope="row">' + (index + 1) + '</th>'
-                        + '<td>' + item.smt + '</td>'
-                        + '<td>' + item.dept_name + '</td>'
-                        + '<td>' + item.stu_grade + '</td>'
-                        + '<td>' + item.stu_name + '</td>'
-                        + '<td>' + item.sub_name + '</td>'
-                        + '<td>' + item.grade + '</td>'
-                        + '<td>' + item.grade_p + '</td>'
-                        + '<td>' + '<button type="button" class="btn btn-xs btn-primary" onclick="location.href=\'${path}/objectionUpdate?sub_code=' + item.sub_code
-                        + '&sub_name=' + item.sub_name + '&stu_no=' + item.stu_no + '\'">보기</button>' + '</td>';
-                    resultsTable.appendChild(row);
-                });
-            },
+                    // 데이터의 길이를 체크합니다.
+                    if (data.length > 0) {
+                        data.forEach((item, index) => {
+                            const row = document.createElement('tr');
+                            console.log("item : " + item.smt);
+                            row.innerHTML = '<th scope="row">' + (index + 1) + '</th>'
+                                + '<td>' + item.smt + '</td>'
+                                + '<td>' + item.dept_name + '</td>'
+                                + '<td>' + item.stu_grade + '</td>'
+                                + '<td>' + item.stu_name + '</td>'
+                                + '<td>' + item.sub_name + '</td>'
+                                + '<td>' + item.grade + '</td>'
+                                + '<td>' + item.grade_p + '</td>'
+                                + '<td>' + '<button type="button" class="btn btn-xs btn-primary" onclick="location.href=\'${path}/objectionUpdate?sub_code=' + item.sub_code
+                                + '&sub_name=' + item.sub_name + '&stu_no=' + item.stu_no + '\' "style="background-color: #024C86; color: white; padding: 5px 10px 5px 10px; border: none !important;">보기</button>' + '</td>';
+                            resultsTable.appendChild(row);
+                        });
+                    } 
+                },
             error: function (error) {
                 console.error('Error:', error);
                 alert('데이터를 불러오는 데 오류가 발생했습니다.');
@@ -358,7 +366,6 @@
         });
 
     }
-
 
 </script>
 </body>

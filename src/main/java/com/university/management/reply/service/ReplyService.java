@@ -42,4 +42,7 @@ public class ReplyService {
         return replies;
     }
 
+    public List<Reply> getNestedReplies(int re_No) {
+        return mapper.getNestedReplies(re_No);
+    }
 }
