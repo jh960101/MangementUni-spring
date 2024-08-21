@@ -72,12 +72,13 @@
 	color: #024C86;
 }
 
-.btn btn-xs btn-primary {
-	background-color: #024C86;
-	color: white;
-	padding: 5px 10px 5px 10px;
-	border: none !important;
+#selectBtn{
+    background-color: #024C86 !important;
+    color: white;
+    padding: 5px 10px; /* 여기서 padding 적용 */
+    border: none !important;
 }
+
 </style>
 </head>
 <body>
@@ -152,7 +153,7 @@
 							<th scope="col"></th>
 						</tr>
 					</thead>
-					<tbody id="results" class="table-group-divider">
+					<tbody id="resultsBody" class="table-group-divider">
 						<!-- 검색 결과가 들어올 부분 -->
 						<c:if test="${objListEmp.size()>1}">
 							<c:forEach var="item" items="${objListEmp}">
@@ -312,107 +313,133 @@
         const departmentSelect = document.querySelector('select[name="department"]');
         const subjectSelect = document.querySelector('select[name="subject"]');
         const gradeSelect = document.querySelector('select[name="grade"]');
-
-        const selectedDepartment = departmentSelect.value;
-        const selectedSubject = subjectSelect.value;
-        const selectedGrade = gradeSelect.value;
-        const selectedPage = 1;
-
+        
+        const selectedPage = 1; // 초기 페이지 설정
 
         $.ajax({
-            url: '${path}/objectionSearch', // 실제 서버 측 경로로 변경
+            url: `${path}/objectionSearch`,
             type: 'POST',
             data: JSON.stringify({
                 department: departmentSelect.value,
                 subject: subjectSelect.value,
                 grade: gradeSelect.value,
-                page: selectedPage
+                page: selectedPage // 현재 페이지 전달
+            }),
+            processData: false,
+            contentType: 'application/json',
+            success: function(data) {
+                console.log(data);
+
+                // 결과 테이블 업데이트
+                renderResults(data.results); // 데이터 렌더링
+                createPagination(data.totalPages, data.currentPage); // 페이지네이션 업데이트
+            },
+            error: function(error) {
+                console.error('Error:', error);
+                alert('데이터를 불러오는 데 오류가 발생했습니다.');
+            }
+        });
+    }
+
+    function renderResults(results) {
+        const resultsTableBody = document.getElementById('resultsBody');
+        resultsTableBody.innerHTML = ''; // 이전 결과 초기화
+
+        if (results.length > 0) {
+            results.forEach((item, index) => {
+                const row = document.createElement('tr');
+                console.log("item : " + item.smt);
+                row.innerHTML = '<th scope="row">' + item.num + '</th>' // num 사용
+                    + '<td>' + item.year + '</td>'
+                    + '<td>' + item.dept_name + '</td>'
+                    + '<td>' + item.stu_grade + '</td>'
+                    + '<td>' + item.stu_name + '</td>'
+                    + '<td>' + item.sub_name + '</td>'
+                    + '<td>' + item.grade + '</td>'
+                    + '<td>' + item.grade_p + '</td>'
+                    + '<td>' +  '<button type="button" class="btn btn-xs btn-primary selectBtn" id="selectBtn"' +
+                    'onclick="location.href=\'${path}/objectionUpdate?sub_code=' + item.sub_code +
+                    '&sub_name=' + item.sub_name + '&stu_no=' + item.stu_no + '\' ' +
+                    'style="background-color: #024C86 !important; color: white; padding: 5px 10px; border: none !important;">보기</button>' +
+                    '</td>';
+                resultsTableBody.appendChild(row);
+            }); 
+        } else {
+            resultsTableBody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:200px;">조회 결과가 없습니다.</td></tr>';
+    }
+
+    function createPagination(totalPages, currentPage) {
+        const paginationContainer = document.getElementById('pagination');
+        paginationContainer.innerHTML = ''; // 기존 페이지네이션 초기화
+
+        // 이전 페이지 버튼 추가
+        if (currentPage > 1) {
+            paginationContainer.innerHTML += `
+                <li class="page-item">
+                    <button class="page-link" onclick="loadFilteredResults(${currentPage - 1})" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </button>
+                </li>
+            `;
+        }
+
+        // 페이지 번호 버튼 생성
+        for (let i = 1; i <= totalPages; i++) { // 1부터 totalPages까지 반복
+            if (i === currentPage) { // 현재 페이지인 경우
+                paginationContainer.innerHTML += `
+                    <li class="page-item active">
+                        <span class="page-link">${i}</span>
+                    </li>
+                `;
+            } else {
+                paginationContainer.innerHTML += `
+                    <li class="page-item">
+                        <span class="page-link" style="cursor: pointer;" onclick="loadFilteredResults(${i})">${i}</span>
+                    </li>
+                `;
+            }
+        }
+
+        // 다음 페이지 버튼 추가
+        if (currentPage < totalPages) {
+            paginationContainer.innerHTML += `
+                <li class="page-item">
+                    <button class="page-link" onclick="loadFilteredResults(${currentPage + 1})" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </button>
+                </li>
+            `;
+        }
+    }
+
+    // 페이지 로드 시 초기 AJAX 요청 실행
+    document.addEventListener('DOMContentLoaded', function() {
+        ajaxData(); // 페이지 로드 시 필터링된 결과 요청
+    });
+        
+    function loadFilteredResults() {
+        $.ajax({
+            url: `${path}/objectionSearch?page=${selectedPage}`,
+            type: 'POST',
+            data: JSON.stringify({
+                department: departmentSelect.value,
+                subject: subjectSelect.value,
+                grade: gradeSelect.value,
             }),
             processData: false,
             contentType: 'application/json',
             success: function (data) {
-            	console.log("data.results : " + data.results);
-
-                const resultsTable = document.getElementById('results');
-                resultsTable.innerHTML = ''; // 기존 내용을 지우고
-
-                    // 데이터의 길이를 체크합니다.
-                    if (data.results.length > 0) {
-                    	
-                        data.results.forEach((item, index) => {
-                            const row = document.createElement('tr');
-                            console.log("item : " + item.smt);
-                            row.innerHTML = '<th scope="row">' + (index + 1) + '</th>'
-                                + '<td>' + item.smt + '</td>'
-                                + '<td>' + item.dept_name + '</td>'
-                                + '<td>' + item.stu_grade + '</td>'
-                                + '<td>' + item.stu_name + '</td>'
-                                + '<td>' + item.sub_name + '</td>'
-                                + '<td>' + item.grade + '</td>'
-                                + '<td>' + item.grade_p + '</td>'
-                                + '<td>' + '<button type="button" class="btn btn-xs btn-primary" onclick="location.href=\'${path}/objectionUpdate?sub_code=' + item.sub_code
-                                + '&sub_name=' + item.sub_name + '&stu_no=' + item.stu_no + '\' "style="background-color: #024C86; color: white; padding: 5px 10px 5px 10px; border: none !important;">보기</button>' + '</td>';
-                            resultsTable.appendChild(row);
-                        });
-                     
-                
-                     // 페이지네이션 업데이트
-                    const paginationContainer = document.getElementById('pagination');
-				    paginationContainer.innerHTML = ''; // 기존 페이지네이션 초기화
-				
-				    // 이전 페이지 버튼 추가
-				    if (data.currentPage > 0) {
-				        paginationContainer.innerHTML += `
-				            <li class="page-item">
-				                <button class="page-link" onclick="loadFilteredResults(${currentPage - 1})" aria-label="Previous">
-				                    <span aria-hidden="true">&laquo;</span>
-				                </button>
-				            </li>
-				        `;
-				    }
-				
-				    // 페이지 번호 버튼 생성
-				    for (let i = data.startPage; i < data.totalPages; i++) {
-				        if (data.currentPage === data.currentPage) {
-				        	console.log("currentPage === " + i);
-				            paginationContainer.innerHTML += `
-				                <li class="page-item active">
-				                    <span class="page-link">\${data.currentPage}</span>
-				                </li>
-				            `;
-				        } else if(data.currentPage !== data.currentPage) {
-				        	console.log("else 코드 실행");
-				            paginationContainer.innerHTML += `
-				                <li class="page-item">
-				                    <span class="page-link" style="cursor: pointer;" onclick="loadFilteredResults(\${i})"></span>
-				                </li>
-				            `;
-				        }
-				    }
-				
-				    // 다음 페이지 버튼 추가
-				    if (data.currentPage < data.totalPages) {
-				        paginationContainer.innerHTML += `
-				            <li class="page-item">
-				                <button class="page-link" onclick="loadFilteredResults(${currentPage + 1})" aria-label="Next">
-				                    <span aria-hidden="true">&raquo;</span>
-				                </button>
-				            </li>
-				        `;
-				     }       
-				 }
+                renderResults(data.results);
+                createPagination(data.totalPages, selectedPage);
             },
             error: function (error) {
                 console.error('Error:', error);
                 alert('데이터를 불러오는 데 오류가 발생했습니다.');
             }
         });
-        
-	     // 페이지 로드 시 초기 AJAX 요청
-	        document.addEventListener('DOMContentLoaded', function() {
-	            ajaxData(); // 페이지 로드 시 AJAX 요청
-	        });
-    	}
+    }
+    }
+
 
 </script>
 </body>
