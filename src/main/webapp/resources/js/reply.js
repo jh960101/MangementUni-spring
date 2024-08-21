@@ -91,12 +91,36 @@ $().ready(function () {
             }
         });
     });
+    // 대댓글 고치기 빰!
+    $('.nesteddeletereply').on('click', function() {
+        let comment = $(this).closest('.nested-replies-container');
+        const path = $('#path').val();
+        const reNo = comment.find('.nested-id').val();
+        console.log(reNo);
+        $.ajax({
+            url: `${path}/reply/delete`,
+            type: 'POST',
+            data: {
+                re_no: reNo
+            },
+            success: function(response) {
+                if (response === 'success') {
+                    alert('댓글이 삭제되었습니다.');
+                    location.reload();
+                } else {
+                    alert('댓글 삭제에 실패했습니다.');
+                }
+            }
+        });
+    });
+
     $('.updatereply').on('click', function() {
         let comment = $(this).closest('.comment');
         comment.find('.replycontent').removeAttr('readonly');
         comment.find('.replycontent').css('border','1px solid black');
         comment.find('.replyupdate').css('display','block');
     });
+
     $('.replyupdate').on('click', function() {
         let comment = $(this).closest('.comment');
         const replycontent = comment.find('.replycontent').val();
@@ -119,6 +143,14 @@ $().ready(function () {
                 }
             }
         });
+    });
+
+    // 대댓글 수정창 나오게!
+    $('.nestedupdatereply').on('click', function() {
+        let comment = $(this).closest('.nested-replies-container');
+        comment.find('.nestedreplycontent').removeAttr('readonly');
+        comment.find('.nestedreplycontent').css('border','1px solid black');
+        comment.find('.replyupdate').css('display','block');
     });
 
 });
