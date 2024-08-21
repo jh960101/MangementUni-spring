@@ -209,11 +209,17 @@
                                              alt="Profile Image" style="margin-left: 10px;">
                                         <span class="username">익명</span>
                                     </div>
-                                    <div class="nested-comment" style="margin-left: 40px; margin-top: 10px;">
+                                    <div class="nested-comment"
+                                         style="margin-left: 40px; margin-top: 10px;display: flex;flex-direction: column">
                                         <input type="hidden" class="nested-id" value="${nestedReply.re_No}"/>
                                         <textarea class="nestedreplycontent"
-                                                  style="border: none;width:800px;height: 80px; outline: none;"
+                                                  style="border: none;width:900px;height: 80px; outline: none;border-radius: 5px;"
                                                   readonly>${nestedReply.reply_Content}</textarea>
+                                        <div>
+                                            <button class="custom-submit-button nestedupdatebtn " style="margin-top: 20px;display: none">답글
+                                                작성
+                                            </button>
+                                        </div>
                                     </div>
 
                                     <c:if test="${studentno == nestedReply.stu_No}">
