@@ -53,4 +53,8 @@ public class EverytimeService {
     public int deleteBoard(int bo_no) {
          return mapper.deleteBoard(bo_no);
     }
+
+	public int getListCountByStuNo(int stu_no) {
+		return mapper.getListCountByStuNo(stu_no);
+	}
 }

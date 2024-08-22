@@ -31,4 +31,6 @@ public interface EverytimeMapper {
     void etaLikeUp(int boNo);
 
     int deleteBoard(int boNo);
+
+	int getListCountByStuNo(int stu_no);
 }
