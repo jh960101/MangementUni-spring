@@ -383,11 +383,11 @@ public class StudentController {
 		int res = objservice.objInsert(objInsertList);
 		System.out.println("res : " + res);
 		
-		if(res > 0) {
-			session.setAttribute("msg", "정상적으로 신청 되었습니다.");
-		} else {
-			session.setAttribute("msg", "신청이 정상적으로 되지 않았습니다.");
-		}
+//		if(res > 0) {
+//			session.setAttribute("msg", "정상적으로 신청 되었습니다.");
+//		} else {
+//			session.setAttribute("msg", "신청이 정상적으로 되지 않았습니다.");
+//		}
 		
 		return "redirect:/objection";
 	}

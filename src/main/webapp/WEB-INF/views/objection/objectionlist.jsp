@@ -100,7 +100,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="container" style="height: auto; margin-top: 50px;">
+	<div class="container" style="height: auto; margin-top: 50px; margin-bottom: 30px;">
 		<div id="content">
 			<!-- title view -->
 			<div id="pagetitle">
