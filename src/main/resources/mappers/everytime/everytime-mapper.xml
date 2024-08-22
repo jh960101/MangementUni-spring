@@ -35,6 +35,11 @@
 		resultType="int">
 		SELECT COUNT(*) FROM board WHERE TYPE = "e"
 	</select>
+	
+	<select id="getListCountByStuNo" parameterType="int"
+		resultType="int">
+		SELECT COUNT(*) FROM board WHERE STU_NO = #{stu_no} AND TYPE = "e" 
+	</select>
 
 	<insert id="insertBoard" parameterType="com.university.management.board.dto.Board">
         INSERT INTO BOARD(stu_no, title, content, type, readcount, bo_like, bo_status)

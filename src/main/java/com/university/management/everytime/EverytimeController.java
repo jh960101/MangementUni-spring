@@ -159,7 +159,7 @@ public class EverytimeController {
 		Map<String, Object> params = new HashMap<>();
 
 		int listLimit = 4; // 한 페이지에 보여질 게시글 수
-		int totalRowCount = service.getListCount(); // 전체 게시글의 수
+		int totalRowCount = service.getListCountByStuNo(stu_no); // 전체 게시글의 수
 
 		// 페이지네이션 설정
 		PageInfo pageSettings = new PageInfo(page, totalRowCount, listLimit);
@@ -167,6 +167,7 @@ public class EverytimeController {
 
 		int firstRow = pageSettings.getFirstRow();
 
+		System.out.println(pageSettings.getLastPage());
 		params.put("firstRow", firstRow);
 		params.put("listLimit", listLimit);
 		params.put("stu_no",stu_no);
